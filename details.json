@@ -1,0 +1,20 @@
+{
+  "1" : [
+      {"mileage": 159774,
+       "lastWaypoint": {
+           "timestamp": "20140116T152440+0000",
+           "latitude": 28.088505,
+           "longitude": -82.578467
+       },
+       "timestamp": "20140116T151952+0000",
+       "running": false,
+       "fulerate": 1.2,
+       "fuellevel" : 20,
+       "coolant_temperature": 163,
+       "battery_voltage": 13.2,
+       "odometer": 65345,
+       "header": 272,
+       "speed": 72
+      }
+  ]
+}
