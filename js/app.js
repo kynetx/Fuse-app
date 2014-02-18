@@ -16,7 +16,7 @@ require.config({
             exports: "_"
         },
         "cloudosvanilla": {
-            deps: ["jquery"}
+            deps: ["jquery"]
         },
         "cloudos": {
             deps: ["cloudosvanilla"],
