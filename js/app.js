@@ -21,7 +21,7 @@ require.config({
         "cloudos": {
             deps: ["cloudosvanilla"],
             exports: "CloudOS"
-        }
+        },
         "backbone": {
             deps: ["underscore", "jquery"],
             exports: "Backbone"
