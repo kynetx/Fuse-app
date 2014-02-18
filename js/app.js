@@ -1,6 +1,8 @@
 /*jslint browser: true */
 /*global _, jQuery, $, console, Backbone */
 
+
+// Define the exercise object
 var exercise = {};
 
 (function($){
@@ -16,7 +18,7 @@ var exercise = {};
         set: function(attributes, options) {
             var aDate;
             if (attributes.date){
-                //TODO future version - make sure date is valid format during input
+                // TODO future version - make sure date is valid format during input
 		console.log("attributes.date ", attributes.date);
                 aDate = new Date(attributes.date);
                 if ( Object.prototype.toString.call(aDate) === "[object Date]" && !isNaN(aDate.getTime()) ){
@@ -27,7 +29,7 @@ var exercise = {};
         },
         
         dateInputType: function(){
-            return exercise.formatDate(this.get('date'), "yyyy-mm-dd"); //https://github.com/jquery/jquery-mobile/issues/2755
+            return exercise.formatDate(this.get('date'), "yyyy-mm-dd"); // https://github.com/jquery/jquery-mobile/issues/2755
         },
         
         displayDate: function(){
@@ -63,7 +65,7 @@ var exercise = {};
     exercise.Activities = Backbone.Collection.extend({
         model: exercise.Activity,
         url: "model/exercise.json",
-        comparator: function(activity){
+        comparator: function(activity){ 
             var date = new Date(activity.get('date'));
             return date.getTime();
         }
@@ -106,8 +108,8 @@ var exercise = {};
                 
             $renderedItem.jqmData('activityId', item.get('id'));
             $renderedItem.bind('click', function(){
-                //set the activity id on the page element for use in the details pagebeforeshow event
-                $('#activity-details').jqmData('activityId', $(this).jqmData('activityId'));  //'this' represents the element being clicked
+                // set the activity id on the page element for use in the details pagebeforeshow event
+                $('#activity-details').jqmData('activityId', $(this).jqmData('activityId'));  // 'this' represents the element being clicked
             });
             
             listView.append($renderedItem);
@@ -120,7 +122,7 @@ var exercise = {};
     });
     
     exercise.ActivityDetailsView = Backbone.View.extend({
-        //since this template will render inside a div, we don't need to specify a tagname
+        // Since this template will render inside a div, we don't need to specify a tagname
         initialize: function(options) {
 	    this.options = options || {};
             this.template = _.template($('#activity-details-template').html());
@@ -138,7 +140,7 @@ var exercise = {};
     });
     
     exercise.ActivityFormView = Backbone.View.extend({
-        //since this template will render inside a div, we don't need to specify a tagname, but we do want the fieldcontain
+        // Since this template will render inside a div, we don't need to specify a tagname, but we do want the fieldcontain
         attributes: {"data-role": 'fieldcontain'},
         
         initialize: function(options) {
@@ -158,7 +160,7 @@ var exercise = {};
     
     exercise.initData = function(){
         exercise.activities = new exercise.Activities();
-        exercise.activities.fetch({async: false});  // use async false to have the app wait for data before rendering the list
+        exercise.activities.fetch({async: false});  // Use async false to have the app wait for data before rendering the list
     };
     
 }(jQuery));
@@ -178,7 +180,7 @@ $(document).ready(function(){
             activityForm = $('#activity-form-form'),
             activityFormView;
     
-        //clear any existing id attribute from the form page
+        // Clear any existing id attribute from the form page
         $('#activity-details').jqmRemoveData('activityId');
         activityFormView = new exercise.ActivityFormView({model: activity, viewContainer: activityForm});
         activityFormView.render();
@@ -211,8 +213,8 @@ $(document).ready(function(){
             dateComponents,
             formJSON = $('#activity-form-form').formParams();
         
-        //if we are on iOS and we have a date...convert it from yyyy-mm-dd back to mm/dd/yyyy
-        //TODO future version - for non-iOS, we would need to validate the date is in the expected format (mm/dd/yyyy)
+        // If we are on iOS and we have a date...convert it from yyyy-mm-dd back to mm/dd/yyyy
+        // TODO future version - for non-iOS, we would need to validate the date is in the expected format (mm/dd/yyyy)
         if (formJSON.date && (navigator.userAgent.indexOf('iPhone') >= 0 || 
 			      navigator.userAgent.indexOf('iPad') >= 0 ||
 			      navigator.userAgent.indexOf('Chrome') >= 0
@@ -223,13 +225,13 @@ $(document).ready(function(){
         }
         
         if (activityId){
-            //editing
+            // Editing
             activity = exercise.activities.get(activityId);
             activity.set(formJSON); //not calling save since we have no REST backend...save in memory
         }else{
-            //new (since we have no REST backend, create a new model and add to collection to prevent Backbone making REST calls)
+            // New (since we have no REST backend, create a new model and add to collection to prevent Backbone making REST calls)
             activity = new exercise.Activity(formJSON);
-            activity.set({'id': new Date().getTime()});  //create some identifier
+            activity.set({'id': new Date().getTime()});  // Create some identifier
             exercise.activities.add(activity);
         }
     });

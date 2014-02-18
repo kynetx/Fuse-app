@@ -6,9 +6,19 @@
     <link rel="stylesheet" href="style/jquery.mobile-1.4.0.css" />
     <link rel="stylesheet" href="style/jquery.mobile.icons-1.4.0.min.css" />
 
-    <!-- templates -->
+    <!-- Templates -->
     <script type="text/template" id="activity-list-item-template">    
       <li><a href="#activity-details" data-transition="slide" identifier="<%= id %>"><%= displayDate %> - <%= type %></a></li>
+    </script>
+
+    <!-- Vehicle List Template-->
+    <script type="text/template" id="vehicle-list-template">
+      <li>
+        <a href="#vehicle-details" data-transition="slide" identifier="<%= id %>">
+        <img src="<%= icon %>">
+        <h2><%= nickname %></h2>
+        <p><%= make %>, <%= model %> </p></a>
+      </li>      
     </script>
     
     <script type="text/template" id="activity-details-template">
@@ -53,7 +63,7 @@
         </div>
     </script>
     
-    <!-- maximum scale added to stop zoom on select controls -->
+    <!-- Maximum scale added to stop zoom on select controls -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
   </head>
   <body>
@@ -64,7 +74,7 @@
         <a href="#activity-form" id="add-button" data-transition="slide" class="ui-btn ui-btn-right ui-corner-all ui-shadow ui-mini ui-btn-icon-left  ui-icon-plus">Add</a>
       </div>
       <div data-role="content">
-          <!-- the contents of the list view will be rendered via the backbone view -->
+          <!-- The contents of the list view will be rendered via the backbone view -->
       </div>
     </div>
     
@@ -74,7 +84,7 @@
         <h1>Activity Details</h1>
       </div>
       <div data-role="content" id="activity-details-content">
-          <!-- the contents of the list view will be rendered via the backbone view -->
+          <!-- The contents of the list view will be rendered via the backbone view -->
       </div>
     </div>
     
@@ -84,7 +94,7 @@
         <h1>New Activity</h1>
       </div>
       <div data-role="content" id="activity-form-content">
-          <!-- the contents of the form will be rendered via the backbone view -->
+          <!-- The contents of the form will be rendered via the backbone view -->
           <form id="activity-form-form" action="#"></form>
       </div>
     </div>
