@@ -5,7 +5,7 @@ require.config({
         "jquery": "vendor/jquery-1.11.0.min",
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
         "cloudosvanilla": "vendor/CloudOS",
-        "cloudos": "vendor/CloudOS-config"
+        "cloudos": "vendor/CloudOS-config",
         "underscore": "vendor/underscore-min",
         "text": "vendor/requre.text",
         "backbone": "vendor/backbone-min"
