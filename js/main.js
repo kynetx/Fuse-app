@@ -29,7 +29,7 @@ require.config({
     }
 });
 
-require(["backbone", "jquery", "jquerymobile", "cloudos"], function(Backbone, $, jQM) {
+require(["backbone", "jquery", "jquerymobile", "cloudos"], function(Backbone, $, jQM, CloudOS) {
     alert("Hello!!!");
     console.log(Object.prototype.toString.apply(Backbone, $, jQM));
 });
