@@ -1,4 +1,8 @@
-define(["backbone", "jquery"], function(Backbone, $) {
+define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
+
+    return Backbone.Model.extend({
+        // put the below static data in here.
+    });
         // sample data for detail collection.
         /* {
             "1" : [
