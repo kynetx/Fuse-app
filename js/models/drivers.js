@@ -1,4 +1,6 @@
-{
+define(["backbone", "jquery"], function(Backbone, $) {
+// sample data for drivers collection
+/* {
     "1" : {"id": "1",
 	   "firstname": "Phil",
 	   "lastname": "Windley",
@@ -10,4 +12,5 @@
 			    },
 	   "primaryvehicle": "1"
 	  }
-}
+} */
+});

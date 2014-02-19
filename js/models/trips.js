@@ -1,4 +1,6 @@
-{
+define(["backbone", "jquery"], function(Backbone, $) {
+// sample trip data for model and trips collection
+/*{
     "1" : [ 
 	{
 	    "id": 198366,
@@ -103,4 +105,5 @@
 
     ]
   
-}
+}*/
+});

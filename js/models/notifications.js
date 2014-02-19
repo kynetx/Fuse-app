@@ -1,4 +1,6 @@
-[
+define(["backbone", "jquery"], function(Backbone, $) {
+// sample notifications collection.
+/* [
     {
 	"id": "1",
 	"vehicle": "1"
@@ -37,3 +39,6 @@
 	"action": "https://joinfuse.com/some/action/url.html"
     },   
 ]
+
+*/
+});
