@@ -8,7 +8,7 @@ require.config({
         "cloudos": "vendor/CloudOS",
         "cloudosconfig": "vendor/CloudOS.config",
         "underscore": "vendor/underscore-min",
-        "text": "vendor/requre.text",
+        "text": "vendor/require.text",
         "backbone": "vendor/backbone-min"
     },
 

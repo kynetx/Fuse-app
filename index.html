@@ -9,113 +9,24 @@
         <script data-main="js/app" src="js/vendor/require.js"></script>
     </head>
     <body>
-
-<!-- Templates -->
-        <!-- Vehicle List Template-->
-        <script type="text/template" id="vehicle-list-item-template">
-            <li>
-                <a href="#vehicle-details" data-transition="slide" identifier="<%= id %>">
-                <img src="<%= icon %>">
-                <h2><%= nickname %></h2>
-                <p><%= make %>, <%= model %> </p></a>
-            </li>      
-        </script>
-
-        <!-- Vehicle Details Template-->
-        <script type="text/template" id="vehicle-list-template">
-        </script>
-
-        <!-- Activity List Item Template-->
-        <script type="text/template" id="activity-list-item-template">    
-            <li><a href="#activity-details" data-transition="slide" identifier="<%= id %>"><%= displayDate %> - <%= type %></a></li>
-        </script>
-
-        <!-- Activity Details Template-->
-        <script type="text/template" id="activity-details-template">
-            <h3><%= type %></h3>
-            <ul data-role="listview" id="activitiy-fields" data-inset="true">
-                <li>Date: <%= displayDate %></li>
-                <li>Minutes: <%= minutes %></li>
-                <li>Distance: <%= distance %></li>
-                <li>Comments: <%= comments %></li>
-            </ul>
-        </script>
-
-        <!-- Activity Form Template -->
-        <script type="text/template" id="activity-form-template">
-            <label for="date" class="select">Date</label>
-
-            <% if (navigator.userAgent.indexOf('iPhone') >= 0 || navigator.userAgent.indexOf('iPad') >= 0 || navigator.userAgent.indexOf('Chrome') >= 0 ) { %>
-                <input type="date" name="date" id="date" placeholder="Date" value="<%= dateInputType %>" />
-            <% } else { %>
-                <input type="date" name="date" id="date" placeholder="Date" value="<%= displayDate %>" />
-            <% } %>
-        
-            <label for="type" class="select">Type</label>
-            <select name="type" id="type">
-                <option>Run</option>
-                <option>Bike</option>
-                <option>Swim</option>
-                <option>Walk</option>
-            </select>
-        
-            <label for="distance">Distance</label>
-	        <input type="range" name="distance" id="distance" data-highlight="true" min="0" max="180" value="<%= minutes %>" >
-            <!-- <input type="text" name="distance" id="distance" placeholder="" value="<%= distance %>" /> -->
-    
-            <label for="minutes">Minutes</label>
-            <!-- <input type="tel" name="minutes" id="minutes" placeholder="" value="<%= minutes %>" /> -->
-	        <input type="range" name="minutes" id="minutes" data-highlight="true" min="0" max="180" value="<%= minutes %>" >
-        
-            <div data-role="fieldcontain">
-                <textarea name="comments" id="comments" placeholder="Comments"><%= comments %></textarea>
-            </div>
-        </script>
-    
-
-
-<!-- Pages -->
-        <!-- Activity List -->
-        <div data-role="page" id="activities">
+        <!-- Landing Page -->
+        <div data-role="page" id="page-vehicles">
             <div data-role="header">
-                <h1>Activities</h1>
-                <a href="#activity-form" id="add-button" data-transition="slide" class="ui-btn ui-btn-right ui-corner-all ui-shadow ui-mini ui-btn-icon-left  ui-icon-plus">Add</a>
+                <h1>Welcome to Fuse!</h1>
             </div>
             <div data-role="content">
-                <!-- The contents of the list view will be rendered via the backbone view -->
+                <h1>Fuse is awesome!!</h1>
             </div>
         </div>
 
         <!-- Vehicle List -->
-        <div data-role="page" id="vehicles">
+        <div data-role="page" id="page-vehicles">
             <div data-role="header">
                 <h1>Vehicles</h1>
             </div>
             <div data-role="content">
-                <!-- The contents of the list view will be rendered via the backbone view -->
-            </div>
-        </div>
-
-        <!-- Activity Details-->
-        <div data-role="page" id="activity-details">
-            <div data-role="header"  data-add-back-btn="true">
-                <a href="#activity-form" id="edit-activity-button" data-transition="slide" class="ui-btn ui-btn-right ui-corner-all ui-shadow ui-mini ui-btn-icon-left  ui-icon-edit">Edit</a>
-                <h1>Activity Details</h1>
-            </div>
-            <div data-role="content" id="activity-details-content">
-                <!-- The contents of the list view will be rendered via the backbone view -->
-            </div>
-        </div>
-
-        <!-- Activity Form-->
-        <div data-role="page" id="activity-form" >
-            <div data-role="header"  data-add-back-btn="true">
-                <a href="#" data-role="button" data-icon="check" data-theme="b" data-rel="back" id="save-activity-button" class="ui-btn-right">Save</a>
-                <h1>New Activity</h1>
-            </div>
-            <div data-role="content" id="activity-form-content">
-                <!-- The contents of the form will be rendered via the backbone view -->
-                <form id="activity-form-form" action="#"></form>
+                <ul data-role = "listview" id="vehicles">
+                </ul>
             </div>
         </div>
 
