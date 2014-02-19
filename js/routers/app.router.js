@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "controllers/app.controller"], function(Backbone, $, _ AppController) {
+define(["backbone", "jquery", "underscore", "controllers/app.controller"], function(Backbone, $, _, AppController) {
     return Backbone.Router.extend({
         routes: {
             "": "showVehicleListFromHome",

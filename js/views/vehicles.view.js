@@ -11,7 +11,7 @@ define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-        }
+        },
 
         renderVehicle: function(vehicle) {
             var view = new VehicleView({
