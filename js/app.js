@@ -4,6 +4,7 @@ require.config({
     paths: {
         "jquery": "vendor/jquery-1.11.0.min",
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
+        "jquerymobileconfig": "vendor/jquery.mobile.config",
         "cloudosvanilla": "vendor/CloudOS",
         "cloudos": "vendor/CloudOS-config",
         "underscore": "vendor/underscore-min",
@@ -15,9 +16,9 @@ require.config({
         "underscore": {
             exports: "_"
         },
-        "cloudosvanilla": {
-            deps: ["jquery"]
-        },
+        "jquerymobileconfig": ["jquery"],
+        "jquerymobile": ["jquery", "jquerymobileconfig"],
+        "cloudosvanilla": ["jquery"],
         "cloudos": {
             deps: ["cloudosvanilla"],
             exports: "CloudOS"
