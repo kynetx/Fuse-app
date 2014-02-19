@@ -1,3 +1,2 @@
-require(["backbone", "cloudos", "jquery", "jquerymobile"], function(Backbone, CloudOS, $) {
-    alert("Ready for the list view? Because here we go.");
+require(["backbone", "cloudos", "jquery", "routers/app.router", "jquerymobile"], function(Backbone, CloudOS, $, AppRouter) {
 });
