@@ -1,2 +1,3 @@
-require(["backbone", "cloudos", "jquery", "routers/app.router", "jquerymobile"], function(Backbone, CloudOS, $, AppRouter) {
+require(["backbone", "cloudos", "jquery", "fuse", "jquerymobile"], function(Backbone, CloudOS, $, Fuse) {
+    Backbone.history.start();
 });

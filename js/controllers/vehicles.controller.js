@@ -1,3 +1,6 @@
 define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
-    return {};
+    return {
+        showVehicleList: function() {
+        }
+    };
 });
