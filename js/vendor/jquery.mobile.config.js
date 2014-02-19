@@ -7,8 +7,8 @@ require(["jquery"], function($) {
         $.mobile.linkBindingEnabled = false;
         // can cause calling object creation twice and back button issues are solved
         $.mobile.ajaxEnabled = false;
-        // Otherwise after mobileinit, it tries to load a landing page
-        $.mobile.autoInitializePage = false;
+        // jqueyr mobile wont apply proper styling unless its allowed to auto initalize itself...
+        // $.mobile.autoInitializePage = false;
         // we want to handle caching and cleaning the DOM ourselves
         $.mobile.page.prototype.options.domCache = false;
 

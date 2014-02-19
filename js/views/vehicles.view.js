@@ -1,6 +1,5 @@
 define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.view"], function(Backbone, $, _, VehicleCollection, VehicleView) {
     return Backbone.View.extend({
-        id: "vehicles",
         el: "#vehicles",
 
         initialize: function(vehicles) {
@@ -12,9 +11,10 @@ define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-            $.mobile.changePage("#" + this.id, {
-                "changeHash": false,
-                "role": this.role
+            $("#page-" + this.el.id).page();
+            $.mobile.changePage(this.$el.closest("[data-role = 'page']"), {
+                "transition": "slide",
+                "changeHash": false
             });
         },
 
