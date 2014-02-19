@@ -5,6 +5,8 @@
 // Define the exercise object
 var exercise = {};
 
+var vehicle = {};
+
 (function($){
     exercise.Activity = Backbone.Model.extend({
         defaults: {
@@ -108,7 +110,7 @@ var exercise = {};
                 
             $renderedItem.jqmData('activityId', item.get('id'));
             $renderedItem.bind('click', function(){
-                // set the activity id on the page element for use in the details pagebeforeshow event
+                // Set the activity id on the page element for use in the details pagebeforeshow event
                 $('#activity-details').jqmData('activityId', $(this).jqmData('activityId'));  // 'this' represents the element being clicked
             });
             
