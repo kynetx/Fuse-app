@@ -1,6 +1,6 @@
 ({    
     baseUrl: "js",
-    out: "build/fuse.js",
+    out: "builds/fuse-0.0.0.js",
     include: ["main"],
     paths: {
         "jquery": "vendor/jquery-1.11.0.min",
