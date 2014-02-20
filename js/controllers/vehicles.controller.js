@@ -3,6 +3,7 @@ define(["backbone", "jquery", "underscore", "views/vehicles.view"], function(Bac
         showVehicleList: function() {
             // this is just dummy data for now.
             new VehiclesView([{
+            
                 "default": 1,
                 "vin": "1FTFW1EV6AKA75407",
                 "nickname" : "Truck",

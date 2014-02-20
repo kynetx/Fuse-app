@@ -1,0 +1,268 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		BB0FF93818B6844000DFD8D8 /* build.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = build.js; sourceTree = "<group>"; };
+		BB0FF93A18B6844000DFD8D8 /* deploy.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = deploy.sh; sourceTree = "<group>"; };
+		BB0FF93C18B6844000DFD8D8 /* Fuse Mocks Feb 11 2014 v1.4.pptx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuse Mocks Feb 11 2014 v1.4.pptx"; sourceTree = "<group>"; };
+		BB0FF93D18B6844000DFD8D8 /* Fuse User Reqa 1142014 v1.2.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuse User Reqa 1142014 v1.2.docx"; sourceTree = "<group>"; };
+		BB0FF93E18B6844000DFD8D8 /* Fuse User Reqs Feb 11 2014 v1.4.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fuse User Reqs Feb 11 2014 v1.4.docx"; sourceTree = "<group>"; };
+		BB0FF93F18B6844000DFD8D8 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		BB0FF94118B6844000DFD8D8 /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		BB0FF94318B6844000DFD8D8 /* vehicles.collection.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vehicles.collection.js; sourceTree = "<group>"; };
+		BB0FF94518B6844000DFD8D8 /* app.controller.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.controller.js; sourceTree = "<group>"; };
+		BB0FF94618B6844000DFD8D8 /* vehicles.controller.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vehicles.controller.js; sourceTree = "<group>"; };
+		BB0FF94718B6844000DFD8D8 /* fuse.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = fuse.js; sourceTree = "<group>"; };
+		BB0FF94818B6844000DFD8D8 /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		BB0FF94A18B6844000DFD8D8 /* calendar.model.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = calendar.model.js; sourceTree = "<group>"; };
+		BB0FF94B18B6844000DFD8D8 /* driver.model.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = driver.model.js; sourceTree = "<group>"; };
+		BB0FF94C18B6844000DFD8D8 /* notification.model.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = notification.model.js; sourceTree = "<group>"; };
+		BB0FF94D18B6844000DFD8D8 /* trip.model.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = trip.model.js; sourceTree = "<group>"; };
+		BB0FF94E18B6844000DFD8D8 /* vehicle.model.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vehicle.model.js; sourceTree = "<group>"; };
+		BB0FF95018B6844000DFD8D8 /* app.router.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.router.js; sourceTree = "<group>"; };
+		BB0FF95118B6844000DFD8D8 /* vehicles.router.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vehicles.router.js; sourceTree = "<group>"; };
+		BB0FF95318B6844000DFD8D8 /* vehicle.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = vehicle.html; sourceTree = "<group>"; };
+		BB0FF95518B6844000DFD8D8 /* almond.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = almond.js; sourceTree = "<group>"; };
+		BB0FF95618B6844000DFD8D8 /* backbone-min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "backbone-min.js"; sourceTree = "<group>"; };
+		BB0FF95718B6844000DFD8D8 /* CloudOS.config.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CloudOS.config.js; sourceTree = "<group>"; };
+		BB0FF95818B6844000DFD8D8 /* CloudOS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CloudOS.js; sourceTree = "<group>"; };
+		BB0FF95918B6844000DFD8D8 /* formparams.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = formparams.js; sourceTree = "<group>"; };
+		BB0FF95A18B6844000DFD8D8 /* jquery-1.11.0.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "jquery-1.11.0.js"; sourceTree = "<group>"; };
+		BB0FF95B18B6844000DFD8D8 /* jquery-1.11.0.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "jquery-1.11.0.min.js"; sourceTree = "<group>"; };
+		BB0FF95C18B6844000DFD8D8 /* jquery.mobile-1.4.0.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "jquery.mobile-1.4.0.js"; sourceTree = "<group>"; };
+		BB0FF95D18B6844000DFD8D8 /* jquery.mobile-1.4.0.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "jquery.mobile-1.4.0.min.js"; sourceTree = "<group>"; };
+		BB0FF95E18B6844000DFD8D8 /* jquery.mobile.config.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.mobile.config.js; sourceTree = "<group>"; };
+		BB0FF95F18B6844000DFD8D8 /* require.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = require.js; sourceTree = "<group>"; };
+		BB0FF96018B6844000DFD8D8 /* require.text.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = require.text.js; sourceTree = "<group>"; };
+		BB0FF96118B6844000DFD8D8 /* underscore-min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "underscore-min.js"; sourceTree = "<group>"; };
+		BB0FF96318B6844000DFD8D8 /* vehicle.view.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vehicle.view.js; sourceTree = "<group>"; };
+		BB0FF96418B6844000DFD8D8 /* vehicles.view.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = vehicles.view.js; sourceTree = "<group>"; };
+		BB0FF96518B6844000DFD8D8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BB0FF96818B6844000DFD8D8 /* ajax-loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "ajax-loader.gif"; sourceTree = "<group>"; };
+		BB0FF96918B6844000DFD8D8 /* icons-18-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-18-black.png"; sourceTree = "<group>"; };
+		BB0FF96A18B6844000DFD8D8 /* icons-18-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-18-white.png"; sourceTree = "<group>"; };
+		BB0FF96B18B6844000DFD8D8 /* icons-36-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-36-black.png"; sourceTree = "<group>"; };
+		BB0FF96C18B6844000DFD8D8 /* icons-36-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-36-white.png"; sourceTree = "<group>"; };
+		BB0FF96D18B6844000DFD8D8 /* jquery.mobile-1.4.0.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile-1.4.0.css"; sourceTree = "<group>"; };
+		BB0FF96E18B6844000DFD8D8 /* jquery.mobile-1.4.0.min.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile-1.4.0.min.css"; sourceTree = "<group>"; };
+		BB0FF96F18B6844000DFD8D8 /* jquery.mobile.external-png-1.4.0.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile.external-png-1.4.0.css"; sourceTree = "<group>"; };
+		BB0FF97018B6844000DFD8D8 /* jquery.mobile.icons-1.4.0.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile.icons-1.4.0.css"; sourceTree = "<group>"; };
+		BB0FF97118B6844000DFD8D8 /* jquery.mobile.icons-1.4.0.min.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile.icons-1.4.0.min.css"; sourceTree = "<group>"; };
+		BB0FF97218B6844000DFD8D8 /* jquery.mobile.inline-png-1.4.0.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile.inline-png-1.4.0.css"; sourceTree = "<group>"; };
+		BB0FF97318B6844000DFD8D8 /* jquery.mobile.inline-svg-1.4.0.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile.inline-svg-1.4.0.css"; sourceTree = "<group>"; };
+		BB0FF97418B6844000DFD8D8 /* jquery.mobile.structure-1.4.0.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile.structure-1.4.0.css"; sourceTree = "<group>"; };
+		BB0FF97518B6844000DFD8D8 /* jquery.mobile.theme-1.4.0.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jquery.mobile.theme-1.4.0.css"; sourceTree = "<group>"; };
+		BB0FF97618B6844000DFD8D8 /* jqueryui-flat.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "jqueryui-flat.css"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		BB0FF93118B6840400DFD8D8 = {
+			isa = PBXGroup;
+			children = (
+				BB0FF93818B6844000DFD8D8 /* build.js */,
+				BB0FF93918B6844000DFD8D8 /* builds */,
+				BB0FF93A18B6844000DFD8D8 /* deploy.sh */,
+				BB0FF93B18B6844000DFD8D8 /* docs */,
+				BB0FF93F18B6844000DFD8D8 /* index.html */,
+				BB0FF94018B6844000DFD8D8 /* js */,
+				BB0FF96518B6844000DFD8D8 /* README.md */,
+				BB0FF96618B6844000DFD8D8 /* style */,
+			);
+			sourceTree = "<group>";
+		};
+		BB0FF93918B6844000DFD8D8 /* builds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = builds;
+			sourceTree = "<group>";
+		};
+		BB0FF93B18B6844000DFD8D8 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF93C18B6844000DFD8D8 /* Fuse Mocks Feb 11 2014 v1.4.pptx */,
+				BB0FF93D18B6844000DFD8D8 /* Fuse User Reqa 1142014 v1.2.docx */,
+				BB0FF93E18B6844000DFD8D8 /* Fuse User Reqs Feb 11 2014 v1.4.docx */,
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
+		BB0FF94018B6844000DFD8D8 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF94118B6844000DFD8D8 /* app.js */,
+				BB0FF94218B6844000DFD8D8 /* collections */,
+				BB0FF94418B6844000DFD8D8 /* controllers */,
+				BB0FF94718B6844000DFD8D8 /* fuse.js */,
+				BB0FF94818B6844000DFD8D8 /* main.js */,
+				BB0FF94918B6844000DFD8D8 /* models */,
+				BB0FF94F18B6844000DFD8D8 /* routers */,
+				BB0FF95218B6844000DFD8D8 /* templates */,
+				BB0FF95418B6844000DFD8D8 /* vendor */,
+				BB0FF96218B6844000DFD8D8 /* views */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		BB0FF94218B6844000DFD8D8 /* collections */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF94318B6844000DFD8D8 /* vehicles.collection.js */,
+			);
+			path = collections;
+			sourceTree = "<group>";
+		};
+		BB0FF94418B6844000DFD8D8 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF94518B6844000DFD8D8 /* app.controller.js */,
+				BB0FF94618B6844000DFD8D8 /* vehicles.controller.js */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		BB0FF94918B6844000DFD8D8 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF94A18B6844000DFD8D8 /* calendar.model.js */,
+				BB0FF94B18B6844000DFD8D8 /* driver.model.js */,
+				BB0FF94C18B6844000DFD8D8 /* notification.model.js */,
+				BB0FF94D18B6844000DFD8D8 /* trip.model.js */,
+				BB0FF94E18B6844000DFD8D8 /* vehicle.model.js */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		BB0FF94F18B6844000DFD8D8 /* routers */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF95018B6844000DFD8D8 /* app.router.js */,
+				BB0FF95118B6844000DFD8D8 /* vehicles.router.js */,
+			);
+			path = routers;
+			sourceTree = "<group>";
+		};
+		BB0FF95218B6844000DFD8D8 /* templates */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF95318B6844000DFD8D8 /* vehicle.html */,
+			);
+			path = templates;
+			sourceTree = "<group>";
+		};
+		BB0FF95418B6844000DFD8D8 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF95518B6844000DFD8D8 /* almond.js */,
+				BB0FF95618B6844000DFD8D8 /* backbone-min.js */,
+				BB0FF95718B6844000DFD8D8 /* CloudOS.config.js */,
+				BB0FF95818B6844000DFD8D8 /* CloudOS.js */,
+				BB0FF95918B6844000DFD8D8 /* formparams.js */,
+				BB0FF95A18B6844000DFD8D8 /* jquery-1.11.0.js */,
+				BB0FF95B18B6844000DFD8D8 /* jquery-1.11.0.min.js */,
+				BB0FF95C18B6844000DFD8D8 /* jquery.mobile-1.4.0.js */,
+				BB0FF95D18B6844000DFD8D8 /* jquery.mobile-1.4.0.min.js */,
+				BB0FF95E18B6844000DFD8D8 /* jquery.mobile.config.js */,
+				BB0FF95F18B6844000DFD8D8 /* require.js */,
+				BB0FF96018B6844000DFD8D8 /* require.text.js */,
+				BB0FF96118B6844000DFD8D8 /* underscore-min.js */,
+			);
+			path = vendor;
+			sourceTree = "<group>";
+		};
+		BB0FF96218B6844000DFD8D8 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF96318B6844000DFD8D8 /* vehicle.view.js */,
+				BB0FF96418B6844000DFD8D8 /* vehicles.view.js */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		BB0FF96618B6844000DFD8D8 /* style */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF96718B6844000DFD8D8 /* images */,
+				BB0FF96D18B6844000DFD8D8 /* jquery.mobile-1.4.0.css */,
+				BB0FF96E18B6844000DFD8D8 /* jquery.mobile-1.4.0.min.css */,
+				BB0FF96F18B6844000DFD8D8 /* jquery.mobile.external-png-1.4.0.css */,
+				BB0FF97018B6844000DFD8D8 /* jquery.mobile.icons-1.4.0.css */,
+				BB0FF97118B6844000DFD8D8 /* jquery.mobile.icons-1.4.0.min.css */,
+				BB0FF97218B6844000DFD8D8 /* jquery.mobile.inline-png-1.4.0.css */,
+				BB0FF97318B6844000DFD8D8 /* jquery.mobile.inline-svg-1.4.0.css */,
+				BB0FF97418B6844000DFD8D8 /* jquery.mobile.structure-1.4.0.css */,
+				BB0FF97518B6844000DFD8D8 /* jquery.mobile.theme-1.4.0.css */,
+				BB0FF97618B6844000DFD8D8 /* jqueryui-flat.css */,
+			);
+			path = style;
+			sourceTree = "<group>";
+		};
+		BB0FF96718B6844000DFD8D8 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				BB0FF96818B6844000DFD8D8 /* ajax-loader.gif */,
+				BB0FF96918B6844000DFD8D8 /* icons-18-black.png */,
+				BB0FF96A18B6844000DFD8D8 /* icons-18-white.png */,
+				BB0FF96B18B6844000DFD8D8 /* icons-36-black.png */,
+				BB0FF96C18B6844000DFD8D8 /* icons-36-white.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		BB0FF93218B6840400DFD8D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = BB0FF93518B6840400DFD8D8 /* Build configuration list for PBXProject "Fuse" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BB0FF93118B6840400DFD8D8;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		BB0FF93618B6840400DFD8D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		BB0FF93718B6840400DFD8D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB0FF93518B6840400DFD8D8 /* Build configuration list for PBXProject "Fuse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB0FF93618B6840400DFD8D8 /* Debug */,
+				BB0FF93718B6840400DFD8D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BB0FF93218B6840400DFD8D8 /* Project object */;
+}
