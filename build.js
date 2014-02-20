@@ -1,6 +1,7 @@
-// setup require js.
-require.config({
+({    
     baseUrl: "js",
+    out: "build/fuse.js",
+    include: ["main"],
     paths: {
         "jquery": "vendor/jquery-1.11.0.min",
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
@@ -28,6 +29,4 @@ require.config({
             exports: "Backbone"
         }
     }
-});
-
-require(["main"]);
+})
