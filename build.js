@@ -2,6 +2,7 @@
     baseUrl: "js",
     out: "builds/fuse-0.0.0.js",
     include: ["main"],
+    wrap: true,
     paths: {
         "jquery": "vendor/jquery-1.11.0.min",
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
