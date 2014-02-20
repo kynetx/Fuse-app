@@ -6,12 +6,21 @@ define(["backbone", "jquery", "underscore", "routers/app.router", "routers/vehic
         },
         View: Backbone.View.extend({
             initialize: function() {
-            },
-            
-            render: function() {
+                _.bindAll();
+                this.render();
             },
 
-            jQM: function() {
+            events: {
+                // none for now...
+            },
+
+            render: function() {
+                this.renderHeader();
+                this.renderFooter();
+            },
+
+            // does neccesary housekeeping 
+            mobilize: function() {
             }
         })
     };
