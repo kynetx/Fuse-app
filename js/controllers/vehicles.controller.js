@@ -243,5 +243,6 @@ define(["backbone", "jquery", "underscore", "views/vehicles.view"], function(Bac
                 "heading": 234,
                 "speed": 85
             }]);
-        };
-    });
+        }
+    };
+});
