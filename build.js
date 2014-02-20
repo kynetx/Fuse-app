@@ -1,5 +1,6 @@
 ({    
     baseUrl: "js",
+    name: "js/vendor/almond",
     out: "builds/fuse-0.0.0.js",
     include: ["main"],
     wrap: true,
