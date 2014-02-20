@@ -3,6 +3,7 @@
     name: "vendor/almond",
     out: "builds/fuse-0.0.0.js",
     include: ["main"],
+    optimize: "uglify2",
     wrap: true,
     paths: {
         "jquery": "vendor/jquery-1.11.0.min",
