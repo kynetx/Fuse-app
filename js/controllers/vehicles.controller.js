@@ -24,7 +24,7 @@ define(["backbone", "jquery", "underscore", "views/vehicles.view"], function(Bac
                 "coolantTemperature": 163,
                 "batteryVoltage": 13.2,
                 "odometer": 65345,
-                "header": 272,// foo
+                "header": 272,
                 "speed": 72
             }]);
         }
