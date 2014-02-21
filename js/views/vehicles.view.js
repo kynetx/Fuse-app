@@ -1,6 +1,6 @@
-define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view"], function(Backbone, $, _, VehicleCollection, VehicleItemView) {
+define(["jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view"], function(require, $, _,VehicleCollection, VehicleItemView) {
     // represents the view that contains the vehicle list.
-    return Backbone.View.extend({
+    return Fuse.View.extend({
         tagName: "div",
         className: "vehicle-list",
         // header: _.template(headerTmpl("Vehicles")),

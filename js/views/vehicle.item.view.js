@@ -1,6 +1,6 @@
-define(["backbone", "jquery", "underscore", "text!templates/vehicleItemTmpl.html"], function(Backbone, $, _, vehicleItemTmpl) {
+define(["jquery", "underscore", "text!templates/vehicleItemTmpl.html"], function($, _, vehicleItemTmpl) {
 	// represets an item in the vehicle list.
-    return Backbone.View.extend({
+    return Fuse.View.extend({
         tagName: "li",
         className: "vehicle",
         template: _.template(vehicleItemTmpl),
