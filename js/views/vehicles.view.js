@@ -3,7 +3,7 @@ define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "
     return Backbone.View.extend({
         tagName: "div",
         className: "vehicle-list",
-        header: _.template(headerTmpl("Vehicles")),
+        // header: _.template(headerTmpl("Vehicles")),
         role: "page",
 
         initialize: function(vehicles) {
@@ -17,7 +17,7 @@ define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "
             }, this);
             this.$el.page();
             $.mobile.changePage(this.$el, {
-                "transition": "slide",
+                "transition": "fade",
                 "changeHash": false,
                 "role": this.role
             });
