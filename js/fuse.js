@@ -1,9 +1,15 @@
-define(["backbone", "jquery", "underscore", "routers/app.router", "routers/vehicles.router"], function(Backbone, $, _, AppRouter, VehiclesRouter) {
+define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
     return {
-        routers: {
-            AppRouter: new AppRouter(),
-            VehiclesRouter: new VehiclesRouter()
-        },
+        // not any special functionality now but maybe later.
+        Router: Backbone.Router.extend({}),
+
+        Model: Backbone.Model.extend({}),
+
+        Controller: {
+            // just use the extend method already defined by backbone.
+            extend: Backbone.Router.extend;
+        }
+
         View: Backbone.View.extend({
             // this initalize function will be overriden by the inheriting views
             initialize: function() {
@@ -18,6 +24,12 @@ define(["backbone", "jquery", "underscore", "routers/app.router", "routers/vehic
             // does neccesary housekeeping 
             mobilize: function() {
             }
-        })
+        }),
+
+        history: Backbone.History.extend({});
+
+        init: function() {
+            this.history.start();
+        }
     };
 });

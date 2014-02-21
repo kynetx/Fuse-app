@@ -1,5 +1,5 @@
-define(["backbone", "jquery", "underscore", "views/vehicles.view"], function(Backbone, $, _, VehiclesView) {
-    return {
+    define(["fuse", "jquery", "underscore", "views/vehicles.view"], function(Fuse, $, _, VehiclesView) {
+    return Fuse.Controller.extend({
         showVehicleList: function() {
             // this is just dummy data for now.
             new VehiclesView([{
@@ -244,5 +244,5 @@ define(["backbone", "jquery", "underscore", "views/vehicles.view"], function(Bac
                 "speed": 85
             }]);
         }
-    };
+    });
 });

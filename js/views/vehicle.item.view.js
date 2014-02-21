@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "text!templates/vehicleItemTmpl.html"], function($, _, vehicleItemTmpl) {
+define(["fuse", "jquery", "underscore", "text!templates/vehicleItemTmpl.html"], function(Fuse, $, _, vehicleItemTmpl) {
 	// represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "li",
