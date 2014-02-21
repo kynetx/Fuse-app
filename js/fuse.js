@@ -8,7 +8,7 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
         Controller: {
             // just use the extend method already defined by backbone.
             extend: Backbone.Router.extend
-        }
+        },
 
         View: Backbone.View.extend({
             // this initalize function will be overriden by the inheriting views
@@ -26,7 +26,7 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
             }
         }),
 
-        history: Backbone.History.extend({});
+        history: Backbone.History.extend({}),
 
         init: function() {
             this.history.start();
