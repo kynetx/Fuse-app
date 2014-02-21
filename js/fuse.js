@@ -7,7 +7,7 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
 
         Controller: {
             // just use the extend method already defined by backbone.
-            extend: Backbone.Router.extend;
+            extend: Backbone.Router.extend
         }
 
         View: Backbone.View.extend({
