@@ -1,0 +1,17 @@
+<form>
+    <ul data-role="listview" data-inset="true">
+        <li>
+            <img scr="<%= icon %>">
+            <h2><%= nickname %></h2>
+            <p><%=year %><%= make %>,<%= model %></p>
+        </li>
+        <li>
+            <label>Mileage</label>
+            <input type="text" data-theme="b" name="mileage" value="<%= mileage %>">
+        </li>
+        <li>
+            <label>Notes</label>
+            <input type="range" data-theme="b" name="mileage" value="<%= notes %>">
+        </li>
+    </ul>
+</form>
