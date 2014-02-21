@@ -1,3 +1,3 @@
-require(["backbone", "cloudos", "jquery", "fuse", "jquerymobile"], function(Backbone, CloudOS, $, Fuse) {
+require(["backbone", "cloudos", "jquery", "underscore", "fuse", "jquerymobile"], function(Backbone, CloudOS, $, Fuse) {
     Backbone.history.start();
 });
