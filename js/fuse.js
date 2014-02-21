@@ -12,17 +12,7 @@ define(["backbone", "jquery", "underscore", "routers/app.router", "routers/vehic
             },
 
             render: function() {
-                this.renderHeader();
-                this.renderFooter();
-                this.mobilize();
-                this.
-            },
-
-            renderHeader: function() {
-                this.go();
-            },
-
-            renderFooter: function() {
+                
             },
 
             // does neccesary housekeeping 

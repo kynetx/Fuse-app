@@ -1,6 +1,10 @@
-define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.view"], function(Backbone, $, _, VehicleCollection, VehicleView) {
+define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view"], function(Backbone, $, _, VehicleCollection, VehicleItemView) {
+    // represents the view that contains the vehicle list.
     return Backbone.View.extend({
-        el: "#vehicles",
+        tagName: "div",
+        className: "vehicle-list",
+        header: _.template(headerTmpl("Vehicles")),
+        role: "page",
 
         initialize: function(vehicles) {
             this.collection = new VehicleCollection(vehicles);
@@ -11,15 +15,16 @@ define(["backbone", "jquery", "underscore", "collections/vehicles.collection", "
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-            $("#page-" + this.el.id).page();
-            $.mobile.changePage(this.$el.closest("[data-role = 'page']"), {
+            this.$el.page();
+            $.mobile.changePage(this.$el, {
                 "transition": "slide",
-                "changeHash": false
+                "changeHash": false,
+                "role": this.role
             });
         },
 
         renderVehicle: function(vehicle) {
-            var view = new VehicleView({
+            var view = new VehicleItemView({
                 model: vehicle
             });
             this.$el.append(view.render().el);
