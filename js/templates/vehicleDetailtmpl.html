@@ -2,16 +2,15 @@
     <ul data-role="listview" data-inset="true">
         <li>
             <img scr="<%= icon %>">
-            <h2><%= nickname %></h2>
-            <p><%=year %><%= make %>,<%= model %></p>
+            <h2> <%= nickname %> </h2>
+            <p> <%= year %> <%= make %>, <%= model %> </p>
         </li>
         <li>
-            <label>Mileage</label>
-            <input type="text" data-theme="b" name="mileage" value="<%= mileage %>">
+            <span><strong> Mileage: </strong> <%= mileage %> </span>
         </li>
         <li>
-            <label>Notes</label>
-            <input type="range" data-theme="b" name="mileage" value="<%= notes %>">
+            <span><strong> Notes: </strong></span>
+            <p> <%= mileage %> </p>
         </li>
     </ul>
 </form>
