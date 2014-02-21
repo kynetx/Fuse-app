@@ -5,18 +5,24 @@ define(["backbone", "jquery", "underscore", "routers/app.router", "routers/vehic
             VehiclesRouter: new VehiclesRouter()
         },
         View: Backbone.View.extend({
+            // this initalize function will be overriden by the inheriting views
             initialize: function() {
                 _.bindAll();
                 this.render();
             },
 
-            events: {
-                // none for now...
-            },
-
             render: function() {
                 this.renderHeader();
                 this.renderFooter();
+                this.mobilize();
+                this.
+            },
+
+            renderHeader: function() {
+                this.go();
+            },
+
+            renderFooter: function() {
             },
 
             // does neccesary housekeeping 
