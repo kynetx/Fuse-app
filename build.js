@@ -1,6 +1,10 @@
-// setup require js.
-require.config({
+({    
     baseUrl: "js",
+    name: "vendor/almond",
+    out: "builds/fuse-0.0.0.js",
+    include: ["main"],
+    optimize: "uglify2",
+    wrap: true,
     paths: {
         "jquery": "vendor/jquery-1.11.0.min",
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
@@ -28,6 +32,4 @@ require.config({
             exports: "Backbone"
         }
     }
-});
-
-require(["main"]);
+})
