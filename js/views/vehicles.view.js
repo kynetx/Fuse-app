@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view"], function(require, $, _,VehicleCollection, VehicleItemView) {
+define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view"], function(Fuse, $, _,VehicleCollection, VehicleItemView) {
     // represents the view that contains the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
