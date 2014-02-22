@@ -1,11 +1,14 @@
-define(["backbone", "jquery", "underscore", "controllers/app.controller"], function(Backbone, $, _, AppController) {
-    return Backbone.Router.extend({
+define(["fuse", "jquery", "underscore", "controllers/app.controller"], function(Fuse, $, _, AppController) {
+    return Fuse.Router.extend({
         routes: {
             "": "showVehicleListFromHome",
             "home": "showVehicleListFromHome"
         },
+
+        controller: new AppController(),
+
         showVehicleListFromHome: function() {
-            AppController.showVehicleListFromHome();
+        	this.controller.showVehicleListFromHome();
         }
     });
 });

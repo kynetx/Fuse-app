@@ -1,6 +1,6 @@
-define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
+define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 
-    return Backbone.Model.extend({
+    return Fuse.Model.extend({
         defaults: {
             "default": 1,
             "vin": "XXXXXX",
