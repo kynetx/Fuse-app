@@ -1,4 +1,4 @@
-require(["backbone", "cloudos", "jquery", "fuse", "jquerymobile"], function(Backbone, CloudOS, $, Fuse) {
+require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.router", "jquerymobile"], function(Fuse, CloudOS, $, AppRouter, VehiclesRouter) {
 	// setup the routers
 	Fuse.routers = {};
 	Fuse.routers.AppRouter = new AppRouter();

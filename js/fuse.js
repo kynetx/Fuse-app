@@ -1,13 +1,12 @@
 define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
-    return {
+    var Fuse = {
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
 
         Model: Backbone.Model.extend({}),
 
-        Controller: {
-            // just use the extend method already defined by backbone.
-            extend: Backbone.Router.extend
+        Controller: function() {
+            // we don't really have any instance properties here yet.
         },
 
         View: Backbone.View.extend({
@@ -26,10 +25,21 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
             }
         }),
 
-        history: Backbone.History.extend({}),
-
         init: function() {
-            this.history.start();
+            Backbone.history.start();
+        },
+
+        logging: true,
+
+        log: function() {
+            if (console && console.log && this.logging) {
+                console.log(arguments)
+            }
         }
     };
+
+    // since backbone has already written a great extend function, lets just reuse it in our controller.
+    Fuse.Controller.extend = Backbone.Model.extend;
+
+    return Fuse;
 });

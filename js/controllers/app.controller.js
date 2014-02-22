@@ -1,7 +1,7 @@
-define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
+define(["backbone", "fuse", "jquery", "underscore"], function(Backbone, Fuse, $, _) {
     return Fuse.Controller.extend({
         showVehicleListFromHome: function() {
-            Fuse.history.navigate("vehicles", {trigger: true});
+            Backbone.history.navigate("vehicles", {trigger: true});
         }
     });
 });

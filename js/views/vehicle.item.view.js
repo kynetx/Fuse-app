@@ -5,6 +5,9 @@ define(["fuse", "jquery", "underscore", "text!templates/vehicleItemTmpl.html"], 
         className: "vehicle",
         template: _.template(vehicleItemTmpl),
 
+        // do nothing for now
+        initialize: function() {},
+
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
