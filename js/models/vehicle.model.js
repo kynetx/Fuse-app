@@ -13,8 +13,8 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "mileage": 0,
             "lastWaypoint": {
                "timestamp": "never",
-            "latitude": 0.0,
-            "longitude": 0.0
+                "latitude": 0.0,
+                "longitude": 0.0
             },
             "timestamp": "never",
             "running": "never",
