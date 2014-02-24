@@ -3,7 +3,6 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
     return Fuse.View.extend({
         tagName: "div",
         className: "vehicle-list",
-        // header: _.template(headerTmpl("Vehicles")),
         role: "page",
         header: "Vehicles",
         footer: "Fuse",
