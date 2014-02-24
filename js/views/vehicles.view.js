@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view"], function(Fuse, $, _,VehicleCollection, VehicleItemView) {
+define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view", "text!templates/vehicleListTmpl.html"], function(Fuse, $, _,VehicleCollection, VehicleItemView, vehicleListTmpl) {
     // represents the view that contains the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
@@ -7,6 +7,7 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
         header: "Vehicles",
         footer: "Fuse",
         transition: "fade",
+        vehicleListItems: [],
 
         initialize: function(vehicles) {
             this.collection = new VehicleCollection(vehicles);
@@ -17,13 +18,14 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-            Fuse.View.prototype.render.apply(this, arguments);
+            Fuse.View.prototype.render.apply(this, [this.vehicleList];
         },
 
         renderVehicle: function(vehicle) {
             var view = new VehicleItemView({
                 model: vehicle
             });
+            this.vehicleListItems.push(view.render().el)
         }
     });
 });

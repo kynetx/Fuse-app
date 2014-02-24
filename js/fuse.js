@@ -18,6 +18,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
 
             headerTemplate: _.template(headerTmpl),
             footerTemplate: _.template(footerTmpl),
+            contentTemplate: _.template(contentTmpl),
 
             renderHeader: function() {
                 this.$el.prepend(this.headerTemplate({header: this.header}));
@@ -27,11 +28,15 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
                 this.$el.append(this.footerTemplate({footer: this.footer}));
             },
 
-            render: function() {
+            renderContent: function(content) {
+                this.$el.append(this.contentTemplate({content: content}));
+            },
+
+            render: function(content) {
                 Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
                 this.renderHeader();
-                this.renderFooter();
                 this.renderContent();
+                this.renderFooter();
                 this.removeDups();
                 this.addToDOM();
                 this.enhance();
