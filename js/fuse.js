@@ -27,6 +27,7 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
 
         init: function() {
             Backbone.history.start();
+            $.mobile.initializePage();
         },
 
         logging: true,
