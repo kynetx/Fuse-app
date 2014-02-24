@@ -3,8 +3,9 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
     return Fuse.View.extend({
         tagName: "div",
         className: "vehicle-list",
-        // header: _.template(headerTmpl("Vehicles")),
         role: "page",
+        header: "Vehicles",
+        footer: "Fuse",
 
         initialize: function(vehicles) {
             this.collection = new VehicleCollection(vehicles);
@@ -15,19 +16,13 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-            this.$el.page();
-            $.mobile.changePage(this.$el, {
-                "transition": "fade",
-                "changeHash": false,
-                "role": this.role
-            });
+            Fuse.View.prototype.render.apply(this, arguments);
         },
 
         renderVehicle: function(vehicle) {
             var view = new VehicleItemView({
                 model: vehicle
             });
-            this.$el.append(view.render().el);
         }
     });
 });
