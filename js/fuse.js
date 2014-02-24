@@ -35,7 +35,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             render: function(content) {
                 Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
                 this.renderHeader();
-                this.renderContent();
+                this.renderContent(content);
                 this.renderFooter();
                 this.removeDups();
                 this.addToDOM();
