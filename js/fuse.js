@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
+define(["backbone", "jquery", "underscore", "text!templates/headetTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _) {
     var Fuse = {
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
@@ -16,12 +16,14 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
                 this.render();
             },
 
+            headerTemplate: _.template
+
             renderHeader: function() {
-                Fuse.log(this.header);
+                this.$el.append(this.header);
             },
 
             renderFooter: function() {
-                Fuse.log(this.footer);
+                this.$el.append(this.footer);
             },
 
             render: function() {
@@ -47,6 +49,7 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
             },
 
             enhance: function() {
+                this.$el.data("role", this.role);
                 this.$el.page();
             },
 
