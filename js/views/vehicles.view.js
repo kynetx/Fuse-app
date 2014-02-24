@@ -21,6 +21,8 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
                 "changeHash": false,
                 "role": this.role
             });
+            // call the super class render(), which does all the jQuery mobile goodness.
+            this.__super__.render(this, arguments);
         },
 
         renderVehicle: function(vehicle) {
