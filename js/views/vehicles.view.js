@@ -18,7 +18,7 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-            Fuse.View.prototype.render.apply(this, [this.vehicleList];
+            Fuse.View.prototype.render.apply(this, [this.vehicleListItems]);
         },
 
         renderVehicle: function(vehicle) {

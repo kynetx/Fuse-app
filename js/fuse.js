@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!/templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
+define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
     var Fuse = {
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
