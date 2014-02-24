@@ -29,6 +29,10 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             },
 
             renderContent: function(content) {
+                for (var i = 0; i < content.length; ++i) {
+                    Fuse.log(content[i].innerHTML);
+                    Fuse.log(content[i].outerHTML);
+                }
                 this.$el.append(this.contentTemplate({content: content}));
             },
 
