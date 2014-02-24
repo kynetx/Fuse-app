@@ -16,17 +16,54 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
                 this.render();
             },
 
-            render: function() {
-                
+            renderHeader: function() {
+                Fuse.log(this.header);
             },
 
-            // does neccesary housekeeping 
-            mobilize: function() {
+            renderFooter: function() {
+                Fuse.log(this.footer);
+            },
+
+            render: function() {
+                Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
+                this.renderHeader();
+                this.renderFooter();
+                this.removeDups();
+                this.addToDOM();
+                this.enhance();
+                this.show();
+            },
+
+            removeDups: function() {
+                if (this.$el.length) {
+                    // detach keeps jQuery data and event handlers around 
+                    // while removing it from the DOM. 
+                    this.$el.detach();
+                }
+            },
+
+            addToDOM: function() {
+                $(document).append(this.$el);
+            },
+
+            enhance: function() {
+                this.$el.page();
+            },
+
+            show: function() {
+                $.mobile.changePage(this.$el, {
+                    transition: this.transition,
+                    // Backbone is managing hash listening for us so we don't want 
+                    // jQM to mess with it.
+                    changeHash: false
+                })
             }
         }),
 
         init: function() {
+            // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
+            // start jQuery Mobile.
             $.mobile.initializePage();
         },
 

@@ -5,6 +5,8 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
         className: "vehicle-list",
         // header: _.template(headerTmpl("Vehicles")),
         role: "page",
+        header: "Vehicles",
+        footer: "Fuse",
 
         initialize: function(vehicles) {
             this.collection = new VehicleCollection(vehicles);
@@ -15,21 +17,13 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-            this.$el.page();
-            $.mobile.changePage(this.$el, {
-                "transition": "fade",
-                "changeHash": false,
-                "role": this.role
-            });
-            // call the super class render(), which does all the jQuery mobile goodness.
-            this.__super__.render(this, arguments);
+            Fuse.View.prototype.render.apply(this, arguments);
         },
 
         renderVehicle: function(vehicle) {
             var view = new VehicleItemView({
                 model: vehicle
             });
-            this.$el.append(view.render().el);
         }
     });
 });
