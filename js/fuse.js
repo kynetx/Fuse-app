@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "text!templates/headetTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _) {
+define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!/templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
     var Fuse = {
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
@@ -16,20 +16,22 @@ define(["backbone", "jquery", "underscore", "text!templates/headetTmpl.html", "t
                 this.render();
             },
 
-            headerTemplate: _.template
+            headerTemplate: _.template(headerTmpl),
+            footerTemplate: _.template(footerTmpl),
 
             renderHeader: function() {
-                this.$el.append(this.header);
+                this.$el.prepend(this.headerTemplate({header: this.header}));
             },
 
             renderFooter: function() {
-                this.$el.append(this.footer);
+                this.$el.append(this.footerTemplate({footer: this.footer}));
             },
 
             render: function() {
                 Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
                 this.renderHeader();
                 this.renderFooter();
+                this.renderContent();
                 this.removeDups();
                 this.addToDOM();
                 this.enhance();
@@ -45,11 +47,11 @@ define(["backbone", "jquery", "underscore", "text!templates/headetTmpl.html", "t
             },
 
             addToDOM: function() {
-                $(document).append(this.$el);
+                $(document.body).append(this.$el);
             },
 
             enhance: function() {
-                this.$el.data("role", this.role);
+                this.$el.attr("data-role", this.role);
                 this.$el.page();
             },
 
@@ -59,7 +61,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headetTmpl.html", "t
                     // Backbone is managing hash listening for us so we don't want 
                     // jQM to mess with it.
                     changeHash: false
-                })
+                });
             }
         }),
 

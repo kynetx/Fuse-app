@@ -6,6 +6,7 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
         role: "page",
         header: "Vehicles",
         footer: "Fuse",
+        transition: "fade",
 
         initialize: function(vehicles) {
             this.collection = new VehicleCollection(vehicles);
