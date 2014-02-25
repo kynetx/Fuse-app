@@ -33,7 +33,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             },
 
             render: function() {
-                Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
+                Fuse.log("Rendering view:", this);
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
@@ -79,10 +79,23 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             $.mobile.initializePage();
         },
 
-        logging: true,
+        show: function(to, options) {
+            if (options && options.id) {
+                Fuse.log("Going to show page:", to, " with options:", options);
+                Backbone.history.navigate(to + "/" + id, {trigger: true});
+            } else {
+                Fuse.log("Going to show page:", to);
+                Backbone.history.navigate(to, {trigger: true});
+            }
+        },
+
+        logging: false,
 
         log: function() {
-            return this.logging && console && console.log && Function.prototype.apply.call(console.log, console, arguments);
+            // this is a console.log wrapper written by AKO that uses javascript awesomeness to emulate exact behavior
+            // of console.log() but with the bonus of having it be easily disableable. (Remove line in main.js where Fuse.logging = true);
+            return this.logging && console && console.log && 
+            Function.prototype.apply.call(console.log, console, ["Fuse v0.0.0:"].concat(Array.prototype.slice.call(arguments)));
         }
     };
 

@@ -38,7 +38,7 @@ define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collec
             var $vehicle = $(e.target).closest("li");
             var vid = $vehicle.attr("data-vid");
             Fuse.log("Clicked on: ", $vehicle.get(0), " going to show vehicle detail view.");
-            Backbone.history.navigate("vehicle/" + vid);
+            Fuse.show("vehicle", {id: vid});
         }
     });
 });
