@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view", "text!templates/vehicleListTmpl.html"], function(Fuse, $, _,VehicleCollection, VehicleItemView, vehicleListTmpl) {
+define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view", "text!templates/vehicleListTmpl.html"], function(Backbone, Fuse, $, _,VehicleCollection, VehicleItemView, vehicleListTmpl) {
     // represents the view that contains the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
@@ -33,8 +33,11 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
             this.vehicleListItems.push(view.render().el);
         },
 
-        showVehicleDetail: function() {
-            VehiclesController.showVehicleDetail(/* id */);
+        showVehicleDetail: function(e) {
+            e.preventDefault();
+            var $vehicle = $(e.target).closest("li");
+            var vid = $vehicle.attr("data-vid");
+            Fuse.show("vehicle", {id: vid});
         }
     });
 });

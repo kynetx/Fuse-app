@@ -3,5 +3,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 	Fuse.routers = {};
 	Fuse.routers.AppRouter = new AppRouter();
 	Fuse.routers.VehiclesRouter = new VehiclesRouter();
+	// remove this for production.
+	Fuse.logging = true;
 	Fuse.init();
 });

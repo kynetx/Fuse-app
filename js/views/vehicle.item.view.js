@@ -3,6 +3,9 @@ define(["fuse", "jquery", "underscore", "text!templates/vehicleItemTmpl.html"], 
     return Fuse.View.extend({
         tagName: "li",
         className: "vehicle",
+        attributes: {
+            "data-vid": "VXXX"
+        },
         template: _.template(vehicleItemTmpl),
 
         // do nothing for now
