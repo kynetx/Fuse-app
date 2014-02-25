@@ -34,7 +34,8 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
         },
 
         showVehicleDetail: function(e) {
-            Fuse.log("Clicked on: ", e, " going to show vehicle detail view.");
+            e.preventDefault();
+            Fuse.log("Clicked on: ", $(e.target).closest("li").get(0), " going to show vehicle detail view.");
             Backbone.history.navigate("vehicle/" + $(e.target).attr("data-vid"));
         }
     });
