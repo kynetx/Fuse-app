@@ -1,10 +1,17 @@
-define(["jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view"], function(require, $, _,VehicleCollection, VehicleItemView) {
+define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view", "text!templates/vehicleListTmpl.html"], function(Backbone, Fuse, $, _,VehicleCollection, VehicleItemView, vehicleListTmpl) {
     // represents the view that contains the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
-        className: "vehicle-list",
-        // header: _.template(headerTmpl("Vehicles")),
+        id: "vehicle-list",
         role: "page",
+        header: "Vehicles",
+        footer: "Fuse",
+        transition: "fade",
+        vehicleListTemplate: _.template(vehicleListTmpl),
+        vehicleListItems: [],
+        events: {
+            "click .vehicle": "showVehicleDetail"
+        },
 
         initialize: function(vehicles) {
             this.collection = new VehicleCollection(vehicles);
@@ -15,19 +22,22 @@ define(["jquery", "underscore", "collections/vehicles.collection", "views/vehicl
             this.collection.each(function(vehicle) {
                 this.renderVehicle(vehicle);
             }, this);
-            this.$el.page();
-            $.mobile.changePage(this.$el, {
-                "transition": "fade",
-                "changeHash": false,
-                "role": this.role
-            });
+            this.content = this.vehicleListTemplate({vehicles: this.vehicleListItems});
+            Fuse.View.prototype.render.call(this);
         },
 
         renderVehicle: function(vehicle) {
             var view = new VehicleItemView({
                 model: vehicle
             });
-            this.$el.append(view.render().el);
+            this.vehicleListItems.push(view.render().el);
+        },
+
+        showVehicleDetail: function(e) {
+            e.preventDefault();
+            var $vehicle = $(e.target).closest("li");
+            var vid = $vehicle.attr("data-vid");
+            Fuse.show("vehicle", {id: vid});
         }
     });
 });

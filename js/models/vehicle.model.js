@@ -1,6 +1,6 @@
-define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
+define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 
-    return Backbone.Model.extend({
+    return Fuse.Model.extend({
         defaults: {
             "default": 1,
             "vin": "XXXXXX",
@@ -13,8 +13,8 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
             "mileage": 0,
             "lastWaypoint": {
                "timestamp": "never",
-            "latitude": 0.0,
-            "longitude": 0.0
+                "latitude": 0.0,
+                "longitude": 0.0
             },
             "timestamp": "never",
             "running": "never",

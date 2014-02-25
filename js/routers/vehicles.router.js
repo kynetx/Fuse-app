@@ -1,10 +1,18 @@
-define(["backbone", "jquery", "underscore", "controllers/vehicles.controller"], function(Backbone, $, _, VehiclesController) {
-    return Backbone.Router.extend({
+define(["fuse", "jquery", "underscore", "controllers/vehicles.controller"], function(Fuse, $, _, VehiclesController) {
+    return Fuse.Router.extend({
         routes: {
-            "vehicles": "showVehicleList"
+            "vehicles": "showVehicleList",
+            "vehicle/:id": "showVehicleDetail"
         },
+
+        controller: new VehiclesController(),
+
         showVehicleList: function() {
-            VehiclesController.showVehicleList();
+        	this.controller.showVehicleList();
+        },
+
+        showVehicleDetail: function(id) {
+        	this.controller.showVehicleDetail(id);
         }
     });
 });

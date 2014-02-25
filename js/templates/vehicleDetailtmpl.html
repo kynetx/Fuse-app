@@ -1,0 +1,25 @@
+<form>
+    <ul data-role="listview" data-inset="true">
+        <li>
+            <img scr="<%= icon %>">
+            <h2> <%= nickname %> </h2>
+            <p> <%= year %> <%= make %>, <%= model %> </p>
+        </li>
+        <li>
+            <h3>Map:</h3>
+            <div id="map-canvas">
+            </div>
+        </li>
+        <li>
+            <p> Mileage: <%= mileage %> </p>
+            <p>VIN: <%= vin %> </p>
+            <p> Speed: <%= speed %> </p>
+            <p> Battery Voltage: <%= batteryVoltage %> </p>
+            <p> Fuel Level: <%= fuelLevel %> </p>
+        </li>
+        <li>
+            <span>Notes: </span>
+            <p> <%= mileage %> </p>
+        </li>
+    </ul>
+</form>
