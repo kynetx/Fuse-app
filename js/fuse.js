@@ -82,9 +82,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
         logging: true,
 
         log: function() {
-            if (console && console.log && this.logging) {
-                console.log(arguments)
-            }
+            return this.logging && console && console.log && Function.apply.call(console.log, console, arguments);
         }
     };
 

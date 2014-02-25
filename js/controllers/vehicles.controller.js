@@ -243,6 +243,10 @@
                 "heading": 234,
                 "speed": 85
             }]);
+        },
+
+        showVehicleDetail: function(id) {
+            Fuse.log("Vehicles controller should show vehicle detail with id: ", id);
         }
     });
 });

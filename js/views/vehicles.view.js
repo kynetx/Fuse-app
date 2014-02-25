@@ -33,8 +33,9 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "view
             this.vehicleListItems.push(view.render().el);
         },
 
-        showVehicleDetail: function() {
-            VehiclesController.showVehicleDetail(/* id */);
+        showVehicleDetail: function(e) {
+            Fuse.log("Clicked on: ", e, " going to show vehicle detail view.");
+            Backbone.history.navigate("vehicle/" + $(e.target).attr("data-vid"));
         }
     });
 });
