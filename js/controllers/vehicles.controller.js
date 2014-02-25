@@ -243,6 +243,10 @@
                 "heading": 234,
                 "speed": 85
             }]);
+        },
+
+        showVehicleDetail: function(id) {
+            Fuse.log("Vehicles controller recieved transition and will render vehicle detail page for vehicle with id:", id);
         }
     });
 });

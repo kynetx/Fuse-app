@@ -1,5 +1,6 @@
 define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
     var Fuse = {
+        VERSION: "0.0.0",
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
 
@@ -33,7 +34,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             },
 
             render: function() {
-                Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
+                Fuse.log("Rendering view:", this);
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
@@ -79,12 +80,23 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             $.mobile.initializePage();
         },
 
-        logging: true,
+        show: function(to, options) {
+            if (options && options.id) {
+                Fuse.log("Showing page:", to, " with options:", options);
+                Backbone.history.navigate(to + "/" + options.id, {trigger: true});
+            } else {
+                Fuse.log("Showing page:", to);
+                Backbone.history.navigate(to, {trigger: true});
+            }
+        },
+
+        logging: false,
 
         log: function() {
-            if (console && console.log && this.logging) {
-                console.log(arguments)
-            }
+            // this is a console.log wrapper written by AKO that uses javascript awesomeness to emulate exact behavior
+            // of console.log() but with the bonus of having it be easily disableable. (Remove line in main.js where Fuse.logging = true);
+            return this.logging && console && console.log && 
+            Function.prototype.apply.call(console.log, console, ["Fuse v"+ this.VERSION +":"].concat(Array.prototype.slice.call(arguments)));
         }
     };
 
