@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
+define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
     var Fuse = {
         VERSION: "0.0.0",
         // not any special functionality now but maybe later.
