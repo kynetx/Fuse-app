@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
+define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
     var Fuse = {
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
@@ -16,22 +16,34 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
                 this.render();
             },
 
+            headerTemplate: _.template(headerTmpl),
+            footerTemplate: _.template(footerTmpl),
+            contentTemplate: _.template(contentTmpl),
+
             renderHeader: function() {
-                Fuse.log(this.header);
+                this.$el.prepend(this.headerTemplate({header: this.header}));
             },
 
             renderFooter: function() {
-                Fuse.log(this.footer);
+                this.$el.append(this.footerTemplate({footer: this.footer}));
+            },
+
+            renderContent: function() {
+                this.$el.append(this.contentTemplate({content: this.content}));
             },
 
             render: function() {
                 Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
                 this.renderHeader();
+                this.renderContent();
                 this.renderFooter();
                 this.removeDups();
                 this.addToDOM();
                 this.enhance();
-                this.show();
+                var __self__ = this;
+                $(document).on("pageinit", function() {
+                    __self__.show();
+                });
             },
 
             removeDups: function() {
@@ -43,20 +55,20 @@ define(["backbone", "jquery", "underscore"], function(Backbone, $, _) {
             },
 
             addToDOM: function() {
-                $(document).append(this.$el);
+                $(document.body).append(this.$el);
             },
 
             enhance: function() {
+                this.$el.attr("data-role", this.role);
                 this.$el.page();
             },
 
             show: function() {
                 $.mobile.changePage(this.$el, {
                     transition: this.transition,
-                    // Backbone is managing hash listening for us so we don't want 
-                    // jQM to mess with it.
+                    role: this.role,
                     changeHash: false
-                })
+                });
             }
         }),
 
