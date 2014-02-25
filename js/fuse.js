@@ -1,5 +1,6 @@
 define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
     var Fuse = {
+        VERSION: "0.0.0",
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
 
@@ -95,7 +96,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             // this is a console.log wrapper written by AKO that uses javascript awesomeness to emulate exact behavior
             // of console.log() but with the bonus of having it be easily disableable. (Remove line in main.js where Fuse.logging = true);
             return this.logging && console && console.log && 
-            Function.prototype.apply.call(console.log, console, ["Fuse v0.0.0:"].concat(Array.prototype.slice.call(arguments)));
+            Function.prototype.apply.call(console.log, console, ["Fuse v"+ this.VERSION +":"].concat(Array.prototype.slice.call(arguments)));
         }
     };
 
