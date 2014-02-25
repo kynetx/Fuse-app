@@ -81,10 +81,10 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
 
         show: function(to, options) {
             if (options && options.id) {
-                Fuse.log("Going to show page:", to, " with options:", options);
+                Fuse.log("Showing page:", to, " with options:", options);
                 Backbone.history.navigate(to + "/" + id, {trigger: true});
             } else {
-                Fuse.log("Going to show page:", to);
+                Fuse.log("Showing page:", to);
                 Backbone.history.navigate(to, {trigger: true});
             }
         },
