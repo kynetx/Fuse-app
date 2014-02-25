@@ -246,7 +246,7 @@
         },
 
         showVehicleDetail: function(id) {
-            Fuse.log("Vehicles controller should show vehicle detail with id: ", id);
+            Fuse.log("Vehicles controller recieved transition and will render vehicle detail page for vehicle with id:", id);
         }
     });
 });
