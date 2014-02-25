@@ -28,23 +28,22 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
                 this.$el.append(this.footerTemplate({footer: this.footer}));
             },
 
-            renderContent: function(content) {
-                for (var i = 0; i < content.length; ++i) {
-                    Fuse.log(content[i].innerHTML);
-                    Fuse.log(content[i].outerHTML);
-                }
-                this.$el.append(this.contentTemplate({content: content}));
+            renderContent: function() {
+                this.$el.append(this.contentTemplate({content: this.content}));
             },
 
-            render: function(content) {
+            render: function() {
                 Fuse.log("Fuse base view class is now rendering view: ", this, " with arguments: ", arguments);
                 this.renderHeader();
-                this.renderContent(content);
+                this.renderContent();
                 this.renderFooter();
                 this.removeDups();
                 this.addToDOM();
                 this.enhance();
-                this.show();
+                var __self__ = this;
+                $(document).on("pageinit", function() {
+                    __self__.show();
+                });
             },
 
             removeDups: function() {
@@ -67,8 +66,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
             show: function() {
                 $.mobile.changePage(this.$el, {
                     transition: this.transition,
-                    // Backbone is managing hash listening for us so we don't want 
-                    // jQM to mess with it.
+                    role: this.role,
                     changeHash: false
                 });
             }
