@@ -83,7 +83,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
         show: function(to, options) {
             if (options && options.id) {
                 Fuse.log("Showing page:", to, " with options:", options);
-                Backbone.history.navigate(to + "/" + id, {trigger: true});
+                Backbone.history.navigate(to + "/" + options.id, {trigger: true});
             } else {
                 Fuse.log("Showing page:", to);
                 Backbone.history.navigate(to, {trigger: true});
