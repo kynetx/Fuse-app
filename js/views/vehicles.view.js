@@ -10,7 +10,7 @@ define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collec
         vehicleListTemplate: _.template(vehicleListTmpl),
         vehicleListItems: [],
         events: {
-            "click .vehicle": "showVehicleDetail"
+            "click .show-vehicle-detail": "showVehicleDetail"
         },
 
         initialize: function(vehicles) {
@@ -34,9 +34,8 @@ define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collec
         },
 
         showVehicleDetail: function(e) {
-            e.preventDefault();
-            var $vehicle = $(e.target).closest("li");
-            var vid = $vehicle.attr("data-vid");
+            var $vehicle = $(e.target);
+            var vid = $vehicle.closest("a").attr("data-vid");
             Fuse.show("vehicle", {id: vid});
         }
     });

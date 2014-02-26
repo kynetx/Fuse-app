@@ -95,13 +95,21 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
         },
 
         show: function(to, options) {
+            var page = "";
             if (options && options.id) {
-                Fuse.log("Showing page:", to, " with options:", options);
-                Backbone.history.navigate(to + "/" + options.id, {trigger: true});
+                page = to + "/" + options.id;
+                Fuse.log("Attempting to show page:", to, " with options:", options);
             } else {
-                Fuse.log("Showing page:", to);
-                Backbone.history.navigate(to, {trigger: true});
+                page = to;
+                Fuse.log("Attempting to show page:", to);
             }
+            // if are already on the requested page, do nothing.
+            if (Backbone.history.fragment === page) {
+                Fuse.log("Already on requested page! (", page, ") Not doing anything.");
+                return;
+            }
+
+            Backbone.history.navigate(page, {trigger: true});
         },
 
         logging: false,
