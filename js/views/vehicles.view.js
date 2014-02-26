@@ -1,4 +1,4 @@
-define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collection", "views/vehicle.item.view", "text!templates/vehiclelisttmpl.html"], function(Backbone, Fuse, $, _,VehicleCollection, VehicleItemView, vehicleListTmpl) {
+define(["backbone", "fuse", "jquery", "underscore", "views/vehicle.item.view", "text!templates/vehiclelisttmpl.html"], function(Backbone, Fuse, $, _, VehicleItemView, vehicleListTmpl) {
     // represents the view that contains the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
@@ -13,8 +13,7 @@ define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collec
             "click .show-vehicle-detail": "showVehicleDetail"
         },
 
-        initialize: function(vehicles) {
-            this.collection = new VehicleCollection(vehicles);
+        initialize: function() {
             this.render();
         },
 
@@ -34,8 +33,9 @@ define(["backbone", "fuse", "jquery", "underscore", "collections/vehicles.collec
         },
 
         showVehicleDetail: function(e) {
-            var $vehicle = $(e.target);
-            var vid = $vehicle.closest("a").attr("data-vid");
+            var $target = $(e.target);
+            // get the vehicle id fo which we want to render a detail view.
+            var vid = $target.closest("a").attr("data-vid");
             Fuse.show("vehicle", {id: vid});
         }
     });

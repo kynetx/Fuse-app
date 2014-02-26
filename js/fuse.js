@@ -108,7 +108,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
                 Fuse.log("Already on requested page! (", page, ") Not doing anything.");
                 return;
             }
-            
+
             Backbone.history.navigate(page, {trigger: true});
         },
 

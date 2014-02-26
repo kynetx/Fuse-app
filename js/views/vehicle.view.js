@@ -1,24 +1,20 @@
 define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/vehicledetailtmpl.html"], function(Fuse, $, _, VehicleModel, vehicleDetailTmpl) {
 	return Fuse.View.extend({
-		tagName: "div"
+		tagName: "div",
 		role: "page",
+		id: "vehicle-detail",
 		transition: "slide",
-		template: _.template(vehicledetailtmpl),
-		events: {
-			"click": "logClick"
+		header: "Vehicle",
+		footer: "Fuse",
+		template: _.template(vehicleDetailTmpl),
+
+		initialize: function() {
+			this.render();
 		},
 
-		initialize: function(vehicle) {
-			this.render(vehicle);
-		},
-
-		render: function(vehicle) {
-			this.content = this.template(vehicle);
+		render: function() {
+			this.content = this.template(this.model.toJSON());
 			Fuse.View.prototype.render.apply(this, arguments);
 		},
-
-		logClick: function(e) {
-			Fuse.log("element", e, "was clicked");
-		}
 	});
 });
