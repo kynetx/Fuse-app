@@ -262,7 +262,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 
 		"trips": {}
 	};
-
+	
 	// start the app.
 	Fuse.init();
 });
