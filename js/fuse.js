@@ -88,16 +88,10 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
         init: function() {
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
-
-            // temporary debugging...
-            var __self__ = this;
-            $(document).on("pagechangefailed", function(e) {
-                __self__.log("Page change failed with:", e);
-            });
         },
 
         isInitialized: function() {
-            return $("html").hasClass("ui-mobile-viewport");
+            return $("body").hasClass("ui-mobile-viewport");
         },
 
         show: function(to, options) {
