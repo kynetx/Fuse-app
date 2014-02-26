@@ -3,13 +3,9 @@ define(["fuse", "jquery", "underscore", "text!templates/vehicleitemtmpl.html"], 
     return Fuse.View.extend({
         tagName: "li",
         className: "vehicle",
-        attributes: {
-            "data-vid": "VXXX"
-        },
         template: _.template(vehicleItemTmpl),
 
-        // do nothing for now
-        initialize: function() {},
+        initialize: function() {/* do nothing for now */},
 
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
