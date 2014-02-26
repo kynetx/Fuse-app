@@ -106,10 +106,9 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
             // if are already on the requested page, do nothing.
             if (Backbone.history.fragment === page) {
                 Fuse.log("Already on requested page! (", page, ") Not doing anything.");
-                return;
+            } else {
+                Backbone.history.navigate(page, {trigger: true});
             }
-
-            Backbone.history.navigate(page, {trigger: true});
         },
 
         logging: false,
