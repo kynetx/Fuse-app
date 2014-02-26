@@ -4,12 +4,21 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 		role: "page",
 		transition: "slide",
 		template: _.template(vehicledetailtmpl),
-
-		initialize: function() {
-
+		events: {
+			"click": "logClick"
 		},
 
-		render: function() {
+		initialize: function(vehicle) {
+			this.render(vehicle);
 		},
+
+		render: function(vehicle) {
+			this.content = this.template(vehicle);
+			Fuse.View.prototype.render.apply(this, arguments);
+		},
+
+		logClick: function(e) {
+			Fuse.log("element", e, "was clicked");
+		}
 	});
 });
