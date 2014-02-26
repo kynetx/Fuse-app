@@ -5,10 +5,7 @@ define(["fuse", "jquery", "underscore", "text!templates/vehicleitemtmpl.html"], 
         className: "vehicle",
         template: _.template(vehicleItemTmpl),
 
-        // do nothing for now
-        initialize: function() {
-            Fuse.log(this.model);
-        },
+        initialize: function() {/* do nothing for now */},
 
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
