@@ -89,9 +89,22 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
 
         menuTemplate: _.template(menuTmpl),
 
+        preventGhostTaps: function() {
+            $(document).on("tap", function(e) {
+                if (e.handled) {
+                    // make the event die a horrible death.
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
+                }
+            })
+        },
+
         init: function() {
             // setup application menu.
             this.initMenu();
+            // prevent ghost taps.
+            this.preventGhostTaps();
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
@@ -108,15 +121,23 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
             $(document.body).append(menu);
             // setup handler for menu.
             $("#menu").on("tap", "a", function(e) {
-                __self__.show($(e.target).data("action"));
+                var action = $(e.target).data("action");
+                if (action === "close") {
+                    $("#menu").panel("close");
+                } else {
+                    __self__.show($(e.target).data("action"));
+                }
+                e.handled = true;
             });
+            
             // initialize the panel and listview widgets.
             $("#menu").panel();
             $("#menu ul:eq(0)").listview();
             // setup toggle handler.
-            $(document).on("tap", "#toggle-menu", function(e) {
-                Fuse.log("toggling menu...");
-                $("#menu").panel("toggle");
+            $(document).on("tap", "#open-menu", function(e) {
+                Fuse.log("opening menu...");
+                $("#menu").panel("open");
+                e.handled = true;
             }); 
         },
 
