@@ -3,6 +3,9 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 	Fuse.routers = {};
 	Fuse.routers.AppRouter = new AppRouter();
 	Fuse.routers.VehiclesRouter = new VehiclesRouter();
+	// this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
+	// a good idea to remove later.
+	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.VehiclesRouter.routes));
 	// remove this for production.
 	Fuse.logging = true;
 
@@ -262,6 +265,47 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 
 		"trips": {}
 	};
+
+	Fuse.menu = [{
+		action: "profile",
+		text: "Profile"
+	},
+	{
+		action: "preferences",
+		text: "Preferences"
+	},
+	{
+		action: "alerts",
+		text: "Alerts"
+	},
+	{
+		action: "vehicles",
+		text: "Vehicles"
+	},
+	{
+		action: "trips",
+		text: "Trips"
+	},
+	{
+		action: "maintenance",
+		text: "Maintenance"
+	},
+	{
+		action: "carpool",
+		text: "Carpool",
+	},
+	{
+		action: "store",
+		text: "Store"
+	},
+	{
+		action: "support",
+		text: "Support",
+	},
+	{
+		action: "logout",
+		text: "Logout"
+	}];
 	
 	// start the app.
 	Fuse.init();
