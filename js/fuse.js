@@ -133,12 +133,12 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
             // if are already on the requested page, do nothing.
             if (Backbone.history.fragment === page) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
-            } else if (this.routes && this.routes.indexOf(page) < 0 && !options) {
+            } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
                 // if no routes match, do nothing. 
                 // Primarily for menu use case, hence we don't bother checking routes with options.
                 this.log ("No routes match requested page. Not doing anything.");
             } else {
-                Backbone.history.navigate(page, {trigger: true});
+                Backbone.history.navigate(page, true);
             }
         },
 
