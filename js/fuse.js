@@ -88,7 +88,9 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
         init: function() {
             // setup the slide out menu.
             $("#menu").panel();
-            $("#toggle-menu").on("tap", function() {
+            $("#menu ul").listview();
+            $(document).on("tap", "#toggle-menu", function(e) {
+                Fuse.log("toggling menu...");
                 $("#menu").panel("toggle");
             });
             // tell Backbone to start listening for hashchanges.
