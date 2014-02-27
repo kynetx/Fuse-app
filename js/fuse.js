@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
+define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl, menuTmpl) {
     var Fuse = {
         VERSION: "0.0.0",
         // not any special functionality now but maybe later.
@@ -69,8 +69,10 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
 
-                // if the whole page hasn't been initalized, then initalize it as well.
+                // if jQM hasn't been initalized, then initalize it, otherwise nothing will work.
                 // should only happen once.
+                // choosing for ourselves when jQM inializes prevents jQM from trying to show a 
+                // landing page that we don't want.
                 if (!Fuse.isInitialized()) {
                     $.mobile.initializePage();
                 }
@@ -85,38 +87,59 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
             }
         }),
 
+        menuTemplate: _.template(menuTmpl),
+
         init: function() {
-            // setup the slide out menu.
-            $("#menu").panel();
-            $("#menu ul").listview();
-            $(document).on("tap", "#toggle-menu", function(e) {
-                Fuse.log("toggling menu...");
-                $("#menu").panel("toggle");
-            });
+            // setup application menu.
+            this.initMenu();
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
 
         isInitialized: function() {
+            // TODO: is this really the best way to determine if jQM is initialized?
             return $("body").hasClass("ui-mobile-viewport");
+        },
+
+        initMenu: function() {
+            var __self__ = this;
+            // populate menu items.
+            var menu = this.menuTemplate({items: this.menu});
+            $(document.body).append(menu);
+            // setup handler for menu.
+            $("#menu").on("tap", "a", function(e) {
+                __self__.show($(e.target).data("action"));
+            });
+            // initialize the panel and listview widgets.
+            $("#menu").panel();
+            $("#menu ul:eq(0)").listview();
+            // setup toggle handler.
+            $(document).on("tap", "#toggle-menu", function(e) {
+                Fuse.log("toggling menu...");
+                $("#menu").panel("toggle");
+            }); 
         },
 
         show: function(to, options) {
             var page = "";
             if (options && options.id) {
                 page = to + "/" + options.id;
-                Fuse.log("Attempting to show page:", to, " with options:", options);
+                this.log("Attempting to show page:", to, " with options:", options);
             } else {
                 page = to;
-                Fuse.log("Attempting to show page:", to);
-            }
-            // if are already on the requested page, do nothing.
-            if (Backbone.history.fragment === page) {
-                Fuse.log("Already on requested page! (", page, ") Not doing anything.");
-                return;
+                this.log("Attempting to show page:", to);
             }
 
-            Backbone.history.navigate(page, {trigger: true});
+            // if are already on the requested page, do nothing.
+            if (Backbone.history.fragment === page) {
+                this.log("Already on requested page! (", page, ") Not doing anything.");
+            } else if (this.routes && this.routes.indexOf(page) < 0 && !options) {
+                // if no routes match, do nothing. 
+                // Primarily for menu use case, hence we don't bother checking routes with options.
+                this.log ("No routes match requested page. Not doing anything.");
+            } else {
+                Backbone.history.navigate(page, {trigger: true});
+            }
         },
 
         logging: false,
