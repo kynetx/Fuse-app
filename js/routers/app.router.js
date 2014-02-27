@@ -6,9 +6,9 @@ define(["fuse", "jquery", "underscore", "controllers/app.controller"], function(
         },
 
         controller: new AppController(),
-
+        
         showVehicleListFromHome: function() {
         	this.controller.showVehicleListFromHome();
-        }
+        },
     });
 });
