@@ -1,0 +1,8 @@
+<div data-role="panel" id="menu" data-display="push" data-theme="b">
+    <ul data-role="listview">
+        <li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+        <% for (var i = 0; i < items.length; ++i) { %>
+            <li id="menu-item-<%= items[i].action %>"><a data-action="<%= items[i].action %>"><%= items[i].text %></a>
+        <% } %>
+    </ul>
+</div>
