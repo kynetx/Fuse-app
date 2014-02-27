@@ -2,7 +2,7 @@ define(["fuse", "jquery", "underscore", "controllers/app.controller"], function(
     return Fuse.Router.extend({
         routes: {
             "": "showVehicleListFromHome",
-            "home": "showVehicleListFromHome"
+            "home": "showVehicleListFromHome",
             "panel-menu": "showPanelMenu"
         },
 
