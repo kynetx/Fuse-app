@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "text!templates/contentTmpl.html", "text!templates/footerTmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
+define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl) {
     var Fuse = {
         VERSION: "0.0.0",
         // not any special functionality now but maybe later.
@@ -40,18 +40,17 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
                 this.renderFooter();
                 this.removeDups();
                 this.addToDOM();
+                this.showWhenReady();
                 this.enhance();
-                var __self__ = this;
-                $(document).on("pageinit", function() {
-                    __self__.show();
-                });
             },
 
             removeDups: function() {
-                if (this.$el.length) {
+                var targetElements = ["#" + this.el.id];
+                var dups = $(targetElements.join());
+                if (dups.length) {
                     // detach keeps jQuery data and event handlers around 
                     // while removing it from the DOM. 
-                    this.$el.detach();
+                    dups.detach();
                 }
             },
 
@@ -59,9 +58,22 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
                 $(document.body).append(this.$el);
             },
 
+            showWhenReady: function() {
+                var __self__ = this;
+                $(this.$el).on("pagecreate", function(e) {
+                    __self__.show();
+                }); 
+            },
+
             enhance: function() {
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
+
+                // if the whole page hasn't been initalized, then initalize it as well.
+                // should only happen once.
+                if (!Fuse.isInitialized()) {
+                    $.mobile.initializePage();
+                }
             },
 
             show: function() {
@@ -76,18 +88,28 @@ define(["backbone", "jquery", "underscore", "text!templates/headerTmpl.html", "t
         init: function() {
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
-            // start jQuery Mobile.
-            $.mobile.initializePage();
+        },
+
+        isInitialized: function() {
+            return $("body").hasClass("ui-mobile-viewport");
         },
 
         show: function(to, options) {
+            var page = "";
             if (options && options.id) {
-                Fuse.log("Showing page:", to, " with options:", options);
-                Backbone.history.navigate(to + "/" + options.id, {trigger: true});
+                page = to + "/" + options.id;
+                Fuse.log("Attempting to show page:", to, " with options:", options);
             } else {
-                Fuse.log("Showing page:", to);
-                Backbone.history.navigate(to, {trigger: true});
+                page = to;
+                Fuse.log("Attempting to show page:", to);
             }
+            // if are already on the requested page, do nothing.
+            if (Backbone.history.fragment === page) {
+                Fuse.log("Already on requested page! (", page, ") Not doing anything.");
+                return;
+            }
+
+            Backbone.history.navigate(page, {trigger: true});
         },
 
         logging: false,
