@@ -39,7 +39,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 		},
 		{
 			"id": "V4GM",
-			"vin": "FAKE_VIN",
+			"vin": "1FFJKLEFWEKLRJWELK,
 			"nickname" : "Tacoma",
 			"year" : "2000",
 			"make" : "Toyota",
@@ -64,7 +64,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 		},
 		{
 			"id": "VTVB",
-			"vin": "FAKE_VIN",
+			"vin": "15FJKLSDFJK",
 			"nickname" : "Speedy",
 			"year" : "2005",
 			"make" : "Lexus",
@@ -86,7 +86,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 			"odometer": 65345,
 			"header": 272,
 			"speed": 72
-		},
+		}/*,
 		{
 			"id": "VN0E",
 			"vin": "Y257JX9AXQDXI529",
@@ -261,7 +261,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 			"odometer": 145159,
 			"heading": 234,
 			"speed": 85
-		}],
+		}*/],
 
 		"trips": {}
 	};
