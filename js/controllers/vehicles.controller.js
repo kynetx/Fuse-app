@@ -3,13 +3,13 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "mode
         showVehicleList: function() {
             Fuse.log("Vehicles controller: rendering vehicle list view.");
             new VehiclesView({
-                collection: new VehicleCollection(Fuse.data.vehicles)
+                collection: new VehicleCollection(Fuse.FIXTURES.vehicles)
             });
         },
 
         showVehicleDetail: function(id) {
             Fuse.log("Vehicles controller: rendering view for vehicle:", id);
-            var vehicle = Fuse.data.vehicles.filter(function(vehicle) {
+            var vehicle = Fuse.FIXTURES.vehicles.filter(function(vehicle) {
                 return vehicle.id === id;
             })[0];
             Fuse.log("Found vehicle:", vehicle);

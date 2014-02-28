@@ -10,7 +10,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 	Fuse.logging = true;
 
 	// setup dummy data. Will eventually come from API obviously.
-	Fuse.data = {
+	Fuse.FIXTURES = {
 		"vehicles": [{
 			"id": "VSPQ",
 			"default": 1,
