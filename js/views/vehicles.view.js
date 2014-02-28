@@ -8,13 +8,13 @@ define(["backbone", "fuse", "jquery", "underscore", "views/vehicle.item.view", "
         footer: "Fuse",
         transition: "fade",
         vehicleListTemplate: _.template(vehicleListTmpl),
-        vehicleListItems: [],
         events: {
-            "click .show-vehicle-detail": "showVehicleDetail"
+            "tap.show-vehicle-detail": "showVehicleDetail"
         },
 
         initialize: function() {
-            this.render();
+            this.vehicleListItems = [];
+            this.render(); 
         },
 
         render: function() {
@@ -37,6 +37,7 @@ define(["backbone", "fuse", "jquery", "underscore", "views/vehicle.item.view", "
             // get the vehicle id fo which we want to render a detail view.
             var vid = $target.closest("a").attr("data-vid");
             Fuse.show("vehicle", {id: vid});
+            e.handled = true;
         }
     });
 });
