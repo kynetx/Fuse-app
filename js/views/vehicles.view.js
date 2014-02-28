@@ -9,7 +9,7 @@ define(["backbone", "fuse", "jquery", "underscore", "views/vehicle.item.view", "
         transition: "fade",
         vehicleListTemplate: _.template(vehicleListTmpl),
         events: {
-            "tap.show-vehicle-detail": "showVehicleDetail"
+            "tap .show-vehicle-detail": "showVehicleDetail"
         },
 
         initialize: function() {

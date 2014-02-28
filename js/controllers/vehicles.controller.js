@@ -2,7 +2,6 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "mode
     return Fuse.Controller.extend({
         showVehicleList: function() {
             Fuse.log("Vehicles controller: rendering vehicle list view.");
-            Fuse.log(Fuse.data.vehicles);
             new VehiclesView({
                 collection: new VehicleCollection(Fuse.data.vehicles)
             });
