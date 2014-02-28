@@ -11,7 +11,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
         },
 
         View: Backbone.View.extend({
-            // this initalize function will be overriden by the inheriting views
+            // this initalize function will be overriden by the inheriting views.
             initialize: function() {
                 _.bindAll();
                 this.render();
