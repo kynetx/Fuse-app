@@ -69,7 +69,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 			"year": "1998",
 			"make": "Ford",
 			"model": "Fiesta",
-			"icon": "http://motorreview.com/wp-content/uploads/2013/12/2014-Ford-Fiesta-SE-12-of-28.jpg",
+			"icon": "style/images/ford_fiesta.jpg",
 			"notes": "Labore consectetur et proident veniam mollit. In minim reprehenderit proident et. Elit fugiat cillum sit cillum quis. Elit ad ullamco velit laborum amet exercitation ea. Nisi ea nostrud ullamco ipsum magna consequat id qui",
 			"mileage": 84519,
 			"lastWaypoint": {
