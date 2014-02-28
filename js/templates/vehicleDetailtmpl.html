@@ -1,23 +1,32 @@
 <ul data-role="listview" data-inset="true">
     <li>
+        <h3 class="center-text">[map will go here]</h3>
+    </li>
+</ul>
+<ul data-role="listview" data-inset="true">
+    <li>
         <img src="<%= icon %>">
         <h2> <%= nickname %> </h2>
         <p> <%= year %> <%= make %>, <%= model %> </p>
     </li>
+</ul>
+<ul data-role="listview" data-inset="true">
     <li>
-        <h3>Map:</h3>
-        <div id="map-canvas">
-        </div>
+        <p> <strong>Mileage:</strong> <%= mileage %> MPG</p>
     </li>
     <li>
-        <p> <strong>Mileage:</strong> <%= mileage %> </p>
         <p> <strong>VIN:</strong> <%= vin %> </p>
-        <p> <strong>Speed:</strong> <%= speed %> </p>
-        <p> <strong>Battery Voltage:</strong> <%= batteryVoltage %> </p>
-        <p> <strong>Fuel Level:</strong> <%= fuelLevel %> </p>
     </li>
     <li>
-        <span> <strong>Notes:</strong> </span>
-        <p> <%= mileage %> </p>
+        <p> <strong>Speed:</strong> <%= speed %> MPH</p>
+    </li>
+    <li>
+        <p> <strong>Battery Voltage:</strong> <%= batteryVoltage %> </p>
+    </li>
+    <li>
+        <p> <strong>Fuel Level:</strong> <%= fuelLevel %> Gallons</p>
+    </li>
+    <li>
+        <p> <strong>Notes:</strong> <%= notes %> </p>
     </li>
 </ul>
