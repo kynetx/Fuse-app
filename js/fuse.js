@@ -26,7 +26,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
             },
 
             renderFooter: function() {
-                this.$el.append(this.footerTemplate({footer: this.footer}));
+                this.$el.append(this.footerTemplate());
             },
 
             renderContent: function() {

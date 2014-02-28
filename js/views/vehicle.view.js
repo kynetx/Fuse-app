@@ -4,11 +4,10 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 		role: "page",
 		id: "vehicle-detail",
 		transition: "slide",
-		header: "Vehicle",
-		footer: "Fuse",
 		template: _.template(vehicleDetailTmpl),
 
 		initialize: function() {
+			this.header = this.model.get("nickname");
 			this.render();
 		},
 
