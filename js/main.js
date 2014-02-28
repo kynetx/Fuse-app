@@ -92,16 +92,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 	};
 
 	Fuse.menu = [{
-		action: "profile",
-		text: "Profile"
-	},
-	{
-		action: "preferences",
-		text: "Preferences"
-	},
-	{
-		action: "alerts",
-		text: "Alerts"
+		action: "settings",
+		text: "Settings"
 	},
 	{
 		action: "vehicles",
@@ -118,14 +110,6 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 	{
 		action: "carpool",
 		text: "Carpool",
-	},
-	{
-		action: "store",
-		text: "Store"
-	},
-	{
-		action: "support",
-		text: "Support",
 	},
 	{
 		action: "logout",
