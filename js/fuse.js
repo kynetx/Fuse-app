@@ -67,7 +67,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             enhance: function() {
                 if (this.mapConfig) {
-                    Fuse.configureMap(this.mapConfig);
+                    Fuse.map.configure(this.mapConfig);
                 }
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
@@ -92,7 +92,36 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         menuTemplate: _.template(menuTmpl),
         mapTemplate: _.template(mapTmpl),
-        map: {},
+        map: {
+            reset: function() {
+                while (this.overlays.length) {
+                    var overlay = this.overlays.pop();
+                    Fuse.log("Removing overlay", overlay, "from map.");
+                    overlay.setMap(null);
+                }
+            },
+
+            configure: function(config) {
+                Fuse.log("Configuring Fuse map:", config);
+                if (!config) {
+                    Fuse.log("Invalid map configuration:", config);
+                    return;
+                }
+                if (!config.height || !config.width) {
+                    Fuse.log("invalid map configuration:", config, "must be passed a height & width");
+                    return;
+                }
+                // reset the map.
+                this.reset();
+
+                // set it up.
+                // give it a width and a height.
+                this.$el.css({
+                    height: config.height,
+                    width: config.width
+                }).appendTo($(config.container));
+            }
+        },
 
         initMenu: function() {
             this.log("Initializing menu.");
@@ -150,6 +179,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.initMenu();
             // add reusable map container to page.
             this.initMap();
+            this.map.configure();
             // prevent ghost taps.
             this.preventGhostTaps();
             // tell Backbone to start listening for hashchanges.
