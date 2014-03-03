@@ -68,8 +68,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             enhance: function() {
-                if (this.mapConfig) {
-                    Fuse.map.configure(this.mapConfig);
+                if (this.map) {
+                    Fuse.map.configure(this.map);
                 }
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
@@ -96,6 +96,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         mapTemplate: _.template(mapTmpl),
         map: {
             overlays: [],
+            listeners: [],
 
             reset: function() {
                 // set the height and width to zero and move it to the beginning of the body.
@@ -103,10 +104,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     height: 0,
                     width: 0
                 }).prependTo(document.body);
+                // remove all event listeners.
+                while (this.listeners.length) {
+                    var listener = this.listeners.pop();
+                    Fuse.log("Removing listener:", listener, "from map:", this);
+                    Maps.event.removeListener(listener);
+                }
                 // remove all overlays.
                 while (this.overlays.length) {
                     var overlay = this.overlays.pop();
-                    Fuse.log("Removing overlay:", overlay, "from map:", this.obj);
+                    Fuse.log("Removing overlay:", overlay, "from map:", this);
                     overlay.setMap(null);
                 }
 
@@ -146,7 +153,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             addOverlay: function(overlay) {
-                Fuse.log("Adding overlay:", overlay, "to map:", this.obj);
+                Fuse.log("Adding overlay:", overlay, "to map:", this);
+                this.overlays.push(overlay);
             }
         },
 
