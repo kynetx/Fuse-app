@@ -175,7 +175,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         animation = Maps.Animation.BOUNCE;
                     }
-                    var posiiton = new Maps.LatLng(overlay.posiiton.latitude, overlay.position.longitude);
+                    var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
                     googOverlay = new Maps.Marker({
                         position: position,
                         title: overlay.title,
@@ -186,7 +186,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // add the overlay to the map.
                 googOverlay.setMap(this.obj);
                 // extend the bounds object to include this marker position.
-                this.bounds.extend(posiiton);
+                this.bounds.extend(position);
                 // keep track of this overlay so we can remove it later.
                 this.overlays.push(overlay);
             }
