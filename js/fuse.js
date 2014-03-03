@@ -97,6 +97,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         map: {
             overlays: [],
             listeners: [],
+            infoWindow: new Maps.InfoWindow(),
 
             reset: function() {
                 // set the height and width to zero and move it to the beginning of the body.
@@ -153,6 +154,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             addOverlay: function(overlay) {
+                if (overlay.infowindow) {
+                    // this overlay is a marker.
+                }
+                
                 Fuse.log("Adding overlay:", overlay, "to map:", this);
                 this.overlays.push(overlay);
             }
