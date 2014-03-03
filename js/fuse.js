@@ -110,7 +110,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     overlay.setMap(null);
                 }
 
-                Fuse.log("Reset Fuse map. Current map object:", this);
+                Fuse.log("Reset Fuse map. Fuse map object after reset:", this);
             },
 
             configure: function(config) {
@@ -138,7 +138,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     width: width
                 }).appendTo($container);
                 // add overlays, if any.
-                while (config.overlays.length) {
+                while (config.overlays && config.overlays.length) {
                     this.addOverlay(config.overlays.pop());
                 }
             },
