@@ -106,7 +106,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // remove all overlays.
                 while (this.overlays.length) {
                     var overlay = this.overlays.pop();
-                    Fuse.log("Removing overlay", overlay, "from map.");
+                    Fuse.log("Removing overlay:", overlay, "from map:", this.obj);
                     overlay.setMap(null);
                 }
 
@@ -138,8 +138,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     width: width
                 }).appendTo($container);
                 // add overlays, if any.
-                while (config.overlays && config.overlays.length) {
-                    this.addOverlay(config.overlays.pop());
+                if (config.overlays) {
+                    while (config.overlays.length) {
+                        this.addOverlay(config.overlays.pop());
+                    }
                 }
             },
 
