@@ -99,7 +99,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
-            bounds: new Maps.LatLngBounds(),
 
             reset: function() {
                 // set the height and width to zero and move it to the beginning of the body.
@@ -120,6 +119,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     overlay.setMap(null);
                 }
 
+                if (this.bounds) {
+                    delete this.bounds;
+                }
+
                 Fuse.log("Reset Fuse map. Fuse map object after reset:", this);
             },
 
@@ -129,6 +132,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     Fuse.log("Invalid map configuration:", config);
                     return;
                 }
+                
                 // reset the map.
                 this.reset();
 
@@ -147,12 +151,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     height: height,
                     width: width
                 }).appendTo($container);
+                // setup bounds.
+                this.bounds = new Maps.LatLngBounds();
                 // add overlays, if any.
                 if (config.overlays) {
                     while (config.overlays.length) {
                         this.addOverlay(config.overlays.pop());
                     }
                 }
+                // tell the map to respect our bounds object.
+                this.obj.fitBounds(this.bounds);
+                // set the zoom level on the map.
+                this.obj.setZoom(this.obj.getZoom() - 3);
             },
 
             addOverlay: function(overlay) {
@@ -165,14 +175,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         animation = Maps.Animation.BOUNCE;
                     }
+                    var posiiton = new Maps.LatLng(overlay.posiiton.latitude, overlay.posiiton.longitude);
                     googOverlay = new Maps.Marker({
-                        position: new Maps.LatLng(overlay.position.latitude, overlay.position.longitude),
+                        position: position,
                         title: overlay.title,
                         animation: animation
                     });
                 }
-                
                 Fuse.log("Adding overlay:", googOverlay, "to map:", this);
+                // add the overlay to the map.
+                googOverlay.setMap(this.obj);
+                // extend the bounds object to include this marker position.
+                this.bounds.extend(posiiton);
+                // keep track of this overlay so we can remove it later.
                 this.overlays.push(overlay);
             }
         },
