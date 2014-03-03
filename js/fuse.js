@@ -94,10 +94,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         menuTemplate: _.template(menuTmpl),
         mapTemplate: _.template(mapTmpl),
+
         map: {
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
+            bounds: new Maps.LatLngBounds(),
 
             reset: function() {
                 // set the height and width to zero and move it to the beginning of the body.
@@ -154,11 +156,23 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             addOverlay: function(overlay) {
+                var googOverlay;
+                // if the overlay is a google maps marker.
                 if (overlay.infowindow) {
-                    // this overlay is a marker.
+                    var animation;
+                    if (!overlay.animation || overlay.animation.toUpperCase() == "DROP") {
+                        animation = Maps.Animation.DROP;
+                    } else {
+                        animation = Maps.Animation.BOUNCE;
+                    }
+                    googOverlay = new Maps.Marker({
+                        position: new Maps.LatLng(overlay.position.latitude, overlay.position.longitude),
+                        title: overlay.title,
+                        animation: animation
+                    });
                 }
                 
-                Fuse.log("Adding overlay:", overlay, "to map:", this);
+                Fuse.log("Adding overlay:", googOverlay, "to map:", this);
                 this.overlays.push(overlay);
             }
         },
