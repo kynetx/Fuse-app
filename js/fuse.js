@@ -160,7 +160,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // if the overlay is a google maps marker.
                 if (overlay.infowindow) {
                     var animation;
-                    if (!overlay.animation || overlay.animation.toUpperCase() == "DROP") {
+                    if (!overlay.animation || overlay.animation.toUpperCase() === "DROP") {
                         animation = Maps.Animation.DROP;
                     } else {
                         animation = Maps.Animation.BOUNCE;
