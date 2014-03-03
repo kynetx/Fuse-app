@@ -132,7 +132,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     Fuse.log("Invalid map configuration:", config);
                     return;
                 }
-                
+
                 // reset the map.
                 this.reset();
 
@@ -175,7 +175,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         animation = Maps.Animation.BOUNCE;
                     }
-                    var posiiton = new Maps.LatLng(overlay.posiiton.latitude, overlay.posiiton.longitude);
+                    var posiiton = new Maps.LatLng(overlay.posiiton.latitude, overlay.position.longitude);
                     googOverlay = new Maps.Marker({
                         position: position,
                         title: overlay.title,
