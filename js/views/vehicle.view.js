@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/vehicledetailtmpl.html"], function(Fuse, $, _, VehicleModel, vehicleDetailTmpl) {
+define(["fuse", "jquery", "underscore", "vendor/google.maps", "models/vehicle.model", "text!templates/vehicledetailtmpl.html"], function(Fuse, $, _, Maps, VehicleModel, vehicleDetailTmpl) {
 	return Fuse.View.extend({
 		tagName: "div",
 		role: "page",
@@ -13,6 +13,7 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 
 		render: function() {
 			this.content = this.template(this.model.toJSON());
+			Fuse.log(Maps);
 			Fuse.View.prototype.render.apply(this, arguments);
 		},
 	});
