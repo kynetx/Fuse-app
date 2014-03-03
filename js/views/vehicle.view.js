@@ -9,6 +9,9 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 		initialize: function() {
 			this.header = this.model.get("nickname");
 			this.content = this.template(this.model.toJSON());
+			this.mapConfig = {
+				container: "#vehicle-detail-map"
+			}
 			this.render();
 		},
 

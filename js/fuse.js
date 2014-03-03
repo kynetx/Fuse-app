@@ -48,6 +48,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var targetElements = ["#" + this.el.id];
                 var dups = $(targetElements.join());
                 if (dups.length) {
+                    // reset the map back to its starting location.
+                    Fuse.map.reset();
                     // detach keeps jQuery data and event handlers around 
                     // while removing it from the DOM. 
                     dups.detach();
@@ -93,12 +95,22 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         menuTemplate: _.template(menuTmpl),
         mapTemplate: _.template(mapTmpl),
         map: {
+            overlays: [],
+
             reset: function() {
+                // set the height and width to zero and move it to the beginning of the body.
+                this.$el.css({
+                    height: 0,
+                    width: 0
+                }).prependTo(document.body);
+                // remove all overlays.
                 while (this.overlays.length) {
                     var overlay = this.overlays.pop();
                     Fuse.log("Removing overlay", overlay, "from map.");
                     overlay.setMap(null);
                 }
+
+                Fuse.log("Reset Fuse map. Current map object:", this);
             },
 
             configure: function(config) {
@@ -107,19 +119,32 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     Fuse.log("Invalid map configuration:", config);
                     return;
                 }
-                if (!config.height || !config.width) {
-                    Fuse.log("invalid map configuration:", config, "must be passed a height & width");
-                    return;
-                }
                 // reset the map.
                 this.reset();
 
                 // set it up.
-                // give it a width and a height.
+                // give it a width and a height & move it to the appropriate location.
+                var $container = $(config.container);
+                // use the explicitly passed width and height, if given them,
+                // otherwise use the container's dimensions.
+                var height = config.height || $container.height();
+                if (height < 300) {
+                    Fuse.log("Map height (", height, ") is too small. Padding by 300px.");
+                    height += 300;
+                }
+                var width = config.width || $container.width();
                 this.$el.css({
-                    height: config.height,
-                    width: config.width
-                }).appendTo($(config.container));
+                    height: height,
+                    width: width
+                }).appendTo($container);
+                // add overlays, if any.
+                while (config.overlays.length) {
+                    this.addOverlay(config.overlays.pop());
+                }
+            },
+
+            addOverlay: function(overlay) {
+                Fuse.log("Adding overlay:", overlay, "to map:", this.obj);
             }
         },
 
@@ -153,7 +178,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initMap: function() {
             this.log("Initializing map.");
-            $(document.body).append(this.mapTemplate());
+            $(document.body).prepend(this.mapTemplate());
             this.map.$el = $("#fuse-map");
             // google maps expects the raw DOM element so we 
             // extract it out of the jQuery object using .get().
@@ -179,7 +204,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.initMenu();
             // add reusable map container to page.
             this.initMap();
-            this.map.configure();
             // prevent ghost taps.
             this.preventGhostTaps();
             // tell Backbone to start listening for hashchanges.
