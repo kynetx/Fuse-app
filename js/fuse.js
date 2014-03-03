@@ -66,8 +66,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             enhance: function() {
-                if (this.map) {
-                    this.configureMap();
+                if (this.mapConfig) {
+                    Fuse.configureMap(this.mapConfig);
                 }
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
@@ -92,46 +92,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         menuTemplate: _.template(menuTmpl),
         mapTemplate: _.template(mapTmpl),
-
-        preventGhostTaps: function() {
-            $(document).on("tap", function(e) {
-                if (e.handled) {
-                    // make the event die a horrible death.
-                    e.stopPropagation();
-                    e.preventDefault();
-                    return false;
-                }
-            })
-        },
-
-        initMap: function() {
-            $(document.body).append(this.mapTemplate());
-            this.$map = $("#fuse-map");
-            // google maps expects the raw DOM element so we 
-            // extract it out of the jQuery object using .get().
-            this.map = new Maps.Map(this.$map.get(0), {
-                mapTypeId: Maps.MapTypeId.ROADMAP
-            });
-            this.log(this);
-        },
-
-        init: function() {
-            // setup application menu.
-            this.initMenu();
-            // prevent ghost taps.
-            this.preventGhostTaps();
-            // add reusable map container to page.
-            this.initMap();
-            // tell Backbone to start listening for hashchanges.
-            Backbone.history.start();
-        },
-
-        isInitialized: function() {
-            // TODO: is this really the best way to determine if jQM is initialized?
-            return $("body").hasClass("ui-mobile-viewport");
-        },
+        map: {},
 
         initMenu: function() {
+            this.log("Initializing menu.");
             var __self__ = this;
             // populate menu items.
             var menu = this.menuTemplate({items: this.menu});
@@ -156,6 +120,45 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 $("#menu").panel("open");
                 e.handled = true;
             }); 
+        },
+
+        initMap: function() {
+            this.log("Initializing map.");
+            $(document.body).append(this.mapTemplate());
+            this.map.$el = $("#fuse-map");
+            // google maps expects the raw DOM element so we 
+            // extract it out of the jQuery object using .get().
+            this.map.el = this.map.$el.get(0);
+            this.map.obj = new Maps.Map(this.map.el, {
+                mapTypeId: Maps.MapTypeId.ROADMAP
+            });
+        },
+
+        preventGhostTaps: function() {
+            $(document).on("tap", function(e) {
+                if (e.handled) {
+                    // make the event die a horrible death.
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
+                }
+            })
+        },
+
+        init: function() {
+            // setup application menu.
+            this.initMenu();
+            // add reusable map container to page.
+            this.initMap();
+            // prevent ghost taps.
+            this.preventGhostTaps();
+            // tell Backbone to start listening for hashchanges.
+            Backbone.history.start();
+        },
+
+        isInitialized: function() {
+            // TODO: is this really the best way to determine if jQM is initialized?
+            return $("body").hasClass("ui-mobile-viewport");
         },
 
         show: function(to, options) {
