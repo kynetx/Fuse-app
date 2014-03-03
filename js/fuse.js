@@ -1,4 +1,4 @@
-define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html"], function(Backbone, $, _, headerTmpl, contentTmpl, footerTmpl, menuTmpl) {
+define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         VERSION: "0.0.0",
         // not any special functionality now but maybe later.
@@ -66,6 +66,9 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
             },
 
             enhance: function() {
+                if (this.map) {
+                    this.configureMap();
+                }
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
 
@@ -88,6 +91,7 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
         }),
 
         menuTemplate: _.template(menuTmpl),
+        mapTemplate: _.template(mapTmpl),
 
         preventGhostTaps: function() {
             $(document).on("tap", function(e) {
@@ -100,11 +104,24 @@ define(["backbone", "jquery", "underscore", "text!templates/headertmpl.html", "t
             })
         },
 
+        initMap: function() {
+            $(document.body).append(this.mapTemplate());
+            this.$map = $("#fuse-map");
+            // google maps expects the raw DOM element so we 
+            // extract it out of the jQuery object using .get().
+            this.map = new Maps.Map(this.$map.get(0), {
+                mapTypeId: Maps.MapTypeId.ROADMAP
+            });
+            this.log(this);
+        },
+
         init: function() {
             // setup application menu.
             this.initMenu();
             // prevent ghost taps.
             this.preventGhostTaps();
+            // add reusable map container to page.
+            this.initMap();
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
