@@ -100,18 +100,6 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 		text: "Vehicles"
 	},
 	{
-		action: "trips",
-		text: "Trips"
-	},
-	{
-		action: "maintenance",
-		text: "Maintenance"
-	},
-	{
-		action: "carpool",
-		text: "Carpool",
-	},
-	{
 		action: "logout",
 		text: "Logout"
 	}];

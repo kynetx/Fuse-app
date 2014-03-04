@@ -219,7 +219,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             
             // initialize the panel and listview widgets.
             $("#menu").panel();
-            $("#menu ul:eq(0)").listview();
+            $("#menu ul").listview();
             // setup toggle handler.
             $(document).on("tap", "#open-menu", function(e) {
                 Fuse.log("opening menu...");
