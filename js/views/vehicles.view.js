@@ -5,11 +5,10 @@ define(["backbone", "fuse", "jquery", "underscore", "views/vehicle.item.view", "
         id: "vehicle-list",
         role: "page",
         header: "Vehicles",
-        footer: "Fuse",
         transition: "fade",
         vehicleListTemplate: _.template(vehicleListTmpl),
         events: {
-            "tap.show-vehicle-detail": "showVehicleDetail"
+            "tap .show-vehicle-detail": "showVehicleDetail"
         },
 
         initialize: function() {
