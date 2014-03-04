@@ -101,11 +101,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             infoWindow: new Maps.InfoWindow(),
 
             reset: function() {
-                // set the height and width to zero and move it to the beginning of the body.
-                this.$el.css({
-                    height: 0,
-                    width: 0
-                }).prependTo(document.body);
+                // reset width and height and prepend it back to the body.
+                this.height = 0;
+                this.width = 0;
+                this.$container = $(document.body);
+                this.adjust();
                 // remove all event listeners.
                 while (this.listeners.length) {
                     var listener = this.listeners.pop();
@@ -126,6 +126,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.log("Reset Fuse map. Fuse map object after reset:", this);
             },
 
+            adjust: function() {
+                this.$el.css({
+                    height: this.height,
+                    width: this.width
+                }).prependTo(this.$container);
+                // tell google maps to trigger a resize event on our map
+                // object so the new configuration and position takes effect.
+                Maps.event.trigger(this.obj, "resize");   
+            },
+
             configure: function(config) {
                 Fuse.log("Configuring Fuse map:", config);
                 if (!config) {
@@ -136,21 +146,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // reset the map.
                 this.reset();
 
-                // set it up.
-                // give it a width and a height & move it to the appropriate location.
-                var $container = $(config.container);
-                // use the explicitly passed width and height, if given them,
+                // set up the maps container, height, width, and then adjust the map
+                // element given the new configuration.
+                this.$container = $(config.container);
+                // use the explicitly passed width and height if given,
                 // otherwise use the container's dimensions.
-                var height = config.height || $container.height();
-                if (height < 300) {
-                    Fuse.log("Map height (", height, ") is too small. Padding by 300px.");
-                    height += 300;
+                this.height = config.height || this.$container.height();
+                if (this.height < 300) {
+                    Fuse.log("Map height (", this.height, ") is too small. Padding by 300px.");
+                    this.height += 300;
                 }
-                var width = config.width || $container.width();
-                this.$el.css({
-                    height: height,
-                    width: width
-                }).appendTo($container);
+                this.width = config.width || this.$container.width();
+                // adjust the map to the new configuration.
+                this.adjust();
                 // setup bounds.
                 this.bounds = new Maps.LatLngBounds();
                 // add overlays, if any.
@@ -162,7 +170,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // tell the map to respect our bounds object.
                 this.obj.fitBounds(this.bounds);
                 // set the zoom level on the map.
-                this.obj.setZoom(this.obj.getZoom() - 3);
+                this.obj.setZoom(this.obj.getZoom() - 2);
             },
 
             addOverlay: function(overlay) {
@@ -188,7 +196,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // extend the bounds object to include this marker position.
                 this.bounds.extend(position);
                 // keep track of this overlay so we can remove it later.
-                this.overlays.push(overlay);
+                this.overlays.push(googOverlay);
             }
         },
 
