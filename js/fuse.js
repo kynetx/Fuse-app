@@ -240,6 +240,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             });
         },
 
+        initTooltips: function() {
+            // this is somewhat of a hack until I can finish a stable
+            // patch of the tooltipster() plugin which allows 
+            // for adding tooltipster functionality to dynamically-added
+            // elements.
+            $(document).on("mouseenter", "[title]", function() {
+                $(this).tooltipster();
+            });
+        },
+
         preventGhostTaps: function() {
             $(document).on("tap", function(e) {
                 if (e.handled) {
@@ -256,6 +266,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.initMenu();
             // add reusable map container to page.
             this.initMap();
+            // inialize tooltip plugin.
+            this.initTooltips();
             // prevent ghost taps.
             this.preventGhostTaps();
             // tell Backbone to start listening for hashchanges.
