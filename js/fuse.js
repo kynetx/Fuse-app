@@ -204,7 +204,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.log("Initializing menu.");
             var __self__ = this;
             // populate menu items.
-            var menu = this.menuTemplate({items: this.menu});
+            var menu = this.menuTemplate({items: this.menu, vehicles: this.FIXTURES.vehicles});
             $(document.body).append(menu);
             // setup handler for menu.
             $("#menu").on("tap", "a", function(e) {
@@ -219,7 +219,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             
             // initialize the panel and listview widgets.
             $("#menu").panel();
-            $("#menu ul:eq(0)").listview();
+            $("#menu ul").listview();
             // setup toggle handler.
             $(document).on("tap", "#open-menu", function(e) {
                 Fuse.log("opening menu...");
