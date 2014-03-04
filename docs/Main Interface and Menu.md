@@ -1,4 +1,6 @@
-The primary interface of the app should be a quick view list of all cars linked to the user’s app. This list view should include the car’s name and photo (YMM if there’s enough room) as well as the current location (with a link out to a map), the current safe driver score (linkable to score detail), the most recent alert, if any (link to list of alerts), and fuel level (link to fuelsmart). If the user only has one car, only the stats for that single car should be listed. 
+The primary interface of the app should be a quick view list of all cars linked to the user’s app. This list view should include the car’s name and photo (YMM if there’s enough room) as well as the current location (with a link out to a map), the current safe driver score (linkable to score detail), the most recent alert, if any (link to list of alerts), and fuel level (link to fuelsmart). If the user only has one car, only the stats for that single car should be listed.
+
+
 
 If the user clicks on the map button or linkable location text, they should drop into a map view where that car appears on the map with an icon or photo of the car (if present). If there is no photo a default car icon in a different color (assigned by the app) should appear for each car. This color should be consistent throughout the app for that vehicle (where relevant).  When the user taps the individual icon in the detail-view, the basic vital stats view (like we have now, but let’s add the name and pic of the primary driver) should open. 
 
