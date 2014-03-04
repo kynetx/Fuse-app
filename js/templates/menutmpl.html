@@ -1,8 +1,15 @@
 <div data-role="panel" id="menu" data-display="push" data-theme="b">
-    <ul data-role="listview">
+    <ul data-role="listview" data-divider-theme="b">
         <li data-icon="back"><a data-action="close">Close</a></li>
         <% for (var i = 0; i < items.length; ++i) { %>
-            <li id="menu-item-<%= items[i].action %>"><a data-action="<%= items[i].action %>"><%= items[i].text %></a>
+        	<% if (items[i].action.toUpperCase() === "VEHICLES") { %>
+            	<li id="menu-item-<%= items[i].action %>" data-role="list-divider"><!-- <a data-action="<%= items[i].action %>"> --><%= items[i].text %><!-- </a> -->
+            	<% for (var j = 0; j < vehicles.length; ++j) { %>
+            		<li id="vehicle-<%= vehicles[j].nickname %>"><%= vehicles[j].nickname %></li>
+            	<% } %>
+            <% } else { %>
+            	<li id="menu-item-<%= items[i].action %>"><a data-action="<%= items[i].action %>"><%= items[i].text %></a>
+            <% } %>
         <% } %>
     </ul>
 </div>
