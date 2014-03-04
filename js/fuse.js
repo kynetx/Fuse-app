@@ -1,6 +1,6 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
-        VERSION: "0.0.0",
+        VERSION: "0.0.1",
         // not any special functionality now but maybe later.
         Router: Backbone.Router.extend({}),
 
@@ -170,7 +170,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // tell the map to respect our bounds object.
                 this.obj.fitBounds(this.bounds);
                 // set the zoom level on the map.
-                this.obj.setZoom(this.obj.getZoom() - 2);
+                this.obj.setZoom(this.obj.getZoom() - 5);
             },
 
             addOverlay: function(overlay) {
