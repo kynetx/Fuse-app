@@ -24,8 +24,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 			"mileage": 159774,
 			"lastWaypoint": {
 				"timestamp": "20140116T152440+0000",
-				"latitude": 28.088505,
-				"longitude": -82.578467
+				"latitude": 40.23107,
+				"longitude": -111.65885
 			},
 			"timestamp": "20140116T151952+0000",
 			"running": false,
@@ -49,8 +49,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 			"mileage": 273000,
 			"lastWaypoint": {
 				"timestamp": "20140116T152440+0000",
-				"latitude": 28.088505,
-				"longitude": -82.578467
+				"latitude": 40.42970,
+				"longitude": -111.89830
 			},
 			"timestamp": "20140116T151952+0000",
 			"running": false,
@@ -74,8 +74,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 			"mileage": 84519,
 			"lastWaypoint": {
 				"timestamp": "19925606T185601T+07:00",
-				"latitude": 9.308106,
-				"longitude": -78.813817
+				"latitude": 40.74937,
+				"longitude": -111.82633
 			},
 			"timestamp": "19910831T060849T+07:00",
 			"running": false,
