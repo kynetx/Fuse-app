@@ -1,6 +1,6 @@
 ({    
     baseUrl: "js",
-    name: "vendor/almond",
+    name: "vendor/require",
     out: "builds/fuse-0.0.0.js",
     include: ["main"],
     optimize: "uglify2",
@@ -12,8 +12,12 @@
         "cloudos": "vendor/CloudOS",
         "cloudosconfig": "vendor/CloudOS.config",
         "underscore": "vendor/underscore-min",
+        "backbone": "vendor/backbone-min",
+        // require js plugins.
+        // this one lets us load templates from external files.
         "text": "vendor/require.text",
-        "backbone": "vendor/backbone-min"
+        // this one lets us use require to load things like google maps javascript API.
+        "async": "vendor/async"
     },
 
     shim: {
