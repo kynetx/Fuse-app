@@ -5,6 +5,7 @@ require.config({
         "jquery": "vendor/jquery-1.11.0.min",
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
         "jquerymobileconfig": "vendor/jquery.mobile.config",
+        "tooltipster": "vendor/jquery.tooltipster.min",
         "cloudos": "vendor/CloudOS",
         "cloudosconfig": "vendor/CloudOS.config",
         "underscore": "vendor/underscore-min",
@@ -22,6 +23,7 @@ require.config({
         },
         "jquerymobileconfig": ["jquery"],
         "jquerymobile": ["jquery", "jquerymobileconfig"],
+        "tooltipster": ["jquery"],
         "cloudosconfig": ["jquery"],
         "cloudos": {
             deps: ["jquery", "cloudosconfig"],
