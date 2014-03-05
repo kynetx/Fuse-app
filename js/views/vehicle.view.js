@@ -10,10 +10,10 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 		initialize: function() {
 			this.header = this.model.get("nickname");
 			this.content = this.template(this.model.toJSON());
-			this.map = {
+			this.mapConfig = {
 				container: "#vehicle-detail-map",
 			};
-			this.map.overlays = [{
+			this.mapConfig.overlays = [{
 				position: this.model.get("lastWaypoint"),
 				title: this.model.get("nickname"),
 				animation: "drop",

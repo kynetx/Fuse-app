@@ -68,9 +68,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             enhance: function() {
-                if (this.map) {
-                    Fuse.map.configure(this.map);
+                // if there is a map configuration, configure the map with it.
+                if (!!this.mapConfig) {
+                    Fuse.map.configure(this.mapConfig);
                 }
+
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
 
@@ -101,10 +103,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             infoWindow: new Maps.InfoWindow(),
 
             reset: function() {
+                var $body = $(document.body);
+                // if the container is set to the body already, we don't need to do anything.
+                if ($body.is(this.$container)) {
+                    Fuse.log("Aborting map reset attempt. Map already reset.");
+                    return;
+                }
                 // reset width and height and prepend it back to the body.
                 this.height = 0;
                 this.width = 0;
-                this.$container = $(document.body);
+                this.$container = $body;
                 this.adjust();
                 // remove all event listeners.
                 while (this.listeners.length) {
@@ -123,7 +131,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     delete this.bounds;
                 }
 
-                Fuse.log("Reset Fuse map. Fuse map object after reset:", this);
+                Fuse.log("Reset Fuse map:", this);
             },
 
             adjust: function() {
@@ -137,14 +145,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             configure: function(config) {
-                Fuse.log("Configuring Fuse map:", config);
+                this.reset();
+                Fuse.log("Map configuration:", config);
                 if (!config) {
                     Fuse.log("Invalid map configuration:", config);
                     return;
                 }
-
-                // reset the map.
-                this.reset();
 
                 // set up the maps container, height, width, and then adjust the map
                 // element given the new configuration.
@@ -167,10 +173,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         this.addOverlay(config.overlays.pop());
                     }
                 }
-                // tell the map to respect our bounds object.
-                this.obj.fitBounds(this.bounds);
-                // set the zoom level on the map.
-                this.obj.setZoom(this.obj.getZoom() - 5);
+
+                // set the context for the fitter function to Fuse.map (this).
+                var fitter = $.proxy(function() {
+                    Fuse.log("Fitting map.");
+                    this.obj.fitBounds(this.bounds);
+                    this.obj.setZoom(this.obj.getZoom() - 5);
+                }, this);
+
+                // give the map sufficient time to be setup before asking it to be fitted
+                // to our bounds and zoom level. Tried binding to events triggered by the map
+                // but they were unreliable for determining when the map was ready. So, just to be 
+                // safe we simply give it 130 milliseconds to initialize itself, which appears
+                // to be about the amount of time it takes for the map to finish setting itself
+                // up.
+                setTimeout(fitter, 130);
             },
 
             addOverlay: function(overlay) {
