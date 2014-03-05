@@ -18,15 +18,19 @@
 /* CSS for Vehicle Detail */
 
 .large-text {
-    font-size:180%;
+    font-size: 180%;
 }
 
 .medium-text {
-    font-size:120%;
+    font-size: 120%;
+}
+
+.normal-text {
+	font-size: 100%;
 }
 
 .padding-off {
-    padding:0px;
+    padding: 0px;
 }
 
 .margin-off {
