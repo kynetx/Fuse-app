@@ -1,31 +1,30 @@
 <ul data-role="listview" data-inset="true">
-    <li id="vehicle-detail-map">
-    </li>
-</ul>
-<ul data-role="listview" data-inset="true">
     <li>
         <img src="<%= icon %>">
         <h2> <%= nickname %> </h2>
         <p> <%= year %> <%= make %>, <%= model %> </p>
     </li>
 </ul>
+<ul data-role="listview" data-inset="true" class='ui-grid-b gray-border'>
+    <li class='ui-block-a center-text padding-off margin-off'>
+        <p> Mileage </p>
+        <h1 class="large-text padding-off margin-off"> <%= mileage %> </h1>
+        <p class="medium-text"> MPG </p>
+    </li>
+    <li class='ui-block-b  center-text padding-off margin-off'>
+        <p> Speed </p>
+        <h1 class="large-text padding-off margin-off"> <%= speed %></h1>
+        <p class="medium-text"> MPH </p>
+    </li>
+    <li class='ui-block-c center-text padding-off margin-off'>
+        <p> Battery </p>
+        <h1 class="large-text padding-off margin-off"> <%= batteryVoltage %> </h1>
+        <p class="medium-text"> Volts </p>
+    </li>
+</ul>
 <ul data-role="listview" data-inset="true">
     <li>
-        <p> <strong>Mileage:</strong> <%= mileage %> MPG</p>
-    </li>
-    <li>
-        <p> <strong>VIN:</strong> <%= vin %> </p>
-    </li>
-    <li>
-        <p> <strong>Speed:</strong> <%= speed %> MPH</p>
-    </li>
-    <li>
-        <p> <strong>Battery Voltage:</strong> <%= batteryVoltage %> </p>
-    </li>
-    <li>
-        <p> <strong>Fuel Level:</strong> <%= fuelLevel %> Gallons</p>
-    </li>
-    <li>
-        <p> <strong>Notes:</strong> <%= notes %> </p>
+        <h1 class="notes-header">Notes, </h1>
+        <p class="normal-white-space"><%= notes %></p>
     </li>
 </ul>
