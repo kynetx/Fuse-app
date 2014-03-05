@@ -65,7 +65,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 		{
 			"id": "VN0E",
 			"vin": "Y257JX9AXQDXI529",
-			"nickname": "Tanya",
+			"nickname": "Fiesta",
 			"year": "1998",
 			"make": "Ford",
 			"model": "Fiesta",
