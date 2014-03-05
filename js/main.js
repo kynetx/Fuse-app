@@ -53,7 +53,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 				"longitude": -111.89830
 			},
 			"timestamp": "20140116T151952+0000",
-			"running": false,
+			"running": true,
 			"fuelRate": 1.2,
 			"fuelLevel" : 20,
 			"coolantTemperature": 163,
