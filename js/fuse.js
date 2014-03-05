@@ -246,7 +246,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // for adding tooltipster functionality to dynamically-added
             // elements.
             $(document).on("mouseenter", "[title]", function() {
-                $(this).tooltipster();
+                $(this).tooltipster({
+                    theme: "tooltipster-shadow"
+                });
             });
         },
 
