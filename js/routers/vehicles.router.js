@@ -2,7 +2,8 @@ define(["fuse", "jquery", "underscore", "controllers/vehicles.controller"], func
     return Fuse.Router.extend({
         routes: {
             "vehicles": "showVehicleList",
-            "vehicle/:id": "showVehicleDetail"
+            "vehicle/:id": "showVehicleDetail",
+            "fleet": "showFleet"
         },
 
         controller: new VehiclesController(),
@@ -13,6 +14,10 @@ define(["fuse", "jquery", "underscore", "controllers/vehicles.controller"], func
 
         showVehicleDetail: function(id) {
         	this.controller.showVehicleDetail(id);
-        }
+        },
+
+        showFleet: function() {
+            this.controller.showFleet();
+        },
     });
 });
