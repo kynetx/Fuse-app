@@ -104,7 +104,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 	Fuse.routers.FleetRouter.controller = new FleetController();
 	// this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
 	// a good idea to remove later.
-	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.VehiclesRouter.routes));
+	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.FleetRouter.routes));
 	// remove this for production.
 	Fuse.logging = true;
 	

@@ -251,7 +251,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.log("Initializing menu.");
             var __self__ = this;
             // populate menu items.
-            var menu = this.menuTemplate({items: this.menu, vehicles: this.FIXTURES.vehicles});
+            var menu = this.menuTemplate({items: this.menu, vehicles: this.FIXTURES.fleet});
             $(document.body).append(menu);
             // setup handler for menu.
             $("#menu").on("tap", "a", function(e) {
