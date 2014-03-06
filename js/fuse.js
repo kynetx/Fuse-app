@@ -188,8 +188,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.height = config.height || this.$container.height();
                 // if the map height is less than 300px, pad it by 500px.
                 if (this.height < 300) {
-                    Fuse.log("Map height (", this.height, ") is too small. Padding by 500px.");
-                    this.height += 500;
+                    Fuse.log("Map height (", this.height, ") is too small. Padding by 300px.");
+                    this.height += 300;
                 }
 
                 // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
