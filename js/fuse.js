@@ -275,20 +275,24 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }); 
         },
 
-        initFooter: function() {
-            var showPageFromFooter = $.proxy(function(e) {
-                var action = $(e.target).closest("a").data("action");
+        initActionButtons: function() {
+            var showPageFromButton = $.proxy(function(e) {
+                var $target = $(e.target);
+                var action = $target.closest("a").data("action");
                 // show the page either for all vehicles or, 
                 // if we are currently looking at a specific vehicle,
                 // show the action for just that vehicle.
                 var id = Backbone.history.fragment.match(/\/(.*)/);
-
+                var isFleetAction = (action === "fleet");
                 // if we have an id, show the page passing the id,
                 // otherwise just show the page.
-                (!!id && !!id[1]) ? this.show(action, {id: id[1]}) : this.show(action);
+                // note : we check to make sure we're not trying to go to the 
+                // fleet page because no matter where we're coming from, it
+                // doesn't make sense to pass any id's to the fleet page.
+                (!isFleetAction && !!id && !!id[1]) ? this.show(action, {id: id[1]}) : this.show(action);
                 e.handled = true;
             }, this);
-            $(document).on("tap", ".fuse-footer-container > a > img", showPageFromFooter);
+            $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
         },
 
         initMap: function() {
@@ -329,8 +333,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         init: function() {
             // setup application menu.
             this.initMenu();
-            // setup footer.
-            this.initFooter();
+            // setup the action buttons in the header and footer.
+            this.initActionButtons();
             // add reusable map container to page.
             this.initMap();
             // inialize tooltip plugin.
