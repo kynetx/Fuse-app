@@ -7,7 +7,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         Model: Backbone.Model.extend({}),
 
         Controller: function() {
-            // we don't really have any instance properties here yet.
+            // call our constructor.
+            if (typeof this.init === "function") {
+                this.init();
+            }
         },
 
         View: Backbone.View.extend({
@@ -275,7 +278,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         initFooter: function() {
             var showPageFromFooter = $.proxy(function(e) {
                 var action = $(e.target).closest("a").data("action");
-                this.show(action);
+                // show the page either for all vehicles or, 
+                // if we are currently looking at a specific vehicle,
+                // show the action for just that vehicle.
+                var id = Backbone.history.fragment.match(/\/(.*)/)[1];
+
+                // if we have an id, show the page passing the id,
+                // otherwise just show the page.
+                (!!id) ? this.show(action, {id: id}) : this.show(action);
                 e.handled = true;
             }, this);
             $(document).on("tap", ".fuse-footer-container > a > img", showPageFromFooter);

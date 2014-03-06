@@ -10,17 +10,6 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 		initialize: function() {
 			this.header = this.model.get("nickname");
 			this.content = this.template(this.model.toJSON());
-			this.map = {
-				container: "#vehicle-detail-map",
-				height: 300
-			};
-			this.map.overlays = [{
-				type: Fuse.map.OverlayTypeId.MARKER,
-				position: this.model.get("lastWaypoint"),
-				title: this.model.get("nickname"),
-				animation: "drop",
-				infowindow: this.infoWindowTemplate(this.model.toJSON())
-			}];
 			this.render();
 		},
 

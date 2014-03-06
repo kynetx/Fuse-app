@@ -1,13 +1,4 @@
-require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.router", "jquerymobile", "tooltipster"], function(Fuse, CloudOS, $, AppRouter, VehiclesRouter) {
-	// setup the routers
-	Fuse.routers = {};
-	Fuse.routers.AppRouter = new AppRouter();
-	Fuse.routers.VehiclesRouter = new VehiclesRouter();
-	// this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
-	// a good idea to remove later.
-	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.VehiclesRouter.routes));
-	// remove this for production.
-	Fuse.logging = true;
+require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.router", "controllers/app.controller", "controllers/vehicles.controller", "jquerymobile", "tooltipster"], function(Fuse, CloudOS, $, AppRouter, VehiclesRouter, AppController, VehiclesController) {
 
 	// setup dummy data. Will eventually come from API obviously.
 	Fuse.FIXTURES = {
@@ -103,6 +94,19 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 		action: "logout",
 		text: "Logout"
 	}];
+
+	// intialize the routers.
+	Fuse.routers = {};
+	Fuse.routers.AppRouter = new AppRouter();
+	Fuse.routers.VehiclesRouter = new VehiclesRouter();
+	// initialize the controllers.
+	Fuse.routers.AppRouter.controller = new AppController();
+	Fuse.routers.VehiclesRouter.controller = new VehiclesController();
+	// this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
+	// a good idea to remove later.
+	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.VehiclesRouter.routes));
+	// remove this for production.
+	Fuse.logging = true;
 	
 	// start the app.
 	Fuse.init();

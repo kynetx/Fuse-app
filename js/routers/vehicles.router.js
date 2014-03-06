@@ -1,12 +1,11 @@
-define(["fuse", "jquery", "underscore", "controllers/vehicles.controller"], function(Fuse, $, _, VehiclesController) {
+define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
     return Fuse.Router.extend({
         routes: {
             "vehicles": "showVehicleList",
             "vehicle/:id": "showVehicleDetail",
-            "findcar": "showFindCar"
+            "findcar": "showFindCar",
+            "findcar/:id": "showFindCar"
         },
-
-        controller: new VehiclesController(),
 
         showVehicleList: function() {
         	this.controller.showVehicleList();
@@ -17,7 +16,14 @@ define(["fuse", "jquery", "underscore", "controllers/vehicles.controller"], func
         },
 
         showFindCar: function() {
-            this.controller.showFindCar();
+            var args = arguments;
+
+            // if we have an id.
+            if (typeof args[0] !== "undefined") {
+                this.controller.showFindCar(args[0]);
+            } else {
+                this.controller.showFindCar();
+            }
         },
     });
 });
