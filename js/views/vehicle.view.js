@@ -14,6 +14,7 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 				container: "#vehicle-detail-map",
 			};
 			this.map.overlays = [{
+				type: Fuse.map.OverlayTypeId.MARKER,
 				position: this.model.get("lastWaypoint"),
 				title: this.model.get("nickname"),
 				animation: "drop",

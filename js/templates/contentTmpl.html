@@ -1,3 +1,9 @@
-<div class="fuse-content" data-role="content">
-	<%= content %>
-</div>
+<% if (typeof(contentClass) !== "undefined") { %>
+	<div class="fuse-content <%= contentClass %>" data-role="content">
+		<%= content %>
+	</div>
+<% } else { %>
+	<div class="fuse-content" data-role="content">
+		<%= content %>
+	</div>
+<% } %>

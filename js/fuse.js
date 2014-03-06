@@ -30,11 +30,33 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             renderContent: function() {
-                this.$el.append(this.contentTemplate({content: this.content}));
+                var tmplParams = {
+                    content: this.content
+                };
+
+                if (!!this.contentClass) {
+                    tmplParams["contentClass"] = this.contentClass;
+                }
+
+                this.$el.append(this.contentTemplate(tmplParams));
             },
 
             render: function() {
                 Fuse.log("Rendering view:", this);
+                // if the view has a model or collection, tell the 
+                // view to re-render when the backing data changes.
+                // this means we only need to create collections and models
+                // once and then update the data and the views will automatically
+                // re-render.
+                if (this.collection) {
+                    this.collection.on("change", this.render, this);
+                    this.collection.on("add", this.render, this);
+                    this.collection.on("remove", this.render, this);
+                }
+                if (this.model) {
+                    this.model.on("change", this.render, this);
+                }
+
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
@@ -68,9 +90,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             enhance: function() {
-                if (this.map) {
+                // if there is a map configuration, configure the map with it.
+                if (!!this.map) {
                     Fuse.map.configure(this.map);
                 }
+
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
 
@@ -96,15 +120,27 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         mapTemplate: _.template(mapTmpl),
 
         map: {
+            // overlay types
+            OverlayTypeId: {
+                MARKER: 0,
+                DIRECTIONS: 1
+            },
+
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
 
             reset: function() {
+                var $body = $(document.body);
+                // if the container is set to the body already, we don't need to do anything.
+                if ($body.is(this.$container)) {
+                    Fuse.log("Aborting map reset attempt. Map already reset.");
+                    return;
+                }
                 // reset width and height and prepend it back to the body.
                 this.height = 0;
                 this.width = 0;
-                this.$container = $(document.body);
+                this.$container = $body;
                 this.adjust();
                 // remove all event listeners.
                 while (this.listeners.length) {
@@ -123,7 +159,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     delete this.bounds;
                 }
 
-                Fuse.log("Reset Fuse map. Fuse map object after reset:", this);
+                Fuse.log("Reset Fuse map:", this);
             },
 
             adjust: function() {
@@ -137,14 +173,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             configure: function(config) {
-                Fuse.log("Configuring Fuse map:", config);
+                this.reset();
+                Fuse.log("Map configuration:", config);
                 if (!config) {
                     Fuse.log("Invalid map configuration:", config);
                     return;
                 }
-
-                // reset the map.
-                this.reset();
 
                 // set up the maps container, height, width, and then adjust the map
                 // element given the new configuration.
@@ -152,11 +186,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // use the explicitly passed width and height if given,
                 // otherwise use the container's dimensions.
                 this.height = config.height || this.$container.height();
+                // if the map height is less than 300px, pad it by 500px.
                 if (this.height < 300) {
-                    Fuse.log("Map height (", this.height, ") is too small. Padding by 300px.");
+                    Fuse.log("Map height (", this.height, ") is too small. Padding by 500px.");
                     this.height += 300;
                 }
-                this.width = config.width || this.$container.width();
+
+                // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
+                this.width = (config.width || this.$container.width()) + 25;
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.
@@ -167,16 +204,27 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         this.addOverlay(config.overlays.pop());
                     }
                 }
-                // tell the map to respect our bounds object.
-                this.obj.fitBounds(this.bounds);
-                // set the zoom level on the map.
-                this.obj.setZoom(this.obj.getZoom() - 5);
+
+                // set the context for the fitter function to Fuse.map (this).
+                var fitter = $.proxy(function() {
+                    Fuse.log("Fitting map.");
+                    this.obj.fitBounds(this.bounds);
+                    this.obj.setZoom(this.obj.getZoom() - 1);
+                }, this);
+
+                // give the map sufficient time to be setup before asking it to be fitted
+                // to our bounds and zoom level. Tried binding to events triggered by the map
+                // but they were unreliable for determining when the map was ready. So, just to be 
+                // safe we simply give it 132 milliseconds to initialize itself, which appears
+                // to be about the amount of time it takes for the map to finish setting itself
+                // up.
+                setTimeout(fitter, 132);
             },
 
             addOverlay: function(overlay) {
                 var googOverlay;
-                // if the overlay is a google maps marker.
-                if (overlay.infowindow) {
+                // if the overlay is a marker.
+                if (this.OverlayTypeId.MARKER === overlay.type) {
                     var animation;
                     if (!overlay.animation || overlay.animation.toUpperCase() === "DROP") {
                         animation = Maps.Animation.DROP;
@@ -190,6 +238,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         animation: animation
                     });
                 }
+
                 Fuse.log("Adding overlay:", googOverlay, "to map:", this);
                 // add the overlay to the map.
                 googOverlay.setMap(this.obj);
@@ -226,6 +275,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 $("#menu").panel("open");
                 e.handled = true;
             }); 
+        },
+
+        initFooter: function() {
+            var showPageFromFooter = $.proxy(function(e) {
+                var action = $(e.target).closest("a").data("action");
+                this.show(action);
+                e.handled = true;
+            }, this);
+            $(document).on("tap", ".fuse-footer-container > a > img", showPageFromFooter);
         },
 
         initMap: function() {
@@ -266,6 +324,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         init: function() {
             // setup application menu.
             this.initMenu();
+            // setup footer.
+            this.initFooter();
             // add reusable map container to page.
             this.initMap();
             // inialize tooltip plugin.
