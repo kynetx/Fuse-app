@@ -2,13 +2,15 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 	return Fuse.View.extend({
 		tagName: "div",
 		id: "find-car",
+		contentClass: "fuse-map-container",
 		role: "page",
 		header: "Find Car",
 		transition: "slide",
 
 		initialize: function() {
 			this.map = {
-				container: "#fleet"
+				container: "#find-car > .fuse-content",
+				height: 550
 			};
 
 			this.map.overlays = [];

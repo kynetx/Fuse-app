@@ -30,7 +30,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             renderContent: function() {
-                this.$el.append(this.contentTemplate({content: this.content}));
+                var tmplParams = {
+                    content: this.content
+                };
+
+                if (!!this.contentClass) {
+                    tmplParams["contentClass"] = this.contentClass;
+                }
+
+                this.$el.append(this.contentTemplate(tmplParams));
             },
 
             render: function() {
@@ -178,11 +186,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // use the explicitly passed width and height if given,
                 // otherwise use the container's dimensions.
                 this.height = config.height || this.$container.height();
+                // if the map height is less than 300px, pad it by 500px.
                 if (this.height < 300) {
-                    Fuse.log("Map height (", this.height, ") is too small. Padding by 300px.");
+                    Fuse.log("Map height (", this.height, ") is too small. Padding by 500px.");
                     this.height += 300;
                 }
-                this.width = config.width || this.$container.width();
+
+                // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
+                this.width = (config.width || this.$container.width()) + 25;
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.
@@ -198,16 +209,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var fitter = $.proxy(function() {
                     Fuse.log("Fitting map.");
                     this.obj.fitBounds(this.bounds);
-                    this.obj.setZoom(this.obj.getZoom() - 5);
+                    this.obj.setZoom(this.obj.getZoom() - 1);
                 }, this);
 
                 // give the map sufficient time to be setup before asking it to be fitted
                 // to our bounds and zoom level. Tried binding to events triggered by the map
                 // but they were unreliable for determining when the map was ready. So, just to be 
-                // safe we simply give it 130 milliseconds to initialize itself, which appears
+                // safe we simply give it 132 milliseconds to initialize itself, which appears
                 // to be about the amount of time it takes for the map to finish setting itself
                 // up.
-                setTimeout(fitter, 130);
+                setTimeout(fitter, 132);
             },
 
             addOverlay: function(overlay) {
@@ -266,6 +277,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }); 
         },
 
+        initFooter: function() {
+            var showPageFromFooter = $.proxy(function(e) {
+                var action = $(e.target).data("action");
+                this.show(action);
+                e.handled = true;
+            }, this);
+            $(document).on("tap", ".fuse-footer-container > a", showPageFromFooter);
+        },
+
         initMap: function() {
             this.log("Initializing map.");
             $(document.body).prepend(this.mapTemplate());
@@ -302,6 +322,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         init: function() {
             // setup application menu.
             this.initMenu();
+            // setup footer.
+            this.initFooter();
             // add reusable map container to page.
             this.initMap();
             // inialize tooltip plugin.

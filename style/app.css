@@ -5,6 +5,20 @@
 .fuse-footer {
 	padding: 10px;
 }
+
 .fuse-footer img {
 	vertical-align: middle;
+}
+
+/**
+  * normally importants are icky, but when
+  * working with jQuery Mobile, you have to
+  * in order to beat their specificity without
+  * getting ridiculous. 
+  */
+.fuse-map-container {
+	padding: 0 !important;
+	margin: 0 !important;
+	border: 0 !important;
+	border-radius: 0 !important;
 }
