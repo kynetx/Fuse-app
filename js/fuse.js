@@ -283,7 +283,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // if we are currently looking at a specific vehicle,
                 // show the action for just that vehicle.
                 var id = Backbone.history.fragment.match(/\/(.*)/);
-                var isFleetAction = (action === "vehicles");
+                var isFleetAction = (action === "fleet");
                 // if we have an id, show the page passing the id,
                 // otherwise just show the page.
                 // note : we check to make sure we're not trying to go to the 

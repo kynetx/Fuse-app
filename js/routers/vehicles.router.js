@@ -1,8 +1,8 @@
 define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
     return Fuse.Router.extend({
         routes: {
-            "vehicles": "showVehicleList",
-            "vehicle/:id": "showVehicleDetail",
+            "fleet": "showVehicleList",
+            "fleet/:id": "showVehicleDetail",
             "findcar": "showFindCar",
             "findcar/:id": "showFindCar"
         },
