@@ -87,8 +87,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/vehicles.ro
 		text: "Settings"
 	},
 	{
-		action: "vehicles",
-		text: "Vehicles"
+		action: "fleet",
+		text: "Fleet"
 	},
 	{
 		action: "logout",
