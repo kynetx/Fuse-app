@@ -279,11 +279,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initFooter: function() {
             var showPageFromFooter = $.proxy(function(e) {
-                var action = $(e.target).data("action");
+                var action = $(e.target).closest("a").data("action");
                 this.show(action);
                 e.handled = true;
             }, this);
-            $(document).on("tap", ".fuse-footer-container > a", showPageFromFooter);
+            $(document).on("tap", ".fuse-footer-container > a > img", showPageFromFooter);
         },
 
         initMap: function() {
