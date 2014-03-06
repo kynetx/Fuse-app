@@ -3,7 +3,7 @@ define(["fuse", "jquery", "underscore", "controllers/vehicles.controller"], func
         routes: {
             "vehicles": "showVehicleList",
             "vehicle/:id": "showVehicleDetail",
-            "fleet": "showFleet"
+            "findcar": "showFindCar"
         },
 
         controller: new VehiclesController(),
@@ -16,8 +16,8 @@ define(["fuse", "jquery", "underscore", "controllers/vehicles.controller"], func
         	this.controller.showVehicleDetail(id);
         },
 
-        showFleet: function() {
-            this.controller.showFleet();
+        showFindCar: function() {
+            this.controller.showFindCar();
         },
     });
 });

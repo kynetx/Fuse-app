@@ -35,6 +35,20 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             render: function() {
                 Fuse.log("Rendering view:", this);
+                // if the view has a model or collection, tell the 
+                // view to re-render when the backing data changes.
+                // this means we only need to create collections and models
+                // once and then update the data and the views will automatically
+                // re-render.
+                if (this.collection) {
+                    this.collection.on("change", this.render, this);
+                    this.collection.on("add", this.render, this);
+                    this.collection.on("remove", this.render, this);
+                }
+                if (this.model) {
+                    this.model.on("change", this.render, this);
+                }
+
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
@@ -69,8 +83,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             enhance: function() {
                 // if there is a map configuration, configure the map with it.
-                if (!!this.mapConfig) {
-                    Fuse.map.configure(this.mapConfig);
+                if (!!this.map) {
+                    Fuse.map.configure(this.map);
                 }
 
                 this.$el.attr("data-role", this.role);
@@ -98,6 +112,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         mapTemplate: _.template(mapTmpl),
 
         map: {
+            // overlay types
+            OverlayTypeId: {
+                MARKER: 0,
+                DIRECTIONS: 1
+            },
+
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
@@ -192,8 +212,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             addOverlay: function(overlay) {
                 var googOverlay;
-                // if the overlay is a google maps marker.
-                if (overlay.infowindow) {
+                // if the overlay is a marker.
+                if (this.OverlayTypeId.MARKER === overlay.type) {
                     var animation;
                     if (!overlay.animation || overlay.animation.toUpperCase() === "DROP") {
                         animation = Maps.Animation.DROP;
@@ -207,6 +227,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         animation: animation
                     });
                 }
+
                 Fuse.log("Adding overlay:", googOverlay, "to map:", this);
                 // add the overlay to the map.
                 googOverlay.setMap(this.obj);

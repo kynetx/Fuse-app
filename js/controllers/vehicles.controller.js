@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "models/vehicle.model", "views/vehicles.view", "views/vehicle.view", "views/fleet.view"], function(Fuse, $, _, VehicleCollection, VehicleModel, VehiclesView, VehicleView, FleetView) {
+define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "models/vehicle.model", "views/vehicles.view", "views/vehicle.view", "views/findcar.view"], function(Fuse, $, _, VehicleCollection, VehicleModel, VehiclesView, VehicleView, FindCarView) {
     return Fuse.Controller.extend({
         showVehicleList: function() {
             new VehiclesView({
@@ -15,8 +15,8 @@ define(["fuse", "jquery", "underscore", "collections/vehicles.collection", "mode
             });
         },
 
-        showFleet: function() {
-            new FleetView({
+        showFindCar: function() {
+            new FindCarView({
                 collection: new VehicleCollection(Fuse.FIXTURES.vehicles)
             });
         }
