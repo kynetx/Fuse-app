@@ -84,15 +84,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     // note : this is needed because otherwise jQM starts to 
                     // throw a very large and angry fit.
                     dups.detach();
-                    // close the menu if its open.
-                    // note : jQM's panel widget is buggy and doesn't take care of itself
-                    // very well, hence why it will be left in an open state sometimes and
-                    // we have to close it ourselves.
-                    var $menu = $("#menu");
-                    if ($menu.is(".ui-panel-open")) {
-                        $menu.panel("close");
-                    }
-                    // reset the map back to its starting location.
                     Fuse.map.reset();
                 }
             },
@@ -301,7 +292,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // setup toggle handler.
             $(document).on("tap", "#open-menu", function(e) {
                 Fuse.log("opening menu...");
-                $("#menu").panel("open");
+                $("#menu").panel("toggle");
                 e.handled = true;
             }); 
         },
