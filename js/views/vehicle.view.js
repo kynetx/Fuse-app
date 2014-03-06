@@ -1,10 +1,10 @@
-define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/vehicledetailtmpl.html", "text!templates/infowindowtmpl.html"], function(Fuse, $, _, VehicleModel, vehicleDetailTmpl, infoWindowTmpl) {
+define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/vehicletmpl.html", "text!templates/infowindowtmpl.html"], function(Fuse, $, _, VehicleModel, vehicleTmpl, infoWindowTmpl) {
 	return Fuse.View.extend({
 		tagName: "div",
 		role: "page",
-		id: "vehicle-detail",
+		id: "vehicle",
 		transition: "slide",
-		template: _.template(vehicleDetailTmpl),
+		template: _.template(vehicleTmpl),
 		infoWindowTemplate: _.template(infoWindowTmpl),
 
 		initialize: function() {

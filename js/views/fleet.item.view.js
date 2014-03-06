@@ -1,9 +1,9 @@
-define(["fuse", "jquery", "underscore", "text!templates/vehicleitemtmpl.html"], function(Fuse, $, _, vehicleItemTmpl) {
+define(["fuse", "jquery", "underscore", "text!templates/fleetitemtmpl.html"], function(Fuse, $, _, fleetItemTmpl) {
 	// represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "li",
-        className: "vehicle",
-        template: _.template(vehicleItemTmpl),
+        className: "fleet-item",
+        template: _.template(fleetItemTmpl),
 
         initialize: function() {/* do nothing for now */},
 
