@@ -63,21 +63,37 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
-                this.removeDups();
+                this.cleanup();
                 this.addToDOM();
                 this.showWhenReady();
+                // if there is a map configuration,
+                // setup the map with the provided configuration
+                // and show it when ready.
+                if (this.map) {
+                    this.showMapWhenReady();
+                }
                 this.enhance();
             },
 
-            removeDups: function() {
+            cleanup: function() {
                 var targetElements = ["#" + this.el.id];
                 var dups = $(targetElements.join());
                 if (dups.length) {
+                    // remove the duplicate(s) from the DOM but don't throw
+                    // away their attached data or events.
+                    // note : this is needed because otherwise jQM starts to 
+                    // throw a very large and angry fit.
+                    dups.detach();
+                    // close the menu if its open.
+                    // note : jQM's panel widget is buggy and doesn't take care of itself
+                    // very well, hence why it will be left in an open state sometimes and
+                    // we have to close it ourselves.
+                    var $menu = $("#menu");
+                    if ($menu.is(".ui-panel-open")) {
+                        $menu.panel("close");
+                    }
                     // reset the map back to its starting location.
                     Fuse.map.reset();
-                    // detach keeps jQuery data and event handlers around 
-                    // while removing it from the DOM. 
-                    dups.detach();
                 }
             },
 
@@ -92,12 +108,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }); 
             },
 
-            enhance: function() {
-                // if there is a map configuration, configure the map with it.
-                if (!!this.map) {
+            showMapWhenReady: function() {
+                var configureMap = $.proxy(function() {
                     Fuse.map.configure(this.map);
-                }
+                }, this);
 
+                this.$el.on("pageshow", configureMap);
+            },
+
+            enhance: function() {
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
 
@@ -251,18 +270,30 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.log("Initializing menu.");
             var __self__ = this;
             // populate menu items.
-            var menu = this.menuTemplate({items: this.menu, vehicles: this.FIXTURES.fleet});
+            var menu = this.menuTemplate({items: this.menu, fleet: this.FIXTURES.fleet});
             $(document.body).append(menu);
             // setup handler for menu.
-            $("#menu").on("tap", "a", function(e) {
-                var action = $(e.target).data("action");
-                if (action === "close") {
-                    $("#menu").panel("close");
-                } else {
-                    __self__.show($(e.target).data("action"));
-                }
-                e.handled = true;
-            });
+            var showPageFromMenu = $.proxy(function(e) {
+                var $menu = $("#menu"),
+                    $target = $(e.target),
+                    action = $target.data("action"),
+                    vid = $target.data("vid");
+
+                    if (action === "close") {
+                        $menu.panel("close");
+                        return;
+                    }
+
+                    if (action && vid) {
+                        this.show(action, {id: vid});
+                    } else if (action) {
+                        this.show(action);
+                    } else {
+                        this.log("No action or vehicle id provided from panel. Not doing anything.");
+                    }
+            }, this);
+
+            $("#menu").on("tap", "a", showPageFromMenu);
             
             // initialize the panel and listview widgets.
             $("#menu").panel();

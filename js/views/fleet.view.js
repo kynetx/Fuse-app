@@ -8,7 +8,7 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "te
         transition: "fade",
         fleetTemplate: _.template(fleetTmpl),
         events: {
-            "tap .fleet-item": "showVehicle"
+            "tap .fleet-item > a": "showVehicle"
         },
 
         initialize: function() {

@@ -5,7 +5,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 		contentClass: "fuse-map-container",
 		role: "page",
 		header: "Find Car",
-		transition: "slide",
+		transition: "flip",
 
 		initialize: function() {
 			this.map = {
