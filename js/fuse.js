@@ -7,7 +7,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         Model: Backbone.Model.extend({}),
 
         Controller: function() {
-            // we don't really have any instance properties here yet.
+            // call our constructor.
+            if (typeof this.init === "function") {
+                this.init();
+            }
         },
 
         View: Backbone.View.extend({
