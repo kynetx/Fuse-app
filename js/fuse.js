@@ -184,14 +184,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // element given the new configuration.
                 this.$container = $(config.container);
                 // use the explicitly passed width and height if given,
-                // otherwise use the container's dimensions.
-                this.height = config.height || this.$container.height();
-                // if the map height is less than 300px, pad it by 500px.
-                if (this.height < 300) {
-                    Fuse.log("Map height (", this.height, ") is too small. Padding by 300px.");
-                    this.height += 300;
-                }
-
+                // otherwise default to the height of the body and the witdth (with some padding)
+                // of the containing element.
+                this.height = config.height || $(document.body).height();
                 // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
                 this.width = (config.width || this.$container.width()) + 25;
                 // adjust the map to the new configuration.

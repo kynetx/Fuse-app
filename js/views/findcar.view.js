@@ -9,8 +9,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 
 		initialize: function() {
 			this.map = {
-				container: "#find-car > .fuse-content",
-				height: 550
+				container: "#find-car > .fuse-content"
 			};
 
 			this.map.overlays = [];
@@ -23,8 +22,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 					animation: "drop"
 				});
 			}, this);
-
-			Fuse.log(this.map.overlays);
+			
 			this.render();
 		},
 

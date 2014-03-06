@@ -12,6 +12,7 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 			this.content = this.template(this.model.toJSON());
 			this.map = {
 				container: "#vehicle-detail-map",
+				height: 300
 			};
 			this.map.overlays = [{
 				type: Fuse.map.OverlayTypeId.MARKER,
