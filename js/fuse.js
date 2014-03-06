@@ -281,11 +281,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // show the page either for all vehicles or, 
                 // if we are currently looking at a specific vehicle,
                 // show the action for just that vehicle.
-                var id = Backbone.history.fragment.match(/\/(.*)/)[1];
+                var id = Backbone.history.fragment.match(/\/(.*)/);
 
                 // if we have an id, show the page passing the id,
                 // otherwise just show the page.
-                (!!id) ? this.show(action, {id: id}) : this.show(action);
+                (!!id && !!id[1]) ? this.show(action, {id: id[1]}) : this.show(action);
                 e.handled = true;
             }, this);
             $(document).on("tap", ".fuse-footer-container > a > img", showPageFromFooter);
