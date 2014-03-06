@@ -12,6 +12,7 @@
 
 .fuse-footer img {
 	vertical-align: middle;
+  cursor: pointer;
 }
 
 .vehicle-status-icon {
