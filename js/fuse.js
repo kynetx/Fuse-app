@@ -323,6 +323,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             })
         },
 
+        // quick and dirty way to add template helper functions
+        // in such a way that underscore templates can see and use 
+        // them.
+        initTemplateHelpers: function(helperFuncs) {
+            // FTH = Fuse Template Helpers.
+            window["FTH"] = {};
+
+            for (helperFunc in helperFuncs) {
+                window["FTH"][helperFunc] = helperFuncs[helperFunc];
+            }
+        },
+
         init: function() {
             // setup the action buttons in the header and footer.
             this.initActionButtons();
@@ -332,6 +344,22 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.initTooltips();
             // prevent ghost taps.
             this.preventGhostTaps();
+            // add custom underscore template helpers.
+            this.initTemplateHelpers({
+                // got the regex idea from stackoverflow.
+                // the regex uses 2 lookahead assertions: 
+                // - a positive one to look for any point in 
+                //   the string that has a multiple of 3 digits 
+                //   in a row after it 
+                // - a negative assertion to make sure that point 
+                //   only has exactly a multiple of 3 digits. 
+                // The replacement expression puts a comma there.
+                commaSeperateNumber: function(num) {
+                    var parts = num.toString().split(".");
+                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return parts.join(".");
+                }
+            });
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
@@ -363,14 +391,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
-        logging: false,
-
-        log: function() {
-            // this is a console.log wrapper written by AKO that uses javascript awesomeness to emulate exact behavior
-            // of console.log() but with the bonus of having it be easily disableable. (Remove line in main.js where Fuse.logging = true);
-            return this.logging && console && console.log && 
-            Function.prototype.apply.call(console.log, console, ["Fuse v"+ this.VERSION +":"].concat(Array.prototype.slice.call(arguments)));
-        }
+        logging: false
     };
 
     // since backbone has already written a great extend function, lets just reuse it in our controller.
