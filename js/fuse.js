@@ -238,10 +238,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     var numOverlays = this.overlays.length;
                     // add an appropriate zoom offset, if needed.
                     if (numOverlays < this.MIN_OVERLAYS) {
+                        // apply maximum zoom offset if we have less than the minimum
+                        // overlays needed.
                         this.obj.setZoom(this.obj.getZoom() - this.MAX_ZOOM_OFFSET);
                     } else if (numOverlays === this.MIN_OVERLAYS) {
+                        // apply minimum zoom offset if we have exactly the minimum 
+                        // amount of overlays.
                         this.obj.setZoom(this.obj.getZoom() - this.MIN_ZOOM_OFFSET);
                     } else {
+                        // we have enough overlays. We don't need to add any zoom at all.
+                        // test.
                         Fuse.log("Map zoom level:", this.obj.getZoom(), "is enough. Not applying any zoom padding.");
                     }
 
