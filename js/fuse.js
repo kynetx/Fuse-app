@@ -136,6 +136,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         mapTemplate: _.template(mapTmpl),
 
         map: {
+
             // overlay types
             OverlayTypeId: {
                 MARKER: 0,
@@ -145,6 +146,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
+            // this is used to offset the default google maps zoom level
+            // in case we don't have enough markers/overlays for the default
+            // zoom level to make sense. 3 seems to be a reasonable ceiling for
+            // the number of overlays needed for the default google maps zoom 
+            // to look good. So when there are less than 3 markers/overlays
+            // on the map, we make use of the zoom offfset, otherwise it's ignored.
+            MAX_ZOOM_OFFSET: 4,
+            MIN_ZOOM_OFFSET: 2,
+
+            MIN_OVERLAYS: 3,
 
             reset: function() {
                 var $body = $(document.body);
@@ -174,6 +185,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (this.bounds) {
                     delete this.bounds;
                 }
+
+                // reset zoom offset.
+                this.zoomOffset = 5;
 
                 Fuse.log("Reset Fuse map:", this);
             },
@@ -220,7 +234,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var fitter = $.proxy(function() {
                     Fuse.log("Fitting map.");
                     this.obj.fitBounds(this.bounds);
-                    this.obj.setZoom(this.obj.getZoom() - 1);
+
+                    var numOverlays = this.overlays.length;
+                    // add an appropriate zoom offset, if needed.
+                    if (numOverlays < this.MIN_OVERLAYS) {
+                        this.obj.setZoom(this.obj.getZoom() - this.MAX_ZOOM_OFFSET);
+                    } else if (numOverlays === this.MIN_OVERLAYS) {
+                        this.obj.setZoom(this.obj.getZoom() - this.MIN_ZOOM_OFFSET);
+                    } else {
+                        Fuse.log("Map zoom level:", this.obj.getZoom(), "is enough. Not applying any zoom padding.");
+                    }
+
                 }, this);
 
                 // give the map sufficient time to be setup before asking it to be fitted
@@ -326,9 +350,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         // quick and dirty way to add template helper functions
         // in such a way that underscore templates can see and use 
         // them.
-        initTemplateHelpers: function(helperFuncs) {
+        addTemplateHelpers: function(helperFuncs) {
             // FTH = Fuse Template Helpers.
-            window["FTH"] = {};
+            window["FTH"] = window["FTH"] || {};
 
             for (helperFunc in helperFuncs) {
                 window["FTH"][helperFunc] = helperFuncs[helperFunc];
@@ -345,7 +369,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // prevent ghost taps.
             this.preventGhostTaps();
             // add custom underscore template helpers.
-            this.initTemplateHelpers({
+            this.addTemplateHelpers({
                 // got the regex idea from stackoverflow.
                 // the regex uses 2 lookahead assertions: 
                 // - a positive one to look for any point in 
