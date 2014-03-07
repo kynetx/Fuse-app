@@ -237,17 +237,25 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // if the overlay is a marker.
                 if (this.OverlayTypeId.MARKER === overlay.type) {
                     var animation;
-                    if (!overlay.animation || overlay.animation.toUpperCase() === "DROP") {
+                    if (!overlay.animation || "DROP" === overlay.animation.toUpperCase()) {
                         animation = Maps.Animation.DROP;
                     } else {
                         animation = Maps.Animation.BOUNCE;
                     }
                     var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
-                    googOverlay = new Maps.Marker({
+
+                    var marker = {
                         position: position,
                         title: overlay.title,
                         animation: animation
-                    });
+                    };
+
+                    // if we were given an icon, use it.
+                    if (overlay.icon) {
+                        marker["icon"] = overlay.icon;
+                    }
+
+                    googOverlay = new Maps.Marker(marker);
                 }
 
                 Fuse.log("Adding overlay:", googOverlay, "to map:", this);
@@ -297,7 +305,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // patch of the tooltipster() plugin which allows 
             // for adding tooltipster functionality to dynamically-added
             // elements.
-            $(document).on("mouseenter", "[title]", function() {
+            $(document).on("mouseenter", "img[title]", function() {
                 $(this).tooltipster({
                     theme: "tooltipster-shadow"
                 });
