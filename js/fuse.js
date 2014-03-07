@@ -25,14 +25,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             contentTemplate: _.template(contentTmpl),
 
             renderHeader: function() {
-                this.$el.prepend(this.headerTemplate({header: this.header}));
+                Fuse.log("Rendering header.");
+                this.$el.append(this.headerTemplate({header: this.header}));
             },
 
             renderFooter: function() {
+                Fuse.log("Rendering footer.");
                 this.$el.append(this.footerTemplate());
             },
 
             renderContent: function() {
+                Fuse.log("Rendering content.");
                 var tmplParams = {
                     content: this.content
                 };
@@ -60,23 +63,31 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     this.model.on("change", this.render, this);
                 }
 
+                this.cleanup();
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
-                this.removeDups();
                 this.addToDOM();
                 this.showWhenReady();
+                // if there is a map configuration,
+                // setup the map with the provided configuration
+                // and show it when ready.
+                if (this.map) {
+                    this.showMapWhenReady();
+                }
                 this.enhance();
             },
 
-            removeDups: function() {
+            cleanup: function() {
+                Fuse.map.reset();
                 var targetElements = ["#" + this.el.id];
                 var dups = $(targetElements.join());
                 if (dups.length) {
-                    // reset the map back to its starting location.
-                    Fuse.map.reset();
-                    // detach keeps jQuery data and event handlers around 
-                    // while removing it from the DOM. 
+                    // remove the duplicate(s) from the DOM but don't throw
+                    // away their attached data or events.
+                    // note : detach() is needed because otherwise jQM starts to 
+                    // throw a very large and angry fit if you just go full throttle
+                    // and .remove() elements.
                     dups.detach();
                 }
             },
@@ -92,12 +103,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }); 
             },
 
-            enhance: function() {
-                // if there is a map configuration, configure the map with it.
-                if (!!this.map) {
+            showMapWhenReady: function() {
+                var configureMap = $.proxy(function() {
                     Fuse.map.configure(this.map);
-                }
+                }, this);
 
+                this.$el.on("pageshow", configureMap);
+            },
+
+            enhance: function() {
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
 
@@ -119,7 +133,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         }),
 
-        menuTemplate: _.template(menuTmpl),
         mapTemplate: _.template(mapTmpl),
 
         map: {
@@ -247,34 +260,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
-        initMenu: function() {
-            this.log("Initializing menu.");
-            var __self__ = this;
-            // populate menu items.
-            var menu = this.menuTemplate({items: this.menu, vehicles: this.FIXTURES.vehicles});
-            $(document.body).append(menu);
-            // setup handler for menu.
-            $("#menu").on("tap", "a", function(e) {
-                var action = $(e.target).data("action");
-                if (action === "close") {
-                    $("#menu").panel("close");
-                } else {
-                    __self__.show($(e.target).data("action"));
-                }
-                e.handled = true;
-            });
-            
-            // initialize the panel and listview widgets.
-            $("#menu").panel();
-            $("#menu ul").listview();
-            // setup toggle handler.
-            $(document).on("tap", "#open-menu", function(e) {
-                Fuse.log("opening menu...");
-                $("#menu").panel("open");
-                e.handled = true;
-            }); 
-        },
-
         initActionButtons: function() {
             var showPageFromButton = $.proxy(function(e) {
                 var $target = $(e.target);
@@ -331,8 +316,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         init: function() {
-            // setup application menu.
-            this.initMenu();
             // setup the action buttons in the header and footer.
             this.initActionButtons();
             // add reusable map container to page.
