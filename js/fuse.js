@@ -292,7 +292,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // setup toggle handler.
             $(document).on("tap", "#open-menu", function(e) {
                 Fuse.log("opening menu...");
-                $("#menu").panel("toggle");
+                $("#menu").panel("open");
                 e.handled = true;
             }); 
         },
