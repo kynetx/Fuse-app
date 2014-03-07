@@ -1,9 +1,15 @@
-.center-text {
-	text-align: center;
+.ui-grid-b > li.dashboard-data {
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
 }
 
-.ui-grid-b > li.center {
-    text-align: center;
+.ui-grid-b > li > h1.large-font {
+    font-size: 180%;
+}
+
+.ui-grid-b > li > p.medium-font {
+    font-size: 120%;
 }
 
 .fuse-footer {
@@ -19,38 +25,6 @@
 	width: 10px;
 }
 
-/* CSS for Vehicle Detail */
-
-.large-text {
-    font-size: 180%;
-}
-
-.medium-text {
-    font-size: 120%;
-}
-
-.padding-off {
-    padding: 0px;
-}
-
-.margin-off {
-    margin: 0px;
-}
-
-.center-text {
-    text-align: center;
-}
-
-.notes-header {
-    margin-bottom: 16px;
-    margin-top: 0px;
-    padding: 0px;
-}
-
-.normal-white-space {
+#vehicle-notes {
     white-space: normal;
-}
-
-.gray-border {
-    border: 1px solid lightgray;
 }
