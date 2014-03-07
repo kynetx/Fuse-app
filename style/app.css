@@ -1,19 +1,31 @@
 /* Css for Vehicle Detail View */
 
-.ui-grid-b > li.dashboard-data {
+div > ul.dashboard {
+    border: 1px solid lightgray;
+}
+
+.dashboard > li.dashboard-data {
     text-align: center;
-    padding: 0px;
-    margin: 0px;
+    padding: 8px 0px 0px 0px;
     border: 0px;
-    border-radius:.3125em;
+    border-radius: .3125em; /*default radius as set by jQuery mobile*/
 }
 
-.ui-grid-b > li > h1.large-font {
-    font-size: 180%;
+div > ul > li > h1.medium-font {
+    font-size: 1.45em;
+    padding:0px;
+    margin:0px;
 }
 
-.ui-grid-b > li > p.medium-font {
-    font-size: 120%;
+.dashboard > li > h1.large-font {
+    font-size: 1.8em;
+    margin-bottom:0px;
+    padding:0px;
+}
+
+.dashboard > li > p.medium-font {
+    font-size: 1.2em;
+    margin-top:0px;
 }
 
 #vehicle-notes {
@@ -24,6 +36,7 @@
 
 .fuse-footer {
 	padding: 10px;
+    text-align:center;
 }
 
 .fuse-footer img {
