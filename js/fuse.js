@@ -25,14 +25,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             contentTemplate: _.template(contentTmpl),
 
             renderHeader: function() {
-                this.$el.prepend(this.headerTemplate({header: this.header}));
+                Fuse.log("Rendering header.");
+                this.$el.append(this.headerTemplate({header: this.header}));
             },
 
             renderFooter: function() {
+                Fuse.log("Rendering footer.");
                 this.$el.append(this.footerTemplate());
             },
 
             renderContent: function() {
+                Fuse.log("Rendering content.");
                 var tmplParams = {
                     content: this.content
                 };
@@ -60,23 +63,31 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     this.model.on("change", this.render, this);
                 }
 
+                this.cleanup();
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
-                this.removeDups();
                 this.addToDOM();
                 this.showWhenReady();
+                // if there is a map configuration,
+                // setup the map with the provided configuration
+                // and show it when ready.
+                if (this.map) {
+                    this.showMapWhenReady();
+                }
                 this.enhance();
             },
 
-            removeDups: function() {
+            cleanup: function() {
+                Fuse.map.reset();
                 var targetElements = ["#" + this.el.id];
                 var dups = $(targetElements.join());
                 if (dups.length) {
-                    // reset the map back to its starting location.
-                    Fuse.map.reset();
-                    // detach keeps jQuery data and event handlers around 
-                    // while removing it from the DOM. 
+                    // remove the duplicate(s) from the DOM but don't throw
+                    // away their attached data or events.
+                    // note : detach() is needed because otherwise jQM starts to 
+                    // throw a very large and angry fit if you just go full throttle
+                    // and .remove() elements.
                     dups.detach();
                 }
             },
@@ -92,12 +103,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }); 
             },
 
-            enhance: function() {
-                // if there is a map configuration, configure the map with it.
-                if (!!this.map) {
+            showMapWhenReady: function() {
+                var configureMap = $.proxy(function() {
                     Fuse.map.configure(this.map);
-                }
+                }, this);
 
+                this.$el.on("pageshow", configureMap);
+            },
+
+            enhance: function() {
                 this.$el.attr("data-role", this.role);
                 this.$el.page();
 
@@ -119,7 +133,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         }),
 
-        menuTemplate: _.template(menuTmpl),
         mapTemplate: _.template(mapTmpl),
 
         map: {
@@ -224,17 +237,25 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // if the overlay is a marker.
                 if (this.OverlayTypeId.MARKER === overlay.type) {
                     var animation;
-                    if (!overlay.animation || overlay.animation.toUpperCase() === "DROP") {
+                    if (!overlay.animation || "DROP" === overlay.animation.toUpperCase()) {
                         animation = Maps.Animation.DROP;
                     } else {
                         animation = Maps.Animation.BOUNCE;
                     }
                     var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
-                    googOverlay = new Maps.Marker({
+
+                    var marker = {
                         position: position,
                         title: overlay.title,
                         animation: animation
-                    });
+                    };
+
+                    // if we were given an icon, use it.
+                    if (overlay.icon) {
+                        marker["icon"] = overlay.icon;
+                    }
+
+                    googOverlay = new Maps.Marker(marker);
                 }
 
                 Fuse.log("Adding overlay:", googOverlay, "to map:", this);
@@ -247,48 +268,24 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
-        initMenu: function() {
-            this.log("Initializing menu.");
-            var __self__ = this;
-            // populate menu items.
-            var menu = this.menuTemplate({items: this.menu, vehicles: this.FIXTURES.vehicles});
-            $(document.body).append(menu);
-            // setup handler for menu.
-            $("#menu").on("tap", "a", function(e) {
-                var action = $(e.target).data("action");
-                if (action === "close") {
-                    $("#menu").panel("close");
-                } else {
-                    __self__.show($(e.target).data("action"));
-                }
-                e.handled = true;
-            });
-            
-            // initialize the panel and listview widgets.
-            $("#menu").panel();
-            $("#menu ul").listview();
-            // setup toggle handler.
-            $(document).on("tap", "#open-menu", function(e) {
-                Fuse.log("opening menu...");
-                $("#menu").panel("open");
-                e.handled = true;
-            }); 
-        },
-
-        initFooter: function() {
-            var showPageFromFooter = $.proxy(function(e) {
-                var action = $(e.target).closest("a").data("action");
+        initActionButtons: function() {
+            var showPageFromButton = $.proxy(function(e) {
+                var $target = $(e.target);
+                var action = $target.closest("a").data("action");
                 // show the page either for all vehicles or, 
                 // if we are currently looking at a specific vehicle,
                 // show the action for just that vehicle.
                 var id = Backbone.history.fragment.match(/\/(.*)/);
-
+                var isFleetAction = (action === "fleet");
                 // if we have an id, show the page passing the id,
                 // otherwise just show the page.
-                (!!id && !!id[1]) ? this.show(action, {id: id[1]}) : this.show(action);
+                // note : we check to make sure we're not trying to go to the 
+                // fleet page because no matter where we're coming from, it
+                // doesn't make sense to pass any id's to the fleet page.
+                (!isFleetAction && !!id && !!id[1]) ? this.show(action, {id: id[1]}) : this.show(action);
                 e.handled = true;
             }, this);
-            $(document).on("tap", ".fuse-footer-container > a > img", showPageFromFooter);
+            $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
         },
 
         initMap: function() {
@@ -308,7 +305,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // patch of the tooltipster() plugin which allows 
             // for adding tooltipster functionality to dynamically-added
             // elements.
-            $(document).on("mouseenter", "[title]", function() {
+            $(document).on("mouseenter", "img[title]", function() {
                 $(this).tooltipster({
                     theme: "tooltipster-shadow"
                 });
@@ -327,10 +324,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         init: function() {
-            // setup application menu.
-            this.initMenu();
-            // setup footer.
-            this.initFooter();
+            // setup the action buttons in the header and footer.
+            this.initActionButtons();
             // add reusable map container to page.
             this.initMap();
             // inialize tooltip plugin.
