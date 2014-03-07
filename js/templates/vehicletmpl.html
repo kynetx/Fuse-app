@@ -1,3 +1,7 @@
+<!-- <ul data-role="listview" data-inset="true">
+    <li id="vehicle-detail-map" class="fuse-map-container">
+    </li>
+</ul> -->
 <ul data-role="listview" data-inset="true">
     <li>
         <img src="<%= icon %>">
@@ -8,7 +12,7 @@
 <ul data-role="listview" data-inset="true" class='ui-grid-b dashboard'>
     <li class='ui-block-a dashboard-data'>
         <p class="medium-font"> Mileage </p>
-        <h1 class="large-font"> <%= mileage %> </h1>
+        <h1 class="large-font"> <%= FTH.commaSeperateNumber(mileage) %> </h1>
         <p class="medium-font"> MPG </p>
     </li>
     <li class='ui-block-b  dashboard-data'>
