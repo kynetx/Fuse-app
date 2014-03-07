@@ -248,6 +248,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         // we have enough overlays. We don't need to add any zoom at all.
                         // test.
+                        // test again.
                         Fuse.log("Map zoom level:", this.obj.getZoom(), "is enough. Not applying any zoom padding.");
                     }
 
