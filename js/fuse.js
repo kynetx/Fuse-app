@@ -1,8 +1,20 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         VERSION: "0.0.1",
-        // not any special functionality now but maybe later.
-        Router: Backbone.Router.extend({}),
+        Router: Backbone.Router.extend({
+            initialize: function() {
+                this.on("route", this.addRouteToHistory, this);
+            },
+
+            addRouteToHistory: function(name, args) {
+                Fuse.history.push({
+                    name: name,
+                    args: args,
+                    fragment: Backbone.history.fragment
+                });
+                Fuse.log(Fuse.history);
+            }
+        }),
 
         Model: Backbone.Model.extend({}),
 
