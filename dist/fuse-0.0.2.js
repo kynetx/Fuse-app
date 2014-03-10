@@ -36,6 +36,13 @@
  * see: http://github.com/requirejs/text for details
  */
 
+/**
+ * Fuse Mobile Application
+ * Copyright Kynetx Inc. 2014. All Rights Reserved.
+ * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
+ * For details see https://kynetx.com
+ */
+
 /*!
 * jQuery Mobile 1.4.0
 * Git HEAD hash: f09aae0e035d6805e461a7be246d04a0dbc98f69 <> Date: Thu Dec 19 2013 17:34:22 UTC

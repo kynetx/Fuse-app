@@ -1,3 +1,9 @@
+/**
+ * Fuse Mobile Application
+ * Copyright Kynetx Inc. 2014. All Rights Reserved.
+ * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
+ * For details see https://kynetx.com
+ */
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         VERSION: "0.0.2",
