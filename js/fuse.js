@@ -168,16 +168,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     changeHash: false
                 };
 
-                var previous = Fuse.history.get(-1), current = Fuse.history.last(0), next = Backbone.history.fragment.split("/")[0];
-                if (previous && Backbone.history.fragment === previous.fragment) {
+                var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
+                if (previous && Backbone.history.fragment === previous.fragment && next !== "findcar") {
                     var viewName = Fuse.RouteToView[current.name];
 
                     if ("Fleet" === viewName && previous.args) {
                         viewName = "Vehicle";
-                    }
-
-                    if (next === "findcar") {
-                        viewName = "FindCar";
                     }
 
                     changePageOptions["transition"] = this.controller.views[viewName].transition;
@@ -399,11 +395,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // patch of the tooltipster() plugin which allows 
             // for adding tooltipster functionality to dynamically-added
             // elements.
-            this.tooltipsterInterval = setInterval(function() {
-                $("img[title]").tooltipster({
+            $(document).on("mouseenter", "img[title]", function() {
+                $(this).tooltipster({
                     theme: "tooltipster-shadow"
                 });
-            }, 2000);
+            });
         },
 
         preventGhostTaps: function() {
@@ -435,7 +431,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // add reusable map container to page.
             this.initMap();
             // inialize tooltip plugin.
-            // this.initTooltips();
+            this.initTooltips();
             // prevent ghost taps.
             this.preventGhostTaps();
             // add custom underscore template helpers.
