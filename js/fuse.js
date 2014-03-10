@@ -333,26 +333,23 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     action = $target.closest("a").data("action"),
                     fragment = Backbone.history.fragment,
                     id = fragment.match(/\/(.*)/);
-                // if we have an id, show the page passing the id,
-                // otherwise just show the page.
-                if (!("fleet" === action) && id && id[1]) {
-                    this.show(action, {id: id[1]})
-                } else if ("findcar" == action) {
+
+                if ("findcar" == action) {
                     // if we are already on the findcar page but they
                     // clicked on the findcar button in the footer,
-                    // we toggle back to the fleet view, passing an id 
-                    // if any.
-                    if (Backbone.history.fragment.test(/findcar/)) {
+                    // we toggle back to the fleet view.
+                    if (/findcar/.test(Backbone.history.fragment)) {
                         action = "fleet";
-                        if (id && id[1]) {
-                            this.show(action, {id: id[1]});
-                        } else {
-                            this.show(action);
-                        }
                     }
+                }
+
+                if (id && id[1]) {
+                    this.show(action, {id: id[1]});
                 } else {
                     this.show(action);
                 }
+
+
                 e.handled = true;
             }, this);
             $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
@@ -444,11 +441,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             var page = "", settings = _.extend({}, options);
 
             // build out the final page url.
-            if (settings.id) {
+            // make sure wer're not trying to go to the main fleet page,
+            // if so, ignore any passed id.
+            if (to !== "fleet-main" && settings.id) {
                 page = to + "/" + settings.id;
                 this.log("Attempting to show page:", to, " with options:", settings);
             } else {
-                page = to;
+                if (to === "fleet-main") {
+                    page = "fleet";
+                } else {
+                    page = to;
+                }
                 this.log("Attempting to show page:", to);
             }
 
