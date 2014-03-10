@@ -1,12 +1,13 @@
 ({    
     baseUrl: "js",
     name: "vendor/require",
-    out: "builds/fuse-0.0.0.js",
+    out: "dist/fuse-0.0.2.js",
     include: ["main"],
     optimize: "uglify2",
     wrap: true,
     paths: {
         "jquery": "vendor/jquery-1.11.0.min",
+        "tooltipster": "vendor/jquery.tooltipster.min",
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
         "jquerymobileconfig": "vendor/jquery.mobile.config",
         "cloudos": "vendor/CloudOS",
