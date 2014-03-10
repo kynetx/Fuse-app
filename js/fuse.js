@@ -1,8 +1,46 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         VERSION: "0.0.1",
-        // not any special functionality now but maybe later.
-        Router: Backbone.Router.extend({}),
+
+        history: {
+            items: [],
+
+            get: function(i) {
+                var offset = i - 1;
+                var idx = this.items.length + offset;
+                return this.items[idx];
+            },
+
+            last: function() {
+                return this.get(0);
+            }
+        },
+
+        RouteToView: {
+            "fleet": "Fleet",
+            "findcar": "FindCar"
+        },
+
+        Router: Backbone.Router.extend({
+            initialize: function() {
+                this.on("route", this.addRouteToHistory, this);
+            },
+
+            addRouteToHistory: function(name, args) {
+                var previous = Fuse.history.last();
+
+                if (!previous || previous.fragment !== Backbone.history.fragment) {
+                    var splitFrag = Backbone.history.fragment.split("/");
+                    Fuse.history.items.push({
+                        name: splitFrag[0],
+                        args: args,
+                        fragment: Backbone.history.fragment
+                    });
+                }
+
+                Fuse.log("Fuse history:", Fuse.history.items);
+            }
+        }),
 
         Model: Backbone.Model.extend({}),
 
@@ -14,10 +52,25 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         View: Backbone.View.extend({
-            // this initalize function will be overriden by the inheriting views.
-            initialize: function() {
-                _.bindAll();
-                this.render();
+
+            initialize: function(options) {
+                if (options.controller) {
+                    this.controller = options.controller;
+                }
+
+                // if the view has a model or collection, tell the 
+                // view to re-render when the backing data changes.
+                // this means we only need to create collections and models
+                // once and then update the data and the views will automatically
+                // re-render.
+                if (this.collection) {
+                    this.collection.on("change", this.render, this);
+                    this.collection.on("add", this.render, this);
+                    this.collection.on("remove", this.render, this);
+                }
+                if (this.model) {
+                    this.model.on("change", this.render, this);
+                }
             },
 
             headerTemplate: _.template(headerTmpl),
@@ -49,21 +102,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             render: function() {
                 Fuse.log("Rendering view:", this);
-                // if the view has a model or collection, tell the 
-                // view to re-render when the backing data changes.
-                // this means we only need to create collections and models
-                // once and then update the data and the views will automatically
-                // re-render.
-                if (this.collection) {
-                    this.collection.on("change", this.render, this);
-                    this.collection.on("add", this.render, this);
-                    this.collection.on("remove", this.render, this);
-                }
-                if (this.model) {
-                    this.model.on("change", this.render, this);
-                }
 
                 this.cleanup();
+                this.delegateEvents();
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
@@ -83,12 +124,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var targetElements = ["#" + this.el.id];
                 var dups = $(targetElements.join());
                 if (dups.length) {
-                    // remove the duplicate(s) from the DOM but don't throw
-                    // away their attached data or events.
-                    // note : detach() is needed because otherwise jQM starts to 
-                    // throw a very large and angry fit if you just go full throttle
-                    // and .remove() elements.
-                    dups.detach();
+                    dups.empty();
+                    dups.remove();
                 }
             },
 
@@ -125,11 +162,25 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             show: function() {
-                $.mobile.changePage(this.$el, {
+                var changePageOptions = {
                     transition: this.transition,
                     role: this.role,
                     changeHash: false
-                });
+                };
+
+                var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
+                if (previous && Backbone.history.fragment === previous.fragment && "findcar" !== next) {
+                    var viewName = Fuse.RouteToView[current.name];
+
+                    if ("Fleet" === viewName && previous.args) {
+                        viewName = "Vehicle";
+                    }
+
+                    changePageOptions["transition"] = this.controller.views[viewName].transition;
+                    changePageOptions["reverse"] = true;
+                }
+                
+                $.mobile.changePage(this.$el, changePageOptions);
             }
         }),
 
@@ -299,19 +350,27 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initActionButtons: function() {
             var showPageFromButton = $.proxy(function(e) {
-                var $target = $(e.target);
-                var action = $target.closest("a").data("action");
-                // show the page either for all vehicles or, 
-                // if we are currently looking at a specific vehicle,
-                // show the action for just that vehicle.
-                var id = Backbone.history.fragment.match(/\/(.*)/);
-                var isFleetAction = (action === "fleet");
-                // if we have an id, show the page passing the id,
-                // otherwise just show the page.
-                // note : we check to make sure we're not trying to go to the 
-                // fleet page because no matter where we're coming from, it
-                // doesn't make sense to pass any id's to the fleet page.
-                (!isFleetAction && !!id && !!id[1]) ? this.show(action, {id: id[1]}) : this.show(action);
+                var $target = $(e.target), 
+                    action = $target.closest("a").data("action"),
+                    fragment = Backbone.history.fragment,
+                    id = fragment.match(/\/(.*)/);
+
+                if ("findcar" == action) {
+                    // if we are already on the findcar page but they
+                    // clicked on the findcar button in the footer,
+                    // we toggle back to the fleet view.
+                    if (/findcar/.test(Backbone.history.fragment)) {
+                        action = "fleet";
+                    }
+                }
+
+                if (id && id[1]) {
+                    this.show(action, {id: id[1]});
+                } else {
+                    this.show(action);
+                }
+
+
                 e.handled = true;
             }, this);
             $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
@@ -399,25 +458,41 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         show: function(to, options) {
-            var page = "";
-            if (options && options.id) {
-                page = to + "/" + options.id;
-                this.log("Attempting to show page:", to, " with options:", options);
+
+            var page = "", settings = _.extend({}, options);
+
+            // build out the final page url.
+            // make sure wer're not trying to go to the main fleet page,
+            // if so, ignore any passed id.
+            if (to !== "fleet-main" && settings.id) {
+                page = to + "/" + settings.id;
+                this.log("Attempting to show page:", to, " with options:", settings);
             } else {
-                page = to;
+                if (to === "fleet-main") {
+                    page = "fleet";
+                } else {
+                    page = to;
+                }
                 this.log("Attempting to show page:", to);
             }
 
-            // if are already on the requested page, do nothing.
+            // if we are already on the requested page...
             if (Backbone.history.fragment === page) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
             } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
-                // if no routes match, do nothing. 
-                // Primarily for menu use case, hence we don't bother checking routes with options.
+                // ...or there are no matching routes...
+                // note : don't examine the routes array for matching routes 
+                // if we were passed an options object. Routes like foo/1234
+                // are valid but won't be found because foo/:id is what will be 
+                // in the routes array.
                 this.log ("No routes match requested page. Not doing anything.");
             } else {
-                Backbone.history.navigate(page, true);
+                this.navigate(page);
             }
+        },
+
+        navigate: function(to) {
+            Backbone.history.navigate(to, true);
         },
 
         logging: false

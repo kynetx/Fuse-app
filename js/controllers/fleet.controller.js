@@ -3,20 +3,25 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
 
         init: function() {
             this.fleet = new FleetCollection(Fuse.FIXTURES.fleet);
+            this.views = {};
+            this.views["Fleet"] = new FleetView({
+                controller: this,
+                collection: this.fleet
+            })
         },
 
         showFleet: function() {
-            new FleetView({
-                collection: this.fleet
-            });
+            this.views.Fleet.render();
         },
 
         showVehicle: function(id) {
             // retrieve the model by its id from our fleet collection.
             this.vehicle = this.fleet.get(id);
-            new VehicleView({
+            this.views["Vehicle"] = new VehicleView({
+                controller: this,
                 model: this.vehicle
             });
+            this.views.Vehicle.render();
         },
 
         showFindCar: function() {
@@ -27,9 +32,11 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
             // the vehicle with that id, otherwise show 
             // the findcar view for all vehicles.
             var collection = (hasId) ? this.fleet.filterById(args[0]) : this.fleet;
-            new FindCarView({
+            this.views["FindCar"] = new FindCarView({
+                controller: this,
                 collection: collection
             });
+            this.views.FindCar.render();
         }
     });
 });

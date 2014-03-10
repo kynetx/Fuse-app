@@ -8,6 +8,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 		transition: "flip",
 
 		initialize: function() {
+			Fuse.View.prototype.initialize.apply(this, arguments);
 			this.map = {
 				container: "#find-car > .fuse-content"
 			};
@@ -24,8 +25,6 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 					animation: "drop"
 				});
 			}, this);
-			
-			this.render();
 		},
 
 		render: function() {

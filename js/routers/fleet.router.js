@@ -6,7 +6,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "findcar": "showFindCar",
             "findcar/:id": "showFindCar"
         },
-
+        
         showFleet: function() {
         	this.controller.showFleet();
         },
