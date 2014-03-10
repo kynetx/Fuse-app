@@ -179,9 +179,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     changePageOptions["transition"] = this.controller.views[viewName].transition;
                     changePageOptions["reverse"] = true;
                 }
-
-                Fuse.log("Previous:", previous);
-                Fuse.log("opttions to $.mobile.changePage:", changePageOptions);
+                
                 $.mobile.changePage(this.$el, changePageOptions);
             }
         }),
