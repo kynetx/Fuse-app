@@ -15,8 +15,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"mileage": 159774,
 			"lastWaypoint": {
 				"timestamp": "20140116T152440+0000",
-				"latitude": 40.23107,
-				"longitude": -111.65885
+				"latitude": 37.473896,
+				"longitude": -122.23114
 			},
 			"timestamp": "20140116T151952+0000",
 			"running": false,
@@ -26,7 +26,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"batteryVoltage": 13.2,
 			"odometer": 65345,
 			"header": 272,
-			"speed": 72
+			"speed": 0
 		},
 		{
 			"id": "V4GM",
@@ -51,7 +51,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"batteryVoltage": 13.2,
 			"odometer": 65345,
 			"header": 272,
-			"speed": 72
+			"speed": 0
 		},
 		{
 			"id": "VN0E",
@@ -76,7 +76,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"batteryVoltage": 73.4,
 			"odometer": 19725,
 			"heading": 270,
-			"speed": 24
+			"speed": 0
 		}],
 
 		"trips": {}

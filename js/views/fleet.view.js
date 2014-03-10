@@ -12,11 +12,12 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "te
         },
 
         initialize: function() {
+            Fuse.View.prototype.initialize.apply(this, arguments);
             this.fleetItems = [];
-            this.render(); 
         },
 
         render: function() {
+            this.fleetItems.length = 0;
             this.collection.each(function(vehicle) {
                 this.renderFleetItem(vehicle);
             }, this);
