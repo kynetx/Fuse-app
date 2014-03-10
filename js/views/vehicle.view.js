@@ -8,9 +8,9 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 		infoWindowTemplate: _.template(infoWindowTmpl),
 
 		initialize: function() {
+			Fuse.View.prototype.initialize.apply(this, arguments);
 			this.header = this.model.get("nickname");
 			this.content = this.template(this.model.toJSON());
-			this.render();
 		},
 
 		render: function() {

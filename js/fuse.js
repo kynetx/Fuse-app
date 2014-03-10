@@ -6,12 +6,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             items: [],
 
             get: function(i) {
-                return this.items[i];
+                var offset = i - 1;
+                var idx = this.items.length + offset;
+                return this.items[idx];
             },
 
             last: function() {
-                return this.items[this.items.length - 1];
+                return this.get(0);
             }
+        },
+
+        RouteToView: {
+            "fleet": "Fleet",
+            "findcar": "FindCar"
         },
 
         Router: Backbone.Router.extend({
@@ -23,8 +30,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var previous = Fuse.history.last();
 
                 if (!previous || previous.fragment !== Backbone.history.fragment) {
+                    var splitFrag = Backbone.history.fragment.split("/");
                     Fuse.history.items.push({
-                        name: name,
+                        name: splitFrag[0],
                         args: args,
                         fragment: Backbone.history.fragment
                     });
@@ -44,10 +52,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         View: Backbone.View.extend({
-            // this initalize function will be overriden by the inheriting views.
-            initialize: function() {
-                _.bindAll();
-                this.render();
+
+            initialize: function(options) {
+                if (options.controller) {
+                    this.controller = options.controller;
+                }
             },
 
             headerTemplate: _.template(headerTmpl),
@@ -128,7 +137,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             showWhenReady: function() {
                 var __self__ = this;
+                Fuse.log("Binding to pagecreate");
                 $(this.$el).on("pagecreate", function(e) {
+                    Fuse.log("showing...");
                     __self__.show();
                 }); 
             },
@@ -155,11 +166,31 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             show: function() {
-                $.mobile.changePage(this.$el, {
+                var changePageOptions = {
                     transition: this.transition,
                     role: this.role,
                     changeHash: false
-                });
+                };
+
+                var previous = Fuse.history.get(-1), current = Fuse.history.last(0), next = Backbone.history.fragment.split("/")[0];
+                if (previous && Backbone.history.fragment === previous.fragment) {
+                    var viewName = Fuse.RouteToView[current.name];
+
+                    if ("Fleet" === viewName && previous.args) {
+                        viewName = "Vehicle";
+                    }
+
+                    if (next === "findcar") {
+                        viewName = "FindCar";
+                    }
+
+                    changePageOptions["transition"] = this.controller.views[viewName].transition;
+                    changePageOptions["reverse"] = true;
+                }
+
+                Fuse.log("Previous:", previous);
+                Fuse.log("opttions to $.mobile.changePage:", changePageOptions);
+                $.mobile.changePage(this.$el, changePageOptions);
             }
         }),
 
@@ -372,11 +403,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // patch of the tooltipster() plugin which allows 
             // for adding tooltipster functionality to dynamically-added
             // elements.
-            $(document).on("mouseenter", "img[title]", function() {
-                $(this).tooltipster({
+            this.tooltipsterInterval = setInterval(function() {
+                $("img[title]").tooltipster({
                     theme: "tooltipster-shadow"
                 });
-            });
+            }, 2000);
         },
 
         preventGhostTaps: function() {

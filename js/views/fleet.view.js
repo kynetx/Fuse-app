@@ -12,8 +12,8 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "te
         },
 
         initialize: function() {
+            Fuse.View.prototype.initialize.apply(this, arguments);
             this.fleetItems = [];
-            this.render(); 
         },
 
         render: function() {
