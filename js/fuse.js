@@ -104,6 +104,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.log("Rendering view:", this);
 
                 this.cleanup();
+                this.delegateEvents();
                 this.renderHeader();
                 this.renderContent();
                 this.renderFooter();
@@ -434,7 +435,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // add reusable map container to page.
             this.initMap();
             // inialize tooltip plugin.
-            this.initTooltips();
+            // this.initTooltips();
             // prevent ghost taps.
             this.preventGhostTaps();
             // add custom underscore template helpers.
