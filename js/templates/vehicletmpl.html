@@ -5,30 +5,30 @@
 <ul data-role="listview" data-inset="true">
     <li>
         <img src="<%= icon %>">
-        <h2> <%= nickname %> </h2>
+        <h1 class="medium-font"> <%= nickname %> </h2>
         <p> <%= year %> <%= make %>, <%= model %> </p>
     </li>
 </ul>
-<ul data-role="listview" data-inset="true" class='ui-grid-b gray-border'>
-    <li class='ui-block-a center-text padding-off margin-off'>
-        <p> Odometer </p>
-        <h1 class="large-text padding-off margin-off"> <%= mileage %> </h1>
-        <p class="medium-text"> Miles </p>
+<ul data-role="listview" data-inset="true" class='ui-grid-b dashboard'>
+    <li class='ui-block-a dashboard-data'>
+        <p class="medium-font"> Mileage </p>
+        <h1 class="large-font"> <%= FTH.commaSeperateNumber(mileage) %> </h1>
+        <p class="medium-font"> MPG </p>
     </li>
-    <li class='ui-block-b  center-text padding-off margin-off'>
-        <p> Speed </p>
-        <h1 class="large-text padding-off margin-off"> <%= speed %></h1>
-        <p class="medium-text"> MPH </p>
+    <li class='ui-block-b  dashboard-data'>
+        <p class="medium-font"> Speed </p>
+        <h1 class="large-font"> <%= speed %></h1>
+        <p class="medium-font"> MPH </p>
     </li>
-    <li class='ui-block-c center-text padding-off margin-off'>
-        <p> Battery </p>
-        <h1 class="large-text padding-off margin-off"> <%= batteryVoltage %> </h1>
-        <p class="medium-text"> Volts </p>
+    <li class='ui-block-c  dashboard-data'>
+        <p class="medium-font"> Battery </p>
+        <h1 class="large-font"> <%= batteryVoltage %> </h1>
+        <p class="medium-font"> Volts </p>
     </li>
 </ul>
 <ul data-role="listview" data-inset="true">
     <li>
-        <h1 class="notes-header">Notes, </h1>
-        <p class="normal-white-space"><%= notes %></p>
+        <h1>Notes </h1>
+        <p id="vehicle-notes"><%= notes %></p>
     </li>
 </ul>

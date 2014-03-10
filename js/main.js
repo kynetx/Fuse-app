@@ -107,6 +107,9 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.FleetRouter.routes));
 	// remove this for production.
 	Fuse.logging = true;
+
+	// setup loggger 
+	Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
 	
 	// start the app.
 	Fuse.init();

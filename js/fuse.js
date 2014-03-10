@@ -136,6 +136,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         mapTemplate: _.template(mapTmpl),
 
         map: {
+
             // overlay types
             OverlayTypeId: {
                 MARKER: 0,
@@ -145,6 +146,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
+            // this is used to offset the default google maps zoom level
+            // in case we don't have enough markers/overlays for the default
+            // zoom level to make sense. 3 seems to be a reasonable ceiling for
+            // the number of overlays needed for the default google maps zoom 
+            // to look good. So when there are less than 3 markers/overlays
+            // on the map, we make use of the zoom offfset, otherwise it's ignored.
+            MAX_ZOOM_OFFSET: 4,
+            MIN_ZOOM_OFFSET: 2,
+
+            MIN_OVERLAYS: 3,
 
             reset: function() {
                 var $body = $(document.body);
@@ -174,6 +185,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (this.bounds) {
                     delete this.bounds;
                 }
+
+                // reset zoom offset.
+                this.zoomOffset = 5;
 
                 Fuse.log("Reset Fuse map:", this);
             },
@@ -220,7 +234,22 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var fitter = $.proxy(function() {
                     Fuse.log("Fitting map.");
                     this.obj.fitBounds(this.bounds);
-                    this.obj.setZoom(this.obj.getZoom() - 1);
+
+                    var numOverlays = this.overlays.length;
+                    // add an appropriate zoom offset, if needed.
+                    if (numOverlays < this.MIN_OVERLAYS) {
+                        // apply maximum zoom offset if we have less than the minimum
+                        // overlays needed.
+                        this.obj.setZoom(this.obj.getZoom() - this.MAX_ZOOM_OFFSET);
+                    } else if (numOverlays === this.MIN_OVERLAYS) {
+                        // apply minimum zoom offset if we have exactly the minimum 
+                        // amount of overlays.
+                        this.obj.setZoom(this.obj.getZoom() - this.MIN_ZOOM_OFFSET);
+                    } else {
+                        // we have enough overlays. We don't need to add any zoom at all.
+                        Fuse.log("Map zoom level:", this.obj.getZoom(), "is enough. Not applying any zoom padding.");
+                    }
+
                 }, this);
 
                 // give the map sufficient time to be setup before asking it to be fitted
@@ -323,6 +352,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             })
         },
 
+        // quick and dirty way to add template helper functions
+        // in such a way that underscore templates can see and use 
+        // them.
+        addTemplateHelpers: function(helperFuncs) {
+            // FTH = Fuse Template Helpers.
+            window["FTH"] = window["FTH"] || {};
+
+            for (helperFunc in helperFuncs) {
+                window["FTH"][helperFunc] = helperFuncs[helperFunc];
+            }
+        },
+
         init: function() {
             // setup the action buttons in the header and footer.
             this.initActionButtons();
@@ -332,6 +373,22 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.initTooltips();
             // prevent ghost taps.
             this.preventGhostTaps();
+            // add custom underscore template helpers.
+            this.addTemplateHelpers({
+                // got the regex idea from stackoverflow.
+                // the regex uses 2 lookahead assertions: 
+                // - a positive one to look for any point in 
+                //   the string that has a multiple of 3 digits 
+                //   in a row after it 
+                // - a negative assertion to make sure that point 
+                //   only has exactly a multiple of 3 digits. 
+                // The replacement expression puts a comma there.
+                commaSeperateNumber: function(num) {
+                    var parts = num.toString().split(".");
+                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return parts.join(".");
+                }
+            });
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
@@ -363,14 +420,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
-        logging: false,
-
-        log: function() {
-            // this is a console.log wrapper written by AKO that uses javascript awesomeness to emulate exact behavior
-            // of console.log() but with the bonus of having it be easily disableable. (Remove line in main.js where Fuse.logging = true);
-            return this.logging && console && console.log && 
-            Function.prototype.apply.call(console.log, console, ["Fuse v"+ this.VERSION +":"].concat(Array.prototype.slice.call(arguments)));
-        }
+        logging: false
     };
 
     // since backbone has already written a great extend function, lets just reuse it in our controller.
