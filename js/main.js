@@ -110,9 +110,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 
 	// setup loggger 
 	Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
-
-	// initialize history tracking
-	Fuse.history = [];
+	
 	// start the app.
 	Fuse.init();
 });

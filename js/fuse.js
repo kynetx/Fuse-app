@@ -1,18 +1,36 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         VERSION: "0.0.1",
+
+        history: {
+            items: [],
+
+            get: function(i) {
+                return this.items[i];
+            },
+
+            last: function() {
+                return this.items[this.items.length - 1];
+            }
+        },
+
         Router: Backbone.Router.extend({
             initialize: function() {
                 this.on("route", this.addRouteToHistory, this);
             },
 
             addRouteToHistory: function(name, args) {
-                Fuse.history.push({
-                    name: name,
-                    args: args,
-                    fragment: Backbone.history.fragment
-                });
-                Fuse.log("Fuse history:", Fuse.history);
+                var previous = Fuse.history.last();
+
+                if (!previous || previous.fragment !== Backbone.history.fragment) {
+                    Fuse.history.items.push({
+                        name: name,
+                        args: args,
+                        fragment: Backbone.history.fragment
+                    });
+                }
+
+                Fuse.log("Fuse history:", Fuse.history.items);
             }
         }),
 
@@ -311,19 +329,30 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initActionButtons: function() {
             var showPageFromButton = $.proxy(function(e) {
-                var $target = $(e.target);
-                var action = $target.closest("a").data("action");
-                // show the page either for all vehicles or, 
-                // if we are currently looking at a specific vehicle,
-                // show the action for just that vehicle.
-                var id = Backbone.history.fragment.match(/\/(.*)/);
-                var isFleetAction = (action === "fleet");
+                var $target = $(e.target), 
+                    action = $target.closest("a").data("action"),
+                    fragment = Backbone.history.fragment,
+                    id = fragment.match(/\/(.*)/);
                 // if we have an id, show the page passing the id,
                 // otherwise just show the page.
-                // note : we check to make sure we're not trying to go to the 
-                // fleet page because no matter where we're coming from, it
-                // doesn't make sense to pass any id's to the fleet page.
-                (!isFleetAction && !!id && !!id[1]) ? this.show(action, {id: id[1]}) : this.show(action);
+                if (!("fleet" === action) && id && id[1]) {
+                    this.show(action, {id: id[1]})
+                } else if ("findcar" == action) {
+                    // if we are already on the findcar page but they
+                    // clicked on the findcar button in the footer,
+                    // we toggle back to the fleet view, passing an id 
+                    // if any.
+                    if (Backbone.history.fragment.test(/findcar/)) {
+                        action = "fleet";
+                        if (id && id[1]) {
+                            this.show(action, {id: id[1]});
+                        } else {
+                            this.show(action);
+                        }
+                    }
+                } else {
+                    this.show(action);
+                }
                 e.handled = true;
             }, this);
             $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
@@ -411,25 +440,35 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         show: function(to, options) {
-            var page = "";
-            if (options && options.id) {
-                page = to + "/" + options.id;
-                this.log("Attempting to show page:", to, " with options:", options);
+
+            var page = "", settings = _.extend({}, options);
+
+            // build out the final page url.
+            if (settings.id) {
+                page = to + "/" + settings.id;
+                this.log("Attempting to show page:", to, " with options:", settings);
             } else {
                 page = to;
                 this.log("Attempting to show page:", to);
             }
 
-            // if are already on the requested page, do nothing.
+            // if we are already on the requested page...
             if (Backbone.history.fragment === page) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
             } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
-                // if no routes match, do nothing. 
-                // Primarily for menu use case, hence we don't bother checking routes with options.
+                // ...or there are no matching routes...
+                // note : don't examine the routes array for matching routes 
+                // if we were passed an options object. Routes like foo/1234
+                // are valid but won't be found because foo/:id is what will be 
+                // in the routes array.
                 this.log ("No routes match requested page. Not doing anything.");
             } else {
-                Backbone.history.navigate(page, true);
+                this.navigate(page);
             }
+        },
+
+        navigate: function(to) {
+            Backbone.history.navigate(to, true);
         },
 
         logging: false
