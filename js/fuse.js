@@ -57,6 +57,20 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (options.controller) {
                     this.controller = options.controller;
                 }
+
+                // if the view has a model or collection, tell the 
+                // view to re-render when the backing data changes.
+                // this means we only need to create collections and models
+                // once and then update the data and the views will automatically
+                // re-render.
+                if (this.collection) {
+                    this.collection.on("change", this.render, this);
+                    this.collection.on("add", this.render, this);
+                    this.collection.on("remove", this.render, this);
+                }
+                if (this.model) {
+                    this.model.on("change", this.render, this);
+                }
             },
 
             headerTemplate: _.template(headerTmpl),
@@ -88,19 +102,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             render: function() {
                 Fuse.log("Rendering view:", this);
-                // if the view has a model or collection, tell the 
-                // view to re-render when the backing data changes.
-                // this means we only need to create collections and models
-                // once and then update the data and the views will automatically
-                // re-render.
-                if (this.collection) {
-                    this.collection.on("change", this.render, this);
-                    this.collection.on("add", this.render, this);
-                    this.collection.on("remove", this.render, this);
-                }
-                if (this.model) {
-                    this.model.on("change", this.render, this);
-                }
 
                 this.cleanup();
                 this.renderHeader();
@@ -122,12 +123,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var targetElements = ["#" + this.el.id];
                 var dups = $(targetElements.join());
                 if (dups.length) {
-                    // remove the duplicate(s) from the DOM but don't throw
-                    // away their attached data or events.
-                    // note : detach() is needed because otherwise jQM starts to 
-                    // throw a very large and angry fit if you just go full throttle
-                    // and .remove() elements.
-                    dups.detach();
+                    dups.empty();
+                    dups.remove();
                 }
             },
 
@@ -137,9 +134,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             showWhenReady: function() {
                 var __self__ = this;
-                Fuse.log("Binding to pagecreate");
                 $(this.$el).on("pagecreate", function(e) {
-                    Fuse.log("showing...");
                     __self__.show();
                 }); 
             },

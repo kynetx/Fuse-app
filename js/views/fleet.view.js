@@ -17,6 +17,7 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "te
         },
 
         render: function() {
+            this.fleetItems.length = 0;
             this.collection.each(function(vehicle) {
                 this.renderFleetItem(vehicle);
             }, this);
