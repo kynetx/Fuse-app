@@ -6,6 +6,7 @@ require.config({
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
         "jquerymobileconfig": "vendor/jquery.mobile.config",
         "tooltipster": "vendor/jquery.tooltipster.min",
+        "sidr": "vendor/jquery.sidr",
         "cloudos": "vendor/CloudOS",
         "cloudosconfig": "vendor/CloudOS.config",
         "underscore": "vendor/underscore-min",
@@ -14,7 +15,7 @@ require.config({
         // this one lets us load templates from external files.
         "text": "vendor/require.text",
         // this one lets us use require to load things like google maps javascript API.
-        "async": "vendor/async"
+        "async": "vendor/require.async"
     },
 
     shim: {
