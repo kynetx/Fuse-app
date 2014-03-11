@@ -1,4 +1,10 @@
-<<<<<<< HEAD
+/* import all external stylesheets. */
+@import url("jquery.mobile-1.4.0.css");
+@import url("jquery.mobile.icons-1.4.0.min.css");
+@import url("tooltipster.css");
+@import url("tooltipster-shadow.css");
+@import url("jquery.sidr.dark.css");
+
 .center-text {
 	text-align: center;
 }
