@@ -183,6 +183,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         }),
 
         mapTemplate: _.template(mapTmpl),
+        menuTemplate: _.template(menuTmpl),
 
         map: {
 
@@ -374,6 +375,34 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
         },
 
+        initMenu: function() {
+            var showPageFromMenu = $.proxy(function(e) {
+                var $target = $(e.target),
+                    action = $target.data("action");
+                    vid = $target.data("vid");
+
+                if (vid) {
+                    this.show(action, {id: vid});
+                } else {
+                    this.show(action);
+                }
+
+            }, this);
+            var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet});
+            $(document.body).append(menu);
+            $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
+            $(document).on("swiperight", "[data-role='page']", function(e) {
+                e.preventDefault();
+                $.sidr("open");
+            }).on("tap", "#open-menu", function() {
+                $.sidr("toggle");
+            }).on("tap", "[data-role='page']", function() {
+                if ($(document.body).hasClass("sidr-open")) {
+                    $.sidr("close");
+                }
+            });
+        },
+
         initMap: function() {
             this.log("Initializing map.");
             $(document.body).prepend(this.mapTemplate());
@@ -424,6 +453,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         init: function() {
             // setup the action buttons in the header and footer.
             this.initActionButtons();
+            // setup the menu.
+            this.initMenu();
             // add reusable map container to page.
             this.initMap();
             // inialize tooltip plugin.
@@ -460,7 +491,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             var page = "", settings = _.extend({}, options);
 
             // build out the final page url.
-            // make sure wer're not trying to go to the main fleet page,
+            // make sure we're not trying to go to the main fleet page,
             // if so, ignore any passed id.
             if (to !== "fleet-main" && settings.id) {
                 page = to + "/" + settings.id;
