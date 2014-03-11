@@ -19,7 +19,7 @@
         // this one lets us load templates from external files.
         "text": "vendor/require.text",
         // this one lets us use require to load things like google maps javascript API.
-        "async": "vendor/async"
+        "async": "vendor/require.async"
     },
 
     shim: {
