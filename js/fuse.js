@@ -187,10 +187,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         map: {
 
+            directionsService: new Maps.DirectionsService(),
+            directionsRenderer: new Maps.DirectionsRenderer(),
+
             // overlay types
             OverlayTypeId: {
-                MARKER: 0,
-                DIRECTIONS: 1
+                MARKER: 0
             },
 
             overlays: [],
@@ -477,6 +479,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return parts.join(".");
                 }
             });
+
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
@@ -529,6 +532,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
     // since backbone has already written a great extend function, lets just reuse it in our controller.
     Fuse.Controller.extend = Backbone.Model.extend;
-
+    
     return Fuse;
 });
