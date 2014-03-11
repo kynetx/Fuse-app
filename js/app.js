@@ -6,6 +6,7 @@ require.config({
         "jquerymobile": "vendor/jquery.mobile-1.4.0.min",
         "jquerymobileconfig": "vendor/jquery.mobile.config",
         "tooltipster": "vendor/jquery.tooltipster.min",
+        "sidr": "vendor/jquery.sidr",
         "cloudos": "vendor/CloudOS",
         "cloudosconfig": "vendor/CloudOS.config",
         "underscore": "vendor/underscore-min",
