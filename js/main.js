@@ -1,3 +1,9 @@
+/**
+ * Fuse Mobile Application
+ * Copyright Kynetx Inc. 2014. All Rights Reserved.
+ * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
+ * For details see https://kynetx.com
+ */
 require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
 
 	// setup dummy data. Will eventually come from API obviously.
