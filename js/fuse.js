@@ -379,6 +379,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet});
             $(document.body).append(menu);
             $("#menu").sidr();
+            $(document).on("swiperight", "[data-role='page']", function(e) {
+                e.preventDefault();
+                $.sidr("open");
+            }).on("tap", "#open-menu", function() {
+                $.sidr("toggle");
+            }).on("tap", "[data-role='page']", function() {
+                if ($(document.body).hasClass("sidr-open")) {
+                    $.sidr("close");
+                }
+            });
         },
 
         initMap: function() {
