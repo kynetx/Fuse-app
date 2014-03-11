@@ -376,9 +376,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         initMenu: function() {
+            var showPageFromMenu = $.proxy(function(e) {
+                var $target = $(e.target),
+                    action = $target.data("action");
+                    vid = $target.data("vid");
+
+                if (vid) {
+                    this.show(action, {id: vid});
+                } else {
+                    this.show(action);
+                }
+
+            }, this);
             var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet});
             $(document.body).append(menu);
-            $("#menu").sidr();
+            $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
             $(document).on("swiperight", "[data-role='page']", function(e) {
                 e.preventDefault();
                 $.sidr("open");
