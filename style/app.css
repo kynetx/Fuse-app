@@ -4,6 +4,10 @@
 @import url("tooltipster-shadow.css");
 @import url("jquery.sidr.dark.css");
 
+#menu a {
+  cursor: pointer;
+}
+
 .center-text {
 	text-align: center;
 }
