@@ -1,4 +1,4 @@
-define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "text!templates/fleettmpl.html"], function(Backbone, Fuse, $, _, FleetItemView, fleetTmpl) {
+define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "views/fleet.item.info.view", "text!templates/fleettmpl.html"], function(Backbone, Fuse, $, _, FleetItemView, FleetItemInfoView, fleetTmpl) {
     // the fleet view.
     return Fuse.View.extend({
         tagName: "div",
@@ -28,7 +28,11 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "te
             var view = new FleetItemView({
                 model: vehicle
             });
+            var viewinfo = new FleetItemInfoView({
+                model:vehicle
+            });
             this.fleetItems.push(view.render().el);
+            this.fleetItems.push(viewinfo.render().el);
         },
 
         showVehicle: function(e) {
