@@ -18,11 +18,10 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             },
             "timestamp": "never",
             "running": "never",
-            "fulerate": 0.0,
+            "fuelrate": 0.0,
             "fuellevel" : 0.0,
             "coolantTemperature": 0,
             "batteryVoltage": 0.0,
-            "odometer": 0,
             "header": 0,
             "speed": 0
         }
