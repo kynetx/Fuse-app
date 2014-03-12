@@ -209,6 +209,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             MIN_OVERLAYS: 3,
 
+            callbacks: {
+                directionsSuccess: function(directions) {
+
+                },
+
+                directionsError: function(error) {
+                    
+                }
+            },
+
             reset: function() {
                 var $body = $(document.body);
                 // if the container is set to the body already, we don't need to do anything.
@@ -397,37 +407,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 if (typeof from !== "undefined") {
                     dsr["origin"] = new Maps.LatLng(from.latitude, from.longitude);
-                    map.directionsService.route(dsr, functoin(directions, status) {
-                        switch (status) {
-                            case Maps.DirectionsStatus.OK:
-                                break;
-                            case Maps.DirectionsStats
-                        }
-                    });
+                    map.makeDirectionsRequest(dsr, map.callbacks.directionsSuccess, map.callbacks.directionsError);
                 }
             },
 
-            makeDirectionsRequest: function(dsr, cb) {
+            // dsr = directions service request, scb = success callback, ecb = error callback.
+            makeDirectionsRequest: function(dsr, scb, ecb) {
                 this.directionsService.route(dsr, function(directions, status) {
-                    switch (status) {
-                        case Maps.DirectionsStatus.OK:
-                            break;
-                        case Maps.DirectionsStatus.NOT_FOUND:
-                            break;
-                        case Maps.DirectionsStatus.ZERO_RESULTS:
-                            break;
-                        case Maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
-                            break;
-                        case Maps.DirectionsStatus.INVALID_REQUEST:
-                            break;
-                        case Maps.DirectionsStatus.OVER_QUERY_LIMIT:
-                            break;
-                        case Maps.DirectionsStatus.REQUEST_DENIED:
-                            break;
-                        case Maps.DirectionsStatus.UNKNOWN_ERROR:
-                            break;
-                        default:
-                            break;
+                    if (Maps.DirectionsStatus.OK === status) {
+                        scb(directions);
+                    } else {
+                        ecb(status);
                     }
                 });
             }
