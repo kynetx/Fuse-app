@@ -6,4 +6,4 @@ echo "Javascript built."
 echo "Buidling CSS..."
 r.js -o style/build.js
 echo "CSS Built."
-echo "Fuse now ready to be deployed. Yay!"
+echo "Fuse is almost ready to be deployed. Just update index.html to include the minified JS & CSS files and then run deploy.sh. Yay!"
