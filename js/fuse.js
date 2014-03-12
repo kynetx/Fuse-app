@@ -211,7 +211,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             callbacks: {
                 directionsSuccess: function(directions) {
-
+                    Fuse.log(directions);
+                    Fuse.log(this);
+                    Fuse.loading("hide");
                 },
 
                 directionsError: function(error) {
@@ -276,6 +278,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 // reset zoom offset.
                 this.zoomOffset = 5;
+
+                // reset directions display.
+                this.directionsRenderer.setMap(null);
 
                 Fuse.log("Reset Fuse map:", this);
             },
@@ -419,6 +424,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var self = this;
 
                 Maps.event.addListener(googOverlay, trigger, function(e) {
+                    Fuse.loading("show", "getting route...");
                     self.routeToOverlay.call(this, e, self, from);
                 });
             },
@@ -433,6 +439,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (typeof from !== "undefined") {
                     dsr["origin"] = new Maps.LatLng(from.latitude, from.longitude);
                     map.makeDirectionsRequest(dsr, map.callbacks.directionsSuccess, map.callbacks.directionsError);
+                } else {
+                    // otherwise grab the user's current location and use it as the origin
+                    // in the drections service request.
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(pos) {
+                            dsr["origin"] = new Maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                            map.makeDirectionsRequest(dsr, map.callbacks.directionsSuccess, map.callbacks.directionsError);
+                        });
+                    }
                 }
             },
 
@@ -624,6 +639,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         navigate: function(to) {
             Backbone.history.navigate(to, true);
+        },
+
+        loading: function(cmd, msg) {
+            setTimeout(function() {
+                $.mobile.loading(cmd, {
+                    text: msg,
+                    textVisible: true
+                });
+            }, 1);
         },
 
         logging: false
