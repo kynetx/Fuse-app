@@ -6,4 +6,4 @@ echo "Javascript built."
 echo "Buidling CSS..."
 r.js -o style/build.js
 echo "CSS Built."
-echo "Fuse is almost ready to be deployed. Just make sure the css and include reverences in index.html are updated and then run deploy.sh. Yay!"
+echo "Fuse is almost ready to be deployed. Just make sure the css and include references in index.html are updated and then run deploy.sh. Yay!"
