@@ -11,20 +11,24 @@
 </ul>
 <ul data-role="listview" data-inset="true" class='ui-grid-b dashboard'>
     <li class='ui-block-a dashboard-data'>
-        <p> Mileage </p>
-        <h1> <%= FTH.commaSeperateNumber(mileage) %> </h1>
-        <p> MPG </p>
+        <p> Fuel Level </p>
+        <h1> <%= fuellevel %>% </h1>
     </li>
     <li class='ui-block-b  dashboard-data'>
         <p> Speed </p>
-        <h1> <%= speed %></h1>
-        <p> MPH </p>
+        <h1> <%= speed %> MPH</h1>
     </li>
     <li class='ui-block-c  dashboard-data'>
         <p> Battery </p>
-        <h1> <%= batteryVoltage %> </h1>
-        <p> Volts </p>
+        <h1> <%= batteryVoltage %>v </h1>
     </li>
+</ul>
+<ul data-role="listview" data-inset='true'>
+    <li> <p>Mileage: <%= FTH.commaSeperateNumber(mileage) %></p> </li>
+    <li> <p>VIN: [<%= vin %>]</p> </li>
+    <li> <p>Gas Mileage: <%= fuelrate %> MPG</p> </li>
+    <li> <p>Coolant Temperature: <%= coolantTemperature %> degrees</p> </li>
+
 </ul>
 <ul data-role="listview" data-inset="true">
     <li>
