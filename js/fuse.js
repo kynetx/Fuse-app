@@ -16,6 +16,55 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
+
+        callbacks: {
+            directionsSuccess: function(directions) {
+                // bind the directions renderer to the map if it
+                // has no map.
+                // note : the directoins renderer is unbound from 
+                // the map when Fuse.map.reset() is called.
+                if (!this.directionsRenderer.getMap()) {
+                    this.directionsRenderer.setMap(this.obj);
+                }
+                this.directionsRenderer.setDirections(directions);
+                Fuse.loading("hide");
+            },
+
+            directionsError: function(error) {
+                Fuse.loading("hide");
+                switch (error) {
+                    case Maps.DirectionsStatus.NOT_FOUND:
+                        Fuse.log("ERROR! One of the locations in the directions request could not be found.");
+                        break;
+                    case Maps.DirectionsStatus.ZERO_RESULTS:
+                        Fuse.log("ERROR! No route was found between the given origin and destination points.");
+                        break;
+                    case Maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
+                        Fuse.log("ERROR! Too many additional waypoints used in directions request.");
+                        break;
+                    case Maps.DirectionsStatus.INVALID_REQUEST:
+                        Fuse.log("ERROR! Directions request was invalid. This usually occurs because the origin and/or destination points are missing.");
+                        break;
+                    case Maps.DirectionsStatus.OVER_QUERY_LIMIT:
+                        Fuse.log("ERROR! Too many directins requests have been issued within the alotted time. Try again later.");
+                        break;
+                    case Maps.DirectionsStatus.REQUEST_DENIED:
+                        Fuse.log("ERROR! No permission to use directions service.");
+                        break;
+                    case Maps.DirectionsStatus.UNKNOWN_ERROR:
+                        Fuse.log("ERROR! The directions service request encountered an unknown error. Try again later.");
+                        break;
+                    default:
+                        throw new Error("Fatal Google Maps Directions Error!");
+                        break;
+                }
+            }
+        },
+
+        invoke: function(cb, context) {
+            this.callbacks[cb].apply(context, Array.prototype.slice.call(arguments, 2));
+        },
+
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar"
@@ -209,41 +258,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             MIN_OVERLAYS: 3,
 
-            callbacks: {
-                directionsSuccess: function(directions) {
-                    Fuse.log(directions);
-                    Fuse.log(this);
-                    Fuse.loading("hide");
-                },
+            invokeDirectionsSuccess: function(directions) {
+                Fuse.invoke("directionsSuccess", this, directions)
+            },
 
-                directionsError: function(error) {
-                    switch (error) {
-                        case Maps.DirectionsStatus.NOT_FOUND:
-                            Fuse.log("ERROR! One of the locations in the directions request could not be found.");
-                            break;
-                        case Maps.DirectionsStatus.ZERO_RESULTS:
-                            Fuse.log("ERROR! No route was found between the given origin and destination points.");
-                            break;
-                        case Maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
-                            Fuse.log("ERROR! Too many additional waypoints used in directions request.");
-                            break;
-                        case Maps.DirectionsStatus.INVALID_REQUEST:
-                            Fuse.log("ERROR! Directions request was invalid. This usually occurs because the origin and/or destination points are missing.");
-                            break;
-                        case Maps.DirectionsStatus.OVER_QUERY_LIMIT:
-                            Fuse.log("ERROR! Too many directins requests have been issued within the alotted time. Try again later.");
-                            break;
-                        case Maps.DirectionsStatus.REQUEST_DENIED:
-                            Fuse.log("ERROR! No permission to use directions service.");
-                            break;
-                        case Maps.DirectionsStatus.UNKNOWN_ERROR:
-                            Fuse.log("ERROR! The directions service request encountered an unknown error. Try again later.");
-                            break;
-                        default:
-                            throw new Error("Fatal Google Maps Directions Error!");
-                            break;
-                    }
-                }
+            invokeDirectionsError: function(error) {
+                Fuse.invoke("directionsError", this, error);
             },
 
             reset: function() {
@@ -279,7 +299,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // reset zoom offset.
                 this.zoomOffset = 5;
 
-                // reset directions display.
+                // reset directions renderer.
                 this.directionsRenderer.setMap(null);
 
                 Fuse.log("Reset Fuse map:", this);
@@ -438,14 +458,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 if (typeof from !== "undefined") {
                     dsr["origin"] = new Maps.LatLng(from.latitude, from.longitude);
-                    map.makeDirectionsRequest(dsr, map.callbacks.directionsSuccess, map.callbacks.directionsError);
+                    map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
                 } else {
                     // otherwise grab the user's current location and use it as the origin
                     // in the drections service request.
                     if ("geolocation" in navigator) {
                         navigator.geolocation.getCurrentPosition(function(pos) {
                             dsr["origin"] = new Maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                            map.makeDirectionsRequest(dsr, map.callbacks.directionsSuccess, map.callbacks.directionsError);
+                            map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
                         });
                     }
                 }
@@ -453,11 +473,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             // dsr = directions service request, scb = success callback, ecb = error callback.
             makeDirectionsRequest: function(dsr, scb, ecb) {
-                this.directionsService.route(dsr, function(directions, status) {
+                var self = this;
+                self.directionsService.route(dsr, function(directions, status) {
+                    // make sure the callbacks are invoked with the context that
+                    // we had coming in.
                     if (Maps.DirectionsStatus.OK === status) {
-                        scb(directions);
+                        scb.call(self, directions);
                     } else {
-                        ecb(status);
+                        ecb.call(self, status);
                     }
                 });
             }
