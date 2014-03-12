@@ -307,10 +307,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // give the map sufficient time to be setup before asking it to be fitted
                 // to our bounds and zoom level. Tried binding to events triggered by the map
                 // but they were unreliable for determining when the map was ready. So, just to be 
-                // safe we simply give it 132 milliseconds to initialize itself, which appears
+                // safe we simply give it 140 milliseconds to initialize itself, which appears
                 // to be about the amount of time it takes for the map to finish setting itself
                 // up.
-                setTimeout(fitter, 132);
+                setTimeout(fitter, 140);
             },
 
             addOverlay: function(overlay) {
@@ -340,7 +340,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     googOverlay = new Maps.Marker(marker);
 
                     if (typeof overlay.route !== "undefined") {
-                        this.addRouteToOverlay(overlay.route. googOverlay);
+                        this.addRouteToOverlay(overlay.route, googOverlay);
                     }
                 }
 
@@ -379,6 +379,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     Fuse.log("No valid google overlay. Aborting.")
                     return;
                 }
+
+                Maps.event.addListener(googOverlay, trigger, this.routeToOverlay);
+            },
+
+            routeToOverlay: function(e) {
+                Fuse.log(this);
             }
         },
 
