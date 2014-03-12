@@ -323,6 +323,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         animation = Maps.Animation.BOUNCE;
                     }
+
                     var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
 
                     var marker = {
@@ -336,6 +337,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         marker["icon"] = overlay.icon;
                     }
 
+                    if (typeof overlay.route !== "undefined") {
+                        this.addRouteToOverlay(overlay);
+                    }
+
                     googOverlay = new Maps.Marker(marker);
                 }
 
@@ -346,6 +351,27 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.bounds.extend(position);
                 // keep track of this overlay so we can remove it later.
                 this.overlays.push(googOverlay);
+            },
+
+            addRouteToOverlay: function(overlay) {
+                var trigger;
+                switch (typeof overlay.route) {
+                    case "string":
+                        trigger = route;
+                        break;
+                    case "object":
+                        trigger = route.on;
+                        var origin = route.from;
+                        break;
+                    default:
+                        Fuse.log("Invalid route option on overlay:", overlay, "not doing anything.");
+                        break;
+                }
+                this.bindRouteEvent(trigger, overlay.position, origin);
+            },
+
+            bindRouteEvent: function(trigger, to, from) {
+                Fuse.log(arguments);
             }
         },
 
