@@ -227,10 +227,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     Fuse.log("Removing listener:", listener, "from map:", this);
                     Maps.event.removeListener(listener);
                 }
-                // remove all overlays.
+                // remove all overlays and remove their respective listeners.
                 while (this.overlays.length) {
                     var overlay = this.overlays.pop();
                     Fuse.log("Removing overlay:", overlay, "from map:", this);
+                    Maps.event.clearInstanceListeners(overlay);
                     overlay.setMap(null);
                 }
 
@@ -380,11 +381,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return;
                 }
 
-                Maps.event.addListener(googOverlay, trigger, this.routeToOverlay);
+                var self = this;
+
+                Maps.event.addListener(googOverlay, trigger, function(e) {
+                    self.routeToOverlay.call(this, e, self, from);
+                });
             },
 
-            routeToOverlay: function(e) {
-                Fuse.log(this);
+            routeToOverlay: function(e, map, from) {
+                if (typeof from !== "undefined") {
+                    
+                }
             }
         },
 
