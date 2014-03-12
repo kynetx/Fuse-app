@@ -337,11 +337,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         marker["icon"] = overlay.icon;
                     }
 
-                    if (typeof overlay.route !== "undefined") {
-                        this.addRouteToOverlay(overlay);
-                    }
-
                     googOverlay = new Maps.Marker(marker);
+
+                    if (typeof overlay.route !== "undefined") {
+                        this.addRouteToOverlay(overlay.route. googOverlay);
+                    }
                 }
 
                 Fuse.log("Adding overlay:", googOverlay, "to map:", this);
@@ -353,9 +353,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.overlays.push(googOverlay);
             },
 
-            addRouteToOverlay: function(overlay) {
+            addRouteToOverlay: function(route, googOverlay) {
                 var trigger;
-                switch (typeof overlay.route) {
+                switch (typeof route) {
                     case "string":
                         trigger = route;
                         break;
@@ -364,14 +364,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         var origin = route.from;
                         break;
                     default:
-                        Fuse.log("Invalid route option on overlay:", overlay, "not doing anything.");
+                        Fuse.log("Invalid route option:", route);
                         break;
                 }
-                this.bindRouteEvent(trigger, overlay.position, origin);
+                this.bindRouteEvent(trigger, googOverlay, origin);
             },
 
-            bindRouteEvent: function(trigger, to, from) {
-                Fuse.log(arguments);
+            bindRouteEvent: function(trigger, googOverlay, from) {
+                // make sure we have valid information from which to work.
+                if (!trigger) {
+                    Fuse.log("No valid event to route on. Aborting.");
+                    return;
+                } else if (!googOverlay) {
+                    Fuse.log("No valid google overlay. Aborting.")
+                    return;
+                }
             }
         },
 
