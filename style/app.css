@@ -61,23 +61,6 @@ div > ul.dashboard {
     border-radius: .3125em; /*default radius as set by jQuery mobile*/
 }
 
-div > ul > li > h1.medium-font {
-    font-size: 1.45em;
-    padding:0px;
-    margin:0px;
-}
-
-.dashboard > li > h1.large-font {
-    font-size: 1.6em;
-    margin-bottom:0px;
-    padding:0px;
-}
-
-.dashboard > li > p.medium-font {
-    font-size: 1.2em;
-    margin-top:0px;
-}
-
 #vehicle-notes {
     white-space: normal;
 }
