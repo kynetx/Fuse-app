@@ -389,9 +389,47 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             routeToOverlay: function(e, map, from) {
+                // dsr = directions service request.
+                var dsr = {
+                    destination: this.position, // 'this' is the overlay that was clicked on.
+                    travelMode: Maps.TravelMode.WALKING
+                };
+
                 if (typeof from !== "undefined") {
-                    
+                    dsr["origin"] = new Maps.LatLng(from.latitude, from.longitude);
+                    map.directionsService.route(dsr, functoin(directions, status) {
+                        switch (status) {
+                            case Maps.DirectionsStatus.OK:
+                                break;
+                            case Maps.DirectionsStats
+                        }
+                    });
                 }
+            },
+
+            makeDirectionsRequest: function(dsr, cb) {
+                this.directionsService.route(dsr, function(directions, status) {
+                    switch (status) {
+                        case Maps.DirectionsStatus.OK:
+                            break;
+                        case Maps.DirectionsStatus.NOT_FOUND:
+                            break;
+                        case Maps.DirectionsStatus.ZERO_RESULTS:
+                            break;
+                        case Maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
+                            break;
+                        case Maps.DirectionsStatus.INVALID_REQUEST:
+                            break;
+                        case Maps.DirectionsStatus.OVER_QUERY_LIMIT:
+                            break;
+                        case Maps.DirectionsStatus.REQUEST_DENIED:
+                            break;
+                        case Maps.DirectionsStatus.UNKNOWN_ERROR:
+                            break;
+                        default:
+                            break;
+                    }
+                });
             }
         },
 
