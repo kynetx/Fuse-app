@@ -18,7 +18,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         RouteToView: {
             "fleet": "Fleet",
-            "findcar": "FindCar"
+            "findcar": "FindCar",
+            "fuelsmart": "FuelSmart"
         },
 
         Router: Backbone.Router.extend({
@@ -356,6 +357,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 if ("findcar" == action) {
                     // if we are already on the findcar page but they
+                    // clicked on the findcar button in the footer,
+                    // we toggle back to the fleet view.
+                    if (/findcar/.test(Backbone.history.fragment)) {
+                        action = "fleet";
+                    }
+                }
+
+                if ("fuelsmart" == action) {
+                    // if we are already on the fuelsmart page but they
                     // clicked on the findcar button in the footer,
                     // we toggle back to the fleet view.
                     if (/findcar/.test(Backbone.history.fragment)) {
