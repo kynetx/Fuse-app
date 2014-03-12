@@ -15,7 +15,7 @@ echo "Old build removed from fuse.kynetx.com"
 
 # put current build out on production
 echo "Deploying new build to fuse.kynetx.com"
-rsync -av --exclude "js" --exclude "build.js" \
+rsync -av --exclude "js" --exclude "build.js" --exclude "build.sh" \
 --exclude ".git" --exclude ".gitignore" --exclude ".DS_Store" --exclude "deploy.sh" \
 --exclude "README.md" --exclude "docs" --exclude "style/*.css" \
 --update --progress --stats . root@webhost.kynetx.com:/var/www/html/fuse_kynetx_com/
