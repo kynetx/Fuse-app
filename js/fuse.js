@@ -364,15 +364,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     }
                 }
 
-                if ("fuelsmart" == action) {
-                    // if we are already on the fuelsmart page but they
-                    // clicked on the findcar button in the footer,
-                    // we toggle back to the fleet view.
-                    if (/findcar/.test(Backbone.history.fragment)) {
-                        action = "fleet";
-                    }
-                }
-
                 if (id && id[1]) {
                     this.show(action, {id: id[1]});
                 } else {

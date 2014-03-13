@@ -7,10 +7,6 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
             this.views["Fleet"] = new FleetView({
                 controller: this,
                 collection: this.fleet
-            });
-            this.views["FuelSmart"] = new FuelSmartView({
-                controller: this,
-                collection: this.fleet
             })
         },
 
@@ -30,10 +26,9 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
 
         showFuelSmart: function(id) {
             // retrieve the model by its id from our fleet collection.
-            this.vehicle = this.fleet.get(id);
             this.views["FuelSmart"] = new FuelSmartView({
                 controller: this,
-                model: this.vehicle
+                collection: this.fleet
             });
             this.views.FuelSmart.render();
         },
