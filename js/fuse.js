@@ -19,7 +19,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar",
-            "fuelsmart": "FuelSmart"
         },
 
         Router: Backbone.Router.extend({

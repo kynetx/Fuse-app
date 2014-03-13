@@ -5,7 +5,6 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "fleet/:id": "showVehicle",
             "findcar": "showFindCar",
             "findcar/:id": "showFindCar",
-            "fuelsmart": "showFuelSmart"
         },
         
         showFleet: function() {
@@ -25,10 +24,6 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             } else {
                 this.controller.showFindCar();
             }
-        },
-
-        showfuelSmart: function() {
-            this.controller.showFuelSmart();
         },
     });
 });
