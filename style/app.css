@@ -59,6 +59,10 @@
 	border-radius: 0 !important;
 }
 
+.app-icon {
+    width: 50px;
+}
+
 /* Css for Vehicle Detail View */
 div > ul.dashboard {
     border: 1px solid lightgray;

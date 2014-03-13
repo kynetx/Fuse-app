@@ -3,11 +3,15 @@ define(["fuse", "jquery", "underscore", "text!templates/fueltmpl.html"], functio
     return Fuse.View.extend({
         tagName: "div",
         role: "page",
-        header: "Fleet",
+        header: "Fuel Smart",
         transition: "fade",
         template: _.template(fuelTmpl),
 
-        initialize: function() {/* do nothing for now */},
+        initialize: function() {
+            Fuse.View.prototype.initialize.apply(this, arguments);
+            this.header = "Smart Fuel";
+            this.content = this.template(this.model.toJSON());
+        },
 
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
