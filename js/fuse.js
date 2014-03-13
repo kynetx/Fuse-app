@@ -16,6 +16,65 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
+
+        callbacks: {
+            directionsSuccess: function(directions) {
+                // bind the directions renderer to the map if it
+                // has no map.
+                // the directoins renderer is unbound from 
+                // the map when Fuse.map.reset() is called.
+                if (!this.directionsRenderer.getMap()) {
+                    this.directionsRenderer.setMap(this.obj);
+                }
+                var $panel = $("#directions-panel");
+                if (!$panel.length) {
+                    var panel = document.createElement("div");
+                    panel.id = "directions-panel";
+                    document.body.appendChild(panel);
+                }
+                this.directionsRenderer.setPanel(document.getElementById("directions-panel"));
+                if (!$panel.is(":visible")) {
+                    $panel.show();
+                }
+                this.directionsRenderer.setDirections(directions);
+                Fuse.loading("hide");
+            },
+
+            directionsError: function(error) {
+                Fuse.loading("hide");
+                switch (error) {
+                    case Maps.DirectionsStatus.NOT_FOUND:
+                        Fuse.log("ERROR! One of the locations in the directions request could not be found.");
+                        break;
+                    case Maps.DirectionsStatus.ZERO_RESULTS:
+                        Fuse.log("ERROR! No route was found between the given origin and destination points.");
+                        break;
+                    case Maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
+                        Fuse.log("ERROR! Too many additional waypoints used in directions request.");
+                        break;
+                    case Maps.DirectionsStatus.INVALID_REQUEST:
+                        Fuse.log("ERROR! Directions request was invalid. This usually occurs because the origin and/or destination points are missing.");
+                        break;
+                    case Maps.DirectionsStatus.OVER_QUERY_LIMIT:
+                        Fuse.log("ERROR! Too many directins requests have been issued within the alotted time. Try again later.");
+                        break;
+                    case Maps.DirectionsStatus.REQUEST_DENIED:
+                        Fuse.log("ERROR! No permission to use directions service.");
+                        break;
+                    case Maps.DirectionsStatus.UNKNOWN_ERROR:
+                        Fuse.log("ERROR! The directions service request encountered an unknown error. Try again later.");
+                        break;
+                    default:
+                        throw new Error("Fatal Google Maps Directions Error!");
+                        break;
+                }
+            }
+        },
+
+        invoke: function(cb, context) {
+            this.callbacks[cb].apply(context, Array.prototype.slice.call(arguments, 2));
+        },
+
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar"
@@ -187,10 +246,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         map: {
 
+            directionsService: new Maps.DirectionsService(),
+            directionsRenderer: new Maps.DirectionsRenderer(),
+
             // overlay types
             OverlayTypeId: {
-                MARKER: 0,
-                DIRECTIONS: 1
+                MARKER: 0
             },
 
             overlays: [],
@@ -206,6 +267,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             MIN_ZOOM_OFFSET: 2,
 
             MIN_OVERLAYS: 3,
+
+            invokeDirectionsSuccess: function(directions) {
+                Fuse.invoke("directionsSuccess", this, directions)
+            },
+
+            invokeDirectionsError: function(error) {
+                Fuse.invoke("directionsError", this, error);
+            },
 
             reset: function() {
                 var $body = $(document.body);
@@ -225,10 +294,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     Fuse.log("Removing listener:", listener, "from map:", this);
                     Maps.event.removeListener(listener);
                 }
-                // remove all overlays.
+                // remove all overlays and remove their respective listeners.
                 while (this.overlays.length) {
                     var overlay = this.overlays.pop();
                     Fuse.log("Removing overlay:", overlay, "from map:", this);
+                    Maps.event.clearInstanceListeners(overlay);
                     overlay.setMap(null);
                 }
 
@@ -238,6 +308,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 // reset zoom offset.
                 this.zoomOffset = 5;
+
+                // reset directions renderer.
+                this.directionsRenderer.setPanel(null);
+                this.directionsRenderer.setMap(null);
+
+                var $panel = $("#directions-panel");
+                if ($panel.length && $panel.is(":visible")) {
+                    $panel.hide();
+                }
 
                 Fuse.log("Reset Fuse map:", this);
             },
@@ -305,10 +384,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // give the map sufficient time to be setup before asking it to be fitted
                 // to our bounds and zoom level. Tried binding to events triggered by the map
                 // but they were unreliable for determining when the map was ready. So, just to be 
-                // safe we simply give it 132 milliseconds to initialize itself, which appears
+                // safe we simply give it 140 milliseconds to initialize itself, which appears
                 // to be about the amount of time it takes for the map to finish setting itself
                 // up.
-                setTimeout(fitter, 132);
+                setTimeout(fitter, 140);
             },
 
             addOverlay: function(overlay) {
@@ -321,6 +400,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         animation = Maps.Animation.BOUNCE;
                     }
+
                     var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
 
                     var marker = {
@@ -335,6 +415,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     }
 
                     googOverlay = new Maps.Marker(marker);
+
+                    if (typeof overlay.route !== "undefined") {
+                        this.addRouteToOverlay(overlay.route, googOverlay);
+                    }
                 }
 
                 Fuse.log("Adding overlay:", googOverlay, "to map:", this);
@@ -344,6 +428,77 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.bounds.extend(position);
                 // keep track of this overlay so we can remove it later.
                 this.overlays.push(googOverlay);
+            },
+
+            addRouteToOverlay: function(route, googOverlay) {
+                var trigger;
+                switch (typeof route) {
+                    case "string":
+                        trigger = route;
+                        break;
+                    case "object":
+                        trigger = route.on;
+                        var origin = route.from;
+                        break;
+                    default:
+                        Fuse.log("Invalid route option:", route);
+                        break;
+                }
+                this.bindRouteEvent(trigger, googOverlay, origin);
+            },
+
+            bindRouteEvent: function(trigger, googOverlay, from) {
+                // make sure we have valid information from which to work.
+                if (!trigger) {
+                    Fuse.log("No valid event to route on. Aborting.");
+                    return;
+                } else if (!googOverlay) {
+                    Fuse.log("No valid google overlay. Aborting.")
+                    return;
+                }
+
+                var self = this;
+
+                Maps.event.addListener(googOverlay, trigger, function(e) {
+                    Fuse.loading("show", "getting route...");
+                    self.routeToOverlay.call(this, e, self, from);
+                });
+            },
+
+            routeToOverlay: function(e, map, from) {
+                // dsr = directions service request.
+                var dsr = {
+                    destination: this.position, // 'this' is the overlay that was clicked on.
+                    travelMode: Maps.TravelMode.WALKING
+                };
+
+                if (typeof from !== "undefined") {
+                    dsr["origin"] = new Maps.LatLng(from.latitude, from.longitude);
+                    map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
+                } else {
+                    // otherwise grab the user's current location and use it as the origin
+                    // in the drections service request.
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(pos) {
+                            dsr["origin"] = new Maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                            map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
+                        });
+                    }
+                }
+            },
+
+            // dsr = directions service request, scb = success callback, ecb = error callback.
+            makeDirectionsRequest: function(dsr, scb, ecb) {
+                var self = this;
+                self.directionsService.route(dsr, function(directions, status) {
+                    // make sure the callbacks are invoked with the context that
+                    // we had coming in.
+                    if (Maps.DirectionsStatus.OK === status) {
+                        scb.call(self, directions);
+                    } else {
+                        ecb.call(self, status);
+                    }
+                });
             }
         },
 
@@ -354,7 +509,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     fragment = Backbone.history.fragment,
                     id = fragment.match(/\/(.*)/);
 
-                if ("findcar" == action) {
+                if ("findcar" === action) {
                     // if we are already on the findcar page but they
                     // clicked on the findcar button in the footer,
                     // we toggle back to the fleet view.
@@ -392,6 +547,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             $(document.body).append(menu);
             $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
             $(document).on("swiperight", "[data-role='page']", function(e) {
+                // if we're in the map element, do nothing.
+                if ($.contains(document.getElementById("fuse-map"), e.target)) {
+                    return;
+                }
                 e.preventDefault();
                 $.sidr("open");
             }).on("tap", "#open-menu", function() {
@@ -477,6 +636,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return parts.join(".");
                 }
             });
+
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
@@ -510,7 +670,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.log("Already on requested page! (", page, ") Not doing anything.");
             } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
                 // ...or there are no matching routes...
-                // note : don't examine the routes array for matching routes 
+                // don't examine the routes array for matching routes 
                 // if we were passed an options object. Routes like foo/1234
                 // are valid but won't be found because foo/:id is what will be 
                 // in the routes array.
@@ -524,11 +684,20 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             Backbone.history.navigate(to, true);
         },
 
+        loading: function(cmd, msg) {
+            setTimeout(function() {
+                $.mobile.loading(cmd, {
+                    text: msg,
+                    textVisible: true
+                });
+            }, 1);
+        },
+
         logging: false
     };
 
     // since backbone has already written a great extend function, lets just reuse it in our controller.
     Fuse.Controller.extend = Backbone.Model.extend;
-
+    
     return Fuse;
 });
