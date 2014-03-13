@@ -27,7 +27,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"timestamp": "20140116T151952+0000",
 			"running": false,
 			"fuelRate": 1.2,
-			"fuelLevel" : 20,
+			"fuelLevel" : 37,
 			"coolantTemperature": 163,
 			"batteryVoltage": 13.2,
 			"odometer": 65345,
@@ -52,12 +52,12 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"timestamp": "20140116T151952+0000",
 			"running": true,
 			"fuelRate": 1.2,
-			"fuelLevel" : 20,
+			"fuelLevel" : 89,
 			"coolantTemperature": 163,
-			"batteryVoltage": 13.2,
+			"batteryVoltage": 11.1,
 			"odometer": 65345,
 			"header": 272,
-			"speed": 0
+			"speed": 78
 		},
 		{
 			"id": "VN0E",
@@ -75,14 +75,14 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 				"longitude": -111.82633
 			},
 			"timestamp": "19910831T060849T+07:00",
-			"running": false,
+			"running": true,
 			"fuelRate": 2.63,
 			"fuelLevel": 22,
 			"coolantTemperature": 95,
-			"batteryVoltage": 73.4,
+			"batteryVoltage": 12.4,
 			"odometer": 19725,
 			"heading": 270,
-			"speed": 0
+			"speed": 12
 		}],
 
 		"trips": {}
