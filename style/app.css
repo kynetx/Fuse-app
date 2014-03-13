@@ -34,6 +34,7 @@
 .fuse-footer {
   padding: 10px !important;
   z-index: 2;
+  left:-9px; /* This keeps the icons centered */
 }
 
 .fuse-footer img {
@@ -88,4 +89,9 @@ div > ul.dashboard {
 
 #vehicle-notes {
     white-space: normal;
+}
+
+/*This fixes a small css glitch that shows up in the vehicle detail screen*/
+.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
+    min-height: 0;
 }

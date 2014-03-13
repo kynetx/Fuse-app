@@ -77,7 +77,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         RouteToView: {
             "fleet": "Fleet",
-            "findcar": "FindCar"
+            "findcar": "FindCar",
         },
 
         Router: Backbone.Router.extend({
