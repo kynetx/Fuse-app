@@ -21,10 +21,20 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             directionsSuccess: function(directions) {
                 // bind the directions renderer to the map if it
                 // has no map.
-                // note : the directoins renderer is unbound from 
+                // the directoins renderer is unbound from 
                 // the map when Fuse.map.reset() is called.
                 if (!this.directionsRenderer.getMap()) {
                     this.directionsRenderer.setMap(this.obj);
+                }
+                var $panel = $("#directions-panel");
+                if (!$panel.length) {
+                    var panel = document.createElement("div");
+                    panel.id = "directions-panel";
+                    document.body.appendChild(panel);
+                }
+                this.directionsRenderer.setPanel(document.getElementById("directions-panel"));
+                if (!$panel.is(":visible")) {
+                    $panel.show();
                 }
                 this.directionsRenderer.setDirections(directions);
                 Fuse.loading("hide");
@@ -300,7 +310,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.zoomOffset = 5;
 
                 // reset directions renderer.
+                this.directionsRenderer.setPanel(null);
                 this.directionsRenderer.setMap(null);
+
+                var $panel = $("#directions-panel");
+                if ($panel.length && $panel.is(":visible")) {
+                    $panel.hide();
+                }
 
                 Fuse.log("Reset Fuse map:", this);
             },
@@ -531,6 +547,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             $(document.body).append(menu);
             $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
             $(document).on("swiperight", "[data-role='page']", function(e) {
+                // if we're in the map element, do nothing.
+                if ($.contains(document.getElementById("fuse-map"), e.target)) {
+                    return;
+                }
                 e.preventDefault();
                 $.sidr("open");
             }).on("tap", "#open-menu", function() {
@@ -650,7 +670,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.log("Already on requested page! (", page, ") Not doing anything.");
             } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
                 // ...or there are no matching routes...
-                // note : don't examine the routes array for matching routes 
+                // don't examine the routes array for matching routes 
                 // if we were passed an options object. Routes like foo/1234
                 // are valid but won't be found because foo/:id is what will be 
                 // in the routes array.
