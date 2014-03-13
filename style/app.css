@@ -33,6 +33,7 @@
   */
 .fuse-footer {
 	padding: 10px !important;
+  left:-9px; /* This keeps the icons centered */
 }
 
 .fuse-footer img {
@@ -57,10 +58,6 @@
 	margin: 0 !important;
 	border: 0 !important;
 	border-radius: 0 !important;
-}
-
-.app-icon {
-    width: 50px;
 }
 
 /* Css for Vehicle Detail View */
