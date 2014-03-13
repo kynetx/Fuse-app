@@ -22,7 +22,8 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 					type: Fuse.map.OverlayTypeId.MARKER,
 					position: vehicle.get("lastWaypoint"),
 					title: vehicle.get("nickname"),
-					animation: "drop"
+					animation: "drop",
+					route: "click"
 				});
 			}, this);
 		},
