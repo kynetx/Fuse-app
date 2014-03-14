@@ -95,3 +95,21 @@ div > ul.dashboard {
 .ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
     min-height: 0;
 }
+
+.car-thumbnail {
+    border-bottom-right-radius: 48px;
+    border-top-right-radius: 48px;
+}
+
+.list-item-info {
+    text-align: center;
+}
+
+.fleet-item-info {
+    padding: 0px !important;
+    border-top-width: 0px !important;
+}
+
+.fleet-item {
+    border-bottom-width: 0px !important;
+}
