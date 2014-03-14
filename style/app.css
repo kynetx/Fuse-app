@@ -97,7 +97,19 @@ div > ul.dashboard {
 }
 
 .car-thumbnail {
-    border-bottom-right-radius: 70px;
-    border-bottom-style: solid;
-    border-bottom-color: rgb(248,154,33);
+    border-bottom-right-radius: 48px;
+    border-top-right-radius: 48px;
+}
+
+.list-item-info {
+    text-align: center;
+}
+
+.fleet-item-info {
+    padding: 0px !important;
+    border-top-width: 0px !important;
+}
+
+.fleet-item {
+    border-bottom-width: 0px !important;
 }
