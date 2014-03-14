@@ -95,3 +95,9 @@ div > ul.dashboard {
 .ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
     min-height: 0;
 }
+
+.car-thumbnail {
+    border-bottom-right-radius: 70px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(248,154,33);
+}
