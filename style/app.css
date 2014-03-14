@@ -97,8 +97,10 @@ div > ul.dashboard {
 }
 
 .car-thumbnail {
-    border-bottom-right-radius: 48px;
-    border-top-right-radius: 48px;
+    border-bottom-right-radius: 80px;
+    border-bottom-color: rgba(226,119,7,.15);
+    border-bottom-style: solid;
+    border-bottom-width: 12px !important;
 }
 
 .list-item-info {
@@ -106,10 +108,37 @@ div > ul.dashboard {
 }
 
 .fleet-item-info {
-    padding: 0px !important;
+    padding: 0px;
     border-top-width: 0px !important;
+    background: rgba(226,119,7,.15) !important;
 }
 
-.fleet-item {
-    border-bottom-width: 0px !important;
+.margin-off {
+    margin: 0px !important;
+}
+
+.round-box {
+    background-color: rgba(255,255,255,.55);
+    border-radius: .3125em;
+    margin-right: 2px;
+    margin-left: 2px;
+    padding: 2px;
+}
+
+.speed-box {
+    width: 20% !important;
+}
+
+.location-box {
+    width: 77% !important;
+    text-align: left;
+    padding-left: 16px;
+}
+
+.ui-listview>li.ui-first-child>a.ui-btn {
+    border-top-color: black;
+}
+
+.ui-listview>li>.ui-btn {
+    border-top-width: 4px;
 }

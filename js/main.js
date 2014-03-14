@@ -24,6 +24,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 				"latitude": 37.473896,
 				"longitude": -122.23114
 			},
+			"address": "1124 Grand Street, Redwood City, CA 94061, USA",
 			"timestamp": "20140116T151952+0000",
 			"running": false,
 			"fuelRate": 1.2,
@@ -49,6 +50,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 				"latitude": 40.42970,
 				"longitude": -111.89830
 			},
+			"address": "3098 Executive Parkway, Lehi, UT 84043, USA",
 			"timestamp": "20140116T151952+0000",
 			"running": true,
 			"fuelRate": 1.2,
@@ -74,6 +76,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 				"latitude": 40.74937,
 				"longitude": -111.82633
 			},
+			"address": "2254 East 900 South, Salt Lake City, UT 84108, USA",
 			"timestamp": "19910831T060849T+07:00",
 			"running": true,
 			"fuelRate": 2.63,

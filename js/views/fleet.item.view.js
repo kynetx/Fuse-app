@@ -2,7 +2,7 @@ define(["fuse", "jquery", "underscore", "text!templates/fleetitemtmpl.html"], fu
 	// represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "li",
-        className: "fleet-item",
+        className: "fleet-item ok",
         template: _.template(fleetItemTmpl),
 
         initialize: function() {/* do nothing for now */},
