@@ -118,7 +118,7 @@ div > ul.dashboard {
 }
 
 .round-box {
-    background-color: rgba(0,0,0,.15);
+    background-color: rgba(0,0,0,.10);
     border-radius: .3125em;
     margin-right: 2px;
     margin-left: 2px;
