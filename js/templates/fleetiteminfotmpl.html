@@ -1,14 +1,14 @@
 <div class="ui-grid-b list-item-info">
 	<div class="ui-block-a round-box speed-box">
 		<p class='margin-off'>Fuel Level</p>
-		<h1 class='margin-off'><%= fuelLevel %>%</h1>
+		<h3 class='margin-off'><%= fuelLevel %>%</h3>
 	</div>
 	<div class="ui-block-b round-box location-box">
 		<p class='margin-off'>Location</p>
 		<% if (speed > 0) { %>
-			<h1 class='margin-off'><%= speed %> MPH on <%= address %></h1>
+			<h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
 		<% } else { %>
-			<h1 class='margin-off'>Parked at <%= address %></h1>
+			<h3 class='margin-off'>Parked at <%= address %></h3>
 		<% } %>
 	</div>
 </div>
