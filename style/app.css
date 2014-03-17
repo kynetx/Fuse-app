@@ -98,7 +98,7 @@ div > ul.dashboard {
 
 .car-thumbnail {
     border-bottom-right-radius: 80px;
-    border-bottom-color: rgba(226,119,7,.15);
+    border-bottom-color: rgba(0,0,0,.10);
     border-bottom-style: solid;
     border-bottom-width: 12px !important;
 }
@@ -110,7 +110,7 @@ div > ul.dashboard {
 .fleet-item-info {
     padding: 0px;
     border-top-width: 0px !important;
-    background: rgba(226,119,7,.15) !important;
+    background: rgba(0,0,0,.10) !important;
 }
 
 .margin-off {
@@ -118,11 +118,12 @@ div > ul.dashboard {
 }
 
 .round-box {
-    background-color: rgba(255,255,255,.55);
+    background-color: rgba(0,0,0,.15);
     border-radius: .3125em;
     margin-right: 2px;
     margin-left: 2px;
     padding: 2px;
+    text-shadow: none;
 }
 
 .speed-box {
