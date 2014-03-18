@@ -108,7 +108,7 @@ div > ul.dashboard {
 .fleet-item-info {
     padding: 0px;
     border-top-width: 0px !important;
-    background: rgba(0,0,0,.2) !important;
+    background: rgba(0,0,0,.15) !important;
 }
 
 .margin-off {
