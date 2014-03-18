@@ -97,10 +97,8 @@ div > ul.dashboard {
 }
 
 .car-thumbnail {
-    border-bottom-right-radius: 80px;
-    border-bottom-color: rgba(0,0,0,.2);
-    border-bottom-style: solid;
-    border-bottom-width: 12px !important;
+    border-bottom-right-radius: 48px;
+    border-top-right-radius: 48px;
 }
 
 .list-item-info {
