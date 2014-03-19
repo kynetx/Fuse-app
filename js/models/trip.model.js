@@ -1,109 +1,97 @@
-define(["backbone", "jquery"], function(Backbone, $) {
-// sample trip data for model and trips collection
-/*{
-    "1" : [ 
-	{
-	    "id": 198366,
-	    "startTime": "20140116T150940+0000",
-	    "endTime": "20140116T151952+0000",
-	    "mileage": 4.8,
-	    "startWaypoint": {
-		"timestamp": "20140116T150940+0000",
-		"latitude": 28.027016,
-		"longitude": -82.588792
-	    },
-	    "endWaypoint": {
-		"timestamp": "20140116T151952+0000",
-		"latitude": 28.088439,
-		"longitude": -82.578453
-	    },
-	    "data": [
-		{
-		    "id": 2081444,
-		    "timestamp": "20140116T151952+0000",
-		    "datum": [
-			{
-			    "id": 8719850,
-			    "timestamp": "20140116T151952+0000",
-			    "key": "GEN_TRIP_MILEAGE",
-			    "value": "4.8",
-			    "translatedValue": "5 miles"
-			},
-			{
-			    "id": 8719849,
-			    "timestamp": "20140116T151952+0000",
-			    "key": "GEN_ENGINE_COOLANT_TEMP",
-			    "value": "82.8",
-			    "translatedValue": "206.6 deg F"
-			},
-			{
-			    "id": 8719848,
-			    "timestamp": "20140116T151952+0000",
-			    "key": "GEN_VOLTAGE",
-			    "value": "13.9",
-			    "translatedValue": "13.9V"
-			},
-			{
-			    "id": 8719847,
-			    "timestamp": "20140116T151952+0000",
-			    "key": "GEN_HEADING",
-			    "value": "99",
-			    "translatedValue": "99 deg"
-			},
-			{
-			    "id": 8719846,
-			    "timestamp": "20140116T151952+0000",
-			    "key": "GEN_WAYPOINT",
-			    "value": "28.088439,-82.578453",
-			    "translatedValue": "28.088439,-82.578453"
-			}
-		    ]
-		},
-		{
-		    "id": 2081441,
-		    "timestamp": "20140116T151940+0000",
-		    "datum": [
-			{
-			    "id": 8719831,
-			    "timestamp": "20140116T151940+0000",
-			    "key": "GEN_ENGINE_COOLANT_TEMP",
-			    "value": "82.8",
-			    "translatedValue": "206.6 deg F"
-			},
-			{
-			    "id": 8719830,
-			    "timestamp": "20140116T151940+0000",
-			    "key": "GEN_VOLTAGE",
-			    "value": "13.9",
-			    "translatedValue": "13.9V"
-			},
-			{
-			    "id": 8719829,
-			    "timestamp": "20140116T151940+0000",
-			    "key": "GEN_SPEED",
-			    "value": "43.8",
-			    "translatedValue": "43.8 mph"
-			},
-			{
-			    "id": 8719828,
-			    "timestamp": "20140116T151940+0000",
-			    "key": "GEN_HEADING",
-			    "value": "99",
-			    "translatedValue": "99 deg"
-			},
-			{
-			    "id": 8719827,
-			    "timestamp": "20140116T151940+0000",
-			    "key": "GEN_WAYPOINT",
-			    "value": "28.088437,-82.578463",
-			    "translatedValue": "28.088437,-82.578463"
-			}
-		    ]
+define([ "fuse", "jquery" ], function( Fuse ) {
+	return Fuse.Model.extend({
+		defaults: {
+		    "id": 247815,
+		    "mileage": "36.4",
+		    "startTime": "20140319T161206+0000",
+		    "endTime": "20140319T170155+0000",
+		    "startWaypoint": {
+		        "longitude": "-111.712584",
+		        "timestamp": "20140319T161206+0000",
+		        "latitude": "40.038496"
+		    },
+		    "endWaypoint": {
+		        "longitude": "-111.898162",
+		        "timestamp": "20140319T170155+0000",
+		        "latitude": "40.429706"
+		    },
+			"waypoints": [{
+	            "timestamp": "20140319T170155+0000",
+	            "value": "40.429706,-111.898162",
+	            "id": 11416600,
+	            "translatedValue": "40.429706,-111.898162",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T165706+0000",
+	            "value": "40.430665,-111.897155",
+	            "id": 11416406,
+	            "translatedValue": "40.430665,-111.897155",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T165206+0000",
+	            "value": "40.430793,-111.896004",
+	            "id": 11416187,
+	            "translatedValue": "40.430793,-111.896004",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T164706+0000",
+	            "value": "40.431183,-111.889580",
+	            "id": 11416020,
+	            "translatedValue": "40.431183,-111.889580",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T164206+0000",
+	            "value": "40.375006,-111.814038",
+	            "id": 11415843,
+	            "translatedValue": "40.375006,-111.814038",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T163706+0000",
+	            "value": "40.322120,-111.727220",
+	            "id": 11415639,
+	            "translatedValue": "40.322120,-111.727220",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T163206+0000",
+	            "value": "40.249005,-111.695123",
+	            "id": 11415458,
+	            "translatedValue": "40.249005,-111.695123",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T162706+0000",
+	            "value": "40.173321,-111.646477",
+	            "id": 11415285,
+	            "translatedValue": "40.173321,-111.646477",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T162206+0000",
+	            "value": "40.099830,-111.688129",
+	            "id": 11415076,
+	            "translatedValue": "40.099830,-111.688129",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T161706+0000",
+	            "value": "40.044507,-111.727809",
+	            "id": 11414745,
+	            "translatedValue": "40.044507,-111.727809",
+	            "key": "GEN_WAYPOINT"
+	        },
+	        {
+	            "timestamp": "20140319T161206+0000",
+	            "value": "40.038496,-111.712584",
+	            "id": 11414566,
+	            "translatedValue": "40.038496,-111.712584",
+	            "key": "GEN_WAYPOINT"
+	        }]
 		}
-	    ]
-	}
-
-    ]
-  
-}*/
+	});
 });
