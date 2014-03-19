@@ -14,9 +14,14 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
             this.views.Fleet.render();
         },
 
-        showVehicle: function(id) {
+        showVehicle: function() {
             // retrieve the model by its id from our fleet collection.
-            this.vehicle = this.fleet.get(id);
+            this.vehicle = this.fleet.get( arguments[ 0 ] );
+            if ( !this.vehicle ) {
+                Fuse.log("No such vehicle. Aborting.");
+                Fuse.show("fleet");
+                return;
+            }
             this.views["Vehicle"] = new VehicleView({
                 controller: this,
                 model: this.vehicle
@@ -40,6 +45,7 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
         },
 
         showTrips: function() {
+            // filter the collection down here...
             this.views["Trips"] = new TripsView({
                 controller: this,
                 collection: trips

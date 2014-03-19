@@ -96,6 +96,24 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         fragment: Backbone.history.fragment
                     });
                 }
+            },
+
+            invokeControllerFunction: function() {
+                var args = Array.prototype.slice.call(arguments);
+
+                // if the first argument is a function name.
+                if ( typeof args !== "undefined" && typeof args[ 0 ] === "string" ) {
+                    var func = this.controller[ args[ 0 ] ];
+                    // if its not a valid function.
+                    if ( !func ) {
+                        Fuse.log( "No such controller function:", func );
+                        Fuse.log( "Aborting route execution from router:", this );
+                    } else {
+                        // invoke the function, passing it any leftover arguments
+                        // we have.
+                        func.apply(this.controller, args[ 1 ] );
+                    }
+                }
             }
         }),
 
