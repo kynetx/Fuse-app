@@ -144,6 +144,10 @@ div > ul.dashboard {
     border-top-color: black;
 }
 
+ul.ui-listview>li.ui-first-child {
+    border-top-color: black;
+}
+
 .ui-listview>li>.ui-btn {
     border-top-width: 4px;
 }

@@ -1,37 +1,29 @@
-<!-- <ul data-role="listview" data-inset="true">
-    <li id="vehicle-detail-map" class="fuse-map-container">
-    </li>
-</ul> -->
-<ul data-role="listview" data-inset="true">
+<ul data-role="listview" data-inset="false">
     <li>
         <img src="<%= icon %>" class="car-thumbnail">
-        <h1> <%= nickname %> </h2>
-        <p> <%= year %> <%= make %>, <%= model %> </p>
+        <h1> <%= nickname %>
+            <% if (running) { %>
+                <img src="style/images/vehicle_on.png" class="vehicle-status-icon" title="Vehicle is on">
+            <% } else { %>
+                <img src="style/images/vehicle_off.png" class="vehicle-status-icon" title="Vehicle is off">
+            <% } %>
+        </h1>
+        <p> <%= make %>, <%= model %></p>
     </li>
-</ul>
-<ul data-role="listview" data-inset="true" class='ui-grid-b dashboard'>
-    <li class='ui-block-a dashboard-data'>
-        <p> Fuel </p>
-        <h1> <%= fuelLevel %>% </h1>
-    </li>
-    <li class='ui-block-b  dashboard-data'>
-        <p> Speed </p>
-        <h1> <%= speed %> MPH</h1>
-    </li>
-    <li class='ui-block-c  dashboard-data'>
-        <p> Battery </p>
-        <h1> <%= batteryVoltage %>v </h1>
-    </li>
-</ul>
-<ul data-role="listview" data-inset='true'>
-    <li> <p>Odometer: <%= FTH.commaSeperateNumber(mileage) %></p> </li>
-    <li> <p>Gas Mileage: <%= fuelrate %> MPG</p> </li>
-    <li> <p>Coolant Temperature: <%= coolantTemperature %> degrees</p> </li>
-
-</ul>
-<ul data-role="listview" data-inset="true">
-    <li>
-        <h1>Notes </h1>
-        <p id="vehicle-notes"><%= notes %></p>
+    <li class="fleet-item-info">
+        <div class="ui-grid-b list-item-info">
+            <div class="ui-block-a round-box speed-box">
+                <p class='margin-off'>Fuel</p>
+                <h3 class='margin-off'><%= fuelLevel %>%</h3>
+            </div>
+            <div class="ui-block-b round-box location-box">
+                <p class='margin-off'>Location</p>
+                <% if (speed > 0) { %>
+                    <h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
+                <% } else { %>
+                    <h3 class='margin-off'>Parked at <%= address %></h3>
+                <% } %>
+            </div>
+        </div>
     </li>
 </ul>
