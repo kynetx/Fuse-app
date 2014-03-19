@@ -117,6 +117,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         }),
 
+        Collection: Backbone.Collection.extend({
+            filterById: function(id) {
+                var filtered = this.filter(function( item ) {
+                    return id === item.get( "id" );
+                });
+                
+                return ( filtered.length > 0 ) ?  new this.constructor( filtered ) : this;
+            }
+        }),
+
         Model: Backbone.Model.extend({}),
 
         Controller: function() {

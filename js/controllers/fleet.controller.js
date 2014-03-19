@@ -2,9 +2,9 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
     return Fuse.Controller.extend({
 
         init: function() {
-            this.fleet = new FleetCollection(Fuse.FIXTURES.fleet);
+            this.fleet = new FleetCollection( Fuse.FIXTURES.fleet );
             this.views = {};
-            this.views["Fleet"] = new FleetView({
+            this.views[ "Fleet" ] = new FleetView({
                 controller: this,
                 collection: this.fleet
             })
@@ -18,11 +18,10 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
             // retrieve the model by its id from our fleet collection.
             this.vehicle = this.fleet.get( arguments[ 0 ] );
             if ( !this.vehicle ) {
-                Fuse.log("No such vehicle. Aborting.");
-                Fuse.show("fleet");
+                Fuse.log( "No such vehicle. Aborting." );
                 return;
             }
-            this.views["Vehicle"] = new VehicleView({
+            this.views[ "Vehicle" ] = new VehicleView({
                 controller: this,
                 model: this.vehicle
             });
@@ -30,23 +29,16 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
         },
 
         showFindCar: function() {
-            var args = arguments;
-            var hasId = typeof args[0] !== "undefined";
-            // if we were passed a vehicle id, 
-            // filter our vehicles collection down to just
-            // the vehicle with that id, otherwise show 
-            // the findcar view for all vehicles.
-            var collection = (hasId) ? this.fleet.filterById(args[0]) : this.fleet;
-            this.views["FindCar"] = new FindCarView({
+            this.views[ "FindCar" ] = new FindCarView({
                 controller: this,
-                collection: collection
+                collection: this.fleet.filterById( arguments[ 0 ] )
             });
             this.views.FindCar.render();
         },
 
         showTrips: function() {
             // filter the collection down here...
-            this.views["Trips"] = new TripsView({
+            this.views[ "Trips" ] = new TripsView({
                 controller: this,
                 collection: trips
             });
