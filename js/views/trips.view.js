@@ -10,6 +10,26 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/tripstmpl.h
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
+            this.trips = [];
+        },
+
+        render: function() {
+            this.trips.length = 0;
+
+            this.collection.each(function( trip ) {
+                this.renderTrip( trip );
+            });
+
+            this.content = this.tripsTemplate({ trips: this.trips });
+            Fuse.View.prototype.render.call( this );
+        },
+
+        renderTrip: function( trip ) {
+            var tripView = new TripView({
+                model: trip
+            });
+
+            this.trips.push( tripView.render().el );
         }
     });
 });
