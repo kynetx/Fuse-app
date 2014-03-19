@@ -37,10 +37,23 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
         },
 
         showTrips: function() {
+            var trips = this.fleet.filterById( arguments[ 0 ] ).trips;
+
+            /**
+             * if trips comes back undefined, it means we weren't 
+             * passed a valid vehicle id. This can happen either because
+             * the vehicle id doesn't exist, the user does not have access
+             * to the vehicle, or they did not select a specific vehicle
+             * before requesting the trips page. In this case, we just
+             * show an aggregate view of their trip data for all their
+             * vehicles.
+             */ 
+            if ( !trips ) {
+            }
             // filter the collection down here...
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
-                collection: trips
+                collection: new TripCollection( trips )
             });
             this.views.Trips.render();
         }
