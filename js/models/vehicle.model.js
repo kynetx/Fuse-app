@@ -1,5 +1,4 @@
 define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
-
     return Fuse.Model.extend({
         defaults: {
             "default": 1,
