@@ -20,6 +20,6 @@ require(["jquery"], function($) {
         //no native datepicker will conflict with the jQM component
         $.mobile.page.prototype.options.degradeInputs.date = true;
         // set a horizontal distance threshold on swipes.
-        $.event.special.horizontalDistanceThreshold = 100;
+        $.event.special.swipe.horizontalDistanceThreshold = 100;
     });
 });
