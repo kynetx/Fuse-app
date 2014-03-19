@@ -12,17 +12,17 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "vi
         },
 
         initialize: function() {
-            Fuse.View.prototype.initialize.apply(this, arguments);
+            Fuse.View.prototype.initialize.apply( this, arguments );
             this.fleetItems = [];
         },
 
         render: function() {
             this.fleetItems.length = 0;
-            this.collection.each(function(vehicle) {
-                this.renderFleetItem(vehicle);
-            }, this);
-            this.content = this.fleetTemplate({fleet: this.fleetItems});
-            Fuse.View.prototype.render.call(this);
+            this.collection.each(function( vehicle ) {
+                this.renderFleetItem( vehicle );
+            }, this );
+            this.content = this.fleetTemplate( {fleet: this.fleetItems} );
+            Fuse.View.prototype.render.call( this );
         },
 
         renderFleetItem: function( vehicle ) {
@@ -41,8 +41,8 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "vi
         showVehicle: function(e) {
             var $target = $(e.target);
             // get the vehicle id fo which we want to render a detail view.
-            var vid = $target.closest("a").attr("data-vid");
-            Fuse.show("fleet", {id: vid});
+            var vid = $target.closest( "a" ).attr( "data-vid" );
+            Fuse.show( "fleet", {id: vid} );
             e.handled = true;
         }
     });

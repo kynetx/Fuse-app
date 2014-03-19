@@ -1,4 +1,4 @@
-define([ "backbone", "fuse", "jquery", "underscore" ], function( Backbone, Fuse, $, _ ) {
+define([ "backbone", "fuse", "jquery", "underscore", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, tripsTmpl ) {
     // trips view.
     return Fuse.View.extend({
         id: "trips",
