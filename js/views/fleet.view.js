@@ -25,15 +25,17 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "vi
             Fuse.View.prototype.render.call(this);
         },
 
-        renderFleetItem: function(vehicle) {
+        renderFleetItem: function( vehicle ) {
             var view = new FleetItemView({
                 model: vehicle
             });
+
             var viewinfo = new FleetItemInfoView({
-                model:vehicle
+                model: vehicle
             });
-            this.fleetItems.push(view.render().el);
-            this.fleetItems.push(viewinfo.render().el);
+
+            this.fleetItems.push( view.render().el );
+            this.fleetItems.push( viewinfo.render().el );
         },
 
         showVehicle: function(e) {
