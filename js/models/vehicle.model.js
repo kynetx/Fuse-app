@@ -16,6 +16,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
                 "latitude": 0.0,
                 "longitude": 0.0
             },
+            "address": "none",
             "timestamp": "never",
             "running": "never",
             "fuelrate": 0.0,
