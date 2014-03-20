@@ -26,4 +26,21 @@
             </div>
         </div>
     </li>
+    <li class="fleet-item-info">
+        <div class="ui-grid-b list-item-info">
+            <div class="ui-block-a round-box">
+                <p class='margin-off'>Battery Charge</p>
+                <h3 class='margin-off'><%= batteryVoltage %></h3>
+            </div>
+            <div class="ui-block-b round-box">
+                <p class='margin-off'>Miles</p>
+                <h3 class='margin-off'><%= FTH.commaSeperateNumber(mileage) %></h3>
+            </div>
+            <div class="ui-block-b round-box">
+                <p class='margin-off'>MPG</p>
+                <h3 class='margin-off'><%= fuellevel %></h3>
+            </div>
+        </div>
+    </li>
+    
 </ul>

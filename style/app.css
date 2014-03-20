@@ -108,7 +108,6 @@ div > ul.dashboard {
 .fleet-item-info {
     padding: .2em !important;
     border-top-width: 0px !important;
-    background: rgba(0,0,0,.15) !important;
 }
 
 .margin-off {
@@ -116,7 +115,7 @@ div > ul.dashboard {
 }
 
 .round-box {
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(0,0,0,.1);
     border-radius: .125em;
     margin-right: 2px;
     margin-left: 2px;
@@ -150,4 +149,8 @@ ul.ui-listview>li.ui-first-child {
 
 .ui-listview>li>.ui-btn {
     border-top-width: 4px;
+}
+
+.ui-grid-b>.ui-block-a, .ui-grid-b>.ui-block-b, .ui-grid-b>.ui-block-c { /* We need to override the jquery mobile css*/
+    width: 32.3%;
 }
