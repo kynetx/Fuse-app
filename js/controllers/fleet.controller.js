@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/vehicle.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view"], function(Fuse, $, _, FleetCollection, VehicleModel, FleetView, VehicleView, FindCarView, TripsView) {
+define(["fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view"], function(Fuse, $, _, FleetCollection, TripCollection, VehicleModel, FleetView, VehicleView, FindCarView, TripsView) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -39,7 +39,7 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
         showTrips: function() {
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
-                collection: this.fleet.filterById( arguments[ 0 ] )
+                collection: new TripCollection(Fuse.FIXTURES.trips)
             });
             this.views.Trips.render();
         }

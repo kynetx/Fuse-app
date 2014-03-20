@@ -85,7 +85,575 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"speed": 12
 		}],
 
-		"trips": {}
+		"trips": [{
+			"id": 2689,
+			"distance": 2258.4,
+			"startTime": " 20131001T051219+T+06:00 ",
+			"endTime": " 20070512T140235+T+06:00 ",
+			"startWaypoint": {
+				"longitude": "-111.712584",
+				"timestamp": " 20010602T075441+T+06:00 ",
+				"latitude": "40.038496"
+			},
+			"endWaypoint": {
+				"longitude": "-111.898162",
+				"timestamp": " 19891202T025427+T+07:00 ",
+				"latitude": "40.429706"
+			},
+			"waypoints": [{
+				"timestamp": "20140319T170155+0000",
+				"value": "40.429706,-111.898162",
+				"id": 11416600,
+				"translatedValue": "40.429706,-111.898162",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165706+0000",
+				"value": "40.430665,-111.897155",
+				"id": 11416406,
+				"translatedValue": "40.430665,-111.897155",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165206+0000",
+				"value": "40.430793,-111.896004",
+				"id": 11416187,
+				"translatedValue": "40.430793,-111.896004",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164706+0000",
+				"value": "40.431183,-111.889580",
+				"id": 11416020,
+				"translatedValue": "40.431183,-111.889580",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164206+0000",
+				"value": "40.375006,-111.814038",
+				"id": 11415843,
+				"translatedValue": "40.375006,-111.814038",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163706+0000",
+				"value": "40.322120,-111.727220",
+				"id": 11415639,
+				"translatedValue": "40.322120,-111.727220",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163206+0000",
+				"value": "40.249005,-111.695123",
+				"id": 11415458,
+				"translatedValue": "40.249005,-111.695123",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162706+0000",
+				"value": "40.173321,-111.646477",
+				"id": 11415285,
+				"translatedValue": "40.173321,-111.646477",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162206+0000",
+				"value": "40.099830,-111.688129",
+				"id": 11415076,
+				"translatedValue": "40.099830,-111.688129",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161706+0000",
+				"value": "40.044507,-111.727809",
+				"id": 11414745,
+				"translatedValue": "40.044507,-111.727809",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161206+0000",
+				"value": "40.038496,-111.712584",
+				"id": 11414566,
+				"translatedValue": "40.038496,-111.712584",
+				"key": "GEN_WAYPOINT"
+			}
+			]
+		},
+		{
+			"id": 9396,
+			"distance": 2995.8,
+			"startTime": " 19880117T105725+T+07:00 ",
+			"endTime": " 19980513T124658+T+06:00 ",
+			"startWaypoint": {
+				"longitude": "-111.712584",
+				"timestamp": " 20080227T053351+T+07:00 ",
+				"latitude": "40.038496"
+			},
+			"endWaypoint": {
+				"longitude": "-111.898162",
+				"timestamp": " 19930611T180254+T+06:00 ",
+				"latitude": "40.429706"
+			},
+			"waypoints": [
+			{
+				"timestamp": "20140319T170155+0000",
+				"value": "40.429706,-111.898162",
+				"id": 11416600,
+				"translatedValue": "40.429706,-111.898162",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165706+0000",
+				"value": "40.430665,-111.897155",
+				"id": 11416406,
+				"translatedValue": "40.430665,-111.897155",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165206+0000",
+				"value": "40.430793,-111.896004",
+				"id": 11416187,
+				"translatedValue": "40.430793,-111.896004",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164706+0000",
+				"value": "40.431183,-111.889580",
+				"id": 11416020,
+				"translatedValue": "40.431183,-111.889580",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164206+0000",
+				"value": "40.375006,-111.814038",
+				"id": 11415843,
+				"translatedValue": "40.375006,-111.814038",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163706+0000",
+				"value": "40.322120,-111.727220",
+				"id": 11415639,
+				"translatedValue": "40.322120,-111.727220",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163206+0000",
+				"value": "40.249005,-111.695123",
+				"id": 11415458,
+				"translatedValue": "40.249005,-111.695123",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162706+0000",
+				"value": "40.173321,-111.646477",
+				"id": 11415285,
+				"translatedValue": "40.173321,-111.646477",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162206+0000",
+				"value": "40.099830,-111.688129",
+				"id": 11415076,
+				"translatedValue": "40.099830,-111.688129",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161706+0000",
+				"value": "40.044507,-111.727809",
+				"id": 11414745,
+				"translatedValue": "40.044507,-111.727809",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161206+0000",
+				"value": "40.038496,-111.712584",
+				"id": 11414566,
+				"translatedValue": "40.038496,-111.712584",
+				"key": "GEN_WAYPOINT"
+			}
+			]
+		},
+		{
+			"id": 70,
+			"distance": 190.4,
+			"startTime": " 19980310T122959+T+07:00 ",
+			"endTime": " 20050223T194338+T+07:00 ",
+			"startWaypoint": {
+				"longitude": "-111.712584",
+				"timestamp": " 19880318T122527+T+07:00 ",
+				"latitude": "40.038496"
+			},
+			"endWaypoint": {
+				"longitude": "-111.898162",
+				"timestamp": " 20130221T104612+T+07:00 ",
+				"latitude": "40.429706"
+			},
+			"waypoints": [
+			{
+				"timestamp": "20140319T170155+0000",
+				"value": "40.429706,-111.898162",
+				"id": 11416600,
+				"translatedValue": "40.429706,-111.898162",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165706+0000",
+				"value": "40.430665,-111.897155",
+				"id": 11416406,
+				"translatedValue": "40.430665,-111.897155",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165206+0000",
+				"value": "40.430793,-111.896004",
+				"id": 11416187,
+				"translatedValue": "40.430793,-111.896004",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164706+0000",
+				"value": "40.431183,-111.889580",
+				"id": 11416020,
+				"translatedValue": "40.431183,-111.889580",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164206+0000",
+				"value": "40.375006,-111.814038",
+				"id": 11415843,
+				"translatedValue": "40.375006,-111.814038",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163706+0000",
+				"value": "40.322120,-111.727220",
+				"id": 11415639,
+				"translatedValue": "40.322120,-111.727220",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163206+0000",
+				"value": "40.249005,-111.695123",
+				"id": 11415458,
+				"translatedValue": "40.249005,-111.695123",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162706+0000",
+				"value": "40.173321,-111.646477",
+				"id": 11415285,
+				"translatedValue": "40.173321,-111.646477",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162206+0000",
+				"value": "40.099830,-111.688129",
+				"id": 11415076,
+				"translatedValue": "40.099830,-111.688129",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161706+0000",
+				"value": "40.044507,-111.727809",
+				"id": 11414745,
+				"translatedValue": "40.044507,-111.727809",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161206+0000",
+				"value": "40.038496,-111.712584",
+				"id": 11414566,
+				"translatedValue": "40.038496,-111.712584",
+				"key": "GEN_WAYPOINT"
+			}
+			]
+		},
+		{
+			"id": 3602,
+			"distance": 916.4,
+			"startTime": " 20080425T051529+T+06:00 ",
+			"endTime": " 20100124T003217+T+07:00 ",
+			"startWaypoint": {
+				"longitude": "-111.712584",
+				"timestamp": " 19880822T093631+T+06:00 ",
+				"latitude": "40.038496"
+			},
+			"endWaypoint": {
+				"longitude": "-111.898162",
+				"timestamp": " 19921217T165437+T+07:00 ",
+				"latitude": "40.429706"
+			},
+			"waypoints": [
+			{
+				"timestamp": "20140319T170155+0000",
+				"value": "40.429706,-111.898162",
+				"id": 11416600,
+				"translatedValue": "40.429706,-111.898162",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165706+0000",
+				"value": "40.430665,-111.897155",
+				"id": 11416406,
+				"translatedValue": "40.430665,-111.897155",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165206+0000",
+				"value": "40.430793,-111.896004",
+				"id": 11416187,
+				"translatedValue": "40.430793,-111.896004",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164706+0000",
+				"value": "40.431183,-111.889580",
+				"id": 11416020,
+				"translatedValue": "40.431183,-111.889580",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164206+0000",
+				"value": "40.375006,-111.814038",
+				"id": 11415843,
+				"translatedValue": "40.375006,-111.814038",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163706+0000",
+				"value": "40.322120,-111.727220",
+				"id": 11415639,
+				"translatedValue": "40.322120,-111.727220",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163206+0000",
+				"value": "40.249005,-111.695123",
+				"id": 11415458,
+				"translatedValue": "40.249005,-111.695123",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162706+0000",
+				"value": "40.173321,-111.646477",
+				"id": 11415285,
+				"translatedValue": "40.173321,-111.646477",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162206+0000",
+				"value": "40.099830,-111.688129",
+				"id": 11415076,
+				"translatedValue": "40.099830,-111.688129",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161706+0000",
+				"value": "40.044507,-111.727809",
+				"id": 11414745,
+				"translatedValue": "40.044507,-111.727809",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161206+0000",
+				"value": "40.038496,-111.712584",
+				"id": 11414566,
+				"translatedValue": "40.038496,-111.712584",
+				"key": "GEN_WAYPOINT"
+			}
+			]
+		},
+		{
+			"id": 955,
+			"distance": 3844.8,
+			"startTime": " 20010802T051005+T+06:00 ",
+			"endTime": " 19970317T101045+T+07:00 ",
+			"startWaypoint": {
+				"longitude": "-111.712584",
+				"timestamp": " 19980330T181325+T+07:00 ",
+				"latitude": "40.038496"
+			},
+			"endWaypoint": {
+				"longitude": "-111.898162",
+				"timestamp": " 19930929T144047+T+06:00 ",
+				"latitude": "40.429706"
+			},
+			"waypoints": [
+			{
+				"timestamp": "20140319T170155+0000",
+				"value": "40.429706,-111.898162",
+				"id": 11416600,
+				"translatedValue": "40.429706,-111.898162",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165706+0000",
+				"value": "40.430665,-111.897155",
+				"id": 11416406,
+				"translatedValue": "40.430665,-111.897155",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165206+0000",
+				"value": "40.430793,-111.896004",
+				"id": 11416187,
+				"translatedValue": "40.430793,-111.896004",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164706+0000",
+				"value": "40.431183,-111.889580",
+				"id": 11416020,
+				"translatedValue": "40.431183,-111.889580",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164206+0000",
+				"value": "40.375006,-111.814038",
+				"id": 11415843,
+				"translatedValue": "40.375006,-111.814038",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163706+0000",
+				"value": "40.322120,-111.727220",
+				"id": 11415639,
+				"translatedValue": "40.322120,-111.727220",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163206+0000",
+				"value": "40.249005,-111.695123",
+				"id": 11415458,
+				"translatedValue": "40.249005,-111.695123",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162706+0000",
+				"value": "40.173321,-111.646477",
+				"id": 11415285,
+				"translatedValue": "40.173321,-111.646477",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162206+0000",
+				"value": "40.099830,-111.688129",
+				"id": 11415076,
+				"translatedValue": "40.099830,-111.688129",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161706+0000",
+				"value": "40.044507,-111.727809",
+				"id": 11414745,
+				"translatedValue": "40.044507,-111.727809",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161206+0000",
+				"value": "40.038496,-111.712584",
+				"id": 11414566,
+				"translatedValue": "40.038496,-111.712584",
+				"key": "GEN_WAYPOINT"
+			}
+			]
+		},
+		{
+			"id": 5771,
+			"distance": 3684.5,
+			"startTime": " 20021021T200358+T+06:00 ",
+			"endTime": " 20071018T025449+T+06:00 ",
+			"startWaypoint": {
+				"longitude": "-111.712584",
+				"timestamp": " 19930312T103224+T+07:00 ",
+				"latitude": "40.038496"
+			},
+			"endWaypoint": {
+				"longitude": "-111.898162",
+				"timestamp": " 19880612T150256+T+06:00 ",
+				"latitude": "40.429706"
+			},
+			"waypoints": [
+			{
+				"timestamp": "20140319T170155+0000",
+				"value": "40.429706,-111.898162",
+				"id": 11416600,
+				"translatedValue": "40.429706,-111.898162",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165706+0000",
+				"value": "40.430665,-111.897155",
+				"id": 11416406,
+				"translatedValue": "40.430665,-111.897155",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T165206+0000",
+				"value": "40.430793,-111.896004",
+				"id": 11416187,
+				"translatedValue": "40.430793,-111.896004",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164706+0000",
+				"value": "40.431183,-111.889580",
+				"id": 11416020,
+				"translatedValue": "40.431183,-111.889580",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T164206+0000",
+				"value": "40.375006,-111.814038",
+				"id": 11415843,
+				"translatedValue": "40.375006,-111.814038",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163706+0000",
+				"value": "40.322120,-111.727220",
+				"id": 11415639,
+				"translatedValue": "40.322120,-111.727220",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T163206+0000",
+				"value": "40.249005,-111.695123",
+				"id": 11415458,
+				"translatedValue": "40.249005,-111.695123",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162706+0000",
+				"value": "40.173321,-111.646477",
+				"id": 11415285,
+				"translatedValue": "40.173321,-111.646477",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T162206+0000",
+				"value": "40.099830,-111.688129",
+				"id": 11415076,
+				"translatedValue": "40.099830,-111.688129",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161706+0000",
+				"value": "40.044507,-111.727809",
+				"id": 11414745,
+				"translatedValue": "40.044507,-111.727809",
+				"key": "GEN_WAYPOINT"
+			},
+			{
+				"timestamp": "20140319T161206+0000",
+				"value": "40.038496,-111.712584",
+				"id": 11414566,
+				"translatedValue": "40.038496,-111.712584",
+				"key": "GEN_WAYPOINT"
+			}
+			]
+		}]
 	};
 
 	Fuse.menu = [{

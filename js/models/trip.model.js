@@ -1,4 +1,4 @@
-define([ "fuse", "jquery" ], function( Fuse ) {
+define([ "fuse" ], function( Fuse ) {
     return Fuse.Model.extend({
         defaults: {
           "id": 247815,
