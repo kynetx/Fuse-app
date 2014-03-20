@@ -106,7 +106,7 @@ div > ul.dashboard {
 }
 
 .fleet-item-info {
-    padding: 0px;
+    padding: .2em !important;
     border-top-width: 0px !important;
     background: rgba(0,0,0,.15) !important;
 }
@@ -135,7 +135,7 @@ div > ul.dashboard {
 }
 
 .location-box {
-    width: 77% !important;
+    width: 77.97316% !important; /*This is the best number I could find*/
     text-align: left;
     padding-left: 16px;
 }
