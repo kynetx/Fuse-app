@@ -132,16 +132,27 @@ div > ul.dashboard {
     color: #505050;
 }
 
-.round-box>h3 {
+.alert-box {
+    background-color: rgba(255,100,100,1);
+    border-radius: .125em;
+    margin-right: 2px;
+    margin-left: 2px;
+    margin-top: 4px;
+    padding: 2px;
+    text-shadow: none;
+    color: white;
+}
+
+.round-box>h3, .alert-box>h3 {
     font-size: 100% !important;
     font-weight: normal !important;
 }
 
-.speed-box {
+.small-box {
     width: 20% !important;
 }
 
-.location-box {
+.large-box {
     width: 77.97316% !important; /*This is the best number I could find*/
     text-align: left;
     padding-left: 16px;

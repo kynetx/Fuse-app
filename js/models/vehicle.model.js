@@ -16,6 +16,13 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
                 "latitude": 0.0,
                 "longitude": 0.0
             },
+            "alerts": [
+                {
+                    "code": "0000",
+                    "message": "none",
+                    "timestamp": "never"
+                },
+            ],
             "address": "none",
             "timestamp": "never",
             "running": "never",

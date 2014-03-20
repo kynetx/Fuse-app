@@ -24,6 +24,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 				"latitude": 37.473896,
 				"longitude": -122.23114
 			},
+			"alerts": [
+                {
+                    "code": "P0100",
+                    "message": "Air flow circuit malfunction",
+                    "timestamp": ""
+                },
+            ],
 			"address": "1124 Grand Street, Redwood City, CA 94061, USA",
 			"timestamp": "20140116T151952+0000",
 			"running": false,
