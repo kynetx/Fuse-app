@@ -105,6 +105,14 @@ div > ul.dashboard {
     text-align: center;
 }
 
+.fleet-item {
+    background-color: white !important;
+}
+
+.fleet-item:hover {
+    background-color: rgba(0,0,0,.04) !important;
+}
+
 .fleet-item-info {
     padding: .2em !important;
     border-top-width: 0px !important;
