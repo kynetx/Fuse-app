@@ -330,10 +330,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     overlay.setMap(null);
                 }
 
-                if (this.bounds) {
-                    delete this.bounds;
-                }
-
+                this.bounds = null;
+                
                 // reset zoom offset.
                 this.zoomOffset = 5;
 
