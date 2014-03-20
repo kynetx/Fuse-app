@@ -1,4 +1,4 @@
-define([ "backbone", "fuse", "jquery", "underscore", "collections/trip.collection" "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, TripCollection, tripsTmpl ) {
+define([ "backbone", "fuse", "jquery", "underscore", "collections/trip.collection", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, TripCollection, tripsTmpl ) {
     // trips view.
     return Fuse.View.extend({
         id: "trips",
@@ -9,28 +9,31 @@ define([ "backbone", "fuse", "jquery", "underscore", "collections/trip.collectio
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
+            this.viewData = [];
             this.trips = [];
         },
 
         render: function() {
-            this.trips.length = 0;
+            this.viewData.length = 0;
 
             this.collection.each(function( vehicle ) {
-                this.composeTripData( vehicle );
+                this.buildViewData( vehicle );
             });
 
-            this.content = this.tripsTemplate({ trips: this.trips });
             Fuse.View.prototype.render.call( this );
         },
 
-        composeTripData: function( vehicle ) {
+        buildViewData: function( vehicle ) {
             // To be continued...
-            _.each( vehicle.get( "trips" ), this.composeTripList);
+            _.each( vehicle.get( "trips" ), this.buildTripList);
             var tripView = new TripView({
                 model: trip
             });
 
-            this.trips.push({ vehicle: vehicle.get( "nickname" ), trips: trips });
+            this.viewData.push({ vehicle: vehicle.get( "nickname" ), trips: trips });
+        },
+
+        buildTripList: function( trip ) {
         }
     });
 });
