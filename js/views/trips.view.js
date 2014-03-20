@@ -6,31 +6,30 @@ define([ "backbone", "fuse", "jquery", "underscore", "collections/trip.collectio
         role: "page",
         transiton: "slide",
         tripsTemplate: _.template( tripsTmpl ),
+        tripsHeaderTemplate: _.template( tripsHeaderTmpl ),
+        tripItemTemplate: _.template( tripItemTmpl ),
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.viewData = [];
-            this.trips = [];
+            this.tripCollections = [];
+
+            // Are we looking at aggregrate trip data for our fleet or trips for just one vehicle?
+            this.header = ( this.collection.length > 1 ) ? "Fleet Trips" : this.collection.at( 0 ).get( "nickname" );
         },
 
         render: function() {
-            this.viewData.length = 0;
-
-            this.collection.each(function( vehicle ) {
+            this.collection.each(function ( vehicle ) {
                 this.buildViewData( vehicle );
-            });
-
-            Fuse.View.prototype.render.call( this );
+            }, this );
         },
 
         buildViewData: function( vehicle ) {
-            // To be continued...
-            _.each( vehicle.get( "trips" ), this.buildTripList);
-            var tripView = new TripView({
-                model: trip
-            });
+            var tripsHeader = this.buildTripsHeader ( vehicle );
+        },
 
-            this.viewData.push({ vehicle: vehicle.get( "nickname" ), trips: trips });
+        buildTripsHeader: function ( vehicle ) {
+            return this.tripsHeaderTemplate({ vehicle: vehicle });
         },
 
         buildTripList: function( trip ) {
