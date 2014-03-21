@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore", "text!templates/tripheadertmpl.html"], function( Fuse, $, _, tripHeaderTmpl ) {
+define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.html"], function( Fuse, $, _, tripAggregateItemTmpl ) {
 	// represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
@@ -7,12 +7,12 @@ define(["fuse", "jquery", "underscore", "text!templates/tripheadertmpl.html"], f
             "data-role": "collapsible",
             "data-content-theme": "c"
         },
-        template: _.template( tripHeaderTmpl ),
+        template: _.template( tripAggregateItemTmpl ),
 
         initialize: function() {/* do nothing for now */},
 
         render: function() {
-            this.$el.html( this.template( this.model.get("aggregates").trips ) );
+            this.$el.html( this.template( this.model.toJSON() ) );
             return this;
         }
     });
