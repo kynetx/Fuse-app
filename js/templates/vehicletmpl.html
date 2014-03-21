@@ -12,7 +12,11 @@
     </li>
     <li class="detail-item-info">
         <div class="ui-grid-b list-item-info">
-            <div class="ui-block-a round-box small-box">
+            <% if (fuelLevel >= 20) { %>
+            <div class="ui-block-a round-box small-box green">
+            <% } else { %>
+            <div class="ui-block-a round-box small-box red">
+            <% } %>
                 <p class='margin-off'>Fuel</p>
                 <h3 class='margin-off'><%= fuelLevel %>%</h3>
             </div>

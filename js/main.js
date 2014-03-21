@@ -89,7 +89,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"timestamp": "19910831T060849T+07:00",
 			"running": true,
 			"fuelRate": 2.63,
-			"fuelLevel": 22,
+			"fuelLevel": 18,
 			"mpg" : 29.6,
 			"coolantTemperature": 95,
 			"batteryVoltage": 12.4,

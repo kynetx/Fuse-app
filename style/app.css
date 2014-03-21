@@ -142,6 +142,16 @@ div > ul.dashboard {
     color: #505050;
 }
 
+.round-box.green {
+    background-color: rgba(80,200,80,1);
+    color: white;
+}
+
+.round-box.red {
+    background-color: rgba(255,100,100,1);
+    color: white;
+}
+
 .alert-box {
     background-color: rgba(255,100,100,1);
     border-radius: .125em;
@@ -152,6 +162,7 @@ div > ul.dashboard {
     text-shadow: none;
     color: white;
 }
+
 .detail-item-info>.list-item-info>.alert-box {
     margin-top:0px;
 }
@@ -177,10 +188,6 @@ div > ul.dashboard {
 
 .detail-item-info>.list-item-info>.large-box>h3 {
     white-space: normal;
-}
-
-.detail-item-info>.list-item-info>.round-box {
-    background-color: rgba(0,0,0,.08);
 }
 
 .ui-listview>li.ui-first-child>a.ui-btn {
