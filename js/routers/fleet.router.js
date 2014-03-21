@@ -5,7 +5,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "fleet/:id": "showVehicle",
             "findcar": "showFindCar",
             "findcar/:id": "showFindCar",
-            "trips": "showTrips",
+            "trips": "showTripAggregate",
             "trips/:id": "showTrips"
         },
 
@@ -21,8 +21,8 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             this.invokeControllerFunction( "showFindCar", arguments );
         },
 
-        showTrips: function() {
-            this.invokeControllerFunction( "showTrips", arguments );
+        showTripAggregate: function() {
+            this.invokeControllerFunction( "showTripAggregate", arguments );
         }
     });
 });

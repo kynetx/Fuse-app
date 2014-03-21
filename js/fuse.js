@@ -331,7 +331,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
 
                 this.bounds = null;
-                
+
                 // reset zoom offset.
                 this.zoomOffset = 5;
 
@@ -407,13 +407,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 }, this);
 
-                // give the map sufficient time to be setup before asking it to be fitted
-                // to our bounds and zoom level. Tried binding to events triggered by the map
-                // but they were unreliable for determining when the map was ready. So, just to be 
-                // safe we simply give it 140 milliseconds to initialize itself, which appears
-                // to be about the amount of time it takes for the map to finish setting itself
-                // up.
-                setTimeout(fitter, 140);
+                /**
+                 * give the map sufficient time to be setup before asking it to be fitted
+                 * to our bounds and zoom level. Tried binding to events triggered by the map
+                 * but they were unreliable for determining when the map was ready. So, just to be 
+                 * safe we simply give it 140 milliseconds to initialize itself, which appears
+                 * to be about the amount of time it takes for the map to finish setting itself
+                 * up.
+                 */
+                setTimeout( fitter, 140 );
             },
 
             addOverlay: function(overlay) {
