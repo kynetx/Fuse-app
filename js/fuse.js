@@ -78,6 +78,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar",
+            "fuelsmart": "FuelSmart"
         },
 
         Router: Backbone.Router.extend({
@@ -509,7 +510,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     fragment = Backbone.history.fragment,
                     id = fragment.match(/\/(.*)/);
 
-                if ("findcar" === action) {
+                if ("findcar" === action || "fuelsmart" === action) {
                     // if we are already on the findcar page but they
                     // clicked on the findcar button in the footer,
                     // we toggle back to the fleet view.

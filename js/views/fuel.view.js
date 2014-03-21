@@ -4,7 +4,7 @@ define(["fuse", "jquery", "underscore", "text!templates/fueltmpl.html"], functio
         tagName: "div",
         role: "page",
         header: "Fuel Smart",
-        transition: "fade",
+        transition: "flip",
         template: _.template(fuelTmpl),
 
         initialize: function() {

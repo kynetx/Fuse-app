@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/vehicle.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view"], function(Fuse, $, _, FleetCollection, VehicleModel, FleetView, VehicleView, FindCarView) {
+define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/vehicle.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/fuel.view"], function(Fuse, $, _, FleetCollection, VehicleModel, FleetView, VehicleView, FindCarView, FuelSmartView) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -22,6 +22,17 @@ define(["fuse", "jquery", "underscore", "collections/fleet.collection", "models/
                 model: this.vehicle
             });
             this.views.Vehicle.render();
+        },
+
+        showFuelSmart: function() {
+            var args = arguments;
+            var hasID = typeof args[0] !== "undefined";
+            var collection = (hasID) ? this.fleet.filterById(args[0]) : this.fleet;
+            this.views["FuelSmart"] = new FuelSmartView({
+                controller: this,
+                collection: collection
+            });
+            this.views.FuelSmart.render();
         },
 
         showFindCar: function() {
