@@ -143,12 +143,12 @@ div > ul.dashboard {
 }
 
 .round-box.green {
-    background-color: rgba(80,200,80,1);
+    background-color: rgba(80,200,80,.8);
     color: white;
 }
 
 .round-box.red {
-    background-color: rgba(255,100,100,1);
+    background-color: rgba(255,100,100,.8);
     color: white;
 }
 
@@ -168,7 +168,7 @@ div > ul.dashboard {
 }
 
 .alert-box.large-box {
-    background-color: rgba(255,100,100,.6);
+    background-color: rgba(255,100,100,.8);
 }
 
 .round-box>h3, .alert-box>h3 {
