@@ -24,11 +24,19 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 				"latitude": 37.473896,
 				"longitude": -122.23114
 			},
+			"alerts": [
+                {
+                    "code": "P0100",
+                    "message": "Air flow circuit malfunction",
+                    "timestamp": ""
+                },
+            ],
 			"address": "1124 Grand Street, Redwood City, CA 94061, USA",
 			"timestamp": "20140116T151952+0000",
 			"running": false,
 			"fuelRate": 1.2,
 			"fuelLevel" : 37,
+			"mpg" : 18.4,
 			"coolantTemperature": 163,
 			"batteryVoltage": 13.2,
 			"odometer": 65345,
@@ -55,6 +63,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"running": true,
 			"fuelRate": 1.2,
 			"fuelLevel" : 89,
+			"mpg" : 22.2,
 			"coolantTemperature": 163,
 			"batteryVoltage": 11.1,
 			"odometer": 65345,
@@ -80,7 +89,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"timestamp": "19910831T060849T+07:00",
 			"running": true,
 			"fuelRate": 2.63,
-			"fuelLevel": 22,
+			"fuelLevel": 18,
+			"mpg" : 29.6,
 			"coolantTemperature": 95,
 			"batteryVoltage": 12.4,
 			"odometer": 19725,

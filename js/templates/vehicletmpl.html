@@ -1,37 +1,73 @@
-<!-- <ul data-role="listview" data-inset="true">
-    <li id="vehicle-detail-map" class="fuse-map-container">
-    </li>
-</ul> -->
-<ul data-role="listview" data-inset="true">
+<ul data-role="listview" data-inset="false">
     <li>
         <img src="<%= icon %>" class="car-thumbnail">
-        <h1> <%= nickname %> </h2>
-        <p> <%= year %> <%= make %>, <%= model %> </p>
+        <h1> <%= nickname %>
+            <% if (running) { %>
+                <img src="style/images/vehicle_on.png" class="vehicle-status-icon" title="Vehicle is on">
+            <% } else { %>
+                <img src="style/images/vehicle_off.png" class="vehicle-status-icon" title="Vehicle is off">
+            <% } %>
+        </h1>
+        <p> <%= make %>, <%= model %></p>
     </li>
-</ul>
-<ul data-role="listview" data-inset="true" class='ui-grid-b dashboard'>
-    <li class='ui-block-a dashboard-data'>
-        <p> Fuel Level </p>
-        <h1> <%= fuelLevel %>% </h1>
+    <li class="detail-item-info">
+        <div class="ui-grid-b list-item-info">
+            <% if (fuelLevel >= 20) { %>
+            <div class="ui-block-a round-box small-box green">
+            <% } else { %>
+            <div class="ui-block-a round-box small-box red">
+            <% } %>
+                <p class='margin-off'>Fuel</p>
+                <h3 class='margin-off'><%= fuelLevel %>%</h3>
+            </div>
+            <div class="ui-block-b round-box large-box">
+                <p class='margin-off'>Location</p>
+                <% if (speed > 0) { %>
+                    <h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
+                <% } else { %>
+                    <h3 class='margin-off'>Parked at <%= address %></h3>
+                <% } %>
+            </div>
+        </div>
     </li>
-    <li class='ui-block-b  dashboard-data'>
-        <p> Speed </p>
-        <h1> <%= speed %> MPH</h1>
+    <li class="detail-item-info">
+        <div class="ui-grid-b list-item-info">
+            <div class="ui-block-a round-box">
+                <p class='margin-off'>Battery Charge</p>
+                <h3 class='margin-off'><%= batteryVoltage %></h3>
+            </div>
+            <div class="ui-block-b round-box">
+                <p class='margin-off'>Miles</p>
+                <h3 class='margin-off'><%= FTH.commaSeperateNumber(mileage) %></h3>
+            </div>
+            <div class="ui-block-b round-box">
+                <p class='margin-off'>MPG</p>
+                <h3 class='margin-off'><%= mpg %></h3>
+            </div>
+        </div>
     </li>
-    <li class='ui-block-c  dashboard-data'>
-        <p> Battery </p>
-        <h1> <%= batteryVoltage %>v </h1>
+    <% if (alerts[0].code !== '0000') { %>
+    <li class="detail-item-info">
+        <div class="ui-grid-b list-item-info">
+            <div class="ui-block-a alert-box small-box">
+                <p class='margin-off'>Code</p>
+                <h3 class='margin-off'><%= alerts[0].code %></h3>
+            </div>
+            <div class="ui-block-b alert-box large-box">
+                <p class='margin-off'>Message</p>
+                <h3 class='margin-off'><%= alerts[0].message %></h3>
+            </div>
+        </div>
     </li>
-</ul>
-<ul data-role="listview" data-inset='true'>
-    <li> <p>Odometer: <%= FTH.commaSeperateNumber(mileage) %></p> </li>
-    <li> <p>Gas Mileage: <%= fuelrate %> MPG</p> </li>
-    <li> <p>Coolant Temperature: <%= coolantTemperature %> degrees</p> </li>
-
-</ul>
-<ul data-role="listview" data-inset="true">
-    <li>
-        <h1>Notes </h1>
-        <p id="vehicle-notes"><%= notes %></p>
+    <% } %>
+    <% if (notes.length > 0) { %>
+    <li class="detail-item-info">
+        <div class="list-item-info">
+            <div class="round-box" id="vehicle-notes-box">
+                <p class='margin-off'>Notes</p>
+                <h3 id="vehicle-notes" class='margin-off'><%= notes %></h3>
+            </div>
+        </div>
     </li>
+    <% } %>
 </ul>

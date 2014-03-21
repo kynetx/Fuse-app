@@ -87,6 +87,11 @@ div > ul.dashboard {
     border-radius: .3125em; /*default radius as set by jQuery mobile*/
 }
 
+#vehicle-notes-box {
+    text-align: left;
+    padding-left: 16px;
+}
+
 #vehicle-notes {
     white-space: normal;
 }
@@ -105,10 +110,22 @@ div > ul.dashboard {
     text-align: center;
 }
 
+.fleet-item {
+    background-color: white !important;
+}
+
+.fleet-item:hover {
+    background-color: rgba(0,0,0,.04) !important;
+}
+
 .fleet-item-info {
-    padding: 0px;
+    padding: .2em !important;
     border-top-width: 0px !important;
-    background: rgba(0,0,0,.15) !important;
+}
+
+.detail-item-info {
+    padding: .2em !important;
+    border-top-width: 0px !important;
 }
 
 .margin-off {
@@ -116,7 +133,7 @@ div > ul.dashboard {
 }
 
 .round-box {
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(0,0,0,.15);
     border-radius: .125em;
     margin-right: 2px;
     margin-left: 2px;
@@ -125,25 +142,66 @@ div > ul.dashboard {
     color: #505050;
 }
 
-.round-box>h3 {
+.round-box.green {
+    background-color: rgba(80,200,80,.8);
+    color: white;
+}
+
+.round-box.red {
+    background-color: rgba(255,100,100,.8);
+    color: white;
+}
+
+.alert-box {
+    background-color: rgba(255,100,100,1);
+    border-radius: .125em;
+    margin-right: 2px;
+    margin-left: 2px;
+    margin-top: 4px;
+    padding: 2px;
+    text-shadow: none;
+    color: white;
+}
+
+.detail-item-info>.list-item-info>.alert-box {
+    margin-top:0px;
+}
+
+.alert-box.large-box {
+    background-color: rgba(255,100,100,.6);
+}
+
+.round-box>h3, .alert-box>h3 {
     font-size: 100% !important;
     font-weight: normal !important;
 }
 
-.speed-box {
+.small-box {
     width: 20% !important;
 }
 
-.location-box {
-    width: 77% !important;
+.large-box {
+    width: 77.97316% !important; /*This is the best number I could find*/
     text-align: left;
     padding-left: 16px;
+}
+
+.detail-item-info>.list-item-info>.large-box>h3 {
+    white-space: normal;
 }
 
 .ui-listview>li.ui-first-child>a.ui-btn {
     border-top-color: black;
 }
 
+ul.ui-listview>li.ui-first-child {
+    border-top-color: black;
+}
+
 .ui-listview>li>.ui-btn {
     border-top-width: 4px;
+}
+
+.ui-grid-b>.ui-block-a, .ui-grid-b>.ui-block-b, .ui-grid-b>.ui-block-c { /* We need to override the jquery mobile css*/
+    width: 32.15%;
 }
