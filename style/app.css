@@ -168,7 +168,7 @@ div > ul.dashboard {
 }
 
 .alert-box.large-box {
-    background-color: rgba(255,100,100,.8);
+    background-color: rgba(255,100,100,.6);
 }
 
 .round-box>h3, .alert-box>h3 {
