@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate" ], function( Fuse, $, _, FleetCollection, TripCollection, VehicleModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view" ], function( Fuse, $, _, FleetCollection, TripCollection, VehicleModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView ) {
     return Fuse.Controller.extend({
 
         init: function() {
