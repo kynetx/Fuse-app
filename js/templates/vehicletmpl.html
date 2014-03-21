@@ -42,8 +42,8 @@
             </div>
         </div>
     </li>
+    <% if (alerts[0].code !== '0000') { %>
     <li class="detail-item-info">
-        <% if (alerts[0].code !== '0000') { %>
         <div class="ui-grid-b list-item-info">
             <div class="ui-block-a alert-box small-box">
                 <p class='margin-off'>Code</p>
@@ -54,16 +54,16 @@
                 <h3 class='margin-off'><%= alerts[0].message %></h3>
             </div>
         </div>
-        <% } %>
     </li>
+    <% } %>
+    <% if (notes.length > 0) { %>
     <li class="detail-item-info">
         <div class="list-item-info">
-            <% if (notes.length > 0) { %>
             <div class="round-box" id="vehicle-notes-box">
                 <p class='margin-off'>Notes</p>
                 <h3 id="vehicle-notes" class='margin-off'><%= notes %></h3>
             </div>
-            <% } %>
         </div>
     </li>
+    <% } %>
 </ul>

@@ -152,6 +152,9 @@ div > ul.dashboard {
     text-shadow: none;
     color: white;
 }
+.detail-item-info>.list-item-info>.alert-box {
+    margin-top:0px;
+}
 
 .alert-box.large-box {
     background-color: rgba(255,100,100,.6);
