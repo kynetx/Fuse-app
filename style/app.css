@@ -87,6 +87,11 @@ div > ul.dashboard {
     border-radius: .3125em; /*default radius as set by jQuery mobile*/
 }
 
+#vehicle-notes-box {
+    text-align: left;
+    padding-left: 16px;
+}
+
 #vehicle-notes {
     white-space: normal;
 }
@@ -114,6 +119,11 @@ div > ul.dashboard {
 }
 
 .fleet-item-info {
+    padding: .2em !important;
+    border-top-width: 0px !important;
+}
+
+.detail-item-info {
     padding: .2em !important;
     border-top-width: 0px !important;
 }
@@ -160,6 +170,14 @@ div > ul.dashboard {
     width: 77.97316% !important; /*This is the best number I could find*/
     text-align: left;
     padding-left: 16px;
+}
+
+.detail-item-info>.list-item-info>.large-box>h3 {
+    white-space: normal;
+}
+
+.detail-item-info>.list-item-info>.round-box {
+    background-color: rgba(0,0,0,.08);
 }
 
 .ui-listview>li.ui-first-child>a.ui-btn {

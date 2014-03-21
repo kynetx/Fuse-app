@@ -10,7 +10,7 @@
         </h1>
         <p> <%= make %>, <%= model %></p>
     </li>
-    <li class="fleet-item-info">
+    <li class="detail-item-info">
         <div class="ui-grid-b list-item-info">
             <div class="ui-block-a round-box small-box">
                 <p class='margin-off'>Fuel</p>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </li>
-    <li class="fleet-item-info">
+    <li class="detail-item-info">
         <div class="ui-grid-b list-item-info">
             <div class="ui-block-a round-box">
                 <p class='margin-off'>Battery Charge</p>
@@ -40,6 +40,16 @@
                 <p class='margin-off'>MPG</p>
                 <h3 class='margin-off'><%= mpg %></h3>
             </div>
+        </div>
+    </li>
+    <li class="detail-item-info">
+        <div class="list-item-info">
+            <% if (notes.length > 0) { %>
+            <div class="round-box" id="vehicle-notes-box">
+                <p class='margin-off'>Notes</p>
+                <h3 id="vehicle-notes" class='margin-off'><%= notes %></h3>
+            </div>
+            <% } %>
         </div>
     </li>
 </ul>
