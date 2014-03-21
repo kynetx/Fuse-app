@@ -28,7 +28,6 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 {
                     "code": "P0100",
                     "message": "Air flow circuit malfunction",
-                    
                     "timestamp": ""
                 },
             ],
