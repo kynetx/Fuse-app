@@ -28,6 +28,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "running": "never",
             "fuelrate": 0.0,
             "fuellevel" : 0.0,
+            "mpg" : 0.0,
             "coolantTemperature": 0,
             "batteryVoltage": 0.0,
             "header": 0,

@@ -28,6 +28,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 {
                     "code": "P0100",
                     "message": "Air flow circuit malfunction",
+                    
                     "timestamp": ""
                 },
             ],
@@ -36,6 +37,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"running": false,
 			"fuelRate": 1.2,
 			"fuelLevel" : 37,
+			"mpg" : 18.4,
 			"coolantTemperature": 163,
 			"batteryVoltage": 13.2,
 			"odometer": 65345,
@@ -62,6 +64,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"running": true,
 			"fuelRate": 1.2,
 			"fuelLevel" : 89,
+			"mpg" : 22.2,
 			"coolantTemperature": 163,
 			"batteryVoltage": 11.1,
 			"odometer": 65345,
@@ -88,6 +91,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"running": true,
 			"fuelRate": 2.63,
 			"fuelLevel": 22,
+			"mpg" : 29.6,
 			"coolantTemperature": 95,
 			"batteryVoltage": 12.4,
 			"odometer": 19725,
