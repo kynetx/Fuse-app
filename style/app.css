@@ -175,5 +175,5 @@ ul.ui-listview>li.ui-first-child {
 }
 
 .ui-grid-b>.ui-block-a, .ui-grid-b>.ui-block-b, .ui-grid-b>.ui-block-c { /* We need to override the jquery mobile css*/
-    width: 32.3%;
+    width: 32.15%;
 }
