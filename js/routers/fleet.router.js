@@ -23,6 +23,10 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
 
         showTripAggregate: function() {
             this.invokeControllerFunction( "showTripAggregate", arguments );
+        },
+
+        showTrips: function() {
+            // Do nothing for now.
         }
     });
 });
