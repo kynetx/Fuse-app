@@ -123,7 +123,7 @@ div > ul.dashboard {
 }
 
 .round-box {
-    background-color: rgba(0,0,0,.1);
+    background-color: rgba(0,0,0,.15);
     border-radius: .125em;
     margin-right: 2px;
     margin-left: 2px;
@@ -141,6 +141,10 @@ div > ul.dashboard {
     padding: 2px;
     text-shadow: none;
     color: white;
+}
+
+.alert-box.large-box {
+    background-color: rgba(255,100,100,.6);
 }
 
 .round-box>h3, .alert-box>h3 {
