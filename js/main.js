@@ -11,7 +11,9 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 		"fleet": {
 			"aggregates": {
 				"trip": {
-
+					"distance": 270.3,
+					"time": 123456789234324342,
+					"cost": 102.34
 				}
 			},
 			"index": [{
@@ -91,7 +93,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 				"speed": 12
 			}]
 		},
-		
+
 		"trips": [{
 			"id": 2689,
 			"distance": 2258.4,

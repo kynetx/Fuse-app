@@ -2,7 +2,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
     return Fuse.Controller.extend({
 
         init: function() {
-            this.fleet = new FleetCollection( Fuse.FIXTURES.fleet );
+            this.fleet = new FleetCollection( Fuse.FIXTURES.fleet.index );
             this.views = {};
             this.views[ "Fleet" ] = new FleetView({
                 controller: this,
