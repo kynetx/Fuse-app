@@ -2,11 +2,7 @@ define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.ht
 	// represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
-        className: "trip-aggregate-header",
-        attributes: {
-            "data-role": "collapsible",
-            "data-content-theme": "c"
-        },
+        className: "trip-aggregate-item",
         template: _.template( tripAggregateItemTmpl ),
 
         initialize: function() {/* do nothing for now */},

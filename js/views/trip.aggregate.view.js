@@ -23,7 +23,7 @@ define([ "fuse", "jquery", "underscore", "views/trip.aggregate.item.view", "text
                 model: vehicle
             });
 
-            this.tripAggregates.push( aggregate.render().el );
+            this.aggregates.push( aggregate.render().el );
         }
     });
 });
