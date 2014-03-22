@@ -111,7 +111,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         // invoke the function, passing it any leftover arguments
                         // we have.
-                        func.apply(this.controller, args[ 1 ] );
+                        func.apply( this.controller, args[ 1 ] );
                     }
                 }
             }
