@@ -6,7 +6,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
         },
 
         showVehicleListFromHome: function() {
-        	this.invokeControllerFunction( "showVehicleListFromHome", arguments );
+            this.invokeControllerFunction( "showVehicleListFromHome", arguments );
         },
     });
 });

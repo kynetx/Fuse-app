@@ -1,5 +1,5 @@
 define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.html"], function( Fuse, $, _, tripAggregateItemTmpl ) {
-	// represets an item in the vehicle list.
+    // represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
         className: "trip-aggregate-item",
