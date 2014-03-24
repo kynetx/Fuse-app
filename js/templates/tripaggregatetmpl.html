@@ -1,3 +1,18 @@
+<div class="trip-aggregate-totals ui-grid-b">
+    <h3>Totals</h3>
+    <div class="ui-block-a">
+        <h5>Miles</h5>
+        <p><%= FTH.commaSeperateNumber( totals.trip.distance ) %></p>
+    </div>
+    <div class="ui-block-b">
+        <h5>Time</h5>
+        <p><%= totals.trip.time %> ms</p>
+    </div>
+    <div class="ui-block-c">
+        <h5>Cost</h5>
+        <p>$<%= FTH.commaSeperateNumber( totals.trip.cost ) %></p>
+    </div>
+</div>
 <% for ( var i = 0; i < aggs.length; ++i ) { %>
     <%= aggs[ i ].outerHTML %>
 <% } %>

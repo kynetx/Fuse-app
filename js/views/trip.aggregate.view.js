@@ -23,7 +23,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
             }, this );
 
             // Build our content.
-            this.content = this.template({ aggs: this.aggregates });
+            this.content = this.template({ totals: this.model.toJSON(), aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );
         },
 
