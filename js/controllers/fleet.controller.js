@@ -10,7 +10,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
-                model: new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total ),
+                model: new AggregateModel( Fuse.FIXTURES.fleet.aggregates.month ),
                 collection: this.fleet
             });
         },
