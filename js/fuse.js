@@ -78,6 +78,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar",
+            "trips": "Trips"
         },
 
         Router: Backbone.Router.extend({
@@ -255,16 +256,27 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
                 if (previous && Backbone.history.fragment === previous.fragment && "findcar" !== next) {
-                    var viewName = Fuse.RouteToView[current.name];
+                    var viewName = Fuse.RouteToView[current.name], view;
 
-                    if ("Fleet" === viewName && previous.args) {
-                        viewName = "Vehicle";
+                    if ( previous.args ) {
+                        switch( viewName ) {
+                            case "Fleet":
+                                view = "Vehicle";
+                                break;
+                            case "Trips":
+                                view = "TripAggregate";
+                                break;
+                            default:
+                                view = viewName;
+                                break;
+                        }
                     }
 
-                    changePageOptions["transition"] = this.controller.views[viewName].transition;
+                    changePageOptions["transition"] = this.controller.views[view].transition;
                     changePageOptions["reverse"] = true;
                 }
-                
+
+                Fuse.log( "Changing page to:", this.el, "with options:", changePageOptions );
                 $.mobile.changePage(this.$el, changePageOptions);
             }
         }),
@@ -571,7 +583,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
 
             }, this);
-            var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet});
+            var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet.index});
             $(document.body).append(menu);
             $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
             $(document).on("swiperight", "[data-role='page']", function(e) {

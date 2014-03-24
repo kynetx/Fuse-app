@@ -3,7 +3,8 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
         id: "trips",
         tagName: "div",
         role: "page",
-        transiton: "slide",
+        header: "Trips",
+        transition: "slide",
         template: _.template( tripAggregateTmpl ),
 
         initialize: function() {
@@ -16,9 +17,10 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
             this.collection.each(function ( vehicle ) {
                 this.renderAggregateItem( vehicle );
             }, this );
+
             // Build our content.
-            // 'this.model' is the sum of all the vehicle aggregates.
-            this.content = this.template({ totalAgg: this.model.toJSON(), aggs: this.aggregates });
+            this.content = this.template({ aggs: this.aggregates });
+            Fuse.View.prototype.render.call( this );
         },
 
         renderAggregateItem: function( vehicle ) {
