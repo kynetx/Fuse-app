@@ -684,6 +684,28 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     var parts = num.toString().split(".");
                     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     return parts.join(".");
+                },
+
+                // Adds seperators to an ISO8601 datetime string so that
+                // the Date object can then consume it.
+                formatDate: function( datetime ) {
+                    // 01234567890123456789
+                    // 20131019T011821+0000
+                    // YYYY-MM-DDTHH:mm:ss.sssZ
+
+                    var dateYear = datetime.slice(0,4),
+                        dateMonth = datetime.slice(4,6),
+                        dateDay = datetime.slice(6,8),
+                        dateHour = datetime.slice(9,11),
+                        dateMinute = datetime.slice(11,13),
+                        dateSecond = datetime.slice(13,15),
+                        dateBuild  = dateYear + '-' +
+                                     dateMonth + '-' +
+                                     dateDay + 'T' +
+                                     dateHour + ':' +
+                                     dateMinute + ':' +
+                                     dateSecond + '.000Z';
+                    return dateBuild;
                 }
             });
 

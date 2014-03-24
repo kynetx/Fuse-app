@@ -1,10 +1,10 @@
-define([ "backbone", "fuse", "jquery", "underscore", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, tripsTmpl ) {
+define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, TripView, tripsTmpl ) {
     // trips view.
     return Fuse.View.extend({
         id: "trips",
         tagName: "div",
         role: "page",
-        transiton: "slide",
+        transition: "slide",
         template: _.template( tripsTmpl ),
 
         initialize: function() {
@@ -18,10 +18,17 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/tripstmpl.h
                 this.renderTrip( trip );
             }, this );
 
-            this.content = this.template({ vehicle: this.model.toJSON(), tripViews: this.tripViews })
+            this.content = this.template({ vehicle: this.model.toJSON(), tripViews: this.tripViews });
+            Fuse.log( this.tripViews );
+            Fuse.View.prototype.render.call( this );
         },
 
         renderTrip: function( trip ) {
+            var view = new TripView({
+                model: trip
+            });
+
+            this.tripViews.push( view.render().el );
         }
     });
 });

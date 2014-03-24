@@ -1,4 +1,7 @@
-<div data-role="collapsible">
+<% for ( var i = 0; i < tripViews.length; ++i ) { %>
+  <%= tripViews[ i ].outerHTML %>
+<% } %>
+
     <!-- trips to go here in nested collapsibles.
          For now, enjoy this complemantary dinosaur.
 
@@ -25,4 +28,3 @@
                         .=       \=,_      /[-'            '/=              ()
                     .-'/   /='  '[       '
     -->
-</div>
