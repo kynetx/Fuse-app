@@ -305,12 +305,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
-            // this is used to offset the default google maps zoom level
-            // in case we don't have enough markers/overlays for the default
-            // zoom level to make sense. 3 seems to be a reasonable ceiling for
-            // the number of overlays needed for the default google maps zoom 
-            // to look good. So when there are less than 3 markers/overlays
-            // on the map, we make use of the zoom offfset, otherwise it's ignored.
+            /**
+             * this is used to offset the default google maps zoom level
+             * in case we don't have enough markers/overlays for the default
+             * zoom level to make sense. 3 seems to be a reasonable ceiling for
+             * the number of overlays needed for the default google maps zoom 
+             * to look good. So when there are less than 3 markers/overlays
+             * on the map, we make use of the zoom offfset, otherwise it's ignored.
+             */
             MAX_ZOOM_OFFSET: 4,
             MIN_ZOOM_OFFSET: 2,
 
