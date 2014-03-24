@@ -7,6 +7,10 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
         transition: "slide",
         template: _.template( tripAggregateTmpl ),
 
+        events: {
+            "tap .trip-aggregate-item": "showTripsForVehicle"
+        },
+
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.aggregates = [];
@@ -29,6 +33,12 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
             });
 
             this.aggregates.push( aggregate.render().el );
+        },
+
+        showTripsForVehicle: function( e ) {
+            var vid = $(e.target).closest( ".trip-aggregate-item" ).data( "vid" );
+            Fuse.show( "trips", { id: vid } );
+            e.handled = true;
         }
     });
 });

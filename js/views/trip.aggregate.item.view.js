@@ -2,7 +2,14 @@ define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.ht
     // represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "div",
-        className: "trip-aggregate-item",
+        className: "trip-aggregate-item round-box",
+
+        attributes: function() {
+            return {
+                "data-vid": this.model.get( "id" )
+            }
+        },
+        
         template: _.template( tripAggregateItemTmpl ),
 
         initialize: function() {
@@ -13,6 +20,6 @@ define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.ht
         render: function() {
             this.$el.html( this.template( this.model.toJSON() ) );
             return this;
-        }
+        },
     });
 });
