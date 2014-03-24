@@ -21,8 +21,8 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
 			"mileage": 159774,
 			"lastWaypoint": {
 				"timestamp": "20140116T152440+0000",
-				"latitude": 37.473896,
-				"longitude": -122.23114
+				"latitude": 41.237436,
+				"longitude": -111.933228
 			},
 			"alerts": [
                 {
@@ -31,7 +31,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     "timestamp": ""
                 },
             ],
-			"address": "1124 Grand Street, Redwood City, CA 94061, USA",
+			"address": "1701 Park Blvd, Ogden, UT 84401",
 			"timestamp": "20140116T151952+0000",
 			"running": false,
 			"fuelRate": 1.2,
