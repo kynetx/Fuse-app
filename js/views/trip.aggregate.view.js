@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "views/trip.aggregate.item.view", "text!templates/tripaggregatetmpl.html" ], function( Fuse, $, _, TripAggregateItemView, tripAggregateTmpl ) {
+define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.aggregate.item.view", "text!templates/tripaggregatetmpl.html" ], function( Fuse, $, _, AggregateModel, TripAggregateItemView, tripAggregateTmpl ) {
     return Fuse.View.extend({
         id: "trips",
         tagName: "div",

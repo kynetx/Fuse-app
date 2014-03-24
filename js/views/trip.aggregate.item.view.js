@@ -5,7 +5,10 @@ define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.ht
         className: "trip-aggregate-item",
         template: _.template( tripAggregateItemTmpl ),
 
-        initialize: function() {/* do nothing for now */},
+        initialize: function() {
+            // *jedi hand wave* This is not the initialize function you are loooking for.
+            // Move along, move along.
+        },
 
         render: function() {
             this.$el.html( this.template( this.model.toJSON() ) );
