@@ -701,7 +701,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         dateSecond = datetime.slice(13,15),
                         dateBuild  = dateYear + '-' +
                                      dateMonth + '-' +
-                                     dateDay + 'T' +
                                      dateHour + ':' +
                                      dateMinute + ':' +
                                      dateSecond + '.000Z';
