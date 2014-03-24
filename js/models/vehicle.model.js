@@ -22,7 +22,24 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "coolantTemperature": 0,
             "batteryVoltage": 0.0,
             "header": 0,
-            "speed": 0
+            "speed": 0,
+            "aggregates": {
+                "month": {
+                    "distance": 0,
+                    "time": 0,
+                    "cost": 0
+                },
+                "year": {
+                    "distance": 0,
+                    "time": 0,
+                    "cost": 0
+                },
+                "total": {
+                    "distance": 0,
+                    "time": 0,
+                    "cost": 0
+                }
+            }
         }
     });
 });

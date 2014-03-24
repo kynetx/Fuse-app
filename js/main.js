@@ -32,6 +32,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     }
                 }
             },
+            
             "index": [{
                 "id": "VSPQ",
                 "default": 1,
@@ -79,6 +80,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "cost": 2000
                         }
                     }
+                }
             },
             {
                 "id": "V4GM",
@@ -126,6 +128,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "cost": 2000
                         }
                     }
+                }
             },
             {
                 "id": "VN0E",
@@ -173,6 +176,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "cost": 2000
                         }
                     }
+                }
             }]
         },
 
