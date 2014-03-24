@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
+define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
     return Fuse.Router.extend({
         routes: {
             "fleet": "showFleet",
@@ -25,8 +25,8 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             this.invokeControllerFunction( "showTripAggregate", arguments );
         },
 
-        showTrips: function() {
-            // Do nothing for now.
+        showTrips: function( id ) {
+            this.invokeControllerFunction( "showTrips", arguments );
         }
     });
 });

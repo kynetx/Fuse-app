@@ -5,15 +5,23 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/tripstmpl.h
         tagName: "div",
         role: "page",
         transiton: "slide",
-        tripsTemplate: _.template( tripsTmpl ),
+        template: _.template( tripsTmpl ),
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
+            this.tripViews = [];
         },
 
         render: function() {
-            this.collection.each(function ( vehicle ) {
+            this.tripViews.length = 0;
+            this.collection.each(function ( trip ) {
+                this.renderTrip( trip );
             }, this );
+
+            this.content = this.template({ vehicle: this.model.toJSON(), tripViews: this.tripViews })
+        },
+
+        renderTrip: function( trip ) {
         }
     });
 });

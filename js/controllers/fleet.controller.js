@@ -43,6 +43,38 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
         showTripAggregate: function() {
             this.views.TripAggregate.render();
+        },
+
+        showTrips: function( id ) {
+            /**
+             * Here we will make a /trips request to the
+             * api and recieve our TripCollection. For now
+             * we are operating off of fixtures, so we simply
+             * take our trips fixture and make a TripCollection
+             * out of it.
+             *
+             * In order to render a Trips view, we also need to know some
+             * basic info about the vehicle itself, so we pass that in as the model.
+             *
+             * The request might be as simple as TripCollection.fetch({ data: id }) as long
+             * as we've structured the collection correctly. So in the initialize
+             * function we could instantiate a new TripCollection:
+             * this.trips = new TripCollection();
+             * and then in showTrips (right here):
+             * this.trips.fetch({ data: id }).
+             *
+             * We might also want to consider storing the last trip taken by the vehicle in
+             * the fleet index so that we can show the trips view immediately and then lazy load
+             * the next N trips in the background so that delays are minimal.
+             */
+            this.trips = new TripCollection( Fuse.FIXTURES.trips );
+            this.views[ "Trips" ] = new TripsView({
+                controller: this,
+                model: this.fleet.get( id ),
+                collection: this.trips
+            });
+
+            this.views.Trips.render();
         }
     });
 });
