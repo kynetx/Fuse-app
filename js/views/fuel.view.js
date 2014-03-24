@@ -10,12 +10,11 @@ define(["fuse", "jquery", "underscore", "text!templates/fueltmpl.html"], functio
         initialize: function() {
             Fuse.View.prototype.initialize.apply(this, arguments);
             this.header = "Smart Fuel";
-            this.content = this.template(this.model.toJSON());
+            this.content = "<div><p>Hello Ben!</p></div>";
         },
 
         render: function() {
-            this.$el.html(this.template(this.model.toJSON()));
-            return this;
+            Fuse.View.prototype.render.apply(this, arguments);
         }
     });
 });

@@ -5,7 +5,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "fleet/:id": "showVehicle",
             "findcar": "showFindCar",
             "findcar/:id": "showFindCar",
-            "fuelsmart": "showFuelSMart",
+            "fuelsmart": "showFuelSmart",
             "fuelsmart/:id": "showFuelSmart",
         },
         

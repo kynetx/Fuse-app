@@ -195,7 +195,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var __self__ = this;
                 $(this.$el).on("pagecreate", function(e) {
                     __self__.show();
-                }); 
+                });
             },
 
             showMapWhenReady: function() {
