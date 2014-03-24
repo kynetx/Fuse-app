@@ -10,10 +10,26 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
-                "trip": {
-                    "distance": 2456,
-                    "time": 123456789234324342,
-                    "cost": 102.34
+                "month": {
+                    "trip": {
+                        "distance": 2456,
+                        "time": 123456789234324342,
+                        "cost": 102.34
+                    }
+                },
+                "year": {
+                    "trip": {
+                        "distance": 2456789,
+                        "time": 1234567892343243422345,
+                        "cost": 800
+                    }
+                },
+                "total": {
+                    "trip": {
+                        "distance": 2456789101122,
+                        "time": 12345678923432434234757654,
+                        "cost": 20000
+                    }
                 }
             },
             "index": [{
@@ -42,12 +58,27 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "header": 272,
                 "speed": 0,
                 "aggregates": {
-                    "trip": {
-                        "distance": 800,
-                        "time": 123452329,
-                        "cost": 102.34
+                    "month": {
+                        "trip": {
+                            "distance": 24,
+                            "time": 123456,
+                            "cost": 50
+                        }
+                    },
+                    "year": {
+                        "trip": {
+                            "distance": 500,
+                            "time": 1234567,
+                            "cost": 800
+                        }
+                    },
+                    "total": {
+                        "trip": {
+                            "distance": 24567,
+                            "time": 12345678923,
+                            "cost": 2000
+                        }
                     }
-                }
             },
             {
                 "id": "V4GM",
@@ -74,12 +105,27 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "header": 272,
                 "speed": 78,
                 "aggregates": {
-                    "trip": {
-                        "distance": 500,
-                        "time": 234564563,
-                        "cost": 40.72
+                    "month": {
+                        "trip": {
+                            "distance": 24,
+                            "time": 123456,
+                            "cost": 50
+                        }
+                    },
+                    "year": {
+                        "trip": {
+                            "distance": 500,
+                            "time": 1234567,
+                            "cost": 800
+                        }
+                    },
+                    "total": {
+                        "trip": {
+                            "distance": 24567,
+                            "time": 12345678923,
+                            "cost": 2000
+                        }
                     }
-                }
             },
             {
                 "id": "VN0E",
@@ -106,12 +152,27 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "heading": 270,
                 "speed": 12,
                 "aggregates": {
-                    "trip": {
-                        "distance": 100,
-                        "time": 123456789,
-                        "cost": 20.21
+                    "month": {
+                        "trip": {
+                            "distance": 24,
+                            "time": 123456,
+                            "cost": 50
+                        }
+                    },
+                    "year": {
+                        "trip": {
+                            "distance": 500,
+                            "time": 1234567,
+                            "cost": 800
+                        }
+                    },
+                    "total": {
+                        "trip": {
+                            "distance": 24567,
+                            "time": 12345678923,
+                            "cost": 2000
+                        }
                     }
-                }
             }]
         },
 
