@@ -258,11 +258,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (previous && Backbone.history.fragment === previous.fragment && "findcar" !== next) {
                     var viewName = Fuse.RouteToView[current.name], view;
 
-                    if ( previous.args ) {
+                    if ( previous.args.length ) {
                         switch( viewName ) {
                             case "Fleet":
                                 view = "Vehicle";
                                 break;
+                            default:
+                                view = viewName;
+                                break;
+                        }
+                    } else {
+                        switch( viewName ) {
                             case "Trips":
                                 view = "TripAggregate";
                                 break;
@@ -271,6 +277,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 break;
                         }
                     }
+
+                    Fuse.log( view );
 
                     changePageOptions["transition"] = this.controller.views[view].transition;
                     changePageOptions["reverse"] = true;
