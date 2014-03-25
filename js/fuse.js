@@ -442,42 +442,47 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             addOverlay: function(overlay) {
                 var googOverlay;
-                // if the overlay is a marker.
-                if (this.OverlayTypeId.MARKER === overlay.type) {
-                    var animation;
-                    if (!overlay.animation || "DROP" === overlay.animation.toUpperCase()) {
-                        animation = Maps.Animation.DROP;
-                    } else {
-                        animation = Maps.Animation.BOUNCE;
-                    }
+                // Determine the type of overlay.
+                switch( overlay.type ) {
+                    case this.OverlayTypeId.MARKER:
+                        var animation;
+                        if (!overlay.animation || "DROP" === overlay.animation.toUpperCase()) {
+                            animation = Maps.Animation.DROP;
+                        } else {
+                            animation = Maps.Animation.BOUNCE;
+                        }
 
-                    var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
+                        var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
 
-                    var marker = {
-                        position: position,
-                        title: overlay.title,
-                        animation: animation
-                    };
+                        var marker = {
+                            position: position,
+                            title: overlay.title,
+                            animation: animation
+                        };
 
-                    // if we were given an icon, use it.
-                    if (overlay.icon) {
-                        marker["icon"] = overlay.icon;
-                    }
+                        // if we were given an icon, use it.
+                        if (overlay.icon) {
+                            marker["icon"] = overlay.icon;
+                        }
 
-                    googOverlay = new Maps.Marker(marker);
+                        googOverlay = new Maps.Marker(marker);
 
-                    if (typeof overlay.route !== "undefined") {
-                        this.addRouteToOverlay(overlay.route, googOverlay);
-                    }
+                        if ( typeof overlay.route !== "undefined" ) {
+                            this.addRouteToOverlay(overlay.route, googOverlay);
+                        }
+                        Fuse.log( "Adding overlay:", googOverlay, "to map:", this );
+                        // add the overlay to the map.
+                        googOverlay.setMap( this.obj );
+                        // extend the bounds object to include this marker position.
+                        this.bounds.extend( position );
+                        // keep track of this overlay so we can remove it later.
+                        this.overlays.push( googOverlay );
+                        break;
+                    case this.OverlayTypeId.ROUTE:
+                        break;
+                    default:
+                        break;
                 }
-
-                Fuse.log("Adding overlay:", googOverlay, "to map:", this);
-                // add the overlay to the map.
-                googOverlay.setMap(this.obj);
-                // extend the bounds object to include this marker position.
-                this.bounds.extend(position);
-                // keep track of this overlay so we can remove it later.
-                this.overlays.push(googOverlay);
             },
 
             addRouteToOverlay: function(route, googOverlay) {
