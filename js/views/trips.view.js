@@ -8,7 +8,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!te
         template: _.template( tripsTmpl ),
 
         events: {
-            "collapsibleexpand .trip": "renderMapForTrip"
+            "tap .fuse-trip-map-trigger": "showMapForTrip"
         },
 
         initialize: function() {
@@ -35,7 +35,13 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!te
             this.tripViews.push( view.render().el );
         },
 
-        renderMapForTrip: function ( e ) {
+        /**
+         * Utilize a Find Car view to display the trip.
+         * Pass the view a typical map configuration object,
+         * specifying the needed data in order to render a route
+         * between the start and end waypoints of our trip.
+         */
+        showMapForTrip: function ( e ) {
             // tid = trip id.
             var tid = $( e.target ).closest( ".trip" ).data( "tid" );
             e.handled = true;
