@@ -1,5 +1,4 @@
-define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/findcar.view", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, TripView, FindCarView, tripsTmpl ) {
-    // trips view.
+define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/findcar.view", "views/trip.map.view", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, TripView, FindCarView, TripMapView, tripsTmpl ) {
     return Fuse.View.extend({
         id: "trips",
         tagName: "div",
@@ -36,7 +35,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         /**
-         * Utilize a Find Car view to display the trip.
+         * Utilize a Trip Map view to display the trip.
          * Pass the view a typical map configuration object,
          * specifying the needed data in order to render a route
          * between the start and end waypoints of our trip.
@@ -44,8 +43,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         showMapForTrip: function ( e ) {
             // tid = trip id.
             var tid = $( e.target ).closest( ".trip" ).data( "tid" ),
-                routeView = new FindCarView({
-                    trip: this.collection.get( tid )
+                routeView = new TripMapView({
+                    model: this.collection.get( tid )
                 });
 
             routeView.render();
