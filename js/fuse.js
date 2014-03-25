@@ -719,7 +719,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 },
 
                 /**
-                 * Take a duration in milliseconds and convert it to a human consumanble format.
+                 * Take a duration in milliseconds and convert it to a human consumable format.
                  * Also takes a boolean, succint. Causes the function to return 'minutes seconds'
                  * format instead of 'hours minutes seconds.'
                  */
@@ -728,16 +728,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         hours = parseInt( totalSeconds / 24 ) % 24,
                         minutes = parseInt( totalSeconds / 60 ) % 60,
                         seconds = parseInt( totalSeconds % 60, 10 ),
+                        form = ( succint ) ? "succint" : "plural";
                         iterator = ( succint ) ? [ minutes, seconds ] : [ hours, minutes, seconds ],
                         redableDuration = iterator.map(function( val, i ) {
                             if ( val > 0 ) {
-                                return val + " " + ( val > 1 ) ? this.time.get( i, "succint" ) : this.time.get( i, "succint" );
+                                return val + ( ( succint ) ? "" : " " )  
+                                           + ( ( val > 1 ) ? this.time.get( i, form ) : 
+                                            this.time.get( i, form ) );
                             } else {
                                 return "";
                             }
                         }, this ).join(" ");
 
-                    Fuse.log( hours, minutes, seconds, iterator, redableDuration );
                     return redableDuration;
                 },
 
