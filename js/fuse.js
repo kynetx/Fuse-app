@@ -300,7 +300,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // overlay types
             OverlayTypeId: {
                 MARKER: 0,
-                ROUTE: 1
+                TRIP: 1
             },
 
             overlays: [],
@@ -479,7 +479,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         // keep track of this overlay so we can remove it later.
                         this.overlays.push( googOverlay );
                         break;
-                    case this.OverlayTypeId.ROUTE:
+                    case this.OverlayTypeId.TRIP:
                         alert( "Map will render with the following options:" + "\n" + JSON.stringify( overlay, null, 4 ) );
                         this.reset();
                         break;
