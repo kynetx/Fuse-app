@@ -615,7 +615,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                      * 'salientWaypoints' is then the collection of waypoints we send with
                      * our directions service request.
                      */
-                     if ( this.sanatizeWaypoints.length > 0 ) {
+                     if ( this.sanatizedWaypoints.length > 0 ) {
                         if ( this.sanatizedWaypoints.length > this.MAX_ADDITONAL_WAYPOINTS ) {
                             var interestInterval = Math.floor( this.sanatizedWaypoints.length / 4 );
                             Fuse.log( "1/4 of all unique waypoints is approximatley", interestInterval, "elements." );
@@ -623,9 +623,26 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             while ( needle < this.sanatizedWaypoints.length ) {
                                 if ( needle % interestInterval === 0 ) {
                                     Fuse.log( "Adding waypoint at index", needle, "to final waypoints." );
+                                    this.salientWaypoints.push( this.sanatizedWaypoints[ needle ] );
                                 }
+                                ++needle;
                             }
+
+                            // If no waypoints passed our salience filter, just use the sanatized waypoints as the salient waypoints.
+                            this.salientWaypoints = ( this.salientWaypoints.length ) ? this.salientWaypoints : this.sanatizedWaypoints;
+
+                            // Reverse our salient waypoints so they are in the correct chronological order again.
+                            if ( this.salientWaypoint.length > 1 ) {
+                                this.salientWaypoints.reverse();
+                            }
+
+                            var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
+                            routeRequest[ "waypoints" ] = this.salientWaypoints;
+
+                            Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
                         }
+                     } else {
+                        Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
                      }
             },
 
