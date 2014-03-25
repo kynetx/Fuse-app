@@ -38,14 +38,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!te
         renderMapForTrip: function ( e ) {
             // tid = trip id.
             var tid = $( e.target ).closest( ".trip" ).data( "tid" );
-            // Setup map config here and render the map into the container.
-            this.map = {
-                container: $( ".fuse-trip-map-container", this.$el )
-            };
-
-            this.map.overlays = [{
-                type: Fuse.map.OverlayTypeId.ROUTE
-            }];
             e.handled = true;
         }
     });

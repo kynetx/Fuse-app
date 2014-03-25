@@ -114,6 +114,16 @@ div > ul.dashboard {
     border-bottom-width: 0px !important;
 }
 
+/**
+ * This scales the map icon that is present in every
+ * trip collapsible.
+ */
+ .fuse-trip-map-trigger > img {
+    cursor: pointer;
+    height: 29px;
+    width: 18px;
+ }
+
 .trip-aggregate-item {
     cursor: pointer;
 }

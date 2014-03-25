@@ -481,6 +481,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         break;
                     case this.OverlayTypeId.ROUTE:
                         alert( "Map will render with the following options:" + "\n" + JSON.stringify( overlay, null, 4 ) );
+                        this.reset();
                         break;
                     default:
                         break;
