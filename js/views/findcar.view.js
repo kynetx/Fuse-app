@@ -15,8 +15,9 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
 
             this.map.overlays = [];
 
-            // Determine if we are rendering a normal find car view or a trip map.
+            // Determine if we will be rendering a normal find car view or a trip map.
             if ( !options.trip ) {
+                this.header = "Find Car";
                 this.collection.each(function(vehicle, idx) {
                     var icon = "../../style/images/car_map_icon_"+ idx % 3 +".png";
                     this.map.overlays.push({
@@ -29,7 +30,8 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
                     });
                 }, this);
             } else {
-                // We are rendering a trip map. Buckle up.
+                // We will be rendering a trip map. Buckle up.
+                this.header = "Trip Map";
                 this.map.overlays.push({
                     type: Fuse.map.OverlayTypeId.TRIP,
                     origin: options.trip.get( "startWaypoint" ),
@@ -40,7 +42,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
         },
 
         render: function() {
-            Fuse.View.prototype.render.apply(this, arguments);
+            Fuse.View.prototype.render.apply( this, arguments );
         }
     });
 });

@@ -45,7 +45,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             // tid = trip id.
             var tid = $( e.target ).closest( ".trip" ).data( "tid" ),
                 routeView = new FindCarView({
-                    trip: this.model
+                    trip: this.collection.get( tid )
                 });
 
             routeView.render();

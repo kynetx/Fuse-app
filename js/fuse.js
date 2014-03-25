@@ -441,7 +441,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 setTimeout( fitter, 140 );
             },
 
-            addOverlay: function(overlay) {
+            addOverlay: function( overlay ) {
                 var googOverlay;
                 // Determine the type of overlay.
                 switch( overlay.type ) {
