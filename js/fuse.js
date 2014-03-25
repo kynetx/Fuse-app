@@ -19,11 +19,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         callbacks: {
             directionsSuccess: function(directions) {
-                // bind the directions renderer to the map if it
-                // has no map.
-                // the directoins renderer is unbound from 
-                // the map when Fuse.map.reset() is called.
-                if (!this.directionsRenderer.getMap()) {
+                /**
+                 * Bind the directions renderer to the map if it has no map.
+                 * The directoins renderer is unbound from the map 
+                 * when Fuse.map.reset() is called.
+                 */
+                if ( !this.directionsRenderer.getMap() ) {
                     this.directionsRenderer.setMap(this.obj);
                 }
                 var $panel = $("#directions-panel");
@@ -41,38 +42,38 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             directionsError: function(error) {
-                Fuse.loading("hide");
-                switch (error) {
+                Fuse.loading( "hide" );
+                switch ( error ) {
                     case Maps.DirectionsStatus.NOT_FOUND:
-                        Fuse.log("ERROR! One of the locations in the directions request could not be found.");
+                        Fuse.log( "ERROR! One of the locations in the directions request could not be found." );
                         break;
                     case Maps.DirectionsStatus.ZERO_RESULTS:
-                        Fuse.log("ERROR! No route was found between the given origin and destination points.");
+                        Fuse.log( "ERROR! No route was found between the given origin and destination points." );
                         break;
                     case Maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
-                        Fuse.log("ERROR! Too many additional waypoints used in directions request.");
+                        Fuse.log( "ERROR! Too many additional waypoints used in directions request." );
                         break;
                     case Maps.DirectionsStatus.INVALID_REQUEST:
-                        Fuse.log("ERROR! Directions request was invalid. This usually occurs because the origin and/or destination points are missing.");
+                        Fuse.log( "ERROR! Directions request was invalid. This usually occurs because the origin and/or destination points are missing." );
                         break;
                     case Maps.DirectionsStatus.OVER_QUERY_LIMIT:
-                        Fuse.log("ERROR! Too many directins requests have been issued within the alotted time. Try again later.");
+                        Fuse.log( "ERROR! Too many directins requests have been issued within the alotted time. Try again later." );
                         break;
                     case Maps.DirectionsStatus.REQUEST_DENIED:
-                        Fuse.log("ERROR! No permission to use directions service.");
+                        Fuse.log( "ERROR! No permission to use directions service." );
                         break;
                     case Maps.DirectionsStatus.UNKNOWN_ERROR:
-                        Fuse.log("ERROR! The directions service request encountered an unknown error. Try again later.");
+                        Fuse.log( "ERROR! The directions service request encountered an unknown error. Try again later." );
                         break;
                     default:
-                        throw new Error("Fatal Google Maps Directions Error!");
+                        throw new Error( "Fatal Google Maps Directions Error!" );
                         break;
                 }
             }
         },
 
-        invoke: function(cb, context) {
-            this.callbacks[cb].apply(context, Array.prototype.slice.call(arguments, 2));
+        invoke: function( cb, context ) {
+            this.callbacks[ cb ].apply( context, Array.prototype.slice.call( arguments, 2 ) );
         },
 
         RouteToView: {
@@ -480,8 +481,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         this.overlays.push( googOverlay );
                         break;
                     case this.OverlayTypeId.TRIP:
-                        Fuse.log( "Map will render with the following options:", overlay );
-                        throw new Error( "Not yet implemented" );
+                        this.renderTripRoute( overlay );
                         break;
                     default:
                         break;
@@ -557,6 +557,69 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         ecb.call(self, status);
                     }
                 });
+            },
+
+            // Renders a trip route on the map.
+            renderTripRoute: function ( trip ) {
+                this.lats = [];
+                this.lngs = [];
+                this.sanatizedWaypoints = [];
+                this.salientWaypoints = [];
+                var origin = new Maps.LatLng( trip.origin.latitude, trip.origin.longitude ),
+                    destination = new Maps.LatLng( trip.destination.latitude, trip.destination.longitude );
+
+                _.each([ origin, destination ], function( el, idx ) {
+                    lats.push( el.lat() );
+                    lngs.push( el.lng() );
+                });
+
+                var routeRequest = {
+                    origin: origin,
+                    destination: destination,
+                    travelMode: Maps.TravelMode.DRIVING
+                };
+
+                /**
+                 * What follows is a waypoint salience algorithm
+                 * that aims to include the most meaningful additional
+                 * waypoints present in the trip data, if any at all.
+                 */
+
+                 // Check if we have any additional waypoints at all.
+                 if ( trip.waypoints ) {
+                    Fuse.log( trip.waypoints.length, "additional waypoints available for trip:", trip.id );
+
+                    switch( Object.prototype.toString.call( trip.waypoints ) ) {
+                        case "[object Array]":
+                            _.each( trip.waypoints, function(waypoint, idx) {
+                                this.sanatizeWaypoint( waypoint );
+                                }
+                            }, this );
+                            break;
+                        case "[object Object]":
+                            this.sanatizeWaypoint ( trip.waypoints );
+                            break;
+                        default:
+                            Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
+                            break;
+                    }
+            },
+
+            sanatizeWaypoint: function( waypoint ) {
+                var latLngSplit = waypoint.split( "," ),
+                    lat = latLngSplit[ 0 ],
+                    lng = latLngSplit[ 1 ];
+
+                // Check to make sure we're not adding a duplicate waypoint.
+                if ( this.lats.indexOf( lat ) === -1 && this.lngs.indexOf( lng ) === -1 ) {
+                    this.sanatizedWaypoints.push({
+                        location: new Maps.LatLng( lat, lng ),
+                        stopover: false
+                    });
+
+                    this.lats.push( lat );
+                    this.lngs.push( lng );
+                }
             }
         },
 
@@ -576,10 +639,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     }
                 }
 
-                if (id && id[1]) {
-                    this.show(action, {id: id[1]});
+                if ( id && id[ 1 ] ) {
+                    this.show( action, { id: id[ 1 ] });
                 } else {
-                    this.show(action);
+                    this.show( action );
                 }
 
 

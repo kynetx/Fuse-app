@@ -34,6 +34,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
                 this.header = "Trip Map";
                 this.map.overlays.push({
                     type: Fuse.map.OverlayTypeId.TRIP,
+                    id: options.trip.get( "id" ),
                     origin: options.trip.get( "startWaypoint" ),
                     destination: options.trip.get( "endWaypoint" ),
                     waypoints: options.trip.get ( "waypoints" )
