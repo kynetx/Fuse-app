@@ -382,7 +382,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             configure: function(config) {
                 this.reset();
                 Fuse.log("Map configuration:", config);
-                if (!config) {
+                if ( !config ) {
                     Fuse.log("Invalid map configuration:", config);
                     return;
                 }
@@ -395,15 +395,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // of the containing element.
                 this.height = config.height || $(document.body).height();
                 // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
-                this.width = (config.width || this.$container.width()) + 25;
+                this.width = ( config.width || this.$container.width() ) + 25;
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.
                 this.bounds = new Maps.LatLngBounds();
                 // add overlays, if any.
-                if (config.overlays) {
-                    while (config.overlays.length) {
-                        this.addOverlay(config.overlays.pop());
+                if ( config.overlays ) {
+                    while ( config.overlays.length ) {
+                        this.addOverlay( config.overlays.pop() );
                     }
                 }
 
