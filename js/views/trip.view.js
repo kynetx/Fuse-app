@@ -3,8 +3,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.ht
         tagName: "div",
         className: "trip",
         attributes: {
-            "data-role": "collapsible",
-            "data-content-theme": "c"
+            "data-role": "collapsible"
         },
         template: _.template( tripTmpl ),
 

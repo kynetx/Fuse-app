@@ -672,27 +672,34 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.preventGhostTaps();
             // add custom underscore template helpers.
             this.addTemplateHelpers({
-                // got the regex idea from stackoverflow.
-                // the regex uses 2 lookahead assertions: 
-                // - a positive one to look for any point in 
-                //   the string that has a multiple of 3 digits 
-                //   in a row after it 
-                // - a negative assertion to make sure that point 
-                //   only has exactly a multiple of 3 digits. 
-                // The replacement expression puts a comma there.
+                /**
+                 * got the regex idea from stackoverflow.
+                 * the regex uses 2 lookahead assertions: 
+                 * - a positive one to look for any point in 
+                 *   the string that has a multiple of 3 digits 
+                 *   in a row after it 
+                 * - a negative assertion to make sure that point 
+                 *   only has exactly a multiple of 3 digits. 
+                 * The replacement expression puts a comma there.
+                 */
                 commaSeperateNumber: function(num) {
                     var parts = num.toString().split(".");
                     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     return parts.join(".");
                 },
 
-                // Format a date for human consumption.
-                formatDate: function( datetime ) {
-
+                /**
+                 * Format a date for human consumption.
+                 * Takes an optional paramater that determines whether
+                 * it should return a precomposed human readable date or
+                 * the raw Date object.
+                 */
+                formatDate: function( datetime, prettyPrint ) {
                     // Get the date into a managable format.
-
-                    datetime = datetime.replace(/\+/, "").replace(/T/g, "").replace(/:/, "").replace(/\s/g, "");
-                    Fuse.log( datetime );
+                    datetime = datetime.replace(/\+/, "")
+                                       .replace(/T/g, "")
+                                       .replace(/:/, "")
+                                       .replace(/\s/g, "");
 
                     var dateYear = datetime.slice(0,4),
                         dateMonth = datetime.slice(4,6),
@@ -708,11 +715,61 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                      dateSecond + '.000Z',
                         out = new Date( dateBuild );
 
-                    Fuse.log( dateYear, dateMonth, dateDay, dateHour, dateMinute, dateSecond, dateBuild );
+                    return ( prettyPrint ) ? out.toLocaleDateString() + " " + out.toLocaleTimeString() : out;
+                },
 
-                    Fuse.log( dateBuild );
-                    return out.toLocaleDateString()+ " " +out.toLocaleTimeString();
-                }
+                /**
+                 * Take a duration in milliseconds and convert it to a human consumanble format.
+                 * Also takes a boolean, succint. Causes the function to return 'minutes seconds'
+                 * format instead of 'hours minutes seconds.'
+                 */
+                formatDuration: function( duration, succint ) {
+                    var totalSeconds = parseInt( duration / 1000 ),
+                        hours = parseInt( totalSeconds / 24 ) % 24,
+                        minutes = parseInt( totalSeconds / 60 ) % 60,
+                        seconds = parseInt( totalSeconds % 60, 10 ),
+                        iterator = ( succint ) ? [ minutes, seconds ] : [ hours, minutes, seconds ],
+                        redableDuration = iterator.map(function( val, i ) {
+                            if ( val > 0 ) {
+                                return val + " " + ( val > 1 ) ? this.time.get( i, "succint" ) : this.time.get( i, "succint" );
+                            } else {
+                                return "";
+                            }
+                        }, this ).join(" ");
+
+                    Fuse.log( hours, minutes, seconds, iterator, redableDuration );
+                    return redableDuration;
+                },
+
+                /**
+                 * A lookup table for units of time
+                 * and a helper function to retrieve a specified
+                 * unit of time given an index.
+                 */
+                 time: {
+
+                    units: [
+                        {
+                            singular: "hour",
+                            plural: "hours",
+                            succint: "h"
+                        },
+                        {
+                            singular: "minute",
+                            plural: "minutes",
+                            succint: "m"
+                        },
+                        {
+                            singular: "second",
+                            plural: "seconds",
+                            succint: "s"
+                        }
+                    ],
+
+                    get: function( i, form ) {
+                        return this.units[ i ][ form ];
+                    }
+                 }
             });
 
             // tell Backbone to start listening for hashchanges.
