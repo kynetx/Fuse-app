@@ -13,10 +13,10 @@
 }
 
 /**
-* this is a poor man's way of vertically centering 
-* the fleet icon in the header. Let's see if we can
-* figure out a better way in the future.
-*/
+ * This is a poor man's way of vertically centering 
+ * the fleet icon in the header. Let's see if we can
+ * figure out a better way in the future.
+ */
 .fuse-header-container {
     position: absolute;
     top: 10px;
@@ -28,9 +28,9 @@
 }
 
 /**
-* see note below about why one must sometimes
-* use !important with style definitions in jQuery Mobile
-*/
+ * see note below about why one must sometimes
+ * use !important with style definitions in jQuery Mobile
+ */
 .fuse-footer {
     padding: 10px !important;
     z-index: 2;
@@ -49,11 +49,11 @@
 }
 
 /**
-* normally importants are icky, but when
-* working with jQuery Mobile, you have to
-* in order to beat their specificity without
-* getting ridiculous. 
-*/
+ * Normally importants are icky, but when
+ * working with jQuery Mobile, you have to
+ * in order to beat their specificity without
+ * getting ridiculous. 
+ */
 .fuse-map-container {
     padding: 0 !important;
     margin: 0 !important;
@@ -75,7 +75,7 @@
     right: 5%;
 }
 
-/* Css for Vehicle Detail View */
+/* css for Vehicle Detail View */
 div > ul.dashboard {
     border: 1px solid lightgray;
 }
@@ -84,14 +84,14 @@ div > ul.dashboard {
     text-align: center;
     padding: 8px 0px 0px 0px;
     border: 0px;
-    border-radius: .3125em; /*default radius as set by jQuery mobile*/
+    border-radius: .3125em; /* default radius as set by jQuery mobile */
 }
 
 #vehicle-notes {
     white-space: normal;
 }
 
-/*This fixes a small css glitch that shows up in the vehicle detail screen*/
+/* This fixes a small css glitch that shows up in the vehicle detail screen */
 .ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
     min-height: 0;
 }

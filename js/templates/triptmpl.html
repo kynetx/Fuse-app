@@ -2,16 +2,19 @@
 <div class="fuse-trip-container">
     <div class="ui-grid-b">
         <div class="ui-block-a">
-            <h5>Miles</h5>
-            <p><%= FTH.commaSeperateNumber( distance ) %></p>
+            <h5 class="center-text">Miles</h5>
+            <p class="center-text"><%= FTH.commaSeperateNumber( distance ) %></p>
         </div>
         <div class="ui-block-b">
-            <h5>Time</h5>
-            <p><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></p>
+            <h5 class="center-text">Time</h5>
+            <p class="center-text"><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></p>
         </div>
         <div class="ui-block-c">
-            <h5>Cost</h5>
-            <p>$<%= FTH.commaSeperateNumber( cost ) %></p>
+            <h5 class="center-text">Cost</h5>
+            <p class="center-text">$<%= FTH.commaSeperateNumber( cost ) %></p>
         </div>
+    </div>
+    <div class="fuse-trip-map-container center-text">
+        Map goes here.
     </div>
 </div>
