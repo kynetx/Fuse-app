@@ -41,6 +41,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.loading("hide");
             },
 
+            tripRouteSuccess: function( directions ) {
+                if( !this.directionsRenderer.getMap() ) {
+                    this.directionsRenderer.setMap( this.obj );
+                }
+
+                this.directionsRenderer.setDirections( directions );
+                Fuse.loading( "hide" );
+            },
+
             directionsError: function(error) {
                 Fuse.loading( "hide" );
                 switch ( error ) {
@@ -322,12 +331,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             MIN_OVERLAYS: 3,
 
-            invokeDirectionsSuccess: function(directions) {
-                Fuse.invoke("directionsSuccess", this, directions)
+            invokeDirectionsSuccess: function( directions ) {
+                Fuse.invoke( "directionsSuccess", this, directions )
             },
 
-            invokeDirectionsError: function(error) {
-                Fuse.invoke("directionsError", this, error);
+            invokeTripRouteSuccess: function( directions ) {
+                Fuse.invoke( "tripRouteSuccess", this, directions );
+            },
+
+            invokeDirectionsError: function( error ) {
+                Fuse.invoke( "directionsError", this, error );
             },
 
             reset: function() {
@@ -364,6 +377,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // reset directions renderer.
                 this.directionsRenderer.setPanel(null);
                 this.directionsRenderer.setMap(null);
+
+                this.willAutoFit = false;
+                this.lats = [];
+                this.lngs = [];
+                this.sanatizedWaypoints = [];
+                this.salientWaypoints = [];
 
                 var $panel = $("#directions-panel");
                 if ($panel.length && $panel.is(":visible")) {
@@ -441,7 +460,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  * to be about the amount of time it takes for the map to finish setting itself
                  * up.
                  */
-                setTimeout( fitter, 140 );
+
+                // Dont manually handle map fitting if its going to be handled automatically by the Google Maps API.
+                if ( !this.willAutoFit ) {
+                    setTimeout( fitter, 140 );
+                }
             },
 
             addOverlay: function( overlay ) {
@@ -484,6 +507,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         break;
                     case this.OverlayTypeId.TRIP:
                         this.renderTripRoute( overlay );
+                        this.willAutoFit = true;
                         break;
                     default:
                         break;
@@ -571,9 +595,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     destination = new Maps.LatLng( trip.destination.latitude, trip.destination.longitude );
 
                 _.each([ origin, destination ], function( el, idx ) {
-                    lats.push( el.lat() );
-                    lngs.push( el.lng() );
-                });
+                    this.lats.push( el.lat() );
+                    this.lngs.push( el.lng() );
+                }, this );
 
                 var routeRequest = {
                     origin: origin,
@@ -594,12 +618,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     switch( Object.prototype.toString.call( trip.waypoints ) ) {
                         case "[object Array]":
                             _.each( trip.waypoints, function(waypoint, idx) {
-                                this.sanatizeWaypoint( waypoint );
-                                }
+                                this.sanatizeWaypoint( waypoint.value );
                             }, this );
                             break;
                         case "[object Object]":
-                            this.sanatizeWaypoint ( trip.waypoints );
+                            this.sanatizeWaypoint ( trip.waypoints.value );
                             break;
                         default:
                             Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
@@ -615,7 +638,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                      * 'salientWaypoints' is then the collection of waypoints we send with
                      * our directions service request.
                      */
-                     if ( this.sanatizedWaypoints.length > 0 ) {
+                    if ( this.sanatizedWaypoints.length > 0 ) {
                         if ( this.sanatizedWaypoints.length > this.MAX_ADDITONAL_WAYPOINTS ) {
                             var interestInterval = Math.floor( this.sanatizedWaypoints.length / 4 );
                             Fuse.log( "1/4 of all unique waypoints is approximatley", interestInterval, "elements." );
@@ -632,7 +655,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             this.salientWaypoints = ( this.salientWaypoints.length ) ? this.salientWaypoints : this.sanatizedWaypoints;
 
                             // Reverse our salient waypoints so they are in the correct chronological order again.
-                            if ( this.salientWaypoint.length > 1 ) {
+                            if ( this.salientWaypoints.length > 1 ) {
                                 this.salientWaypoints.reverse();
                             }
 
@@ -641,9 +664,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                             Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
                         }
-                     } else {
+                    } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
-                     }
+                    }
+
+                    // Make the request.
+                    Fuse.loading( "show", "getting trip route..." );
+                    this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
+                }
             },
 
             sanatizeWaypoint: function( waypoint ) {
