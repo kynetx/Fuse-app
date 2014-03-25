@@ -7,7 +7,7 @@ define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.ht
         attributes: function() {
             return {
                 "data-vid": this.model.get( "id" )
-            }
+            };
         },
         
         template: _.template( tripAggregateItemTmpl ),

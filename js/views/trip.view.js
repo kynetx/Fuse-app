@@ -2,9 +2,14 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.ht
     return Fuse.View.extend({
         tagName: "div",
         className: "trip",
-        attributes: {
-            "data-role": "collapsible"
+        
+        attributes: function() {
+            return {
+                "data-role": "collapsible",
+                "data-tid": this.model.get( "id" )
+            };
         },
+        
         template: _.template( tripTmpl ),
 
         initialize: function() {

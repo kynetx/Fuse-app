@@ -36,7 +36,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
         },
 
         showTripsForVehicle: function( e ) {
-            var vid = $(e.target).closest( ".trip-aggregate-item" ).data( "vid" );
+            var vid = $( e.target ).closest( ".trip-aggregate-item" ).data( "vid" );
             Fuse.show( "trips", { id: vid } );
             e.handled = true;
         }

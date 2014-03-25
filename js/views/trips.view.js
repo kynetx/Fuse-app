@@ -7,6 +7,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!te
         transition: "slide",
         template: _.template( tripsTmpl ),
 
+        events: {
+            "collapsibleexpand .trip": "renderMapForTrip"
+        },
+
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.header = this.model.get( "nickname" ) + " " + "Trips";
@@ -29,6 +33,13 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!te
             });
 
             this.tripViews.push( view.render().el );
+        },
+
+        renderMapForTrip: function ( e ) {
+            // tid = trip id.
+            var tid = $( e.target ).closest( ".trip" ).data( "tid" );
+            // Setup map config here and render the map into the container.
+            e.handled = true;
         }
     });
 });

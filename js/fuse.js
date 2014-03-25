@@ -299,7 +299,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             // overlay types
             OverlayTypeId: {
-                MARKER: 0
+                MARKER: 0,
+                ROUTE: 1
             },
 
             overlays: [],
@@ -446,7 +447,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 switch( overlay.type ) {
                     case this.OverlayTypeId.MARKER:
                         var animation;
-                        if (!overlay.animation || "DROP" === overlay.animation.toUpperCase()) {
+                        if ( !overlay.animation || "DROP" === overlay.animation.toUpperCase() ) {
                             animation = Maps.Animation.DROP;
                         } else {
                             animation = Maps.Animation.BOUNCE;
@@ -462,10 +463,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                         // if we were given an icon, use it.
                         if (overlay.icon) {
-                            marker["icon"] = overlay.icon;
+                            marker[ "icon" ] = overlay.icon;
                         }
 
-                        googOverlay = new Maps.Marker(marker);
+                        googOverlay = new Maps.Marker( marker );
 
                         if ( typeof overlay.route !== "undefined" ) {
                             this.addRouteToOverlay(overlay.route, googOverlay);
@@ -479,6 +480,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         this.overlays.push( googOverlay );
                         break;
                     case this.OverlayTypeId.ROUTE:
+                        alert( "Map will render with the following options:" + "\n" + JSON.stringify( overlay, null, 4 ) );
                         break;
                     default:
                         break;
