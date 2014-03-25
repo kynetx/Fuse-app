@@ -686,25 +686,32 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return parts.join(".");
                 },
 
-                // Adds seperators to an ISO8601 datetime string so that
-                // the Date object can then consume it.
+                // Format a date for human consumption.
                 formatDate: function( datetime ) {
-                    // 01234567890123456789
-                    // 20131019T011821+0000
-                    // YYYY-MM-DDTHH:mm:ss.sssZ
+
+                    // Get the date into a managable format.
+
+                    datetime = datetime.replace(/\+/, "").replace(/T/g, "").replace(/:/, "").replace(/\s/g, "");
+                    Fuse.log( datetime );
 
                     var dateYear = datetime.slice(0,4),
                         dateMonth = datetime.slice(4,6),
                         dateDay = datetime.slice(6,8),
-                        dateHour = datetime.slice(9,11),
-                        dateMinute = datetime.slice(11,13),
-                        dateSecond = datetime.slice(13,15),
+                        dateHour = datetime.slice(8,10),
+                        dateMinute = datetime.slice(10,12),
+                        dateSecond = datetime.slice(12,14),
                         dateBuild  = dateYear + '-' +
                                      dateMonth + '-' +
+                                     dateDay + 'T' +
                                      dateHour + ':' +
                                      dateMinute + ':' +
-                                     dateSecond + '.000Z';
-                    return dateBuild;
+                                     dateSecond + '.000Z',
+                        out = new Date( dateBuild );
+
+                    Fuse.log( dateYear, dateMonth, dateDay, dateHour, dateMinute, dateSecond, dateBuild );
+
+                    Fuse.log( dateBuild );
+                    return out.toLocaleDateString()+ " " +out.toLocaleTimeString();
                 }
             });
 

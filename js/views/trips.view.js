@@ -9,6 +9,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!te
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
+            this.header = this.model.get( "nickname" ) + " " + "Trips";
             this.tripViews = [];
         },
 

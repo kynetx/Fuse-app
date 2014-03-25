@@ -1,2 +1,5 @@
 <h5><%= FTH.formatDate( startTime ) %></h5>
-<p>This is working!!!!</p>
+<% for ( var k in arguments[ 0 ] ) { %>
+    <p><%= k %></p>
+    <p><%= arguments[ 0 ][ k ] %></p>
+<% } %>
