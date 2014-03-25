@@ -2,12 +2,16 @@
 <div class="fuse-trip-container">
     <div class="ui-grid-b">
         <div class="ui-block-a">
-            <h5>Duration</h5>
-            <p><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></p>
+            <h5>Miles</h5>
+            <p><%= FTH.commaSeperateNumber( distance ) %></p>
         </div>
         <div class="ui-block-b">
+            <h5>Time</h5>
+            <p><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></p>
         </div>
         <div class="ui-block-c">
+            <h5>Cost</h5>
+            <p>$<%= FTH.commaSeperateNumber( cost ) %></p>
         </div>
     </div>
 </div>

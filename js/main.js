@@ -185,6 +185,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
             "distance": 2258.4,
             "startTime": " 20131001T051219+T+06:00 ",
             "endTime": " 20070512T140235+T+06:00 ",
+            "cost": 50.34,
             "startWaypoint": {
                 "longitude": "-111.712584",
                 "timestamp": " 20010602T075441+T+06:00 ",
@@ -279,6 +280,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
             "distance": 2995.8,
             "startTime": " 19880117T105725+T+07:00 ",
             "endTime": " 19980513T124658+T+06:00 ",
+            "cost": 20.36,
             "startWaypoint": {
                 "longitude": "-111.712584",
                 "timestamp": " 20080227T053351+T+07:00 ",
@@ -374,6 +376,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
             "distance": 190.4,
             "startTime": " 19980310T122959+T+07:00 ",
             "endTime": " 20050223T194338+T+07:00 ",
+            "cost": 15.46,
             "startWaypoint": {
                 "longitude": "-111.712584",
                 "timestamp": " 19880318T122527+T+07:00 ",
@@ -469,6 +472,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
             "distance": 916.4,
             "startTime": " 20080425T051529+T+06:00 ",
             "endTime": " 20100124T003217+T+07:00 ",
+            "cost": 51.12,
             "startWaypoint": {
                 "longitude": "-111.712584",
                 "timestamp": " 19880822T093631+T+06:00 ",
@@ -564,6 +568,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
             "distance": 3844.8,
             "startTime": " 20010802T051005+T+06:00 ",
             "endTime": " 19970317T101045+T+07:00 ",
+            "cost": 61.09,
             "startWaypoint": {
                 "longitude": "-111.712584",
                 "timestamp": " 19980330T181325+T+07:00 ",
@@ -659,6 +664,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
             "distance": 3684.5,
             "startTime": " 20021021T200358+T+06:00 ",
             "endTime": " 20071018T025449+T+06:00 ",
+            "cost": 34.16,
             "startWaypoint": {
                 "longitude": "-111.712584",
                 "timestamp": " 19930312T103224+T+07:00 ",

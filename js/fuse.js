@@ -673,6 +673,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // add custom underscore template helpers.
             this.addTemplateHelpers({
                 /**
+                 * Insert commas into numbers where needed.
                  * got the regex idea from stackoverflow.
                  * the regex uses 2 lookahead assertions: 
                  * - a positive one to look for any point in 
@@ -734,7 +735,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             if ( val > 0 ) {
                                 return val + ( ( succint ) ? "" : " " )  
                                            + ( ( val > 1 ) ? this.time.get( i, form ) : 
-                                            this.time.get( i, form ) );
+                                                this.time.get( i, form ) );
                             } else {
                                 return "";
                             }
