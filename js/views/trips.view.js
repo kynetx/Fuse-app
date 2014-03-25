@@ -1,4 +1,4 @@
-define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, TripView, tripsTmpl ) {
+define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/findcar.view", "text!templates/tripstmpl.html" ], function( Backbone, Fuse, $, _, TripView, FindCarView, tripsTmpl ) {
     // trips view.
     return Fuse.View.extend({
         id: "trips",
@@ -43,7 +43,14 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "text!te
          */
         showMapForTrip: function ( e ) {
             // tid = trip id.
-            var tid = $( e.target ).closest( ".trip" ).data( "tid" );
+            var tid = $( e.target ).closest( ".trip" ).data( "tid" ),
+                routeView = new FindCarView({
+                    tripMap: true,
+                    trip: this.model
+                });
+
+            routeView.render();
+
             e.handled = true;
         }
     });
