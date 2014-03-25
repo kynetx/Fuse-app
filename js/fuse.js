@@ -603,6 +603,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
                             break;
                     }
+
+                    /**
+                     * 'sanatizedWaypoints' now contains only unique supplementary waypoints.
+                     * Now we run 'sanatizedWaypoints' through a salience algorithm because
+                     * the google maps javascript API only allows us to send a limited number 
+                     * of additional waypoints in a directions service request. Waypoints that
+                     * meet the salience requirements will be pushed onto 'salientWaypoints.'
+                     * 'salientWaypoints' is then the collection of waypoints we send with
+                     * our directions service request.
+                     */
             },
 
             sanatizeWaypoint: function( waypoint ) {
