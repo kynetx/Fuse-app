@@ -3,6 +3,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
         tagName: "div",
         id: "find-car",
         contentClass: "fuse-map-container",
+        header: "Find Car",
         role: "page",
         transition: "flip",
 
