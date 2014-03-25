@@ -304,6 +304,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 TRIP: 1
             },
 
+            MAX_ADDITONAL_WAYPOINTS: 8,
+
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
@@ -607,12 +609,24 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     /**
                      * 'sanatizedWaypoints' now contains only unique supplementary waypoints.
                      * Now we run 'sanatizedWaypoints' through a salience algorithm because
-                     * the google maps javascript API only allows us to send a limited number 
-                     * of additional waypoints in a directions service request. Waypoints that
-                     * meet the salience requirements will be pushed onto 'salientWaypoints.'
+                     * the google maps javascript API only allows us to send a limited number
+                     * of additional waypoints (8 to be exact) in a directions service request. 
+                     * Waypoints that meet the salience requirements will be pushed onto 'salientWaypoints.'
                      * 'salientWaypoints' is then the collection of waypoints we send with
                      * our directions service request.
                      */
+                     if ( this.sanatizeWaypoints.length > 0 ) {
+                        if ( this.sanatizedWaypoints.length > this.MAX_ADDITONAL_WAYPOINTS ) {
+                            var interestInterval = Math.floor( this.sanatizedWaypoints.length / 4 );
+                            Fuse.log( "1/4 of all unique waypoints is approximatley", interestInterval, "elements." );
+                            var needle = 0;
+                            while ( needle < this.sanatizedWaypoints.length ) {
+                                if ( needle % interestInterval === 0 ) {
+                                    Fuse.log( "Adding waypoint at index", needle, "to final waypoints." );
+                                }
+                            }
+                        }
+                     }
             },
 
             sanatizeWaypoint: function( waypoint ) {
