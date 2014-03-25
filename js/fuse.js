@@ -19,11 +19,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         callbacks: {
             directionsSuccess: function(directions) {
-                // bind the directions renderer to the map if it
-                // has no map.
-                // the directoins renderer is unbound from 
-                // the map when Fuse.map.reset() is called.
-                if (!this.directionsRenderer.getMap()) {
+                /**
+                 * Bind the directions renderer to the map if it has no map.
+                 * The directoins renderer is unbound from the map 
+                 * when Fuse.map.reset() is called.
+                 */
+                if ( !this.directionsRenderer.getMap() ) {
                     this.directionsRenderer.setMap(this.obj);
                 }
                 var $panel = $("#directions-panel");
@@ -40,44 +41,54 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.loading("hide");
             },
 
+            tripRouteSuccess: function( directions ) {
+                if( !this.directionsRenderer.getMap() ) {
+                    this.directionsRenderer.setMap( this.obj );
+                }
+
+                this.directionsRenderer.setDirections( directions );
+                Fuse.loading( "hide" );
+            },
+
             directionsError: function(error) {
-                Fuse.loading("hide");
-                switch (error) {
+                Fuse.loading( "hide" );
+                switch ( error ) {
                     case Maps.DirectionsStatus.NOT_FOUND:
-                        Fuse.log("ERROR! One of the locations in the directions request could not be found.");
+                        Fuse.log( "ERROR! One of the locations in the directions request could not be found." );
                         break;
                     case Maps.DirectionsStatus.ZERO_RESULTS:
-                        Fuse.log("ERROR! No route was found between the given origin and destination points.");
+                        Fuse.log( "ERROR! No route was found between the given origin and destination points." );
                         break;
                     case Maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED:
-                        Fuse.log("ERROR! Too many additional waypoints used in directions request.");
+                        Fuse.log( "ERROR! Too many additional waypoints used in directions request." );
                         break;
                     case Maps.DirectionsStatus.INVALID_REQUEST:
-                        Fuse.log("ERROR! Directions request was invalid. This usually occurs because the origin and/or destination points are missing.");
+                        Fuse.log( "ERROR! Directions request was invalid. This usually occurs because the origin and/or destination points are missing." );
                         break;
                     case Maps.DirectionsStatus.OVER_QUERY_LIMIT:
-                        Fuse.log("ERROR! Too many directins requests have been issued within the alotted time. Try again later.");
+                        Fuse.log( "ERROR! Too many directins requests have been issued within the alotted time. Try again later." );
                         break;
                     case Maps.DirectionsStatus.REQUEST_DENIED:
-                        Fuse.log("ERROR! No permission to use directions service.");
+                        Fuse.log( "ERROR! No permission to use directions service." );
                         break;
                     case Maps.DirectionsStatus.UNKNOWN_ERROR:
-                        Fuse.log("ERROR! The directions service request encountered an unknown error. Try again later.");
+                        Fuse.log( "ERROR! The directions service request encountered an unknown error. Try again later." );
                         break;
                     default:
-                        throw new Error("Fatal Google Maps Directions Error!");
+                        throw new Error( "Fatal Google Maps Directions Error!" );
                         break;
                 }
             }
         },
 
-        invoke: function(cb, context) {
-            this.callbacks[cb].apply(context, Array.prototype.slice.call(arguments, 2));
+        invoke: function( cb, context ) {
+            this.callbacks[ cb ].apply( context, Array.prototype.slice.call( arguments, 2 ) );
         },
 
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar",
+            "trips": "Trips"
         },
 
         Router: Backbone.Router.extend({
@@ -96,6 +107,34 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         fragment: Backbone.history.fragment
                     });
                 }
+            },
+
+            invokeControllerFunction: function() {
+                var args = Array.prototype.slice.call(arguments);
+
+                // if the first argument is a function name.
+                if ( typeof args !== "undefined" && typeof args[ 0 ] === "string" ) {
+                    var func = this.controller[ args[ 0 ] ];
+                    // if its not a valid function.
+                    if ( !func ) {
+                        Fuse.log( "No such controller function:", func );
+                        Fuse.log( "Aborting route execution from router:", this );
+                    } else {
+                        // invoke the function, passing it any leftover arguments
+                        // we have.
+                        func.apply( this.controller, args[ 1 ] );
+                    }
+                }
+            }
+        }),
+
+        Collection: Backbone.Collection.extend({
+            filterById: function(id) {
+                var filtered = this.filter(function( item ) {
+                    return id === item.get( "id" );
+                });
+                
+                return ( filtered.length > 0 ) ?  new this.constructor( filtered ) : this;
             }
         }),
 
@@ -227,16 +266,35 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
                 if (previous && Backbone.history.fragment === previous.fragment && "findcar" !== next) {
-                    var viewName = Fuse.RouteToView[current.name];
+                    var viewName = Fuse.RouteToView[current.name], view;
 
-                    if ("Fleet" === viewName && previous.args) {
-                        viewName = "Vehicle";
+                    if ( previous.args.length ) {
+                        switch( viewName ) {
+                            case "Fleet":
+                                view = "Vehicle";
+                                break;
+                            default:
+                                view = viewName;
+                                break;
+                        }
+                    } else {
+                        switch( viewName ) {
+                            case "Trips":
+                                view = "TripAggregate";
+                                break;
+                            default:
+                                view = viewName;
+                                break;
+                        }
                     }
 
-                    changePageOptions["transition"] = this.controller.views[viewName].transition;
+                    Fuse.log( view );
+
+                    changePageOptions["transition"] = this.controller.views[view].transition;
                     changePageOptions["reverse"] = true;
                 }
-                
+
+                Fuse.log( "Changing page to:", this.el, "with options:", changePageOptions );
                 $.mobile.changePage(this.$el, changePageOptions);
             }
         }),
@@ -251,29 +309,38 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             // overlay types
             OverlayTypeId: {
-                MARKER: 0
+                MARKER: 0,
+                TRIP: 1
             },
+
+            MAX_ADDITONAL_WAYPOINTS: 8,
 
             overlays: [],
             listeners: [],
             infoWindow: new Maps.InfoWindow(),
-            // this is used to offset the default google maps zoom level
-            // in case we don't have enough markers/overlays for the default
-            // zoom level to make sense. 3 seems to be a reasonable ceiling for
-            // the number of overlays needed for the default google maps zoom 
-            // to look good. So when there are less than 3 markers/overlays
-            // on the map, we make use of the zoom offfset, otherwise it's ignored.
+            /**
+             * this is used to offset the default google maps zoom level
+             * in case we don't have enough markers/overlays for the default
+             * zoom level to make sense. 3 seems to be a reasonable ceiling for
+             * the number of overlays needed for the default google maps zoom 
+             * to look good. So when there are less than 3 markers/overlays
+             * on the map, we make use of the zoom offfset, otherwise it's ignored.
+             */
             MAX_ZOOM_OFFSET: 4,
             MIN_ZOOM_OFFSET: 2,
 
             MIN_OVERLAYS: 3,
 
-            invokeDirectionsSuccess: function(directions) {
-                Fuse.invoke("directionsSuccess", this, directions)
+            invokeDirectionsSuccess: function( directions ) {
+                Fuse.invoke( "directionsSuccess", this, directions )
             },
 
-            invokeDirectionsError: function(error) {
-                Fuse.invoke("directionsError", this, error);
+            invokeTripRouteSuccess: function( directions ) {
+                Fuse.invoke( "tripRouteSuccess", this, directions );
+            },
+
+            invokeDirectionsError: function( error ) {
+                Fuse.invoke( "directionsError", this, error );
             },
 
             reset: function() {
@@ -302,9 +369,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     overlay.setMap(null);
                 }
 
-                if (this.bounds) {
-                    delete this.bounds;
-                }
+                this.bounds = null;
 
                 // reset zoom offset.
                 this.zoomOffset = 5;
@@ -312,6 +377,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // reset directions renderer.
                 this.directionsRenderer.setPanel(null);
                 this.directionsRenderer.setMap(null);
+
+                this.willAutoFit = false;
+                this.lats = [];
+                this.lngs = [];
+                this.sanatizedWaypoints = [];
+                this.salientWaypoints = [];
 
                 var $panel = $("#directions-panel");
                 if ($panel.length && $panel.is(":visible")) {
@@ -334,7 +405,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             configure: function(config) {
                 this.reset();
                 Fuse.log("Map configuration:", config);
-                if (!config) {
+                if ( !config ) {
                     Fuse.log("Invalid map configuration:", config);
                     return;
                 }
@@ -347,15 +418,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // of the containing element.
                 this.height = config.height || $(document.body).height();
                 // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
-                this.width = (config.width || this.$container.width()) + 25;
+                this.width = ( config.width || this.$container.width() ) + 25;
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.
                 this.bounds = new Maps.LatLngBounds();
                 // add overlays, if any.
-                if (config.overlays) {
-                    while (config.overlays.length) {
-                        this.addOverlay(config.overlays.pop());
+                if ( config.overlays ) {
+                    while ( config.overlays.length ) {
+                        this.addOverlay( config.overlays.pop() );
                     }
                 }
 
@@ -381,53 +452,66 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 }, this);
 
-                // give the map sufficient time to be setup before asking it to be fitted
-                // to our bounds and zoom level. Tried binding to events triggered by the map
-                // but they were unreliable for determining when the map was ready. So, just to be 
-                // safe we simply give it 140 milliseconds to initialize itself, which appears
-                // to be about the amount of time it takes for the map to finish setting itself
-                // up.
-                setTimeout(fitter, 140);
+                /**
+                 * give the map sufficient time to be setup before asking it to be fitted
+                 * to our bounds and zoom level. Tried binding to events triggered by the map
+                 * but they were unreliable for determining when the map was ready. So, just to be 
+                 * safe we simply give it 140 milliseconds to initialize itself, which appears
+                 * to be about the amount of time it takes for the map to finish setting itself
+                 * up.
+                 */
+
+                // Dont manually handle map fitting if its going to be handled automatically by the Google Maps API.
+                if ( !this.willAutoFit ) {
+                    setTimeout( fitter, 140 );
+                }
             },
 
-            addOverlay: function(overlay) {
+            addOverlay: function( overlay ) {
                 var googOverlay;
-                // if the overlay is a marker.
-                if (this.OverlayTypeId.MARKER === overlay.type) {
-                    var animation;
-                    if (!overlay.animation || "DROP" === overlay.animation.toUpperCase()) {
-                        animation = Maps.Animation.DROP;
-                    } else {
-                        animation = Maps.Animation.BOUNCE;
-                    }
+                // Determine the type of overlay.
+                switch( overlay.type ) {
+                    case this.OverlayTypeId.MARKER:
+                        var animation;
+                        if ( !overlay.animation || "DROP" === overlay.animation.toUpperCase() ) {
+                            animation = Maps.Animation.DROP;
+                        } else {
+                            animation = Maps.Animation.BOUNCE;
+                        }
 
-                    var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
+                        var position = new Maps.LatLng(overlay.position.latitude, overlay.position.longitude);
 
-                    var marker = {
-                        position: position,
-                        title: overlay.title,
-                        animation: animation
-                    };
+                        var marker = {
+                            position: position,
+                            title: overlay.title,
+                            animation: animation
+                        };
 
-                    // if we were given an icon, use it.
-                    if (overlay.icon) {
-                        marker["icon"] = overlay.icon;
-                    }
+                        // if we were given an icon, use it.
+                        if (overlay.icon) {
+                            marker[ "icon" ] = overlay.icon;
+                        }
 
-                    googOverlay = new Maps.Marker(marker);
+                        googOverlay = new Maps.Marker( marker );
 
-                    if (typeof overlay.route !== "undefined") {
-                        this.addRouteToOverlay(overlay.route, googOverlay);
-                    }
+                        if ( typeof overlay.route !== "undefined" ) {
+                            this.addRouteToOverlay(overlay.route, googOverlay);
+                        }
+                        Fuse.log( "Adding overlay:", googOverlay, "to map:", this );
+                        // add the overlay to the map.
+                        googOverlay.setMap( this.obj );
+                        // extend the bounds object to include this marker position.
+                        this.bounds.extend( position );
+                        // keep track of this overlay so we can remove it later.
+                        this.overlays.push( googOverlay );
+                        break;
+                    case this.OverlayTypeId.TRIP:
+                        this.renderTripRoute( overlay );
+                        this.willAutoFit = true;
+                        break;
+                    default:
+                        break;
                 }
-
-                Fuse.log("Adding overlay:", googOverlay, "to map:", this);
-                // add the overlay to the map.
-                googOverlay.setMap(this.obj);
-                // extend the bounds object to include this marker position.
-                this.bounds.extend(position);
-                // keep track of this overlay so we can remove it later.
-                this.overlays.push(googOverlay);
             },
 
             addRouteToOverlay: function(route, googOverlay) {
@@ -499,6 +583,112 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         ecb.call(self, status);
                     }
                 });
+            },
+
+            // Renders a trip route on the map.
+            renderTripRoute: function ( trip ) {
+                this.lats = [];
+                this.lngs = [];
+                this.sanatizedWaypoints = [];
+                this.salientWaypoints = [];
+                var origin = new Maps.LatLng( trip.origin.latitude, trip.origin.longitude ),
+                    destination = new Maps.LatLng( trip.destination.latitude, trip.destination.longitude );
+
+                _.each([ origin, destination ], function( el, idx ) {
+                    this.lats.push( el.lat() );
+                    this.lngs.push( el.lng() );
+                }, this );
+
+                var routeRequest = {
+                    origin: origin,
+                    destination: destination,
+                    travelMode: Maps.TravelMode.DRIVING
+                };
+
+                /**
+                 * What follows is a waypoint salience algorithm
+                 * that aims to include the most meaningful additional
+                 * waypoints present in the trip data, if any at all.
+                 */
+
+                 // Check if we have any additional waypoints at all.
+                 if ( trip.waypoints ) {
+                    Fuse.log( trip.waypoints.length, "additional waypoints available for trip:", trip.id );
+
+                    switch( Object.prototype.toString.call( trip.waypoints ) ) {
+                        case "[object Array]":
+                            _.each( trip.waypoints, function(waypoint, idx) {
+                                this.sanatizeWaypoint( waypoint.value );
+                            }, this );
+                            break;
+                        case "[object Object]":
+                            this.sanatizeWaypoint ( trip.waypoints.value );
+                            break;
+                        default:
+                            Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
+                            break;
+                    }
+
+                    /**
+                     * 'sanatizedWaypoints' now contains only unique supplementary waypoints.
+                     * Now we run 'sanatizedWaypoints' through a salience algorithm because
+                     * the google maps javascript API only allows us to send a limited number
+                     * of additional waypoints (8 to be exact) in a directions service request. 
+                     * Waypoints that meet the salience requirements will be pushed onto 'salientWaypoints.'
+                     * 'salientWaypoints' is then the collection of waypoints we send with
+                     * our directions service request.
+                     */
+                    if ( this.sanatizedWaypoints.length > 0 ) {
+                        if ( this.sanatizedWaypoints.length > this.MAX_ADDITONAL_WAYPOINTS ) {
+                            var interestInterval = Math.floor( this.sanatizedWaypoints.length / 4 );
+                            Fuse.log( "1/4 of all unique waypoints is approximatley", interestInterval, "elements." );
+                            var needle = 0;
+                            while ( needle < this.sanatizedWaypoints.length ) {
+                                if ( needle % interestInterval === 0 ) {
+                                    Fuse.log( "Adding waypoint at index", needle, "to final waypoints." );
+                                    this.salientWaypoints.push( this.sanatizedWaypoints[ needle ] );
+                                }
+                                ++needle;
+                            }
+
+                            // If no waypoints passed our salience filter, just use the sanatized waypoints as the salient waypoints.
+                            this.salientWaypoints = ( this.salientWaypoints.length ) ? this.salientWaypoints : this.sanatizedWaypoints;
+
+                            // Reverse our salient waypoints so they are in the correct chronological order again.
+                            if ( this.salientWaypoints.length > 1 ) {
+                                this.salientWaypoints.reverse();
+                            }
+
+                            var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
+                            routeRequest[ "waypoints" ] = this.salientWaypoints;
+
+                            Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
+                        }
+                    } else {
+                        Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
+                    }
+
+                    // Make the request.
+                    Fuse.loading( "show", "getting trip route..." );
+                    this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
+                }
+            },
+
+            sanatizeWaypoint: function( waypoint ) {
+                var latLngSplit = waypoint.split( "," ),
+                    lat = latLngSplit[ 0 ],
+                    lng = latLngSplit[ 1 ];
+
+                // Check to make sure we're not adding a duplicate waypoint.
+                if ( this.lats.indexOf( lat ) === -1 && this.lngs.indexOf( lng ) === -1 ) {
+                    this.sanatizedWaypoints.push({
+                        location: new Maps.LatLng( lat, lng ),
+                        stopover: false
+                    });
+
+                    this.lats.push( lat );
+                    this.lngs.push( lng );
+                }
             }
         },
 
@@ -518,10 +708,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     }
                 }
 
-                if (id && id[1]) {
-                    this.show(action, {id: id[1]});
+                if ( id && id[ 1 ] ) {
+                    this.show( action, { id: id[ 1 ] });
                 } else {
-                    this.show(action);
+                    this.show( action );
                 }
 
 
@@ -543,7 +733,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
 
             }, this);
-            var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet});
+            var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet.index});
             $(document.body).append(menu);
             $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
             $(document).on("swiperight", "[data-role='page']", function(e) {
@@ -622,19 +812,107 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.preventGhostTaps();
             // add custom underscore template helpers.
             this.addTemplateHelpers({
-                // got the regex idea from stackoverflow.
-                // the regex uses 2 lookahead assertions: 
-                // - a positive one to look for any point in 
-                //   the string that has a multiple of 3 digits 
-                //   in a row after it 
-                // - a negative assertion to make sure that point 
-                //   only has exactly a multiple of 3 digits. 
-                // The replacement expression puts a comma there.
+                /**
+                 * Insert commas into numbers where needed.
+                 * got the regex idea from stackoverflow.
+                 * the regex uses 2 lookahead assertions: 
+                 * - a positive one to look for any point in 
+                 *   the string that has a multiple of 3 digits 
+                 *   in a row after it 
+                 * - a negative assertion to make sure that point 
+                 *   only has exactly a multiple of 3 digits. 
+                 * The replacement expression puts a comma there.
+                 */
                 commaSeperateNumber: function(num) {
                     var parts = num.toString().split(".");
                     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     return parts.join(".");
-                }
+                },
+
+                /**
+                 * Format a date for human consumption.
+                 * Takes an optional paramater that determines whether
+                 * it should return a precomposed human readable date or
+                 * the raw Date object.
+                 */
+                formatDate: function( datetime, prettyPrint ) {
+                    // Get the date into a managable format.
+                    datetime = datetime.replace(/\+/, "")
+                                       .replace(/T/g, "")
+                                       .replace(/:/, "")
+                                       .replace(/\s/g, "");
+
+                    var dateYear = datetime.slice(0,4),
+                        dateMonth = datetime.slice(4,6),
+                        dateDay = datetime.slice(6,8),
+                        dateHour = datetime.slice(8,10),
+                        dateMinute = datetime.slice(10,12),
+                        dateSecond = datetime.slice(12,14),
+                        dateBuild  = dateYear + '-' +
+                                     dateMonth + '-' +
+                                     dateDay + 'T' +
+                                     dateHour + ':' +
+                                     dateMinute + ':' +
+                                     dateSecond + '.000Z',
+                        out = new Date( dateBuild );
+
+                    return ( prettyPrint ) ? out.toLocaleDateString() + " " + out.toLocaleTimeString() : out;
+                },
+
+                /**
+                 * Take a duration in milliseconds and convert it to a human consumable format.
+                 * Also takes a boolean, succint. Causes the function to return 'minutes seconds'
+                 * format instead of 'hours minutes seconds.'
+                 */
+                formatDuration: function( duration, succint ) {
+                    var totalSeconds = parseInt( duration / 1000 ),
+                        hours = parseInt( totalSeconds / 24 ) % 24,
+                        minutes = parseInt( totalSeconds / 60 ) % 60,
+                        seconds = parseInt( totalSeconds % 60, 10 ),
+                        form = ( succint ) ? "succint" : "plural";
+                        iterator = ( succint ) ? [ minutes, seconds ] : [ hours, minutes, seconds ],
+                        redableDuration = iterator.map(function( val, i ) {
+                            if ( val > 0 ) {
+                                return val + ( ( succint ) ? "" : " " )  
+                                           + ( ( val > 1 ) ? this.time.get( i, form ) : 
+                                                this.time.get( i, form ) );
+                            } else {
+                                return "";
+                            }
+                        }, this ).join(" ");
+
+                    return redableDuration;
+                },
+
+                /**
+                 * A lookup table for units of time
+                 * and a helper function to retrieve a specified
+                 * unit of time given an index.
+                 */
+                 time: {
+
+                    units: [
+                        {
+                            singular: "hour",
+                            plural: "hours",
+                            succint: "h"
+                        },
+                        {
+                            singular: "minute",
+                            plural: "minutes",
+                            succint: "m"
+                        },
+                        {
+                            singular: "second",
+                            plural: "seconds",
+                            succint: "s"
+                        }
+                    ],
+
+                    get: function( i, form ) {
+                        return this.units[ i ][ form ];
+                    }
+                 }
             });
 
             // tell Backbone to start listening for hashchanges.

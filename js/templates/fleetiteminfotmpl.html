@@ -1,31 +1,31 @@
 <div class="ui-grid-b list-item-info">
-	<% if (fuelLevel >= 20) { %>
-	<div class="ui-block-a round-box small-box green">
-	<% } else { %>
-	<div class="ui-block-a round-box small-box red">
-	<% } %>
-		<p class='margin-off'>Fuel</p>
-		<h3 class='margin-off'><%= fuelLevel %>%</h3>
-	</div>
-	<div class="ui-block-b round-box large-box">
-		<p class='margin-off'>Location</p>
-		<% if (speed > 0) { %>
-			<h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
-		<% } else { %>
-			<h3 class='margin-off'>Parked at <%= address %></h3>
-		<% } %>
-	</div>
+    <% if (fuelLevel >= 20) { %>
+    <div class="ui-block-a round-box small-box green">
+    <% } else { %>
+    <div class="ui-block-a round-box small-box red">
+    <% } %>
+        <p class='margin-off'>Fuel</p>
+        <h3 class='margin-off'><%= fuelLevel %>%</h3>
+    </div>
+    <div class="ui-block-b round-box large-box">
+        <p class='margin-off'>Location</p>
+        <% if (speed > 0) { %>
+            <h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
+        <% } else { %>
+            <h3 class='margin-off'>Parked at <%= address %></h3>
+        <% } %>
+    </div>
 </div>
 <% if (alerts[0].code !== "0000") { %>
 <div class="ui-grid-b list-item-info">
-	<div class="ui-block-a alert-box small-box">
-		<p class='margin-off'>Code</p>
-		<h3 class='margin-off'><%= alerts[0].code %></h3>
-	</div>
-	<div class="ui-block-b alert-box large-box">
-		<p class='margin-off'>Message</p>
-		<h3 class='margin-off'><%= alerts[0].message %></h3>
-	</div>
+    <div class="ui-block-a alert-box small-box">
+        <p class='margin-off'>Code</p>
+        <h3 class='margin-off'><%= alerts[0].code %></h3>
+    </div>
+    <div class="ui-block-b alert-box large-box">
+        <p class='margin-off'>Message</p>
+        <h3 class='margin-off'><%= alerts[0].message %></h3>
+    </div>
 </div>
 <% } %>
 

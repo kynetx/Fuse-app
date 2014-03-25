@@ -1,29 +1,32 @@
-define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
+define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
     return Fuse.Router.extend({
         routes: {
             "fleet": "showFleet",
             "fleet/:id": "showVehicle",
             "findcar": "showFindCar",
             "findcar/:id": "showFindCar",
-        },
-        
-        showFleet: function() {
-        	this.controller.showFleet();
+            "trips": "showTripAggregate",
+            "trips/:id": "showTrips"
         },
 
-        showVehicle: function(id) {
-        	this.controller.showVehicle(id);
+        showFleet: function() {
+        	this.invokeControllerFunction( "showFleet", arguments );
+        },
+
+        showVehicle: function() {
+            this.invokeControllerFunction( "showVehicle", arguments );
         },
 
         showFindCar: function() {
-            var args = arguments;
-
-            // if we have an id.
-            if (typeof args[0] !== "undefined") {
-                this.controller.showFindCar(args[0]);
-            } else {
-                this.controller.showFindCar();
-            }
+            this.invokeControllerFunction( "showFindCar", arguments );
         },
+
+        showTripAggregate: function() {
+            this.invokeControllerFunction( "showTripAggregate", arguments );
+        },
+
+        showTrips: function( id ) {
+            this.invokeControllerFunction( "showTrips", arguments );
+        }
     });
 });

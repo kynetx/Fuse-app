@@ -1,0 +1,20 @@
+<h5><%= FTH.formatDate( startTime, true ) %></h5>
+<div class="fuse-trip-container">
+    <div class="ui-grid-b">
+        <div class="ui-block-a">
+            <h5 class="center-text">Miles</h5>
+            <p class="center-text"><%= FTH.commaSeperateNumber( distance ) %></p>
+        </div>
+        <div class="ui-block-b">
+            <h5 class="center-text">Time</h5>
+            <p class="center-text"><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></p>
+        </div>
+        <div class="ui-block-c">
+            <h5 class="center-text">Cost</h5>
+            <p class="center-text">$<%= FTH.commaSeperateNumber( cost ) %></p>
+        </div>
+    </div>
+    <div class="fuse-trip-map-trigger center-text">
+        <img src="style/images/location_icon.png" title="View this trip on a map.">
+    </div>
+</div>

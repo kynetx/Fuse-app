@@ -1,5 +1,5 @@
 define(["fuse", "jquery", "underscore", "text!templates/fleetitemtmpl.html"], function(Fuse, $, _, fleetItemTmpl) {
-	// represets an item in the vehicle list.
+    // represets an item in the vehicle list.
     return Fuse.View.extend({
         tagName: "li",
         className: "fleet-item",
