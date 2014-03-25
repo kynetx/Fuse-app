@@ -480,8 +480,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         this.overlays.push( googOverlay );
                         break;
                     case this.OverlayTypeId.TRIP:
-                        alert( "Map will render with the following options:" + "\n" + JSON.stringify( overlay, null, 4 ) );
-                        this.reset();
+                        Fuse.log( "Map will render with the following options:", overlay );
+                        throw new Error( "Not yet implemented" );
                         break;
                     default:
                         break;
