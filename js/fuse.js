@@ -824,10 +824,34 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  *   only has exactly a multiple of 3 digits. 
                  * The replacement expression puts a comma there.
                  */
-                commaSeperateNumber: function(num) {
+                commaSeperateNumber: function( num ) {
                     var parts = num.toString().split(".");
                     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     return parts.join(".");
+                },
+
+                msToTime: function( num ) {
+                    // Find days
+                    var days = Math.floor(num/(1000 * 60 * 60 * 24));
+                    var remainder = num % (1000 * 60 * 60 * 24);
+
+                    // Find hours
+                    var hours = Math.floor(remainder/(1000 * 60 * 60));
+                    remainder = num % (1000 * 60 * 60);
+
+                    // Find minutes
+                    var minutes = Math.floor(remainder/(1000 * 60));
+                    remainder = num % (1000 * 60);
+
+                    // Find seconds
+                    var seconds = Math.floor(remainder/1000);
+
+                    var buildTime = '';
+                    if (days >= 1) buildTime += days.toString() + ':';
+                    if (hours >= 1) buildTime += hours.toString() + ':';
+                    if (minutes >= 1) buildTime += minutes.toString() + ':';
+                    if (seconds >= 1) buildTime += seconds.toString();
+                    return buildTime;
                 },
 
                 /**
