@@ -831,12 +831,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 },
 
                 msToTime: function( num ) {
-                    // Find days
-                    var days = Math.floor(num/(1000 * 60 * 60 * 24));
-                    var remainder = num % (1000 * 60 * 60 * 24);
-
                     // Find hours
-                    var hours = Math.floor(remainder/(1000 * 60 * 60));
+                    var hours = Math.floor(num/(1000 * 60 * 60));
                     remainder = num % (1000 * 60 * 60);
 
                     // Find minutes
@@ -847,10 +843,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     var seconds = Math.floor(remainder/1000);
 
                     var buildTime = '';
-                    if (days >= 1) buildTime += days.toString() + ':';
-                    if (hours >= 1) buildTime += hours.toString() + ':';
-                    if (minutes >= 1) buildTime += minutes.toString() + ':';
-                    if (seconds >= 1) buildTime += seconds.toString();
+                    if (hours >= 1) buildTime += hours.toString() + 'h ';
+                    if (minutes >= 1) buildTime += minutes.toString() + 'm ';
+                    if (seconds >= 1) buildTime += seconds.toString() + 's';
                     return buildTime;
                 },
 

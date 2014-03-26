@@ -13,21 +13,21 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "month": {
                     "trip": {
                         "distance": 2456,
-                        "time": 123456789234324342,
+                        "time": 123456234,
                         "cost": 102.34
                     }
                 },
                 "year": {
                     "trip": {
                         "distance": 2456789,
-                        "time": 1234567892343243422345,
+                        "time": 12345678234,
                         "cost": 800
                     }
                 },
                 "total": {
                     "trip": {
-                        "distance": 2456789101122,
-                        "time": 12345678923432434234757654,
+                        "distance": 245678910,
+                        "time": 12345678923234,
                         "cost": 20000
                     }
                 }
@@ -77,7 +77,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     "total": {
                         "trip": {
                             "distance": 24567,
-                            "time": 12345678923,
+                            "time": 12345678,
                             "cost": 2000
                         }
                     }
