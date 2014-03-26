@@ -19,5 +19,7 @@ require(["jquery"], function($) {
         $.mobile.phonegapNavigationEnabled = true;
         //no native datepicker will conflict with the jQM component
         $.mobile.page.prototype.options.degradeInputs.date = true;
+        // set a horizontal distance threshold on swipes.
+        $.event.special.swipe.horizontalDistanceThreshold = 100;
     });
 });
