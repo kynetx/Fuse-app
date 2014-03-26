@@ -1,15 +1,15 @@
 <h3><%= nickname %></h3>
 <div class="ui-grid-b list-item-info">
     <div class="ui-block-a round-box">
-        <h5>Miles</h5>
-        <p><%= FTH.commaSeperateNumber( aggregates.month.trip.distance ) %></p>
+        <h5 class='margin-off'>Miles</h5>
+        <p class='margin-off'><%= FTH.commaSeperateNumber( aggregates.month.trip.distance ) %></p>
     </div>
     <div class="ui-block-b round-box">
-        <h5>Time</h5>
-        <p><%= FTH.msToTime(aggregates.month.trip.time) %> ms</p>
+        <h5 class='margin-off'>Time</h5>
+        <p class='margin-off'><%= FTH.msToTime(aggregates.month.trip.time) %></p>
     </div>
     <div class="ui-block-c round-box">
-        <h5>Cost</h5>
-        <p>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %></p>
+        <h5 class='margin-off'>Cost</h5>
+        <p class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %></p>
     </div>
 </div>

@@ -837,7 +837,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     // Find minutes
                     var minutes = Math.floor(remainder/(1000 * 60));
-                    remainder = num % (1000 * 60);
+                    remainder = remainder % (1000 * 60);
 
                     // Find seconds
                     var seconds = Math.floor(remainder/1000);
