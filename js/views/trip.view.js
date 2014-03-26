@@ -6,6 +6,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.ht
         attributes: function() {
             return {
                 "data-role": "collapsible",
+                "data-inset": "false",
                 "data-tid": this.model.get( "id" )
             };
         },
