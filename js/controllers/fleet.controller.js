@@ -75,6 +75,14 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
 
             this.views.Trips.render();
+        },
+
+        showFuelAggregate: function() {
+            this.views.FuelAggregate.render();
+        },
+
+        showFuel: function ( id ) {
+            this.fuelData = "????????";
         }
     });
 });
