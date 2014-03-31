@@ -6,6 +6,7 @@
  */
 require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
     // setup dummy data. Will eventually come from API obviously.
+    // v1.0.0 will only have month aggregates.
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
@@ -14,6 +15,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                         "distance": 2456,
                         "time": 123456789234324342,
                         "cost": 102.34
+                    },
+                    "fuel": {
+                        "mpg": 25.4,
+                        "gallons": 50,
+                        "cost": 200,
+                        "cpg": 2.77,
+                        "cpm": 0.95
                     }
                 },
                 "year": {
