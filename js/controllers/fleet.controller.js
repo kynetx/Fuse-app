@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view" ], function( Fuse, $, _, FleetCollection, TripCollection, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelSmartView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view" ], function( Fuse, $, _, FleetCollection, TripCollection, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -14,7 +14,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 collection: this.fleet
             });
         },
-
+        
         showFleet: function() {
             this.views.Fleet.render();
         },
@@ -31,17 +31,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 model: this.vehicle
             });
             this.views.Vehicle.render();
-        },
-
-        showFuelSmart: function() {
-            var args = arguments;
-            var hasID = typeof args[0] !== "undefined";
-            var collection = (hasID) ? this.fleet.filterById(args[0]) : this.fleet;
-            this.views["FuelSmart"] = new FuelSmartView({
-                controller: this,
-                collection: collection
-            });
-            this.views.FuelSmart.render();
         },
 
         showFindCar: function() {
