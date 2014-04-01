@@ -251,3 +251,8 @@ ul.ui-listview>li.ui-first-child {
     margin-left: 4px;
     margin-top: 6px;
 }
+
+.footer-icon {
+    padding: 0px;
+    margin: 0px;
+}
