@@ -1,12 +1,7 @@
 <ul data-role="listview" data-inset="false">
     <li>
         <img src="<%= icon %>" class="car-thumbnail">
-        <h1> <%= nickname %>
-            <% if (running) { %>
-                <img src="style/images/vehicle_on.png" class="vehicle-status-icon" title="Vehicle is on">
-            <% } else { %>
-                <img src="style/images/vehicle_off.png" class="vehicle-status-icon" title="Vehicle is off">
-            <% } %>
+        <h1 class="margin-off header-font"> <%= nickname %>
         </h1>
         <p> <%= make %>, <%= model %></p>
     </li>

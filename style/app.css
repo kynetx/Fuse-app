@@ -150,12 +150,10 @@ div > ul.dashboard {
 
 .round-box.green {
     background-color: rgba(80,200,80,.8);
-    color: white;
 }
 
 .round-box.red {
     background-color: rgba(255,100,100,.8);
-    color: white;
 }
 
 .alert-box {
@@ -183,13 +181,14 @@ div > ul.dashboard {
 }
 
 .small-box {
+    text-align: left;
     width: 20% !important;
 }
 
 .large-box {
     width: 77.97316% !important; /*This is the best number I could find*/
     text-align: left;
-    padding-left: 16px;
+    padding-left: 2px;
 }
 
 .detail-item-info>.list-item-info>.large-box>h3 {
@@ -229,9 +228,26 @@ ul.ui-listview>li.ui-first-child {
 .list-title {
     font-size: 150% !important;
 }
-.header-font {
-    vertical-align: middle;
+
+.title-font {
     font-weight: normal !important;
     padding-top: 3px !important;
     font-size: 180% !important;
+}
+
+.detail-font {
+    font-size: 100% !important;
+    font-family: serif !important;
+}
+
+.data-font {
+    font-size: 105% !important;
+    position: relative;
+    top:-3px;
+}
+
+.data-icon {
+    margin-right: 8px;
+    margin-left: 4px;
+    margin-top: 6px;
 }
