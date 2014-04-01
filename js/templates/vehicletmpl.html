@@ -1,8 +1,7 @@
 <ul data-role="listview" data-inset="false">
     <li>
         <img src="<%= icon %>" class="car-thumbnail">
-        <h1 class="margin-off header-font"> <%= nickname %>
-        </h1>
+        <h1 class="margin-off title-font"> <%= nickname %></h1>
         <p> <%= make %>, <%= model %></p>
     </li>
     <li class="detail-item-info">
@@ -12,32 +11,16 @@
             <% } else { %>
             <div class="ui-block-a round-box small-box red">
             <% } %>
-                <p class='margin-off'>Fuel</p>
-                <h3 class='margin-off'><%= fuelLevel %>%</h3>
+                <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" class='data-icon' style="width: 16px;">
+                <span class='margin-off data-font'><%= fuelLevel %>%</span>
             </div>
             <div class="ui-block-b round-box large-box">
-                <p class='margin-off'>Location</p>
+                <img src="style/images/location_icon_b.png" title="View Fuel Statistics" class='data-icon' style="width: 11px;">
                 <% if (speed > 0) { %>
-                    <h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
+                    <span class='margin-off data-font'><%= speed %> MPH on <%= address %></span>
                 <% } else { %>
-                    <h3 class='margin-off'>Parked at <%= address %></h3>
+                    <span class='margin-off data-font'>Parked at <%= address %></span>
                 <% } %>
-            </div>
-        </div>
-    </li>
-    <li class="detail-item-info">
-        <div class="ui-grid-b list-item-info">
-            <div class="ui-block-a round-box">
-                <p class='margin-off'>Battery Charge</p>
-                <h3 class='margin-off'><%= batteryVoltage %></h3>
-            </div>
-            <div class="ui-block-b round-box">
-                <p class='margin-off'>Odometer</p>
-                <h3 class='margin-off'><%= FTH.commaSeperateNumber(mileage) %></h3>
-            </div>
-            <div class="ui-block-b round-box">
-                <p class='margin-off'>MPG</p>
-                <h3 class='margin-off'><%= mpg %></h3>
             </div>
         </div>
     </li>
@@ -45,12 +28,11 @@
     <li class="detail-item-info">
         <div class="ui-grid-b list-item-info">
             <div class="ui-block-a alert-box small-box">
-                <p class='margin-off'>Code</p>
-                <h3 class='margin-off'><%= alerts[0].code %></h3>
+                <img src="style/images/alert_icon_b.png" title="View Fuel Statistics" class='data-icon' style="width: 12px;">
+                <span class='margin-off data-font'><%= alerts[0].code %></span>
             </div>
             <div class="ui-block-b alert-box large-box">
-                <p class='margin-off'>Message</p>
-                <h3 class='margin-off'><%= alerts[0].message %></h3>
+                <span class='margin-off data-font'><%= alerts[0].message %></span>
             </div>
         </div>
     </li>

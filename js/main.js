@@ -148,6 +148,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     "latitude": 40.74937,
                     "longitude": -111.82633
                 },
+                "alerts": [
+                    {
+                        "code": "P0193",
+                        "message": "Fuel Rail Pressure Sensor Circuit High Input",
+                        "timestamp": "never"
+                    },
+                ],
                 "timestamp": "19910831T060849T+07:00",
                 "running": true,
                 "fuelRate": 2.63,
