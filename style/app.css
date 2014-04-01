@@ -24,6 +24,7 @@
 }
 
 .fuse-header-container img {
+    min-height: 40px;
     cursor: pointer;
 }
 
@@ -112,6 +113,7 @@ div > ul.dashboard {
 
 .fleet-item {
     background-color: white !important;
+    min-height: 58px !important;
 }
 
 .fleet-item:hover {
@@ -132,14 +134,18 @@ div > ul.dashboard {
     margin: 0px !important;
 }
 
+.padding-off {
+    padding: 0px !important;
+}
+
 .round-box {
-    background-color: rgba(0,0,0,.15);
+    background-color: rgba(0,0,0,.60);
     border-radius: .125em;
     margin-right: 2px;
     margin-left: 2px;
     padding: 2px;
     text-shadow: none;
-    color: #505050;
+    color: white;
 }
 
 .round-box.green {
@@ -218,4 +224,14 @@ ul.ui-listview>li.ui-first-child {
 
 .trip-aggregate-item {
     cursor: pointer;
+}
+
+.list-title {
+    font-size: 150% !important;
+}
+.header-font {
+    vertical-align: middle;
+    font-weight: normal !important;
+    padding-top: 3px !important;
+    font-size: 180% !important;
 }
