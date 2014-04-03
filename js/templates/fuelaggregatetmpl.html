@@ -1,17 +1,22 @@
 <div class="fuel-aggregate-totals ui-grid-a">
     <div class="ui-block-a">
+        <h5>Total Cost</h5>
         <%= totals.fuel.cost %>
     </div>
     <div class="ui-block-b">
+        <h5>Total Gals Used</h5>
         <%= totals.fuel.gallons %>
     </div>
 </div>
 <div class="fuel-aggregate-avgs ui-grid-b">
     <div class="ui-block-a">
+        <h5>Avg. MPG</h5>
     </div>
     <div class="ui-block-b">
+        <h5>Avg. $/Gal</h5>
     </div>
     <div class="ui-block-c">
+        <h5>Avg. $/Mile</h5>
     </div>
 </div>
 <% for ( var i = 0; i < aggs.length; ++i ) { %>
