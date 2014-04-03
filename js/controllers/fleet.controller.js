@@ -13,6 +13,10 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 model: new AggregateModel( Fuse.FIXTURES.fleet.aggregates.month ),
                 collection: this.fleet
             });
+            this.views[ "FuelAggregate" ] = new FuelAggregateView({
+                controller: this,
+                model: new AggregateModel( Fuse.FIXTURES.fleet.aggregates )
+            })
         },
         
         showFleet: function() {
@@ -82,7 +86,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showFuel: function ( id ) {
-            this.fuelData = "????????";
+            this.views[ "Fuel" ] = new FuelView({
+                controller: this,
+                model: this.fleet.filterById( id )
+            });
+            this.views.Fuel.render();
         }
     });
 });

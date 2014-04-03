@@ -7,6 +7,7 @@
 require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
     // setup dummy data. Will eventually come from API obviously.
     // v1.0.0 will only have month aggregates.
+    // TODO: BKA please put other past month aggregates in these models.
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
@@ -72,6 +73,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "distance": 24,
                             "time": 123456,
                             "cost": 50
+                        },
+                        "fuel": {
+                            "mpg": 17.2,
+                            "gallons": 20,
+                            "cost": 100,
+                            "cpm": 0.50,
+                            "cpg": 2.75
                         }
                     },
                     "year": {
@@ -121,6 +129,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "distance": 24,
                             "time": 123456,
                             "cost": 50
+                        },
+                        "fuel": {
+                            "mpg": 17.2,
+                            "gallons": 20,
+                            "cost": 100,
+                            "cpm": 0.50,
+                            "cpg": 2.73
                         }
                     },
                     "year": {
@@ -170,6 +185,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "distance": 24,
                             "time": 123456,
                             "cost": 50
+                        },
+                        "fuel": {
+                            "mpg": 17.2,
+                            "gallons": 20,
+                            "cost": 100,
+                            "cpm": 0.50,
+                            "cpg": 2.71
                         }
                     },
                     "year": {
