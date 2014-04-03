@@ -3,6 +3,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
         init: function() {
             this.fleet = new FleetCollection( Fuse.FIXTURES.fleet.index );
+            this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total )
             this.views = {};
             this.views[ "Fleet" ] = new FleetView({
                 controller: this,
@@ -10,10 +11,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
+                model: this.totals,
                 collection: this.fleet
             });
             this.views[ "FuelAggregate" ] = new FuelAggregateView({
                 controller: this,
+                model: this.totals,
                 collection: this.fleet
             });
         },

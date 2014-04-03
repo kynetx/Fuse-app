@@ -18,7 +18,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
 
         render: function() {
             this.aggregates.length = 0;
-            this.collection.each(function ( vehicle ) {
+            this.collection.each(function( vehicle ) {
                 this.renderAggregateItem( vehicle );
             }, this );
 
