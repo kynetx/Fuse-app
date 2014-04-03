@@ -37,6 +37,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                         "distance": 2456789101122,
                         "time": 12345678923432434234757654,
                         "cost": 20000
+                    },
+                    "fuel": {
+                        "mpg": 21.3,
+                        "gallons": 1000
+                        "cost": 5000,
+                        "cpg": 3.32,
+                        "cpm": 0.73
                     }
                 }
             },
