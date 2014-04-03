@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view" ], function( Fuse, $, _, FleetCollection, TripCollection, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view" ], function( Fuse, $, _, FleetCollection, TripCollection, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -10,13 +10,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
-                model: new AggregateModel( Fuse.FIXTURES.fleet.aggregates.month ),
                 collection: this.fleet
             });
             this.views[ "FuelAggregate" ] = new FuelAggregateView({
                 controller: this,
-                model: new AggregateModel( Fuse.FIXTURES.fleet.aggregates )
-            })
+                collection: this.fleet
+            });
         },
         
         showFleet: function() {
@@ -88,7 +87,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showFuel: function ( id ) {
             this.views[ "Fuel" ] = new FuelView({
                 controller: this,
-                model: this.fleet.filterById( id )
+                model: this.fleet.get( id )
             });
             this.views.Fuel.render();
         }
