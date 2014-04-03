@@ -11,14 +11,17 @@
 <div class="fuel-aggregate-avgs ui-grid-b">
     <div class="ui-block-a">
         <h5>Avg. MPG</h5>
+        <%= totals.fuel.mpg %>
     </div>
     <div class="ui-block-b">
         <h5>Avg. $/Gal</h5>
+        <%= totals.fuel.cpg %>
     </div>
     <div class="ui-block-c">
         <h5>Avg. $/Mile</h5>
+        <%= totals.fuel.cpm %>
     </div>
 </div>
-<% for ( var i = 0; i < aggs.length; ++i ) { %>
+<% for( var i = 0; i < aggs.length; ++i ) { %>
     <%= aggs[ i ].outerHTML %>
 <% } %>
