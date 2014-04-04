@@ -40,7 +40,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     },
                     "fuel": {
                         "mpg": 21.3,
-                        "gallons": 1000
+                        "gallons": 1000,
                         "cost": 5000,
                         "cpg": 3.32,
                         "cpm": 0.73
