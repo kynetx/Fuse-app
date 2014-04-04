@@ -89,7 +89,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showFuel: function ( id ) {
-            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( {} );
+            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( [] );
             this.views[ "Fuel" ] = new FuelView({
                 controller: this,
                 model: this.fleet.get( id ),

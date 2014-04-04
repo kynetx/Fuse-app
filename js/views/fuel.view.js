@@ -7,6 +7,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         template: _.template( fuelTmpl ),
 
         events: {
+            "tap .trigger-fillup": "recordFillup"
         },
 
         initialize: function() {
@@ -17,6 +18,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         render: function() {
             Fuse.View.prototype.render.call( this );
         },
+
+        recordFillup: function() {
+            // here we need to popup a modal.
+            // Does jquery mobile have anything for this?
+        }
 
     });
 });
