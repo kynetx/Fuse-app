@@ -7,7 +7,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         template: _.template( fuelTmpl ),
 
         events: {
-            // trigger fillup entry here.
         },
 
         initialize: function() {
@@ -16,8 +15,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         render: function() {
-            if ( 34 > testVal )
-            // more to come...
         },
 
     });
