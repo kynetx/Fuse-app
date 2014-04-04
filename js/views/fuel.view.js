@@ -16,6 +16,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         render: function() {
+            if ( 34 > testVal )
             // more to come...
         },
 
