@@ -11,10 +11,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
-            this.header = this.model.get( "nickname" ) + " " + "Fuel";
+            this.header = this.model.get( "nickname" );
         },
 
         render: function() {
+            Fuse.View.prototype.render.call( this );
         },
 
     });
