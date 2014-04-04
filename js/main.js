@@ -793,7 +793,9 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "key": "GEN_WAYPOINT"
             }
             ]
-        }]
+        }],
+        
+        "fillups": []
     };
 
     Fuse.menu = [{
