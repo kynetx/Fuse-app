@@ -1,14 +1,24 @@
 <div class="fuel-interaction ui-grid-a">
     <div class="ui-block-a">
+        <h5>Fuel Level</h5>
+        <%= vehicle.fuelLevel %>%
     </div>
     <div class="ui-block-b">
+        <a class="trigger-fillup">Fill 'er Up!</a>
     </div>
 </div>
 <div class="fuel-data">
     <div class="fuel-totals ui-grid-a">
+        <div class="ui-block-a">
+            <%= vehicle.aggregates.month.fuel.gallons %>
+        </div>
+        <div class="ui-block-b">
+            <%= vehicle.aggregates.month.fuel.cost %>
+        </div>
     </div>
     <div class="fuel-avgs ui-grid-b">
     </div>
     <div class="fuel-trend-graph">
+        <h1>Humor me and picture a fancy graph here.</h1>
     </div>
 </div>

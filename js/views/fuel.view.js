@@ -16,6 +16,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         render: function() {
+            this.content = this.template({ vehicle: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
         },
 
