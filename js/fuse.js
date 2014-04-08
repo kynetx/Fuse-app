@@ -92,6 +92,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             "trips": "Trips"
         },
 
+        shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+
         Router: Backbone.Router.extend({
             initialize: function() {
                 this.on("route", this.addRouteToHistory, this);

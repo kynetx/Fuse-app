@@ -1,20 +1,27 @@
 <h5><%= FTH.formatDate( startTime, true ) %></h5>
 <div class="fuse-trip-container">
-    <div class="ui-grid-b list-item-info">
-        <div class="ui-block-a round-box">
-            <p class="center-text margin-off">Miles</p>
-            <h3 class="center-text margin-off"><%= FTH.commaSeperateNumber( distance ) %></h3>
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/trip_icon_b.png" style="width: 20px;">
         </div>
-        <div class="ui-block-b round-box">
-            <p class="center-text margin-off">Time</p>
-            <h3 class="center-text margin-off"><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></h3>
-        </div>
-        <div class="ui-block-c round-box">
-            <p class="center-text margin-off">Cost</p>
-            <h3 class="center-text margin-off">$<%= FTH.commaSeperateNumber( cost ) %></h3>
-        </div>
+        <span class='margin-off'><%= FTH.commaSeperateNumber( distance ) %> miles traveled</span>
     </div>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/time_icon_b.png" style="width: 18px;">
+        </div>
+        <span class='margin-off'><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></span>
+    </div>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>$<%= FTH.commaSeperateNumber( cost ) %></span>
+    </div>
+
     <div class="fuse-trip-map-trigger center-text">
-        <img src="style/images/location_icon.png" title="View this trip on a map.">
+        <img src="style/images/location_icon.png">
     </div>
 </div>

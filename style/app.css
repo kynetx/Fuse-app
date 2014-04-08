@@ -86,19 +86,40 @@
     border-top-right-radius: 48px;
 }
 
-.fleet-items {
-    border-bottom: 2px solid gray !important;
+.fleet-item-header {
+    height: 58px !important;
+    border-width: 0px !important;
+    background-color: rgba(0,0,0,.6) !important;
+    border-top: 1px solid rgba(0,0,0,.3) !important;
+    border-bottom: 6px solid rgba(0,0,0,.3) !important;
 }
 
-.fleet-item {
-    min-height: 58px !important;
-    border-width: 0px !important;
-    border-top: 1px solid gray !important;
+.fleet-item-header:hover {
+    background-color: rgba(0,0,0,.4) !important;
+}
+
+.trip {
+    background-color: rgba(0,0,0,.6) !important;
+}
+
+.trip:hover {
+    background-color: rgba(0,0,0,.4) !important;
 }
 
 .fleet-item-info {
     padding: .2em !important;
     border-top-width: 0px !important;
+    background-color: rgba(0,0,0,.02) !important;
+}
+
+.vehicle-data {
+    text-overflow: ellipsis !important;
+}
+
+li.vehicle-data {
+    padding: 0px !important;
+    border-width: 0px !important;
+    white-space: normal !important;
 }
 
 .margin-off {
@@ -138,6 +159,11 @@
     font-family: serif !important;
 }
 
+.white-font {
+    color: white;
+    text-shadow: none;
+}
+
 .footer-icon {
     padding: 0px;
     margin: 0px;
@@ -153,6 +179,7 @@
     width: 22px;
     text-align: center;
     height: 22px;
+    border-bottom: 4px solid rgba(0,0,0,.3);
 }
 
 .icon-box > img.light {
@@ -160,7 +187,7 @@
 }
 
 .icon-box.dark {
-    background-color: rgba(0,0,0,.60);
+    background-color: rgba(0,0,0,.5);
 }
 
 .icon-box.red {
