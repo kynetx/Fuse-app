@@ -1,20 +1,28 @@
-define(["fuse", "jquery", "underscore", "text!templates/fueltmpl.html"], function(Fuse, $, _, fuelTmpl) {
-	// represets an item in the vehicle list.
+define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.html" ], function( Backbone, Fuse, $, _, fuelTmpl ) {
     return Fuse.View.extend({
+        id: "fuel",
         tagName: "div",
         role: "page",
-        header: "Fuel Smart",
-        transition: "flip",
-        template: _.template(fuelTmpl),
+        transition: "slide",
+        template: _.template( fuelTmpl ),
+
+        events: {
+            "tap .trigger-fillup": "recordFillup"
+        },
 
         initialize: function() {
-            Fuse.View.prototype.initialize.apply(this, arguments);
-            this.header = "Smart Fuel";
-            this.content = this.template(this.collection.vehicle);
+            Fuse.View.prototype.initialize.apply( this, arguments );
+            this.header = this.model.get( "nickname" );
         },
 
         render: function() {
-            Fuse.View.prototype.render.apply(this, arguments);
+            this.content = this.template({ vehicle: this.model.toJSON() });
+            Fuse.View.prototype.render.call( this );
+        },
+
+        recordFillup: function() {
+            alert( "Enter fillup info here..." );
         }
+
     });
 });

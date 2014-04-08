@@ -1,1 +1,36 @@
-<h3>Smart Fuel Template</h3>
+<div class="fuel-interaction ui-grid-a">
+    <div class="ui-block-a">
+        <h5>Fuel Level</h5>
+        <p><%= vehicle.fuelLevel %>%</p>
+    </div>
+    <div class="ui-block-b">
+        <p><a class="trigger-fillup">Fill 'er Up!</a></p>
+    </div>
+</div>
+<div class="fuel-data">
+    <div class="fuel-totals ui-grid-a">
+        <div class="ui-block-a">
+            <p><%= vehicle.aggregates.month.fuel.gallons %></p>
+        </div>
+        <div class="ui-block-b">
+            <p><%= vehicle.aggregates.month.fuel.cost %></p>
+        </div>
+    </div>
+    <div class="fuel-avgs ui-grid-b">
+        <div class="ui-block-a">
+            <h5>MPG</h5>
+            <p><%= vehicle.aggregates.month.fuel.mpg %></p>
+        </div>
+        <div class="ui-block-b">
+            <h5>Avg $/Gal</h5>
+            <p><%= vehicle.aggregates.month.fuel.cpg %></p>
+        </div>
+        <div class="ui-block-c">
+            <h5>Avg $/Mile</h5>
+            <p><%= vehicle.aggregates.month.fuel.cpm %></p>
+        </div>
+    </div>
+    <div class="fuel-trend-graph">
+        <h1>graph here.</h1>
+    </div>
+</div>
