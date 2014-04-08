@@ -221,6 +221,13 @@ ul.ui-listview>li.ui-first-child {
 }
 
 /**
+ * The button that opens the fillup popup.
+ */
+.trigger-fillup {
+    cursor: pointer;
+}
+
+/**
  * Form for recording fillups in fuel section of the app.
  */
  #fuel-popup {
