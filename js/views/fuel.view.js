@@ -32,6 +32,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         recordFillup: function(e) {
+            // We dont want to trigger silly submit actions.
+            e.preventDefault();
         }
 
     });
