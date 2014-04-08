@@ -5,10 +5,10 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             "fleet/:id": "showVehicle",
             "findcar": "showFindCar",
             "findcar/:id": "showFindCar",
-            "fuelsmart": "showFuelSmart",
-            "fuelsmart/:id": "showFuelSmart",
             "trips": "showTripAggregate",
-            "trips/:id": "showTrips"
+            "trips/:id": "showTrips",
+            "fuel": "showFuelAggregate",
+            "fuel/:id": "showFuel"
         },
 
         showFleet: function() {
@@ -26,20 +26,17 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
         showTripAggregate: function() {
             this.invokeControllerFunction( "showTripAggregate", arguments );
         },
-
-        showFuelSmart: function() {
-            var args = arguments;
-
-            // if we have an id.
-            if (typeof args[0] !== "undefined") {
-                this.controller.showFuelSmart(args[0]);
-            } else {
-                this.controller.showFuelSmart();
-            }
-        },
         
         showTrips: function( id ) {
             this.invokeControllerFunction( "showTrips", arguments );
+        },
+
+        showFuelAggregate: function( id ) {
+            this.invokeControllerFunction( "showFuelAggregate", arguments );
+        },
+
+        showFuel: function( id ) {
+            this.invokeControllerFunction( "showFuel", arguments );
         }
     });
 });

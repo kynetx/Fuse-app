@@ -216,6 +216,6 @@ ul.ui-listview>li.ui-first-child {
     width: 18px;
  }
 
-.trip-aggregate-item {
+.trip-aggregate-item, .fuel-aggregate-item {
     cursor: pointer;
 }

@@ -1,14 +1,14 @@
-define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.aggregate.item.view", "text!templates/tripaggregatetmpl.html" ], function( Fuse, $, _, AggregateModel, TripAggregateItemView, tripAggregateTmpl ) {
+define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.aggregate.item.view", "text!templates/fuelaggregatetmpl.html" ], function( Fuse, $, _, AggregateModel, FuelAggregateItemView, fuelAggregateTmpl ) {
     return Fuse.View.extend({
-        id: "trips",
+        id: "fuel-aggregate",
         tagName: "div",
         role: "page",
-        header: "Trips",
+        header: "Fuel",
         transition: "slide",
-        template: _.template( tripAggregateTmpl ),
+        template: _.template( fuelAggregateTmpl ),
 
         events: {
-            "tap .trip-aggregate-item": "showTripsForVehicle"
+            "tap .fuel-aggregate-item": "showFuelForVehicle"
         },
 
         initialize: function() {
@@ -18,7 +18,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
 
         render: function() {
             this.aggregates.length = 0;
-            this.collection.each(function( vehicle ) {
+            this.collection.each(function ( vehicle ) {
                 this.renderAggregateItem( vehicle );
             }, this );
 
@@ -28,16 +28,16 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
         },
 
         renderAggregateItem: function( vehicle ) {
-            var aggregate = new TripAggregateItemView({
+            var aggregate = new FuelAggregateItemView({
                 model: vehicle
             });
 
             this.aggregates.push( aggregate.render().el );
         },
 
-        showTripsForVehicle: function( e ) {
-            var vid = $( e.target ).closest( ".trip-aggregate-item" ).data( "vid" );
-            Fuse.show( "trips", { id: vid } );
+        showFuelForVehicle: function( e ) {
+            var vid = $( e.target ).closest( ".fuel-aggregate-item" ).data( "vid" );
+            Fuse.show( "fuel", { id: vid } );
             e.handled = true;
         }
     });

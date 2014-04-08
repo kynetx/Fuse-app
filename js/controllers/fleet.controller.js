@@ -1,8 +1,11 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view" ], function( Fuse, $, _, FleetCollection, TripCollection, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelSmartView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView ) {
     return Fuse.Controller.extend({
 
         init: function() {
             this.fleet = new FleetCollection( Fuse.FIXTURES.fleet.index );
+            this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total )
+            this.trips = new TripCollection( Fuse.FIXTURES.trips );
+            this.fillups = {};
             this.views = {};
             this.views[ "Fleet" ] = new FleetView({
                 controller: this,
@@ -10,11 +13,16 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
-                model: new AggregateModel( Fuse.FIXTURES.fleet.aggregates.month ),
+                model: this.totals,
+                collection: this.fleet
+            });
+            this.views[ "FuelAggregate" ] = new FuelAggregateView({
+                controller: this,
+                model: this.totals,
                 collection: this.fleet
             });
         },
-
+        
         showFleet: function() {
             this.views.Fleet.render();
         },
@@ -31,17 +39,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 model: this.vehicle
             });
             this.views.Vehicle.render();
-        },
-
-        showFuelSmart: function() {
-            var args = arguments;
-            var hasID = typeof args[0] !== "undefined";
-            var collection = (hasID) ? this.fleet.filterById(args[0]) : this.fleet;
-            this.views["FuelSmart"] = new FuelSmartView({
-                controller: this,
-                collection: collection
-            });
-            this.views.FuelSmart.render();
         },
 
         showFindCar: function() {
@@ -78,7 +75,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * the fleet index so that we can show the trips view immediately and then lazy load
              * the next N trips in the background so that delays are minimal.
              */
-            this.trips = new TripCollection( Fuse.FIXTURES.trips );
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
                 model: this.fleet.get( id ),
@@ -86,6 +82,20 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
 
             this.views.Trips.render();
+        },
+
+        showFuelAggregate: function() {
+            this.views.FuelAggregate.render();
+        },
+
+        showFuel: function ( id ) {
+            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( [] );
+            this.views[ "Fuel" ] = new FuelView({
+                controller: this,
+                model: this.fleet.get( id ),
+                fillups: this.fillups[ id ]
+            });
+            this.views.Fuel.render();
         }
     });
 });

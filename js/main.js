@@ -6,6 +6,8 @@
  */
 require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
     // setup dummy data. Will eventually come from API obviously.
+    // v1.0.0 will only have month aggregates.
+    // TODO: BKA please put other past month aggregates in these models.
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
@@ -14,6 +16,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                         "distance": 2456,
                         "time": 123456789234324342,
                         "cost": 102.34
+                    },
+                    "fuel": {
+                        "mpg": 25.4,
+                        "gallons": 50,
+                        "cost": 200,
+                        "cpg": 2.77,
+                        "cpm": 0.95
                     }
                 },
                 "year": {
@@ -28,6 +37,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                         "distance": 2456789101122,
                         "time": 12345678923432434234757654,
                         "cost": 20000
+                    },
+                    "fuel": {
+                        "mpg": 21.3,
+                        "gallons": 1000,
+                        "cost": 5000,
+                        "cpg": 3.32,
+                        "cpm": 0.73
                     }
                 }
             },
@@ -64,6 +80,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "distance": 24,
                             "time": 123456,
                             "cost": 50
+                        },
+                        "fuel": {
+                            "mpg": 17.2,
+                            "gallons": 20,
+                            "cost": 100,
+                            "cpm": 0.50,
+                            "cpg": 2.75
                         }
                     },
                     "year": {
@@ -113,6 +136,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "distance": 24,
                             "time": 123456,
                             "cost": 50
+                        },
+                        "fuel": {
+                            "mpg": 17.2,
+                            "gallons": 20,
+                            "cost": 100,
+                            "cpm": 0.50,
+                            "cpg": 2.73
                         }
                     },
                     "year": {
@@ -162,6 +192,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                             "distance": 24,
                             "time": 123456,
                             "cost": 50
+                        },
+                        "fuel": {
+                            "mpg": 17.2,
+                            "gallons": 20,
+                            "cost": 100,
+                            "cpm": 0.50,
+                            "cpg": 2.71
                         }
                     },
                     "year": {
@@ -756,7 +793,9 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "key": "GEN_WAYPOINT"
             }
             ]
-        }]
+        }],
+        
+        "fillups": []
     };
 
     Fuse.menu = [{
