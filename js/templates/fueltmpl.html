@@ -34,6 +34,17 @@
         <h1>graph here.</h1>
     </div>
 </div>
-<div class="fuel-popup" data-role="popup" data-position-to="popup">
+<div id="fuel-popup" data-role="popup" data-transition="pop" data-position-to="window">
     <h5>Record Fillup</h5>
+    <div class="fuel-popup-guts">
+        <form id="record-fillup">
+            <input id="num-gallons" type="number" placeholder="Gallons filled">
+            <input id="price-gallon" type="number" placeholder="Price/Gallon">
+            <select>
+                <option selected disabled>Location (Choose one:)</option>
+                <option val="none">None</option>
+            </select>
+            <button type="submit">Record Fillup</button>
+        </form>
+    </div>
 </div>

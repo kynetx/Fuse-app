@@ -7,7 +7,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         template: _.template( fuelTmpl ),
 
         events: {
-            "tap .trigger-fillup": "recordFillup"
+            "tap .trigger-fillup": "showFillupForm",
+            "submit #record-fillup": "recordFillup"
         },
 
         initialize: function() {
@@ -20,8 +21,17 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             Fuse.View.prototype.render.call( this );
         },
 
-        recordFillup: function() {
-            Fuse.log( "Going to record fillup." );
+        showFillupForm: function() {
+            var $popup = $( "#fuel-popup" );
+
+            if ( $popup.length ) {
+                $popup.popup( "open" );
+            } else {
+                Fuse.log( "Popup could not be found." );
+            }
+        },
+
+        recordFillup: function(e) {
         }
 
     });
