@@ -21,7 +21,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         recordFillup: function() {
-            alert( "Enter fillup info here..." );
+            Fuse.log( "Going to record fillup." );
         }
 
     });

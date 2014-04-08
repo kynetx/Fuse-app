@@ -587,7 +587,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             // Renders a trip route on the map.
-            renderTripRoute: function ( trip ) {
+            renderTripRoute: function( trip ) {
                 this.lats = [];
                 this.lngs = [];
                 this.sanatizedWaypoints = [];
