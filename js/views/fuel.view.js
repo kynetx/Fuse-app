@@ -21,8 +21,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         recordFillup: function() {
-            // here we need to popup a modal.
-            // Does jquery mobile have anything for this?
+            alert( "Enter fillup info here..." );
         }
 
     });
