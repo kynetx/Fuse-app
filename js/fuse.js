@@ -307,6 +307,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             directionsService: new Maps.DirectionsService(),
             directionsRenderer: new Maps.DirectionsRenderer(),
+            placesService: new Maps.places.placesService(   )
 
             // overlay types
             OverlayTypeId: {
@@ -586,6 +587,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 });
             },
 
+            /**
+             * Make a call to the google places api to get nearby places
+             * given a location and a place classification.
+             * @param location - location object with "lattitude" & longitude keys.
+             * @param classification - the type of places to be searched. IE resteraunt, hostpital, etc. 
+             */
+            makePlacesRequest: function( location, classification ) {
+                var self = this;
+                self.placesService.nearbySearch
+            },
+
             // Renders a trip route on the map.
             renderTripRoute: function( trip ) {
                 this.lats = [];
@@ -623,7 +635,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             }, this );
                             break;
                         case "[object Object]":
-                            this.sanatizeWaypoint ( trip.waypoints.value );
+                            this.sanatizeWaypoint( trip.waypoints.value );
                             break;
                         default:
                             Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
