@@ -1,27 +1,3 @@
 <h5><%= FTH.formatDate( startTime, true ) %></h5>
-<div class="fuse-trip-container">
-    <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/trip_icon_b.png" style="width: 20px;">
-        </div>
-        <span class='margin-off'><%= FTH.commaSeperateNumber( distance ) %> miles traveled</span>
-    </div>
-
-    <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/time_icon_b.png" style="width: 18px;">
-        </div>
-        <span class='margin-off'><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></span>
-    </div>
-
-    <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/cost_icon_b.png" style="width: 12px;">
-        </div>
-        <span class='margin-off'>$<%= FTH.commaSeperateNumber( cost ) %></span>
-    </div>
-
-    <div class="fuse-trip-map-trigger center-text">
-        <img src="style/images/location_icon.png">
-    </div>
+<div>
 </div>

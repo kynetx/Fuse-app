@@ -17,7 +17,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         render: function() {
-            $('#fuel-icon').addClass('active');
             var lastdate='';
             this.tripViews.length = 0;
             this.collection.each(function ( trip ) {
@@ -36,7 +35,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             }, this );
 
             this.content = this.template({ vehicle: this.model.toJSON(), tripViews: this.tripViews });
-            console.log(this.content);
+            $('#fuel-icon').children().attr('src', 'style/images/fuel_icon_active.png');
             Fuse.View.prototype.render.call( this );
         },
 
