@@ -22,10 +22,20 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.collection.each(function ( trip ) {
                 var startTime = trip.get("startTime");
                 var date = startTime.substring(0,9);
+
+                if (date === lastdate) {
+                    // Render the trip inside the date collapsible
+                } else {
+                    // Set lastdate to date
+                    // Render the day
+                    // Render the trip Render the trip inside the date collapsible
+                }
+
                 this.renderTrip( trip );
             }, this );
 
             this.content = this.template({ vehicle: this.model.toJSON(), tripViews: this.tripViews });
+            console.log(this.content);
             Fuse.View.prototype.render.call( this );
         },
 
