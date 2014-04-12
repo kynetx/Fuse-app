@@ -81,7 +81,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             placesSuccess: function( places, cb ) {
-                Fuse.log( places );
                 if ( typeof cb === "function" ) {
                     cb( places );
                 }
@@ -89,7 +88,33 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             placesError: function( error ) {
                 Fuse.loading( "hide" );
-                Fuse.log( error );
+
+                switch ( error ) {
+                    case Maps.places.PlacesServiceStatus.ERROR:
+                        Fuse.log( "ERROR! There was a general error contacting the Google Places Service API." );
+                        break;
+                    case Maps.olaces.PlacesServiceStatus.INVALID_REQUEST:
+                        Fuse.log( "ERROR! Google Places Service request was invalid." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT:
+                        Fuse.log( "ERROR! Too many Google Places Service requests have been issues within the alloted time. Try again later." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.NOT_FOUND:
+                        Fuse.log( "ERROR! The location used in the Google Places Service request could not be found." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.REQUEST_DENIED:
+                        Fuse.log( "ERROR! Fuse has been blocked from using the Google Places Service API." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.ZERO_RESULTS:
+                        Fuse.log( "ERROR! No matching places returned from Google Places Service." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.UNKNOWN_ERROR:
+                        Fuse.log( "ERROR! A Google Places Service API Server Error occured. The request may succeed if it is attempted again." );
+                        break;
+                    default:
+                        throw new Error( "Fatal Google Places Service Error!" );
+                        break;
+                }
             }
         },
 
@@ -609,9 +634,24 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
              * given a classification.
              * @param classification - the type of places to be searched. IE resteraunt, hostpital, etc. 
              */
-            getNearbyPlaces: function( classification ) {
+            getNearbyPlaces: function( classification, cb ) {
                 var self = this;
-                self.placesService.nearbySearch
+                Fuse.getCurrentLocation(function( location ) {
+                    var pos = new Maps.LatLng( location.latitude, location.longitude ),
+                        psr = {
+                            location:   pos,
+                            radius:     2000, // in meters
+                            types:      [ classification ],
+                            rankBy:     google.maps.RankBy.DISTANCE
+                        };
+                    self.placesService.nearbySearch( psr, function( places, status ) {
+                        if ( Maps.places.PlacesServiceStatus.OK === status ) {
+                            self.invokePlacesSuccess( places, cb );
+                        } else {
+                            self.invokePlacesError( status );
+                        }
+                    });
+                });
             },
 
             // Renders a trip route on the map.
