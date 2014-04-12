@@ -25,6 +25,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             var $popup = $( "#fuel-popup" );
 
             if ( $popup.length ) {
+                Fuse.loading( "show", "Getting nearby gas stations." );
+                this.getGasStations(function() {
+                    $popup.popup( "open" );
+                    Fuse.loading( "hide" );
+                });
                 $popup.popup( "open" );
             } else {
                 Fuse.log( "Popup could not be found." );
@@ -34,6 +39,15 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         recordFillup: function(e) {
             // We dont want to trigger silly submit actions.
             e.preventDefault();
+        },
+
+        getGasStations: function( cb ) {
+            Fuse.loading( "show", "getting nearby gas stations" );
+            Fuse.getNearbyPlaces( "gas_station", this.populateGasStations );
+        },
+
+        populateGasStations: function( stations ) {
+
         }
 
     });

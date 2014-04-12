@@ -80,11 +80,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.loading( "hide" );
             },
 
-            placesSuccess: function( places ) {
+            placesSuccess: function( places, cb ) {
                 Fuse.log( places );
+                if ( typeof cb === "function" ) {
+                    cb( places );
+                }
             },
 
             placesError: function( error ) {
+                Fuse.loading( "hide" );
                 Fuse.log( error );
             }
         },
@@ -352,6 +356,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.invoke( "tripRouteSuccess", this, directions );
             },
 
+            invokePlacesSuccess: function( places, cb ) {
+                Fuse.invoke( "placesSuccess", places, cb );
+            },
+
+            invokePlacesError: function( error ) {
+                Fuse.invoke( "placesError", error );
+            },
+
             reset: function() {
                 var $body = $(document.body);
                 // if the container is set to the body already, we don't need to do anything.
@@ -571,12 +583,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 } else {
                     // otherwise grab the user's current location and use it as the origin
                     // in the drections service request.
-                    if ("geolocation" in navigator) {
-                        navigator.geolocation.getCurrentPosition(function(pos) {
-                            dsr["origin"] = new Maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                            map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
-                        });
-                    }
+                    Fuse.getCurrentPosition(function(pos) {
+                        dsr["origin"] = new Maps.LatLng(pos.latitude, pos.longitude);
+                        map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
+                    });
                 }
             },
 
@@ -596,11 +606,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             /**
              * Make a call to the google places api to get nearby places
-             * given a location and a place classification.
-             * @param location - location object with "lattitude" & longitude keys.
+             * given a classification.
              * @param classification - the type of places to be searched. IE resteraunt, hostpital, etc. 
              */
-            makePlacesRequest: function( location, classification ) {
+            getNearbyPlaces: function( classification ) {
                 var self = this;
                 self.placesService.nearbySearch
             },
@@ -995,6 +1004,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     textVisible: true
                 });
             }, 1);
+        },
+
+        getCurrentPosition: function( cb ) {
+            if ( "geolocation" in navigator ) {
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                    if ( typeof cb === "function" ) {
+                        cb({
+                            latitude: pos.coords.latitude,
+                            longitude: pos.coords.longitude
+                        });
+                    }
+                });
+            }
         },
 
         logging: false
