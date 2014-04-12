@@ -41,15 +41,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.loading("hide");
             },
 
-            tripRouteSuccess: function( directions ) {
-                if( !this.directionsRenderer.getMap() ) {
-                    this.directionsRenderer.setMap( this.obj );
-                }
-
-                this.directionsRenderer.setDirections( directions );
-                Fuse.loading( "hide" );
-            },
-
             directionsError: function(error) {
                 Fuse.loading( "hide" );
                 switch ( error ) {
@@ -78,6 +69,23 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         throw new Error( "Fatal Google Maps Directions Error!" );
                         break;
                 }
+            },
+
+            tripRouteSuccess: function( directions ) {
+                if( !this.directionsRenderer.getMap() ) {
+                    this.directionsRenderer.setMap( this.obj );
+                }
+
+                this.directionsRenderer.setDirections( directions );
+                Fuse.loading( "hide" );
+            },
+
+            placesSuccess: function( places ) {
+                Fuse.log( places );
+            },
+
+            placesError: function( error ) {
+                Fuse.log( error );
             }
         },
 
@@ -88,7 +96,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar",
-            "fuelsmart": "FuelSmart",
+            "fuel": "Fuel",
             "trips": "Trips"
         },
 
@@ -307,7 +315,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             directionsService: new Maps.DirectionsService(),
             directionsRenderer: new Maps.DirectionsRenderer(),
-            placesService: new Maps.places.placesService(   )
 
             // overlay types
             OverlayTypeId: {
@@ -337,12 +344,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.invoke( "directionsSuccess", this, directions )
             },
 
-            invokeTripRouteSuccess: function( directions ) {
-                Fuse.invoke( "tripRouteSuccess", this, directions );
-            },
-
             invokeDirectionsError: function( error ) {
                 Fuse.invoke( "directionsError", this, error );
+            },
+
+            invokeTripRouteSuccess: function( directions ) {
+                Fuse.invoke( "tripRouteSuccess", this, directions );
             },
 
             reset: function() {
@@ -775,6 +782,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.map.obj = new Maps.Map(this.map.el, {
                 mapTypeId: Maps.MapTypeId.ROADMAP
             });
+
+            /**
+             * We initialize a PlacesService object here because 
+             * it requires the map object itself being initialized.
+             */
+            this.map.placesService = new Maps.places.PlacesService( this.map.obj );
         },
 
         initTooltips: function() {
