@@ -43,11 +43,12 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         getGasStations: function( cb ) {
             Fuse.loading( "show", "getting nearby gas stations" );
-            Fuse.getNearbyPlaces( "gas_station", this.populateGasStations );
+            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations );
         },
 
         populateGasStations: function( stations ) {
-
+            Fuse.loading( "hide" );
+            Fuse.log( stations );
         }
 
     });

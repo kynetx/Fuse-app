@@ -632,17 +632,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             /**
              * Make a call to the google places api to get nearby places
              * given a classification.
-             * @param classification - the type of places to be searched. IE resteraunt, hostpital, etc. 
+             * @param classification - the type of places to be searched. IE resteraunt, hostpital, etc.
+             * @param cb - callback to handle returned places data.
              */
             getNearbyPlaces: function( classification, cb ) {
                 var self = this;
-                Fuse.getCurrentLocation(function( location ) {
+                Fuse.getCurrentPosition(function( location ) {
                     var pos = new Maps.LatLng( location.latitude, location.longitude ),
                         psr = {
                             location:   pos,
-                            radius:     2000, // in meters
                             types:      [ classification ],
-                            rankBy:     google.maps.RankBy.DISTANCE
+                            rankBy:     Maps.places.RankBy.DISTANCE
                         };
                     self.placesService.nearbySearch( psr, function( places, status ) {
                         if ( Maps.places.PlacesServiceStatus.OK === status ) {
