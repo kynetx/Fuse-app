@@ -382,11 +382,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             invokePlacesSuccess: function( places, cb ) {
-                Fuse.invoke( "placesSuccess", places, cb );
+                Fuse.invoke( "placesSuccess", this, places, cb );
             },
 
             invokePlacesError: function( error ) {
-                Fuse.invoke( "placesError", error );
+                Fuse.invoke( "placesError", this, error );
             },
 
             reset: function() {
@@ -1048,7 +1048,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         getCurrentPosition: function( cb ) {
             if ( "geolocation" in navigator ) {
-                navigator.geolocation.getCurrentPosition(function(pos) {
+                navigator.geolocation.getCurrentPosition(function( pos ) {
                     if ( typeof cb === "function" ) {
                         cb({
                             latitude: pos.coords.latitude,

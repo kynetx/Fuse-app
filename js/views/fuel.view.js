@@ -22,15 +22,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         showFillupForm: function() {
-            var $popup = $( "#fuel-popup" );
-
-            if ( $popup.length ) {
+            this.$popup = $( "#fuel-popup" );
+            if ( this.$popup.length ) {
                 Fuse.loading( "show", "Getting nearby gas stations." );
-                this.getGasStations(function() {
-                    $popup.popup( "open" );
-                    Fuse.loading( "hide" );
-                });
-                $popup.popup( "open" );
+                this.getGasStations();
             } else {
                 Fuse.log( "Popup could not be found." );
             }
@@ -43,12 +38,31 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         getGasStations: function( cb ) {
             Fuse.loading( "show", "getting nearby gas stations" );
-            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations );
+            // We make sure to bind the execution context of the callback to the view itself.
+            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
         },
 
         populateGasStations: function( stations ) {
+            var stationSelect = document.getElementById( "record-fillup" )
+                                         .getElementsByTagName( "select" )[ 0 ],
+                otherOption = document.createElement( "option" );
+
+            otherOption.setAttribute( "value", "other" );
+            otherOption.innerHTML = "Other";
+
+            stations.forEach(function( station ) {
+                var info = station.name + " (" + station.vicinity + ")";
+                var opt = document.createElement( "option" );
+                opt.setAttribute( "value", info );
+                opt.innerHTML = info;
+                stationSelect.appendChild( opt );
+            });
+
+            stationSelect.appendChild( otherOption );
+
+            Fuse.log( "Populated:", stationSelect, "with data:", stations );
             Fuse.loading( "hide" );
-            Fuse.log( stations );
+            this.$popup.popup( "open" );
         }
 
     });
