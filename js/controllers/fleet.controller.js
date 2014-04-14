@@ -89,11 +89,17 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showFuel: function( id ) {
+            /**
+             * Make sure that the vehicle for whom we are requesting the fuel view
+             * has a valid fillups value. If not, initialize it. Also set 'currentFillups'
+             * so that 'addFillups' can access the fillups for the current vehicle.
+             * Note: We may want to sanity check our data modeling here.
+             */
             this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( [] );
+            this.currentFillups = this.fillups[ id ];
             this.views[ "Fuel" ] = new FuelView({
                 controller: this,
-                model: this.fleet.get( id ),
-                fillups: this.fillups[ id ]
+                model: this.fleet.get( id )
             });
             this.views.Fuel.render();
         },
@@ -106,6 +112,15 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
          * @param gasStation  -  gas station where fillup occurred.
          */
         addFillup: function( numGallons, priceGallon, odometer, gasStation ) {
+            var fillup = new FillupModel({
+                numGallons:  numGallons,
+                priceGallon: priceGallon,
+                odometer:    odometer,
+                gasStation:  gasStation
+            });
+
+            this.currentFillups.add( fillup );
+            Fuse.log("Added fillup:", fillup, "to fillup collection:", this.currentFillups );
         }
     });
 });

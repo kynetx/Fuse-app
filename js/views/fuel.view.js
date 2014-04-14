@@ -40,6 +40,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 gasStation = $( "#gas-station" ).val();
 
             this.controller.addFillup( numGallons, priceGallon, odometer, gasStation );
+            this.$popup.popup( "close" );
+            alert( "Success!" );
         },
 
         getGasStations: function( cb ) {
@@ -66,9 +68,15 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             stationSelect.appendChild( otherOption );
 
             Fuse.log( "Populated:", stationSelect, "with data:", stations );
+
+            // If our model has a valid odometer value, pre-populate the odometer input.
+            var odometer = this.model.get( "odometer" );
+            if ( odometer ) {
+                $( "#odometer" ).val( odometer );
+            }
+
             Fuse.loading( "hide" );
             this.$popup.popup( "open" );
         }
-
     });
 });
