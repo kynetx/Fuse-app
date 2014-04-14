@@ -107,7 +107,7 @@
     margin-bottom: 4px;
 }
 
-.fleet-item-header:hover {
+a.fleet-item-header:hover {
     background-color: rgba(0,0,0,.4) !important;
 }
 

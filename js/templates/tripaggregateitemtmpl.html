@@ -1,4 +1,4 @@
-<div class='dark-header padding-off'>
+<div class='dark-header'>
     <h3 class='title-font white-font'><%= nickname %></h3>
 </div>
 <div class="vehicle-data">
@@ -12,12 +12,12 @@
     <div class="icon-box dark">
         <img src="style/images/time_icon_b.png" style="width: 18px;">
     </div>
-    <span class='margin-off'><%= FTH.msToTime(aggregates.month.trip.time) %></span>
+    <span class='margin-off'><%= FTH.msToTime(aggregates.month.trip.time) %> of travel time</span>
 </div>
 
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/cost_icon_b.png" style="width: 12px;">
     </div>
-    <span class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %> total fuel cost</span>
+    <span class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %> spent of fuel</span>
 </div>
