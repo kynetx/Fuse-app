@@ -96,6 +96,16 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 fillups: this.fillups[ id ]
             });
             this.views.Fuel.render();
+        },
+
+        /**
+         * Construct a FillupModel and add it to our FillupCollection.
+         * @param numGallons  -  number of gallons filled.
+         * @param priceGallon -  price per gallon.
+         * @param odometer    -  vehicle odometer reading at time of fillup.
+         * @param gasStation  -  gas station where fillup occurred.
+         */
+        addFillup: function( numGallons, priceGallon, odometer, gasStation ) {
         }
     });
 });

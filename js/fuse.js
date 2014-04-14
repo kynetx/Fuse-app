@@ -632,8 +632,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             /**
              * Make a call to the google places api to get nearby places
              * given a classification.
-             * @param classification - the type of places to be searched. IE resteraunt, hostpital, etc.
-             * @param cb - callback to handle returned places data.
+             * @param classification -  the type of places to be searched. IE resteraunt, hostpital, etc.
+             * @param cb             -  callback to handle returned places data.
              */
             getNearbyPlaces: function( classification, cb ) {
                 var self = this;

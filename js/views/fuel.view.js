@@ -32,8 +32,14 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         recordFillup: function(e) {
-            // We dont want to trigger silly submit actions.
             e.preventDefault();
+            // Grab the values we want.
+            var numGallons = $( "#num-gallons" ).val(),
+                priceGallon = $( "#price-gallon" ).val(),
+                odometer = $( "#odometer" ).val(),
+                gasStation = $( "#gas-station" ).val();
+
+            this.controller.addFillup( numGallons, priceGallon, odometer, gasStation );
         },
 
         getGasStations: function( cb ) {
@@ -43,8 +49,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         populateGasStations: function( stations ) {
-            var stationSelect = document.getElementById( "record-fillup" )
-                                         .getElementsByTagName( "select" )[ 0 ],
+            var stationSelect = document.getElementById( "gas-station" ),
                 otherOption = document.createElement( "option" );
 
             otherOption.setAttribute( "value", "other" );
