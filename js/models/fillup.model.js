@@ -1,12 +1,10 @@
 define([ "fuse" ], function( Fuse ) {
     return Fuse.Model.extend({
         defaults: {
-            "gallons": 0,
-            "ppg": 0.00,
-            "location": {
-                "lattitude": 0,
-                "longitude": 0
-            }
+            "numGallons": 0,
+            "priceGallon": 0.00,
+            "odometer": 000000,
+            "gasStation": "Chevron Salem (390 N SR 198, Salem)"
         }
     });
 });
