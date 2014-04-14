@@ -103,6 +103,8 @@
     background-color: rgba(0,0,0,.6) !important;
     border-top: 1px solid rgba(0,0,0,.3) !important;
     border-bottom: 6px solid rgba(0,0,0,.3) !important;
+    margin-top: 3px;
+    margin-bottom: 4px;
 }
 
 .fleet-item-header:hover {
@@ -159,6 +161,7 @@ li.vehicle-data {
     font-weight: normal !important;
     padding-top: 3px !important;
     font-size: 180% !important;
+    margin: 0px;
 }
 
 .detail-font {
