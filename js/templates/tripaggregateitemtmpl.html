@@ -1,15 +1,21 @@
-<h3><%= nickname %></h3>
-<div class="ui-grid-b list-item-info">
-    <div class="ui-block-a round-box">
-        <p class='margin-off'>Miles</p>
-        <h3 class='margin-off'><%= FTH.commaSeperateNumber( aggregates.month.trip.distance ) %></h3>
+<h3 class='dark-header title-font white-font center-text'><%= nickname %></h3>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/trip_icon_b.png" style="width: 11px;">
     </div>
-    <div class="ui-block-b round-box">
-        <p class='margin-off'>Time</p>
-        <h3 class='margin-off'><%= FTH.msToTime(aggregates.month.trip.time) %></h3>
+    <span class='margin-off'><%= FTH.commaSeperateNumber( aggregates.month.trip.distance ) %> miles traveled</span>
+</div>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/time_icon_b.png" style="width: 11px;">
     </div>
-    <div class="ui-block-c round-box">
-        <p class='margin-off'>Cost</p>
-        <h3 class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %></h3>
+    <span class='margin-off'><%= FTH.msToTime(aggregates.month.trip.time) %></span>
+</div>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/cost_icon_b.png" style="width: 11px;">
     </div>
+    <span class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %> total fuel cost</span>
 </div>

@@ -28,6 +28,10 @@
     cursor: pointer;
 }
 
+#trips > .fuse-content {
+    padding: 0px;
+}
+
 /**
  * see note below about why one must sometimes
  * use !important with style definitions in jQuery Mobile
@@ -88,6 +92,13 @@
 
 .fleet-item-header {
     height: 58px !important;
+    border-width: 0px !important;
+    background-color: rgba(0,0,0,.6) !important;
+    border-top: 1px solid rgba(0,0,0,.3) !important;
+    border-bottom: 6px solid rgba(0,0,0,.3) !important;
+}
+
+.dark-header {
     border-width: 0px !important;
     background-color: rgba(0,0,0,.6) !important;
     border-top: 1px solid rgba(0,0,0,.3) !important;
