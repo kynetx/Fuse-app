@@ -219,3 +219,21 @@ ul.ui-listview>li.ui-first-child {
 .trip-aggregate-item, .fuel-aggregate-item {
     cursor: pointer;
 }
+
+/**
+ * The button that opens the fillup popup.
+ */
+.trigger-fillup {
+    cursor: pointer;
+}
+
+/**
+ * Form for recording fillups in fuel section of the app.
+ */
+ #fuel-popup {
+    padding: 15px;
+ }
+
+ #record-fillup > * {
+    margin: 15px 0;
+ }

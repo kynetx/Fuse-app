@@ -41,15 +41,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.loading("hide");
             },
 
-            tripRouteSuccess: function( directions ) {
-                if( !this.directionsRenderer.getMap() ) {
-                    this.directionsRenderer.setMap( this.obj );
-                }
-
-                this.directionsRenderer.setDirections( directions );
-                Fuse.loading( "hide" );
-            },
-
             directionsError: function(error) {
                 Fuse.loading( "hide" );
                 switch ( error ) {
@@ -78,6 +69,52 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         throw new Error( "Fatal Google Maps Directions Error!" );
                         break;
                 }
+            },
+
+            tripRouteSuccess: function( directions ) {
+                if( !this.directionsRenderer.getMap() ) {
+                    this.directionsRenderer.setMap( this.obj );
+                }
+
+                this.directionsRenderer.setDirections( directions );
+                Fuse.loading( "hide" );
+            },
+
+            placesSuccess: function( places, cb ) {
+                if ( typeof cb === "function" ) {
+                    cb( places );
+                }
+            },
+
+            placesError: function( error ) {
+                Fuse.loading( "hide" );
+
+                switch ( error ) {
+                    case Maps.places.PlacesServiceStatus.ERROR:
+                        Fuse.log( "ERROR! There was a general error contacting the Google Places Service API." );
+                        break;
+                    case Maps.olaces.PlacesServiceStatus.INVALID_REQUEST:
+                        Fuse.log( "ERROR! Google Places Service request was invalid." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT:
+                        Fuse.log( "ERROR! Too many Google Places Service requests have been issues within the alloted time. Try again later." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.NOT_FOUND:
+                        Fuse.log( "ERROR! The location used in the Google Places Service request could not be found." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.REQUEST_DENIED:
+                        Fuse.log( "ERROR! Fuse has been blocked from using the Google Places Service API." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.ZERO_RESULTS:
+                        Fuse.log( "ERROR! No matching places returned from Google Places Service." );
+                        break;
+                    case Maps.places.PlacesServiceStatus.UNKNOWN_ERROR:
+                        Fuse.log( "ERROR! A Google Places Service API Server Error occured. The request may succeed if it is attempted again." );
+                        break;
+                    default:
+                        throw new Error( "Fatal Google Places Service Error!" );
+                        break;
+                }
             }
         },
 
@@ -88,7 +125,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         RouteToView: {
             "fleet": "Fleet",
             "findcar": "FindCar",
-            "fuelsmart": "FuelSmart",
+            "fuel": "Fuel",
             "trips": "Trips"
         },
 
@@ -336,12 +373,20 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.invoke( "directionsSuccess", this, directions )
             },
 
+            invokeDirectionsError: function( error ) {
+                Fuse.invoke( "directionsError", this, error );
+            },
+
             invokeTripRouteSuccess: function( directions ) {
                 Fuse.invoke( "tripRouteSuccess", this, directions );
             },
 
-            invokeDirectionsError: function( error ) {
-                Fuse.invoke( "directionsError", this, error );
+            invokePlacesSuccess: function( places, cb ) {
+                Fuse.invoke( "placesSuccess", this, places, cb );
+            },
+
+            invokePlacesError: function( error ) {
+                Fuse.invoke( "placesError", this, error );
             },
 
             reset: function() {
@@ -563,12 +608,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 } else {
                     // otherwise grab the user's current location and use it as the origin
                     // in the drections service request.
-                    if ("geolocation" in navigator) {
-                        navigator.geolocation.getCurrentPosition(function(pos) {
-                            dsr["origin"] = new Maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                            map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
-                        });
-                    }
+                    Fuse.getCurrentPosition(function(pos) {
+                        dsr["origin"] = new Maps.LatLng(pos.latitude, pos.longitude);
+                        map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
+                    });
                 }
             },
 
@@ -586,8 +629,33 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 });
             },
 
+            /**
+             * Make a call to the google places api to get nearby places
+             * given a classification.
+             * @param classification -  the type of places to be searched. IE resteraunt, hostpital, etc.
+             * @param cb             -  callback to handle returned places data.
+             */
+            getNearbyPlaces: function( classification, cb ) {
+                var self = this;
+                Fuse.getCurrentPosition(function( location ) {
+                    var pos = new Maps.LatLng( location.latitude, location.longitude ),
+                        psr = {
+                            location:   pos,
+                            types:      [ classification ],
+                            rankBy:     Maps.places.RankBy.DISTANCE
+                        };
+                    self.placesService.nearbySearch( psr, function( places, status ) {
+                        if ( Maps.places.PlacesServiceStatus.OK === status ) {
+                            self.invokePlacesSuccess( places, cb );
+                        } else {
+                            self.invokePlacesError( status );
+                        }
+                    });
+                });
+            },
+
             // Renders a trip route on the map.
-            renderTripRoute: function ( trip ) {
+            renderTripRoute: function( trip ) {
                 this.lats = [];
                 this.lngs = [];
                 this.sanatizedWaypoints = [];
@@ -623,7 +691,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             }, this );
                             break;
                         case "[object Object]":
-                            this.sanatizeWaypoint ( trip.waypoints.value );
+                            this.sanatizeWaypoint( trip.waypoints.value );
                             break;
                         default:
                             Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
@@ -763,6 +831,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.map.obj = new Maps.Map(this.map.el, {
                 mapTypeId: Maps.MapTypeId.ROADMAP
             });
+
+            /**
+             * We initialize a PlacesService object here because 
+             * it requires the map object itself being initialized.
+             */
+            this.map.placesService = new Maps.places.PlacesService( this.map.obj );
         },
 
         initTooltips: function() {
@@ -970,6 +1044,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     textVisible: true
                 });
             }, 1);
+        },
+
+        getCurrentPosition: function( cb ) {
+            if ( "geolocation" in navigator ) {
+                navigator.geolocation.getCurrentPosition(function( pos ) {
+                    if ( typeof cb === "function" ) {
+                        cb({
+                            latitude: pos.coords.latitude,
+                            longitude: pos.coords.longitude
+                        });
+                    }
+                });
+            }
         },
 
         logging: false
