@@ -1,7 +1,7 @@
 define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.html" ], function( Backbone, Fuse, $, _, tripTmpl ) {
     return Fuse.View.extend({
         tagName: "div",
-        className: "trip",
+        className: "trip-date",
         
         attributes: function() {
             return {

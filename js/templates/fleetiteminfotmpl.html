@@ -1,31 +1,32 @@
-<div class="ui-grid-b list-item-info">
-    <% if (fuelLevel >= 20) { %>
-    <div class="ui-block-a round-box small-box green">
+<div class="vehicle-data">
+<% if (fuelLevel >= 20) { %>
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+<% } else { %>
+    <div class="icon-box red">
+        <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+<% } %>
+    </div>
+    <span class='margin-off'><%= fuelLevel %>% fuel remaining</span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/location_icon_b.png" title="View Fuel Statistics"  style="width: 11px;">
+    </div>
+
+    <% if (speed > 0) { %>
+        <span class='margin-off'><%= speed %> MPH on <%= address %></span>
     <% } else { %>
-    <div class="ui-block-a round-box small-box red">
+        <span class='margin-off'>Parked at <%= address %></span>
     <% } %>
-        <p class='margin-off'>Fuel</p>
-        <h3 class='margin-off'><%= fuelLevel %>%</h3>
-    </div>
-    <div class="ui-block-b round-box large-box">
-        <p class='margin-off'>Location</p>
-        <% if (speed > 0) { %>
-            <h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
-        <% } else { %>
-            <h3 class='margin-off'>Parked at <%= address %></h3>
-        <% } %>
-    </div>
 </div>
 <% if (alerts[0].code !== "0000") { %>
-<div class="ui-grid-b list-item-info">
-    <div class="ui-block-a alert-box small-box">
-        <p class='margin-off'>Code</p>
-        <h3 class='margin-off'><%= alerts[0].code %></h3>
+<div class="vehicle-data">
+    <div class="icon-box red">
+        <img src="style/images/alert_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
     </div>
-    <div class="ui-block-b alert-box large-box">
-        <p class='margin-off'>Message</p>
-        <h3 class='margin-off'><%= alerts[0].message %></h3>
-    </div>
+    <span class='margin-off'><%= alerts[0].code %>: </span>
+    <span><%= alerts[0].message %></span>
 </div>
 <% } %>
 

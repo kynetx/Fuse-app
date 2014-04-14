@@ -1,11 +1,5 @@
-<a data-vid="<%= id %>" class="fleet-item">
+<a data-vid="<%= id %>" class="fleet-item-header">
 	<img src="<%= icon %>" class="car-thumbnail">
-	<h1> <%= nickname %>
-		<% if (running) { %>
-			<img src="style/images/vehicle_on.png" class="vehicle-status-icon" title="Vehicle is on">
-		<% } else { %>
-			<img src="style/images/vehicle_off.png" class="vehicle-status-icon" title="Vehicle is off">
-		<% } %>
-	</h1>
-	<p> <%= make %>, <%= model %></p>
+	<h1 class='margin-off title-font white-font'> <%= nickname %></h1>
+	<p class="margin-off detail-font white-font"> <%= make %>, <%= model %></p>
 </a>

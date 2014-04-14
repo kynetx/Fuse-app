@@ -1,5 +1,5 @@
 /**
- * Fuse Mobile Application v0.0.4
+ * Fuse Mobile Application
  * Copyright Kynetx Inc. 2014. All Rights Reserved.
  * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
  * For details see https://kynetx.com
@@ -14,7 +14,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "month": {
                     "trip": {
                         "distance": 2456,
-                        "time": 123456789234324342,
+                        "time": 123456234,
                         "cost": 102.34
                     },
                     "fuel": {
@@ -28,14 +28,14 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                 "year": {
                     "trip": {
                         "distance": 2456789,
-                        "time": 1234567892343243422345,
+                        "time": 12345678234,
                         "cost": 800
                     }
                 },
                 "total": {
                     "trip": {
-                        "distance": 2456789101122,
-                        "time": 12345678923432434234757654,
+                        "distance": 245678910,
+                        "time": 12345678923234,
                         "cost": 20000
                     },
                     "fuel": {
@@ -99,7 +99,7 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     "total": {
                         "trip": {
                             "distance": 24567,
-                            "time": 12345678923,
+                            "time": 12345678,
                             "cost": 2000
                         }
                     }
@@ -177,6 +177,13 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     "latitude": 40.74937,
                     "longitude": -111.82633
                 },
+                "alerts": [
+                    {
+                        "code": "P0193",
+                        "message": "Fuel Rail Pressure Sensor Circuit High Input",
+                        "timestamp": "never"
+                    },
+                ],
                 "timestamp": "19910831T060849T+07:00",
                 "running": true,
                 "fuelRate": 2.63,
@@ -798,35 +805,35 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
         "fillups": []
     };
 
-    Fuse.menu = [{
-        action: "settings",
-        text: "Settings"
-    },
-    {
-        action: "fleet",
-        text: "Fleet"
-    },
-    {
-        action: "logout",
-        text: "Logout"
-    }];
+	Fuse.menu = [{
+		action: "settings",
+		text: "Settings"
+	},
+	{
+		action: "fleet",
+		text: "Fleet"
+	},
+	{
+		action: "logout",
+		text: "Logout"
+	}];
 
-    // intialize the routers.
-    Fuse.routers = {};
-    Fuse.routers.AppRouter = new AppRouter();
-    Fuse.routers.FleetRouter = new FleetRouter();
-    // initialize the controllers.
-    Fuse.routers.AppRouter.controller = new AppController();
-    Fuse.routers.FleetRouter.controller = new FleetController();
-    // this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
-    // a good idea to remove later.
-    Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.FleetRouter.routes));
-    // remove this for production.
-    Fuse.logging = true;
+	// intialize the routers.
+	Fuse.routers = {};
+	Fuse.routers.AppRouter = new AppRouter();
+	Fuse.routers.FleetRouter = new FleetRouter();
+	// initialize the controllers.
+	Fuse.routers.AppRouter.controller = new AppController();
+	Fuse.routers.FleetRouter.controller = new FleetController();
+	// this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
+	// a good idea to remove later.
+	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.FleetRouter.routes));
+	// remove this for production.
+	Fuse.logging = true;
 
-    // setup loggger 
-    Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
-    
-    // start the app.
-    Fuse.init();
+	// setup loggger 
+	Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
+	
+	// start the app.
+	Fuse.init();
 });

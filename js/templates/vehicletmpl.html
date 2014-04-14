@@ -1,73 +1,29 @@
 <ul data-role="listview" data-inset="false">
-    <li>
+    <li class="fleet-item-header">
         <img src="<%= icon %>" class="car-thumbnail">
-        <h1> <%= nickname %>
-            <% if (running) { %>
-                <img src="style/images/vehicle_on.png" class="vehicle-status-icon" title="Vehicle is on">
-            <% } else { %>
-                <img src="style/images/vehicle_off.png" class="vehicle-status-icon" title="Vehicle is off">
-            <% } %>
-        </h1>
-        <p> <%= make %>, <%= model %></p>
+        <h1 class='margin-off title-font white-font'> <%= nickname %></h1>
+        <p class="margin-off detail-font white-font"> <%= make %>, <%= model %></p>
     </li>
-    <li class="detail-item-info">
-        <div class="ui-grid-b list-item-info">
-            <% if (fuelLevel >= 20) { %>
-            <div class="ui-block-a round-box small-box green">
-            <% } else { %>
-            <div class="ui-block-a round-box small-box red">
-            <% } %>
-                <p class='margin-off'>Fuel</p>
-                <h3 class='margin-off'><%= fuelLevel %>%</h3>
-            </div>
-            <div class="ui-block-b round-box large-box">
-                <p class='margin-off'>Location</p>
-                <% if (speed > 0) { %>
-                    <h3 class='margin-off'><%= speed %> MPH on <%= address %></h3>
-                <% } else { %>
-                    <h3 class='margin-off'>Parked at <%= address %></h3>
-                <% } %>
-            </div>
-        </div>
-    </li>
-    <li class="detail-item-info">
-        <div class="ui-grid-b list-item-info">
-            <div class="ui-block-a round-box">
-                <p class='margin-off'>Battery Charge</p>
-                <h3 class='margin-off'><%= batteryVoltage %></h3>
-            </div>
-            <div class="ui-block-b round-box">
-                <p class='margin-off'>Miles</p>
-                <h3 class='margin-off'><%= FTH.commaSeperateNumber(mileage) %></h3>
-            </div>
-            <div class="ui-block-b round-box">
-                <p class='margin-off'>MPG</p>
-                <h3 class='margin-off'><%= mpg %></h3>
-            </div>
-        </div>
-    </li>
-    <% if (alerts[0].code !== '0000') { %>
-    <li class="detail-item-info">
-        <div class="ui-grid-b list-item-info">
-            <div class="ui-block-a alert-box small-box">
-                <p class='margin-off'>Code</p>
-                <h3 class='margin-off'><%= alerts[0].code %></h3>
-            </div>
-            <div class="ui-block-b alert-box large-box">
-                <p class='margin-off'>Message</p>
-                <h3 class='margin-off'><%= alerts[0].message %></h3>
-            </div>
-        </div>
-    </li>
+    <li class="vehicle-data">
+    <% if (fuelLevel >= 20) { %>
+        <div class="icon-box dark">
+            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+    <% } else { %>
+        <div class="icon-box red">
+            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
     <% } %>
-    <% if (notes.length > 0) { %>
-    <li class="detail-item-info">
-        <div class="list-item-info">
-            <div class="round-box" id="vehicle-notes-box">
-                <p class='margin-off'>Notes</p>
-                <h3 id="vehicle-notes" class='margin-off'><%= notes %></h3>
-            </div>
         </div>
+        <span class='margin-off'><%= fuelLevel %>% fuel remaining</span>
     </li>
-    <% } %>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/location_icon_b.png" title="View Fuel Statistics"  style="width: 11px;">
+        </div>
+
+        <% if (speed > 0) { %>
+            <span class='margin-off'><%= speed %> MPH on <%= address %></span>
+        <% } else { %>
+            <span class='margin-off'>Parked at <%= address %></span>
+        <% } %>
+    </li>
 </ul>

@@ -17,6 +17,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         render: function() {
+            var lastdate='';
             this.tripViews.length = 0;
             this.collection.each(function( trip ) {
                 this.renderTrip( trip );
