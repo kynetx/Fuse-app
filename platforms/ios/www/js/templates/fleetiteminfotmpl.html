@@ -1,0 +1,32 @@
+<div class="vehicle-data">
+<% if (fuelLevel >= 20) { %>
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+<% } else { %>
+    <div class="icon-box red">
+        <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+<% } %>
+    </div>
+    <span class='margin-off'><%= fuelLevel %>% fuel remaining</span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/location_icon_b.png" title="View Fuel Statistics"  style="width: 11px;">
+    </div>
+
+    <% if (speed > 0) { %>
+        <span class='margin-off'><%= speed %> MPH on <%= address %></span>
+    <% } else { %>
+        <span class='margin-off'>Parked at <%= address %></span>
+    <% } %>
+</div>
+<% if (alerts[0].code !== "0000") { %>
+<div class="vehicle-data">
+    <div class="icon-box red">
+        <img src="style/images/alert_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+    </div>
+    <span class='margin-off'><%= alerts[0].code %>: </span>
+    <span><%= alerts[0].message %></span>
+</div>
+<% } %>
+
