@@ -16,7 +16,7 @@ You should eventually see `** BUILD SUCCEEDED **` outputted to the console.
 At this time, iOS is the only platform included. Cordova manages most of the process
 but there are some extra steps you need to take, including code signing and provisioning. 
 In order to provision iOS applications for distribution, Ad Hoc or otherwise,
-you'll need a paid Apple Developer Account. @alexkolson has one and
+you'll need a paid Apple Developer Account. [Alex](https://github.com/alexkolson) has one and
 manages the iOS build, but should you be curious to learn more simply ask him or read 
 about it on the Apple Developer Documentation.
 
