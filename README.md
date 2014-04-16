@@ -2,7 +2,7 @@
 You'll need cordova installed. In order to get cordova, you'll need npm, node package manager.
 I'm going to assume you know how to get node/npm.
 After you have node & npm installed, run:
-`npm install cordova -g'
+`npm install cordova -g`
 Afterwards `cordova` should be avaliable at the command line.
 
 For most development purposes, simply `cd www/` from the project root and then run `cordova server`. You can then
@@ -26,4 +26,4 @@ You can develop as you would on any other web application.
 
 
 # Note
-This application is under heavy development at any given time. Should you need stable code please use one of our [releases](releases).
+This application is under heavy development at any given time. Should you need stable code please use one of our [releases](https://github.com/kynetx/Fuse-app/releases).
