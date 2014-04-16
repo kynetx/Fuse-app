@@ -35,6 +35,21 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.tripViews.push( view.render().el );
         },
 
+        addTrip: function( trip ) {
+            var date = trip.get( "endTime" ).substring( 0, 9 );
+            var view = new TripView({
+                model: trip
+            });
+
+            this.tripViewData[ date ] = this.tripViewData[ date ] || {};
+            this.tripViewData[ date ][ "elements" ] = this.tripViewData[ date ][ "elements" ] || [];
+            this.tripViewData[ date ][ "aggregates" ] = this.tripViewData[ date ][ "aggregates" ] || {};
+
+            this.tripViews[ date ][ "aggregates" ][ "distance" ]+= trip.get( "distance" );
+
+            this.tripViewData[ date ][ "elements" ].push( view.render().el );
+        },
+
         /**
          * Utilize a Trip Map view to display the trip.
          * Pass the view a typical map configuration object,
