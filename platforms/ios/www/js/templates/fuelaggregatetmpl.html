@@ -1,0 +1,27 @@
+<div class="fuel-aggregate-totals ui-grid-a">
+    <div class="ui-block-a">
+        <h5>Total Cost</h5>
+        <p><%= totals.fuel.cost %></p>
+    </div>
+    <div class="ui-block-b">
+        <h5>Total Gals Used</h5>
+        <p><%= totals.fuel.gallons %></p>
+    </div>
+</div>
+<div class="fuel-aggregate-avgs ui-grid-b">
+    <div class="ui-block-a">
+        <h5>Avg. MPG</h5>
+        <p><%= totals.fuel.mpg %></p>
+    </div>
+    <div class="ui-block-b">
+        <h5>Avg. $/Gal</h5>
+        <p><%= totals.fuel.cpg %></p>
+    </div>
+    <div class="ui-block-c">
+        <h5>Avg. $/Mile</h5>
+        <p><%= totals.fuel.cpm %></p>
+    </div>
+</div>
+<% for( var i = 0; i < aggs.length; ++i ) { %>
+    <%= aggs[ i ].outerHTML %>
+<% } %>

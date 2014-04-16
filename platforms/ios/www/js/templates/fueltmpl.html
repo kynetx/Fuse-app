@@ -1,0 +1,50 @@
+<div class="fuel-interaction ui-grid-a">
+    <div class="ui-block-a">
+        <h5>Fuel Level</h5>
+        <p><%= vehicle.fuelLevel %>%</p>
+    </div>
+    <div class="ui-block-b">
+        <p><a class="trigger-fillup" data-role="button">Fill 'er Up!</a></p>
+    </div>
+</div>
+<div class="fuel-data">
+    <div class="fuel-totals ui-grid-a">
+        <div class="ui-block-a">
+            <p><%= vehicle.aggregates.month.fuel.gallons %></p>
+        </div>
+        <div class="ui-block-b">
+            <p><%= vehicle.aggregates.month.fuel.cost %></p>
+        </div>
+    </div>
+    <div class="fuel-avgs ui-grid-b">
+        <div class="ui-block-a">
+            <h5>MPG</h5>
+            <p><%= vehicle.aggregates.month.fuel.mpg %></p>
+        </div>
+        <div class="ui-block-b">
+            <h5>Avg $/Gal</h5>
+            <p><%= vehicle.aggregates.month.fuel.cpg %></p>
+        </div>
+        <div class="ui-block-c">
+            <h5>Avg $/Mile</h5>
+            <p><%= vehicle.aggregates.month.fuel.cpm %></p>
+        </div>
+    </div>
+    <div class="fuel-trend-graph">
+        <h1>graph here.</h1>
+    </div>
+</div>
+<div id="fuel-popup" data-role="popup" data-transition="pop" data-position-to="window">
+    <h5>Record Fillup</h5>
+    <div id="fuel-popup-guts">
+        <form id="record-fillup">
+            <input id="num-gallons" type="number" placeholder="Gallons filled">
+            <input id="price-gallon" type="number" step="0.01" placeholder="Price/Gallon">
+            <input id="odometer" type="number" placeholder="Current odometer reading" title="Odometer">
+            <select id="gas-station">
+                <option selected disabled>Gas Station (Choose one)</option>
+            </select>
+            <button type="submit" data-theme="b">Record Fillup</button>
+        </form>
+    </div>
+</div>
