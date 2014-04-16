@@ -16,7 +16,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             };
 
             this.collection.each(function(vehicle, idx) {
-                var icon = "../../style/images/car_map_icon_"+ idx % 3 +".png";
+                var icon = "style/images/car_map_icon_"+ idx % 3 +".png";
                 this.map.overlays.push({
                     icon: icon,
                     type: Fuse.map.OverlayTypeId.MARKER,
