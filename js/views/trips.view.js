@@ -13,17 +13,18 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.header = this.model.get( "nickname" ) + " " + "Trips";
-            this.tripViews = [];
+            this.tripViewData = {};
         },
 
         render: function() {
             var lastdate='';
-            this.tripViews.length = 0;
             this.collection.each(function( trip ) {
-                this.renderTrip( trip );
+                this.addTrip( trip );
             }, this );
 
-            this.content = this.template({ vehicle: this.model.toJSON(), tripViews: this.tripViews });
+            console.log(this.tripViewData);
+
+            this.content = this.template({ vehicle: this.model.toJSON(), tripViewDate: this.tripViewDate });
             Fuse.View.prototype.render.call( this );
         },
 
@@ -45,7 +46,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.tripViewData[ date ][ "elements" ] = this.tripViewData[ date ][ "elements" ] || [];
             this.tripViewData[ date ][ "aggregates" ] = this.tripViewData[ date ][ "aggregates" ] || {};
 
-            this.tripViews[ date ][ "aggregates" ][ "distance" ]+= trip.get( "distance" );
+            //this.tripViews[ date ][ "aggregates" ][ "distance" ] += trip.get( "distance" );
 
             this.tripViewData[ date ][ "elements" ].push( view.render().el );
         },
