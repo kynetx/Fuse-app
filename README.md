@@ -5,7 +5,7 @@ After you have node & npm installed, run:
 `npm install cordova -g`
 Afterwards `cordova` should be avaliable at the command line.
 
-For most development purposes, simply `cd www/` from the project root and then run `cordova server`. You can then
+For most development purposes, simply `cd www/` from the project root and then run `cordova serve`. You can then
 develop the applciation and see your changes reflected on `localhost:8000`.
 
 ## Build Process
@@ -21,7 +21,7 @@ manages the iOS build, but should you be curious to learn more simply ask him or
 about it on the Apple Developer Documentation.
 
 ## Development process
-Simply navigate to the `www/` directory and run `cordova server`. This will serve the web application on `localhost:8000`. 
+Simply navigate to the `www/` directory and run `cordova serve`. This will serve the web application on `localhost:8000`. 
 You can develop as you would on any other web application.
 
 
