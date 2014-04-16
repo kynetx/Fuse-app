@@ -1,0 +1,231 @@
+/* import all external stylesheets. */
+@import url(jquery.mobile-1.4.0.min.css);
+@import url(tooltipster.css);
+@import url(tooltipster-shadow.css);
+@import url(jquery.sidr.dark.css);
+
+#menu a {
+    cursor: pointer;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/**
+ * This is a poor man's way of vertically centering 
+ * the fleet icon in the header. Let's see if we can
+ * figure out a better way in the future.
+ */
+.fuse-header-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.fuse-header-container img {
+    min-height: 40px;
+    cursor: pointer;
+}
+
+/**
+ * see note below about why one must sometimes
+ * use !important with style definitions in jQuery Mobile
+ */
+.fuse-footer {
+    padding: 10px !important;
+    z-index: 2;
+    left:-9px; /* This keeps the icons centered */
+}
+
+.fuse-footer img {
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.vehicle-status-icon {
+    height: 10px;
+    width: 10px;
+    cursor: pointer;
+}
+
+/**
+ * Normally importants are icky, but when
+ * working with jQuery Mobile, you have to
+ * in order to beat their specificity without
+ * getting ridiculous. 
+ */
+.fuse-map-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+#directions-panel {
+    position: absolute;
+    background: white;
+    width: 90%;
+    height: 40%;
+    -moz-box-shadow: 0 0 15px 5px #888;
+    -webkit-box-shadow: 0 0 15px 5px #888;
+    box-shadow: 0 0 15px 5px #888;
+    overflow: auto;
+    z-index: 1;
+    bottom: 2%;
+    right: 5%;
+}
+
+/* This fixes a small css glitch that shows up in the vehicle detail screen */
+.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
+    min-height: 0;
+}
+
+.car-thumbnail {
+    border-bottom-right-radius: 48px;
+    border-top-right-radius: 48px;
+}
+
+.fleet-item-header {
+    height: 58px !important;
+    border-width: 0px !important;
+    background-color: rgba(0,0,0,.6) !important;
+    border-top: 1px solid rgba(0,0,0,.3) !important;
+    border-bottom: 6px solid rgba(0,0,0,.3) !important;
+}
+
+.fleet-item-header:hover {
+    background-color: rgba(0,0,0,.4) !important;
+}
+
+.trip:hover {
+    background-color: rgba(0,0,0,.4) !important;
+}
+
+.fleet-item-info {
+    padding: .2em !important;
+    border-top-width: 0px !important;
+    background-color: rgba(0,0,0,.02) !important;
+}
+
+.vehicle-data {
+    text-overflow: ellipsis !important;
+}
+
+li.vehicle-data {
+    padding: 0px !important;
+    border-width: 0px !important;
+    white-space: normal !important;
+}
+
+.margin-off {
+    margin: 0px !important;
+}
+
+.padding-off {
+    padding: 0px !important;
+}
+
+.ui-grid-b>.ui-block-a, .ui-grid-b>.ui-block-b, .ui-grid-b>.ui-block-c { /* We need to override the jquery mobile css*/
+    width: 32.15%;
+}
+
+/**
+ * This scales the map icon that is present in every
+ * trip collapsible.
+ */
+ .fuse-trip-map-trigger > img {
+    cursor: pointer;
+    height: 29px;
+    width: 18px;
+ }
+
+.trip-aggregate-item {
+    cursor: pointer;
+}
+
+.title-font {
+    font-weight: normal !important;
+    padding-top: 3px !important;
+    font-size: 180% !important;
+}
+
+.detail-font {
+    font-size: 100% !important;
+    font-family: serif !important;
+}
+
+.white-font {
+    color: white;
+    text-shadow: none;
+}
+
+.footer-icon {
+    padding: 0px;
+    margin: 0px;
+}
+
+.icon-box {
+    border-radius: .125em;
+    display: inline-block;
+    margin: 2px;
+    padding: 4px;
+    margin-left: 8px;
+    padding-bottom: 0px;
+    width: 22px;
+    text-align: center;
+    height: 22px;
+    border-bottom: 4px solid rgba(0,0,0,.3);
+}
+
+.icon-box > img.light {
+    opacity: .5 !important;
+}
+
+.icon-box.dark {
+    background-color: rgba(0,0,0,.5);
+}
+
+.icon-box.red {
+    background-color: rgba(255,100,100,.9);
+}
+
+.icon-box.green {
+    background-color: rgba(80,200,80,.9);
+}
+
+/**
+ * This scales the map icon that is present in every
+ * trip collapsible.
+ */
+ .fuse-trip-map-trigger > img {
+    cursor: pointer;
+    height: 29px;
+    width: 18px;
+ }
+
+.trip-aggregate-item, .fuel-aggregate-item {
+    cursor: pointer;
+}
+
+/**
+ * The button that opens the fillup popup.
+ */
+.trigger-fillup {
+    cursor: pointer;
+}
+
+/**
+ * Form for recording fillups in fuel section of the app.
+ */
+ #fuel-popup {
+    padding: 15px;
+ }
+
+ #record-fillup > * {
+    margin: 15px 0;
+ }
+ 
+.icon-box.light {
+    background-color: rgba(0,0,0,.15);
+}
