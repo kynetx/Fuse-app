@@ -1,3 +1,8 @@
-<% for ( var i = 0; i < tripViews.length; ++i ) { %>
-  <%= tripViews[ i ].outerHTML %>
-<% } %>
+<% for (var prop in tripViewData) { %>
+    <div class='dark-header'>
+        <h3 class='title-font white-font'><%= prop %></h3>
+    </div>
+    <% for (var trip in prop.elements ) { %>
+        <%= trip %>
+<%  }
+} %>

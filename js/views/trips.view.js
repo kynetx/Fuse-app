@@ -22,9 +22,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
                 this.addTrip( trip );
             }, this );
 
+            // This is temporary while I debug
             console.log(this.tripViewData);
 
-            this.content = this.template({ vehicle: this.model.toJSON(), tripViewDate: this.tripViewDate });
+            this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
         },
 
