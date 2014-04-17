@@ -1,8 +1,11 @@
-<% for (var prop in tripViewData) { %>
+<% for (var date in tripViewData) { %>
     <div class='dark-header'>
-        <h3 class='title-font white-font'><%= prop %></h3>
+        <h3 class='title-font white-font'><%= date %></h3>
     </div>
-    <% for (var trip in prop.elements ) { %>
-        <%= trip %>
-<%  }
+    <%= alert(date.elements) %>
+    <% if (date.elements) {
+        for (var i = 0; i < date.elements.length; i++) { %>
+            <%= date.elements[ i ].outerhtml() %>
+    <%  }
+    }
 } %>
