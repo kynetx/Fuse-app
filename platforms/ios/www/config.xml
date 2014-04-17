@@ -9,5 +9,4 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <plugin name="GeoLocation" value="CDVLocation" />
 </widget>
