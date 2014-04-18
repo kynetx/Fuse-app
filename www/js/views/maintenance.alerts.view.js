@@ -15,6 +15,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         render: function() {
+            // Testing something.
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
         }
