@@ -925,6 +925,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return buildTime;
                 },
 
+                monthDayYear: function( str ) {
+                    var month = str.substring( 6, 7 );
+                    var day = str.substring( 7, 9 );
+                    var year = str.substring( 1, 5 );
+                    // I'm very confused as to why .substring works here.
+
+                    var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ' ' + year;
+                    return buildStr;
+                },
+
                 /**
                  * Format a date for human consumption.
                  * Takes an optional paramater that determines whether
