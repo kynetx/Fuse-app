@@ -926,10 +926,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 },
 
                 monthDayYear: function( str ) {
-                    var month = str.substring( 6, 7 );
-                    var day = str.substring( 7, 9 );
-                    var year = str.substring( 1, 5 );
-                    // I'm very confused as to why .substring works here.
+                    newStr = str.replace(/\s+/g,'');
+
+                    var month = newStr.substring( 4, 6 );
+                    var day = newStr.substring( 7, 8 );
+                    var year = newStr.substring( 0, 4 );
 
                     var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ' ' + year;
                     return buildStr;
