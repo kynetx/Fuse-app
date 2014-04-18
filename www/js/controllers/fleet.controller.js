@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView, MaintenanceSplashView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -7,19 +7,26 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.trips = new TripCollection( Fuse.FIXTURES.trips );
             this.fillups = {};
             this.views = {};
+
             this.views[ "Fleet" ] = new FleetView({
                 controller: this,
                 collection: this.fleet
             });
+
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
                 model: this.totals,
                 collection: this.fleet
             });
+
             this.views[ "FuelAggregate" ] = new FuelAggregateView({
                 controller: this,
                 model: this.totals,
                 collection: this.fleet
+            });
+
+            this.views[ "MaintenanceSplash" ] = new MaintenanceSplashView({
+                controller: this
             });
         },
         
@@ -121,6 +128,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             this.currentFillups.add( fillup );
             Fuse.log("Added fillup:", fillup, "to fillup collection:", this.currentFillups );
+        },
+
+        // Render the maintenance splash view.
+        showMaintenanceSplash: function() {
+            this.views.MaintenanceSplash.render();
         }
     });
 });
