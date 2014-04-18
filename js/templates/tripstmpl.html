@@ -1,11 +1,10 @@
-<% for (var date in tripViewData) { %>
+<% for (var prop in tripViewData) { %>
     <div class='dark-header'>
-        <h3 class='title-font white-font'><%= date %></h3>
+        <h3 class='title-font white-font'><%= prop %></h3>
     </div>
-    <%= alert(date.elements) %>
-    <% if (date.elements) {
-        for (var i = 0; i < date.elements.length; i++) { %>
-            <%= date.elements[ i ].outerhtml() %>
+    <% if (tripViewData[ prop ].elements) {
+        for (var i = 0; i < tripViewData[ prop ].elements.length; i++) { %>
+            <%= tripViewData[ prop ].elements[ i ].outerHTML %>
     <%  }
     }
 } %>
