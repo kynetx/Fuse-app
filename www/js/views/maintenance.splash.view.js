@@ -6,7 +6,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         header: "Maintenance",
         transition: "slide",
         template: _.template( maintenanceSplashTmpl ),
-
+        
         events: {
         },
 
