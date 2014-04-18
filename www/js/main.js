@@ -5,9 +5,6 @@
  * For details see https://kynetx.com
  */
  require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
-    // setup dummy data. Will eventually come from API obviously.
-    // v1.0.0 will only have month aggregates.
-    // TODO: BKA please put other past month aggregates in these models.
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
