@@ -10,7 +10,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             "fuel"                      : "showFuelAggregate",
             "fuel/:id"                  : "showFuel",
             "maintenance"               : "showMaintenanceSplash",
-            "maintenance/:id"           : "showMaintenance",
+            "maintenance/:id"           : "showMaintenanceSplashForVehicle",
             "maintenance/alerts"        : "showMaintenanceAlerts",
             "maintenance/:id/alerts"    : "showMaintenanceAlertsForVehicle",
             "maintenance/reminders"     : "showMaintenanceReminders",
@@ -51,8 +51,17 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             this.invokeControllerFunction ( "showMaintenanceSplash", arguments );
         },
 
-        showMaintenance: function( id ) {
-            this.invokeControllerFunction( "showMaintenance", arguments );
+        showMaintenanceSplashForVehicle: function( id ) {
+            this.invokeControllerFunction( "showMaintenanceSplashForVehicle", arguments );
+        },
+
+        showMaintenanceAlerts: function() {
+            this.invokeControllerFunction( "showMaintenanceAlerts", arguments );
+        },
+
+        showMaintenanceAlertsForVehicle: function( id ) {
+            this.invokeControllerFunction( "showMaintenanceAlertsForVehicle", arguments );
         }
+
     });
 });
