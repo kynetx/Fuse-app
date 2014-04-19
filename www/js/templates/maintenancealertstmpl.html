@@ -1,0 +1,8 @@
+<% for (var i = 0; i < alerts.length; ++i) { %>
+    <div class="ui-bar ui-bar-a">
+        <h3><%= alerts[i].vehicle %></h3>
+    </div>
+    <% for (var j = 0; j < alerts[i].alerts.length; ++j) { %>
+        <p><%= alerts[i].alerts[j].code %> - <%= alerts[i].alerts[j].description %></p>
+    <% } %>
+<% } %>
