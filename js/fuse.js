@@ -932,7 +932,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     var day = newStr.substring( 7, 8 );
                     var year = newStr.substring( 0, 4 );
 
-                    var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ' ' + year;
+                    var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ', ' + year;
                     return buildStr;
                 },
 
