@@ -906,19 +906,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return parts.join(".");
                 },
 
-                monthDayYear: function( str ) {
-                    newStr = str.replace(/\s+/g,'');
+                monthDayYear: function( datestr ) {
+                    var newStr = datestr.replace(/\s+/g,'');
 
-                    var month = newStr.substring( 4, 6 );
-                    var day = newStr.substring( 6, 8 );
-                    var year = newStr.substring( 0, 4 );
+                    var month = newStr.substring( 4, 6 ),
+                        day = newStr.substring( 6, 8 ),
+                        year = newStr.substring( 0, 4 );
 
                     var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ', ' + year;
                     return buildStr;
                 },
 
-                getTime: function( str ) {
-                    var parts = str.split(" ");
+                getTime: function( datestr ) {
+                    var parts = datestr.split(" ");
                     var time = parts[ 3 ] + ' ' + parts[ 4 ];
 
                     return time;
