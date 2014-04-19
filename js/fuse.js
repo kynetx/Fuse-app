@@ -919,8 +919,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 getTime: function( str ) {
                     var parts = str.split(" ");
-                    var time = parts[ 3 ];
-                }
+                    var time = parts[ 3 ] + ' ' + parts[ 4 ];
+
+                    return time;
+                },
 
                 /**
                  * Format a date for human consumption.
