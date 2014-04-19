@@ -906,25 +906,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return parts.join(".");
                 },
 
-                msToTime: function( num ) {
-                    // Find hours
-                    var hours = Math.floor(num/(1000 * 60 * 60));
-                    remainder = num % (1000 * 60 * 60);
-
-                    // Find minutes
-                    var minutes = Math.floor(remainder/(1000 * 60));
-                    remainder = remainder % (1000 * 60);
-
-                    // Find seconds
-                    var seconds = Math.floor(remainder/1000);
-
-                    var buildTime = '';
-                    if (hours >= 1) buildTime += hours.toString() + 'h ';
-                    if (minutes >= 1) buildTime += minutes.toString() + 'm ';
-                    if (seconds >= 1) buildTime += seconds.toString() + 's';
-                    return buildTime;
-                },
-
                 monthDayYear: function( str ) {
                     newStr = str.replace(/\s+/g,'');
 
