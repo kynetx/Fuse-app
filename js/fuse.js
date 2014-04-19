@@ -902,7 +902,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  */
                 commaSeperateNumber: function( num ) {
                     var parts = num.toString().split(".");
-                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    parts[ 0 ] = parts[ 0 ].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     return parts.join(".");
                 },
 
@@ -910,12 +910,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     newStr = str.replace(/\s+/g,'');
 
                     var month = newStr.substring( 4, 6 );
-                    var day = newStr.substring( 7, 8 );
+                    var day = newStr.substring( 6, 8 );
                     var year = newStr.substring( 0, 4 );
 
                     var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ', ' + year;
                     return buildStr;
                 },
+
+                getTime: function( str ) {
+                    var parts = str.split(" ");
+                    var time = parts[ 3 ];
+                }
 
                 /**
                  * Format a date for human consumption.
