@@ -2,7 +2,7 @@
     <div class="ui-bar ui-bar-a">
         <h3><%= data[ i ].vehicle %></h3>
     </div>
-    <% if ( data[ i ].alerts.length ) { %>
+    <% if ( data[ i ].alerts && data[ i ].alerts.length ) { %>
         <% for (var j = 0; j < data[ i ].alerts.length; ++j) { %>
             <p class="alert"><%= data[ i ].alerts[ j ].code %> - <%= data[ i ].alerts[ j ].message %></p>
         <% } %>

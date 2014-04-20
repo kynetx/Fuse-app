@@ -37,10 +37,23 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         collectVehicleAlerts: function( vehicle ) {
-            this.alerts.push({
-                vehicle: vehicle.get( "nickname" ),
-                alerts: vehicle.get( "alerts" )
-            });
+
+            /**
+             * This check works because of the way object identify in
+             * javascript works. If the alerts object on the current vehicle
+             * is equal to the default alerts object, then the vehicle actually
+             * has NO alerts and we don't push them onto our alerts array.
+             */
+            if ( vehicle.get( "alerts" ) !== vehicle.defaults.alerts ) {
+                this.alerts.push({
+                    vehicle: vehicle.get( "nickname" ),
+                    alerts: vehicle.get( "alerts" )
+                });
+            } else {
+                this.alerts.push({
+                    vehicle: vehicle.get( "nickname" )
+                });
+            }
         }
 
     });
