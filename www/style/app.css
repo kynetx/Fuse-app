@@ -241,7 +241,6 @@ li.vehicle-data {
  /* Red button theme for JQuery Mobile
  * - Use data-theme="r" for red versions of the default JQuery Mobile Buttons.
  ******************************************************************************************/
- 
 .ui-btn-up-r {
     border: 1px solid #721414;
     background: #AB2525;
