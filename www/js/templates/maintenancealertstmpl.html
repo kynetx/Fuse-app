@@ -4,7 +4,7 @@
     </div>
     <% if ( data[ i ].alerts && data[ i ].alerts.length ) { %>
         <% for (var j = 0; j < data[ i ].alerts.length; ++j) { %>
-            <p class="alert"><%= data[ i ].alerts[ j ].code %> - <%= data[ i ].alerts[ j ].message %></p>
+            <a data-role="button" class="alert"><%= data[ i ].alerts[ j ].code %> - <%= data[ i ].alerts[ j ].message %></p>
         <% } %>
     <% } else { %>
         <p>No alerts for this vehicle.</p>
