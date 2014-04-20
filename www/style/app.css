@@ -229,3 +229,11 @@ li.vehicle-data {
 .icon-box.light {
     background-color: rgba(0,0,0,.15);
 }
+
+/**
+ * Maintenance alerts on the alert page should be
+ * highlighted red.
+ */
+ .alert {
+    color: red;
+ }

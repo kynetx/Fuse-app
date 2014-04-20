@@ -1,8 +1,12 @@
-<% for (var i = 0; i < alerts.length; ++i) { %>
+<% for ( var i = 0; i < data.length; ++i ) { %>
     <div class="ui-bar ui-bar-a">
-        <h3><%= alerts[i].vehicle %></h3>
+        <h3><%= data[ i ].vehicle %></h3>
     </div>
-    <% for (var j = 0; j < alerts[i].alerts.length; ++j) { %>
-        <p><%= alerts[i].alerts[j].code %> - <%= alerts[i].alerts[j].description %></p>
+    <% if ( data[ i ].alerts.length ) { %>
+        <% for (var j = 0; j < data[ i ].alerts.length; ++j) { %>
+            <p class="alert"><%= data[ i ].alerts[ j ].code %> - <%= alerts[i].alerts[j].message %></p>
+        <% } %>
+    <% } else { %>
+        <p>No alerts for this vehicle.</p>
     <% } %>
 <% } %>

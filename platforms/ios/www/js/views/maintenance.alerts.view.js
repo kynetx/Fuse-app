@@ -22,7 +22,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             // Are we rendering alerts for the whole fleet or just one vehicle?
             if ( this.model ) {
                 // Just one vehicle.
-                this.alerts.append({
+                this.alerts.push({
                     vehicle: this.model.get( "nickname" ),
                     alerts: this.model.get( "alerts" )
                 });
@@ -32,12 +32,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                     this.collectVehicleAlerts( vehicle );
                 }, this);
             }
-            this.content = this.template({ alerts: this.alerts });
+            this.content = this.template({ data: this.alerts });
             Fuse.View.prototype.render.call( this );
         },
 
         collectVehicleAlerts: function( vehicle ) {
-            this.alerts.append({
+            this.alerts.push({
                 vehicle: vehicle.get( "nickname" ),
                 alerts: vehicle.get( "alerts" )
             });
