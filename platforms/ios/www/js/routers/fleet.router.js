@@ -11,12 +11,12 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             "fuel/:id"                  : "showFuel",
             "maintenance"               : "showMaintenanceSplash",
             "maintenance/:id"           : "showMaintenanceSplashForVehicle",
-            "maintenance/alerts"        : "showMaintenanceAlerts",
-            "maintenance/:id/alerts"    : "showMaintenanceAlertsForVehicle",
-            "maintenance/reminders"     : "showMaintenanceReminders",
-            "maintenance/:id/reminders" : "showMaintenanceRemindersForeVehicle",
-            "maintenance/history"       : "showMaintenanceHistory",
-            "maintenance/:id/history"   : "showMaintenanceHistoryForVehicle"
+            "maintenance-alerts"        : "showMaintenanceAlerts",
+            "maintenance-alerts/:id"    : "showMaintenanceAlertsForVehicle",
+            "maintenance-reminders"     : "showMaintenanceReminders",
+            "maintenance-reminders/:id" : "showMaintenanceRemindersForeVehicle",
+            "maintenance-history"       : "showMaintenanceHistory",
+            "maintenance-history/:id"   : "showMaintenanceHistoryForVehicle"
         },
 
         showFleet: function() {

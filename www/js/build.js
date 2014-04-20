@@ -26,6 +26,12 @@
         "underscore": {
             exports: "_"
         },
+        "sidr":  {
+            deps: [ "jquery" ]
+        },
+        "tooltipster": {
+            deps: [ "jquery" ]
+        },
         "jquerymobileconfig": ["jquery"],
         "jquerymobile": ["jquery", "jquerymobileconfig"],
         "cloudosconfig": ["jquery"],
