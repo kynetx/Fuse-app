@@ -126,7 +126,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             "fleet": "Fleet",
             "findcar": "FindCar",
             "fuel": "Fuel",
-            "trips": "Trips"
+            "trips": "Trips",
+            "maintenance": "MaintenanceSplash",
+            "maintenance-alerts": "MaintenanceAlerts"
         },
 
         shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -1080,8 +1082,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
              * If "idMatch" has two elements, that means our id is the second
              * item in the array.
              */
-            if ( Object.prototype.toString.call( id ) === "[object Array]" && id.length === 2 ) {
-                this.show( to, { id: id[ 1 ] } );
+            if ( Object.prototype.toString.call( idMatch ) === "[object Array]" && idMatch.length === 2 ) {
+                this.show( to, { id: idMatch[ 1 ] } );
             } else {
                 this.show( to );
             }

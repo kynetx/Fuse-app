@@ -23,7 +23,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         },
 
         showAlerts: function( e ) {
-            Fuse.show( "maintenance-alerts" );
+            Fuse.showWithContext( "maintenance-alerts" );
         },
 
         showMaintenance: function( e ) {
