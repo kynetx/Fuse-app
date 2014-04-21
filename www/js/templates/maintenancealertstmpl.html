@@ -4,9 +4,18 @@
     </div>
     <% if ( data[ i ].alerts && data[ i ].alerts.length ) { %>
         <% for (var j = 0; j < data[ i ].alerts.length; ++j) { %>
-            <a data-role="button" data-theme="r"><%= data[ i ].alerts[ j ].code %> - <%= data[ i ].alerts[ j ].message %></a>
+            <a data-role="button" data-theme="r"><%= data[ i ].alerts[ j ].code %></a>
         <% } %>
     <% } else { %>
         <p>No alerts for this vehicle.</p>
     <% } %>
 <% } %>
+
+<!-- Show details for a maintenance alert. -->
+<div id="maintenance-alert-description" data-role="popup" data-transition="pop" data-position-to="window">
+    <div class="ui-bar ui-bar-a">
+        <h3 id="alert-code"></h3>
+    </div>
+    <div id="alert-message">
+    </div>
+</div>

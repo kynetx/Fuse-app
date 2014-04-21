@@ -39,7 +39,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         collectVehicleAlerts: function( vehicle ) {
 
             /**
-             * This check works because of the way object identify in
+             * This check works because of the way object identity in
              * javascript works. If the alerts object on the current vehicle
              * is equal to the default alerts object, then the vehicle actually
              * has NO alerts and we don't push them onto our alerts array.
