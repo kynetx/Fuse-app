@@ -21,11 +21,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         render: function() {
             // Are we rendering alerts for the whole fleet or just one vehicle?
             if ( this.model ) {
-                // Just one vehicle.
-                this.alerts.push({
-                    vehicle: this.model.get( "nickname" ),
-                    alerts: this.model.get( "alerts" )
-                });
+                this.collectVehicleAlerts( this.model );
             } else {
                 // The whole fleet.
                 this.controller.fleet.each(function( vehicle ) {
