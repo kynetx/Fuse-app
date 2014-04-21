@@ -20,7 +20,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         render: function() {
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
-        }
+        },
 
         showAlerts: function( e ) {
 
