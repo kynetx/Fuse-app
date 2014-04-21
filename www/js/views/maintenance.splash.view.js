@@ -9,7 +9,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         
         events: {
             "tap [data-action='alerts']"        : "showAlerts",
-            "tap [data-action='maintenance']"   : "showMaintenance",
+            "tap [data-action='maintenance']"   : "showMaintenanceReminders",
             "tap [data-action='history']"       : "showHistory"
         },
 
@@ -26,12 +26,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
             Fuse.showWithContext( "maintenance-alerts" );
         },
 
-        showMaintenance: function( e ) {
-
+        showMaintenanceReminders: function( e ) {
+            Fuse.showWithContext( "maintenance-reminders" );
         },
 
         showHistory: function( e ) {
-            
+            Fuse.showWithContext( "maintenance-history" );
         }
 
     });
