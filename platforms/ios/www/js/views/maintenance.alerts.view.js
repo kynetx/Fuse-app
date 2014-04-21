@@ -8,6 +8,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         template: _.template( maintenanceAlertsTmpl ),
         
         events: {
+            "tap .alert": "showAlertInfo"
         },
 
         initialize: function() {
@@ -30,6 +31,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             }
             this.content = this.template({ data: this.alerts });
             Fuse.View.prototype.render.call( this );
+
+            this.$popup = $( "#maintenance-alert-info" );
+
         },
 
         collectVehicleAlerts: function( vehicle ) {
@@ -50,7 +54,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                     vehicle: vehicle.get( "nickname" )
                 });
             }
-        }
+        },
 
+        showAlertInfo: function( e ) {
+            var alert = this.alerts[ e.target.dataset.vehicleIdx ];
+            Fuse.log( alert );
+        }
     });
 });
