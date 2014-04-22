@@ -8,7 +8,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         template: _.template( maintenanceAlertsTmpl ),
         
         events: {
-            "tap .alert": "showAlertInfo"
+            "tap .alert": "showAlertInfo",
+            "tap #schedule-repair": "showPrepopulatedReminderForm"
         },
 
         initialize: function() {
@@ -62,6 +63,21 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             this.$popup.find( "#alert-code" ).html( alert.code );
             this.$popup.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
             this.$popup.popup( "open" );
+        },
+
+        showPrepopulatedReminderForm: function( e ) {
+            /**
+             * Pass error code and message for which we are scheduling
+             * a maintenance reminder.
+             */
+            var args = {
+                error: {
+                    code: this.$popup.find( "#alert-code" ).text(),
+                    message: this.$popup.find( "#alert-message" ).text()
+                }
+            };
+
+            Fuse.showInContext( "maintenance-reminders", args );
         }
     });
 });
