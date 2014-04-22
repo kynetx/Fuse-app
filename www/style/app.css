@@ -216,10 +216,12 @@ li.vehicle-data {
 }
 
 /**
- * Popups should have some padding.
+ * Popups should have some padding
+ * and additional width.
  */
  .popup {
     padding: 15px;
+    width: 90%;
  }
 
  #record-fillup > * {

@@ -72,17 +72,20 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
              * a maintenance reminder to the form.
              */
             var alert = {
-                code: this.popups.$alert.find( "#alert-code" ).text(),
-                message: this.popups.$alert.find( "#alert-message" ).text()
-            },
-                self = this;
+                code: this.popups.$alert.find( "#alert-code" ).text().replace( " ", "", "g" ),
+                message: this.popups.$alert.find( "#alert-message" ).text().replace( " ", "", "g" )
+            };
 
-            this.popups.$alert.popup( "close" ).one( "popupafterclose", function( e ) {
-                self.popups.$form.popup( "open" );
-            });
+            this.popups.$alert.popup( "close" );
 
             this.popups.$form.find( "#reminder-alert-code" ).val( alert.code );
             this.popups.$form.find( "#reminder-alert-message" ).val( alert.message );
+            // This is neccesary because jQuery mobile is weird.
+            setTimeout( this.showReminderFormDelayed.bind( this ), 500 );
+        },
+
+        showReminderFormDelayed: function() {
+            this.popups.$form.popup( "open" );
         }
     });
 });
