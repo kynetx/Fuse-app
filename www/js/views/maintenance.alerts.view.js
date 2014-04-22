@@ -64,6 +64,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             this.popups.$alert.find( "#alert-code" ).html( alert.code );
             this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
             this.popups.$alert.popup( "open" );
+            e.handled = true;
         },
 
         showPrepopulatedReminderForm: function( e ) {
@@ -82,6 +83,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             this.popups.$form.find( "#reminder-alert-message" ).val( alert.message );
             // This is neccesary because jQuery mobile is weird.
             setTimeout( this.showReminderFormDelayed.bind( this ), 500 );
+            e.handled = true;
         },
 
         showReminderFormDelayed: function() {
