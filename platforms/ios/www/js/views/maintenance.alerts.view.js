@@ -9,7 +9,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         
         events: {
             "tap .alert": "showAlertInfo",
-            "tap #schedule-repair": "showPrepopulatedReminderForm"
+            "tap #schedule-repair": "showPrepopulatedReminderForm",
+            "submit #alert-reminder-form": "scheduleAlertMaintenanceReminder"
         },
 
         initialize: function() {
@@ -89,6 +90,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
 
         showReminderFormDelayed: function() {
             this.popups.$form.popup( "open" );
+        },
+
+        scheduleAlertMaintenanceReminder: function( e ) {
+            
         }
     });
 });
