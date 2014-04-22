@@ -18,6 +18,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                 this.header = this.model.get( "nickname" ) + " Alerts";
             }
             this.alerts = [];
+            this.popups = [];
         },
 
         render: function() {
@@ -33,8 +34,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             this.content = this.template({ data: this.alerts });
             Fuse.View.prototype.render.call( this );
 
-            this.$popup = $( "#maintenance-alert-info" );
-
+            this.popups.$alert = $( "#maintenance-alert-info" );
+            this.popups.$form = $( "#alert-reminder-form" );
         },
 
         collectVehicleAlerts: function( vehicle ) {
@@ -68,16 +69,14 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         showPrepopulatedReminderForm: function( e ) {
             /**
              * Pass error code and message for which we are scheduling
-             * a maintenance reminder.
+             * a maintenance reminder to the form.
              */
-            var args = {
-                error: {
-                    code: this.$popup.find( "#alert-code" ).text(),
-                    message: this.$popup.find( "#alert-message" ).text()
-                }
+            var alert = {
+                code: this.$popup.find( "#alert-code" ).text(),
+                message: this.$popup.find( "#alert-message" ).text()
             };
 
-            Fuse.showInContext( "maintenance-reminders", args );
+            this.$popup.popup( "close" );
         }
     });
 });

@@ -21,3 +21,19 @@
     </div>
     <a id="schedule-repair" data-role="button" data-theme="b">Schedule Repair</a>
 </div>
+<!-- Schedule a reminder for an alert. -->
+<div id="alert-reminder-form" class="popup" data-role="popup" data-transition="sildedown" data-position-to="window">
+    <div class="ui bar ui-bar-b">
+        <h3>Schedule Maintenance For Your <span id="schedule-maintenance-code"></span></h3>
+    </div>
+    <div id="alert-reminder-form-container">
+        <form id="alert-reminder-form">
+            <label for="reminder-alert-code">Code:</label>
+            <input id="reminder-alert-code" type="text">
+            <label for="reminder-alert-message">Message:</label>
+            <input id="reminder-alert-message" type="text">
+            <label for="reminder-additional-notes">Additional Notes:</label>
+            <textarea id="reminder-additional-notes"></textarea>
+        </form>
+    </div>
+</div>
