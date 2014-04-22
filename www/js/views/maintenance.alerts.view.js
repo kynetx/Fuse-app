@@ -103,7 +103,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             alert( "Success! Maintenance reminder saved." );
             this.tappedAlert.setAttribute( "data-icon", "check" );
             this.tappedAlert.setAttribute( "data-iconpos", "right" );
-            $( this.tappedAlert ).button();
+            $( this.tappedAlert ).button( "refresh" );
             this.tappedAlert = null;
             Fuse.log( data );
             e.handled = true;
