@@ -61,7 +61,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         showAlertInfo: function( e ) {
-            var data = e.target.dataset,
+            this.tappedAlert = e.target;
+            var data = this.tappedAlert.dataset,
                 alert = this.alerts[ data.vehicleIdx ].alerts[ data.alertIdx ];
             this.popups.$alert.find( "#alert-code" ).html( alert.code );
             this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
@@ -100,6 +101,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             var data = $form.serializeArray();
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
+            this.tappedAlert.setAttribute( "data-icon", "check" );
+            this.tappedAlert.setAttribute( "data-iconpos", "right" );
+            $( this.tappedAlert ).button();
+            this.tappedAlert = null;
             Fuse.log( data );
             e.handled = true;
         }
