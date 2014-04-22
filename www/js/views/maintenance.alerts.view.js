@@ -68,7 +68,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             if ( this.tappedAlert.className.indexOf( "ui-icon-check" ) > -1 ) {
                 var rem = this.alertReminders[ 0 ],
                     dateObj = rem.filter(function( o ) {
-                        o.name === "date";
+                        return o.name === "date";
                     }).shift();
                 this.popups.$alert.find( "#alert-code" ).html( "Maintenance Scheduled" );
                 this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( "Maintenance alread scheduled on" + " " + dateObj.value );
