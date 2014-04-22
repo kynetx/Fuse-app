@@ -4,10 +4,7 @@
  * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
  * For details see https://kynetx.com
  */
-require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
-    // setup dummy data. Will eventually come from API obviously.
-    // v1.0.0 will only have month aggregates.
-    // TODO: BKA please put other past month aggregates in these models.
+ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
@@ -178,11 +175,11 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
                     "longitude": -111.82633
                 },
                 "alerts": [
-                    {
-                        "code": "P0193",
-                        "message": "Fuel Rail Pressure Sensor Circuit High Input",
-                        "timestamp": "never"
-                    },
+                {
+                    "code": "P0193",
+                    "message": "Fuel Rail Pressure Sensor Circuit High Input",
+                    "timestamp": "never"
+                },
                 ],
                 "timestamp": "19910831T060849T+07:00",
                 "running": true,
@@ -805,36 +802,36 @@ require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.route
         "fillups": []
     };
 
-	Fuse.menu = [{
-		action: "settings",
-		text: "Settings"
-	},
-	{
-		action: "fleet",
-		text: "Fleet"
-	},
-	{
-		action: "logout",
-		text: "Logout"
-	}];
+    Fuse.menu = [{
+        action: "settings",
+        text: "Settings"
+    },
+    {
+        action: "fleet",
+        text: "Fleet"
+    },
+    {
+        action: "logout",
+        text: "Logout"
+    }];
 
-	// intialize the routers.
-	Fuse.routers = {};
-	Fuse.routers.AppRouter = new AppRouter();
-	Fuse.routers.FleetRouter = new FleetRouter();
-	// initialize the controllers.
-	Fuse.routers.AppRouter.controller = new AppController();
-	Fuse.routers.FleetRouter.controller = new FleetController();
-	// this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
-	// a good idea to remove later.
-	Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.FleetRouter.routes));
-	// remove this for production.
-	Fuse.logging = true;
+    // intialize the routers.
+    Fuse.routers = {};
+    Fuse.routers.AppRouter = new AppRouter();
+    Fuse.routers.FleetRouter = new FleetRouter();
+    // initialize the controllers.
+    Fuse.routers.AppRouter.controller = new AppController();
+    Fuse.routers.FleetRouter.controller = new FleetController();
+    // this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
+    // a good idea to remove later.
+    Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.FleetRouter.routes));
+    // remove this for production.
+    Fuse.logging = true;
 
-	// setup loggger 
-	Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
-	
-	// start the app.
+    // setup loggger 
+    Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
+    
+    // start the app.
     document.addEventListener( "deviceready", function() {
         Fuse.init();
     });

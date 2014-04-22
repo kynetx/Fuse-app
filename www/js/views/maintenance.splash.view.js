@@ -8,6 +8,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         template: _.template( maintenanceSplashTmpl ),
         
         events: {
+            "tap [data-action='alerts']"        : "showAlerts",
+            "tap [data-action='maintenance']"   : "showMaintenanceReminders",
+            "tap [data-action='history']"       : "showHistory"
         },
 
         initialize: function() {
@@ -17,6 +20,18 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         render: function() {
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
+        },
+
+        showAlerts: function( e ) {
+            Fuse.showWithContext( "maintenance-alerts" );
+        },
+
+        showMaintenanceReminders: function( e ) {
+            Fuse.showWithContext( "maintenance-reminders" );
+        },
+
+        showHistory: function( e ) {
+            Fuse.showWithContext( "maintenance-history" );
         }
 
     });
