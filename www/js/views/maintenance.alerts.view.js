@@ -100,6 +100,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             var data = $form.serializeArray();
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
+            Fuse.log( data );
             e.handled = true;
         }
     });
