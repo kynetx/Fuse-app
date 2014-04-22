@@ -1,16 +1,22 @@
 define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
     return Fuse.Router.extend({
         routes: {
-            "fleet": "showFleet",
-            "fleet/:id": "showVehicle",
-            "findcar": "showFindCar",
-            "findcar/:id": "showFindCar",
-            "trips": "showTripAggregate",
-            "trips/:id": "showTrips",
-            "fuel": "showFuelAggregate",
-            "fuel/:id": "showFuel",
-            "maintenance": "showMaintenanceSplash",
-            "maintenance/:id": "showMaintenance"
+            "fleet"                     : "showFleet",
+            "fleet/:id"                 : "showVehicle",
+            "findcar"                   : "showFindCar",
+            "findcar/:id"               : "showFindCar",
+            "trips"                     : "showTripAggregate",
+            "trips/:id"                 : "showTrips",
+            "fuel"                      : "showFuelAggregate",
+            "fuel/:id"                  : "showFuel",
+            "maintenance"               : "showMaintenanceSplash",
+            "maintenance/:id"           : "showMaintenanceSplashForVehicle",
+            "maintenance-alerts"        : "showMaintenanceAlerts",
+            "maintenance-alerts/:id"    : "showMaintenanceAlertsForVehicle",
+            "maintenance-reminders"     : "showMaintenanceReminders",
+            "maintenance-reminders/:id" : "showMaintenanceRemindersForeVehicle",
+            "maintenance-history"       : "showMaintenanceHistory",
+            "maintenance-history/:id"   : "showMaintenanceHistoryForVehicle"
         },
 
         showFleet: function() {
@@ -45,8 +51,17 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             this.invokeControllerFunction ( "showMaintenanceSplash", arguments );
         },
 
-        showMaintenance: function( id ) {
-            this.invokeControllerFunction( "showMaintenance", arguments );
+        showMaintenanceSplashForVehicle: function( id ) {
+            this.invokeControllerFunction( "showMaintenanceSplashForVehicle", arguments );
+        },
+
+        showMaintenanceAlerts: function() {
+            this.invokeControllerFunction( "showMaintenanceAlerts", arguments );
+        },
+
+        showMaintenanceAlertsForVehicle: function( id ) {
+            this.invokeControllerFunction( "showMaintenanceAlertsForVehicle", arguments );
         }
+
     });
 });

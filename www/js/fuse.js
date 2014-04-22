@@ -126,7 +126,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             "fleet": "Fleet",
             "findcar": "FindCar",
             "fuel": "Fuel",
-            "trips": "Trips"
+            "trips": "Trips",
+            "maintenance": "MaintenanceSplash",
+            "maintenance-alerts": "MaintenanceAlerts"
         },
 
         shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -335,7 +337,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
 
                 Fuse.log( "Changing page to:", this.el, "with options:", changePageOptions );
-                $.mobile.changePage(this.$el, changePageOptions);
+                $.mobile.changePage( this.$el, changePageOptions );
             }
         }),
 
@@ -1020,6 +1022,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             return $("body").hasClass("ui-mobile-viewport");
         },
 
+        /**
+         * Navigate to a given hash, ostensibly one that 
+         * has an associated view.
+         * @param to - string - The hash to be navigated to.
+         * @param options - hash - Optional paramaters to put in the hash.
+         * Example usage: Fuse.show( "foo" ), hash becomes => "#foo"
+         *                Fuse.show( "foo", { id: "XYZ" } ), hash becomes => "#foo/XYZ"
+         */
         show: function(to, options) {
 
             var page = "", settings = _.extend({}, options);
@@ -1051,6 +1061,31 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.log ("No routes match requested page. Not doing anything.");
             } else {
                 this.navigate(page);
+            }
+        },
+
+        /**
+         * Show a given "to" hash in correct context, that being
+         * either vehicle or fleet. Calls Fuse.show() internally.
+         * So if we are looking at a view for a single vehicle, and 
+         * we call showWithContext to navigate to a different view, 
+         * that view will be shown for that vehicle instead of the whole
+         * fleet. Likewise, if we call showWithContext from a fleet page,
+         * the "to" page will be shown for the whole fleet.
+         * @param {to} - string - The hash to navigate to.
+         */
+        showWithContext: function( to ) {
+            var idMatch = Backbone.history.fragment.match(/\/(.*)/);
+
+            /**
+             * If "idMatch" is an array, that means our pattern matched.
+             * If "idMatch" has two elements, that means our id is the second
+             * item in the array.
+             */
+            if ( Object.prototype.toString.call( idMatch ) === "[object Array]" && idMatch.length === 2 ) {
+                this.show( to, { id: idMatch[ 1 ] } );
+            } else {
+                this.show( to );
             }
         },
 

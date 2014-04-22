@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView, MaintenanceSplashView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -26,6 +26,10 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
 
             this.views[ "MaintenanceSplash" ] = new MaintenanceSplashView({
+                controller: this
+            });
+
+            this.views[ "MaintenanceAlerts" ] = new MaintenanceAlertsView({
                 controller: this
             });
         },
@@ -133,6 +137,26 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         // Render the maintenance splash view.
         showMaintenanceSplash: function() {
             this.views.MaintenanceSplash.render();
+        },
+
+        showMaintenanceSplashForVehicle: function( id ) {
+            this.views[ "VehicleMaintenanceSplash" ] = new MaintenanceSplashView({
+                controller: this,
+                model: this.fleet.get( id )
+            });
+            this.views.VehicleMaintenanceSplash.render();
+        },
+
+        showMaintenanceAlerts: function() {
+            this.views.MaintenanceAlerts.render();
+        },
+
+        showMaintenanceAlertsForVehicle: function( id ) {
+            this.views[ "VehicleMaintenanceAlerts" ] = new MaintenanceAlertsView({
+                controller: this,
+                model: this.fleet.get( id )
+            });
+            this.views.VehicleMaintenanceAlerts.render();
         }
     });
 });

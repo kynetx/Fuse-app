@@ -22,9 +22,14 @@ require.config({
         "underscore": {
             exports: "_"
         },
+        "sidr":  {
+            deps: [ "jquery" ]
+        },
+        "tooltipster": {
+            deps: [ "jquery" ]
+        },
         "jquerymobileconfig": ["jquery"],
         "jquerymobile": ["jquery", "jquerymobileconfig"],
-        "tooltipster": ["jquery"],
         "cloudosconfig": ["jquery"],
         "cloudos": {
             deps: ["jquery", "cloudosconfig"],
