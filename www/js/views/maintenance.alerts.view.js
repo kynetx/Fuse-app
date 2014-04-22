@@ -95,7 +95,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         scheduleAlertMaintenanceReminder: function( e ) {
             e.preventDefault();
             e.stopPropagation();
-            
+            var data = $( "#alert-reminder-form" ).serializeArray();
+            Fuse.log( data );
             e.handled = true;
         }
     });
