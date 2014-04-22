@@ -75,8 +75,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             } else {
                 this.popups.$alert.find( "#alert-code" ).html( alert.code );
                 this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
-                this.popups.$alert.popup( "open" );
             }
+            
+            this.popups.$alert.popup( "open" );
             e.handled = true;
         },
 
