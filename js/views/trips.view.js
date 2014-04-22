@@ -43,8 +43,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
                 model: trip
             });
 
-            this.tripViewData[ date ] = this.tripViewData[ date ] || {};
-            
+            if (date !== this.lastDate) {
+                this.tripViewData[ date ] = this.tripViewData[ date ] || {};
+                this.lastDate = date;
+            }
             this.tripViewData[ date ][ "elements" ] = this.tripViewData[ date ][ "elements" ] || [];
             this.tripViewData[ date ][ "aggregates" ] = this.tripViewData[ date ][ "aggregates" ] || {};
             this.tripViewData[ date ][ "elements" ].push( view.render().el );

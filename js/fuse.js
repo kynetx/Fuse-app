@@ -919,7 +919,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 getTime: function( datestr ) {
                     var parts = datestr.split(" ");
-                    var time = parts[ 3 ] + ' ' + parts[ 4 ];
+                    var time = parts[ 1 ] + ' ' + parts[ 2 ];
 
                     return time;
                 },
