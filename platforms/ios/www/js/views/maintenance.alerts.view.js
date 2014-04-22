@@ -70,10 +70,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                     dateObj = rem.filter(function( o ) {
                         return o.name === "date";
                     }).shift();
-                Fuse.log( dateObj );
                 this.popups.$alert.find( "#alert-code" ).html( "Maintenance Scheduled" );
                 this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( "Maintenance alread scheduled on" + " " + dateObj.value );
-                this.popups.$alert.find( "button" ).hide();
+                this.popups.$alert.find( "button" ).remove();
             } else {
                 this.popups.$alert.find( "#alert-code" ).html( alert.code );
                 this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
@@ -120,7 +119,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             this.alertReminders[ this.alertReminders.length ] = $form.serializeArray();
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
-            $( this.tappedAlert ).buttonMarkup({ icon: "check", iconpos: "right" });
+            $( this.tappedAlert ).buttonMarkup({ icon: "check" });
             this.tappedAlert = null;
             e.handled = true;
         }
