@@ -59,8 +59,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         showAlertInfo: function( e ) {
-            var data = e.target.dataset;
-            var alert = this.alerts[ data.vehicleIdx ].alerts[ data.alertIdx ];
+            var data = e.target.dataset,
+                alert = this.alerts[ data.vehicleIdx ].alerts[ data.alertIdx ];
             this.popups.$alert.find( "#alert-code" ).html( alert.code );
             this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
             this.popups.$alert.popup( "open" );
@@ -77,6 +77,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             };
 
             this.popups.$alert.popup( "close" );
+            this.popups.$form.find( "#reminder-alert-code" ).val( alert.code );
+            this.popups.$form.find( "#reminder-alert-message" ).val( alert.message );
+            this.popups.$form.popup( "open" );
         }
     });
 });
