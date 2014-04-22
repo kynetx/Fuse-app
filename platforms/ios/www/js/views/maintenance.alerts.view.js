@@ -93,7 +93,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         scheduleAlertMaintenanceReminder: function( e ) {
+            e.preventDefault();
+            e.stopPropagation();
             
+            e.handled = true;
         }
     });
 });
