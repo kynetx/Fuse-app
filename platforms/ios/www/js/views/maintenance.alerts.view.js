@@ -67,7 +67,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             // Part of the temporary handwaving. To be removed.
             if ( this.tappedAlert.className.indexOf( "ui-icon-check" ) > -1 ) {
                 var rem = this.alertReminders[ 0 ],
-                    dateObj = rems.filter(function( o ) {
+                    dateObj = rem.filter(function( o ) {
                         o.name === "date";
                     }).shift();
                 this.popups.$alert.find( "#alert-code" ).html( "Maintenance Scheduled" );
@@ -119,7 +119,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             alert( "Success! Maintenance reminder saved." );
             $( this.tappedAlert ).buttonMarkup({ icon: "check", iconpos: "right" });
             this.tappedAlert = null;
-            Fuse.log( data );
             e.handled = true;
         }
     });
