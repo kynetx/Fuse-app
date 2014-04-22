@@ -27,13 +27,15 @@
         <h3>Schedule Maintenance</h3>
     </div>
     <div id="alert-reminder-form-container">
-        <form id="alert-reminder-form">
+        <form id="alert-reminder">
             <label for="reminder-alert-code">Code:</label>
             <input id="reminder-alert-code" type="text">
             <label for="reminder-alert-message">Message:</label>
-            <input id="reminder-alert-message" type="text">
+            <input id="reminder-alert-message" name="message" type="text">
+            <label for="reminder-alert-date">Date:</label>
+            <input id="reminder-alert-date" name="date" type="date">
             <label for="reminder-additional-notes">Additional Notes:</label>
-            <textarea id="reminder-additional-notes"></textarea>
+            <textarea id="reminder-additional-notes" name="notes"></textarea>
             <button type="submit" data-theme="b">Save</button>
         </form>
     </div>

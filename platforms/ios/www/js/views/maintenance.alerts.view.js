@@ -76,7 +76,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
              */
             var alert = {
                 code: this.popups.$alert.find( "#alert-code" ).text().replace( /\s+/g, "" ),
-                message: this.popups.$alert.find( "#alert-message" ).text().replace( /\s+/, "" )
+                message: this.popups.$alert.find( "#alert-message" ).text().replace( /\s+/g, "" )
             };
 
             this.popups.$alert.popup( "close" );
@@ -95,7 +95,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         scheduleAlertMaintenanceReminder: function( e ) {
             e.preventDefault();
             e.stopPropagation();
-            var data = $( "#alert-reminder-form" ).serializeArray();
+            var data = $( "#alert-reminder" ).serializeArray();
             Fuse.log( data );
             e.handled = true;
         }
