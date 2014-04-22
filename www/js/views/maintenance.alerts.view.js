@@ -74,13 +74,15 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             var alert = {
                 code: this.popups.$alert.find( "#alert-code" ).text(),
                 message: this.popups.$alert.find( "#alert-message" ).text()
-            };
+            },
+                self = this;
 
-            this.popups.$alert.popup( "close" );
-            this.popups.$alert.detach();
+            this.popups.$alert.popup( "close" ).on( "popupafterclose", function( e ) {
+                self.popups.$form.popup( "open" );
+            });
+            
             this.popups.$form.find( "#reminder-alert-code" ).val( alert.code );
             this.popups.$form.find( "#reminder-alert-message" ).val( alert.message );
-            this.popups.$form.popup( "open" );
         }
     });
 });
