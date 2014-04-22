@@ -72,8 +72,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
              * a maintenance reminder to the form.
              */
             var alert = {
-                code: this.$popup.find( "#alert-code" ).text(),
-                message: this.$popup.find( "#alert-message" ).text()
+                code: this.popups.$alert.find( "#alert-code" ).text(),
+                message: this.popups.$alert.find( "#alert-message" ).text()
             };
 
             this.popups.$alert.popup( "close" );
