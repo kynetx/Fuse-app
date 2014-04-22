@@ -57,8 +57,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         showAlertInfo: function( e ) {
-            var alert = this.alerts[ e.target.dataset.vehicleIdx ];
-            Fuse.log( alert );
+            var data = e.target.dataset;
+            var alert = this.alerts[ data.vehicleIdx ].alerts[ data.alertIdx ];
+            this.$popup.find( "#alert-code" ).html( alert.code );
+            this.$popup.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
+            this.$popup.popup( "open" );
         }
     });
 });

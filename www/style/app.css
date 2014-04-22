@@ -216,9 +216,9 @@ li.vehicle-data {
 }
 
 /**
- * Form for recording fillups in fuel section of the app.
+ * Popups should have some padding.
  */
- #fuel-popup {
+ .popup {
     padding: 15px;
  }
 

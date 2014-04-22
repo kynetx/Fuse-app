@@ -4,7 +4,7 @@
     </div>
     <% if ( data[ i ].alerts && data[ i ].alerts.length ) { %>
         <% for ( var j = 0; j < data[ i ].alerts.length; ++j ) { %>
-            <a class="alert" data-role="button" data-theme="r" data-vehicle-idx=<%= i %>><%= data[ i ].alerts[ j ].code %></a>
+            <a class="alert" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-alert-idx=<%= j %>><%= data[ i ].alerts[ j ].code %></a>
         <% } %>
     <% } else { %>
         <p>No alerts for this vehicle.</p>
@@ -12,10 +12,12 @@
 <% } %>
 
 <!-- Show details for a maintenance alert. -->
-<div id="maintenance-alert-info" data-role="popup" data-transition="pop" data-position-to="window">
+<div id="maintenance-alert-info" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
     <div class="ui-bar ui-bar-a">
         <h3 id="alert-code"></h3>
     </div>
     <div id="alert-message">
+        <p></p>
     </div>
+    <a data-role="button" data-theme="b">Schedule Repair</a>
 </div>
