@@ -70,13 +70,15 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                     dateObj = rem.filter(function( o ) {
                         return o.name === "date";
                     }).shift();
+                Fuse.log( dateObj );
                 this.popups.$alert.find( "#alert-code" ).html( "Maintenance Scheduled" );
                 this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( "Maintenance alread scheduled on" + " " + dateObj.value );
+                this.popups.$alert.find( "button" ).hide();
             } else {
                 this.popups.$alert.find( "#alert-code" ).html( alert.code );
                 this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
             }
-            
+
             this.popups.$alert.popup( "open" );
             e.handled = true;
         },
