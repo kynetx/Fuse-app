@@ -904,27 +904,26 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  */
                 commaSeperateNumber: function( num ) {
                     var parts = num.toString().split(".");
-                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    parts[ 0 ] = parts[ 0 ].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     return parts.join(".");
                 },
 
-                msToTime: function( num ) {
-                    // Find hours
-                    var hours = Math.floor(num/(1000 * 60 * 60));
-                    remainder = num % (1000 * 60 * 60);
+                monthDayYear: function( datestr ) {
+                    var newStr = datestr.replace(/\s+/g,'');
 
-                    // Find minutes
-                    var minutes = Math.floor(remainder/(1000 * 60));
-                    remainder = remainder % (1000 * 60);
+                    var month = newStr.substring( 4, 6 ),
+                        day = newStr.substring( 6, 8 ),
+                        year = newStr.substring( 0, 4 );
 
-                    // Find seconds
-                    var seconds = Math.floor(remainder/1000);
+                    var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ', ' + year;
+                    return buildStr;
+                },
 
-                    var buildTime = '';
-                    if (hours >= 1) buildTime += hours.toString() + 'h ';
-                    if (minutes >= 1) buildTime += minutes.toString() + 'm ';
-                    if (seconds >= 1) buildTime += seconds.toString() + 's';
-                    return buildTime;
+                getTime: function( datestr ) {
+                    var parts = datestr.split(" ");
+                    var time = parts[ 1 ] + ' ' + parts[ 2 ];
+
+                    return time;
                 },
 
                 /**

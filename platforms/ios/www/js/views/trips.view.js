@@ -13,17 +13,19 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.header = this.model.get( "nickname" ) + " " + "Trips";
-            this.tripViews = [];
+            this.tripViewData = {};
+            this.lastDate = '';
         },
 
         render: function() {
-            var lastdate='';
-            this.tripViews.length = 0;
             this.collection.each(function( trip ) {
-                this.renderTrip( trip );
+                this.addTrip( trip );
             }, this );
 
-            this.content = this.template({ vehicle: this.model.toJSON(), tripViews: this.tripViews });
+            // This is temporary while I debug
+            console.log(this.tripViewData);
+
+            this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
         },
 
@@ -33,6 +35,22 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             });
 
             this.tripViews.push( view.render().el );
+        },
+
+        addTrip: function( trip ) {
+            var date = trip.get( "endTime" ).substring( 0, 9 );
+            var view = new TripView({
+                model: trip
+            });
+
+            if (date !== this.lastDate) {
+                this.tripViewData[ date ] = this.tripViewData[ date ] || {};
+                this.lastDate = date;
+            }
+            this.tripViewData[ date ][ "elements" ] = this.tripViewData[ date ][ "elements" ] || [];
+            this.tripViewData[ date ][ "aggregates" ] = this.tripViewData[ date ][ "aggregates" ] || {};
+            this.tripViewData[ date ][ "elements" ].push( view.render().el );
+
         },
 
         /**

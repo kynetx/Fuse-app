@@ -8,7 +8,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.ht
                 "data-role": "collapsible",
                 "data-inset": "false",
                 "data-tid": this.model.get( "id" ),
-                "data-iconpos": "right"
+                "data-iconpos" : "right"
             };
         },
         
