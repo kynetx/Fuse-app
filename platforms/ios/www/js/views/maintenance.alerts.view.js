@@ -71,8 +71,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                         return o.name === "date";
                     }).shift();
                 this.popups.$alert.find( "#alert-code" ).html( "Maintenance Scheduled" );
-                this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( "Maintenance alread scheduled on" + " " + dateObj.value );
-                this.popups.$alert.find( "button" ).remove();
+                this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( "Maintenance already scheduled on" + " " + dateObj.value );
+                this.popups.$alert.find( "#schedule-repair" ).hide();
             } else {
                 this.popups.$alert.find( "#alert-code" ).html( alert.code );
                 this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
