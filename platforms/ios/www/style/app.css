@@ -28,6 +28,10 @@
     cursor: pointer;
 }
 
+#trips > .fuse-content {
+    padding: 0px;
+}
+
 /**
  * see note below about why one must sometimes
  * use !important with style definitions in jQuery Mobile
@@ -94,7 +98,16 @@
     border-bottom: 6px solid rgba(0,0,0,.3) !important;
 }
 
-.fleet-item-header:hover {
+.dark-header {
+    border-width: 0px !important;
+    background-color: rgba(0,0,0,.6) !important;
+    border-top: 1px solid rgba(0,0,0,.3) !important;
+    border-bottom: 6px solid rgba(0,0,0,.3) !important;
+    margin-top: 3px;
+    margin-bottom: 4px;
+}
+
+a.fleet-item-header:hover {
     background-color: rgba(0,0,0,.4) !important;
 }
 
@@ -148,6 +161,7 @@ li.vehicle-data {
     font-weight: normal !important;
     padding-top: 3px !important;
     font-size: 180% !important;
+    margin: 0px;
 }
 
 .detail-font {
@@ -230,6 +244,7 @@ li.vehicle-data {
  
 .icon-box.light {
     background-color: rgba(0,0,0,.15);
+<<<<<<< HEAD:www/style/app.css
 }
 
 /**
@@ -296,4 +311,3 @@ li.vehicle-data {
     font-family: Helvetica, Arial, sans-serif;
     text-decoration: none;
 }
-

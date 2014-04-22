@@ -1,10 +1,3 @@
-<% for (var prop in tripViewData) { %>
-    <div class='dark-header'>
-        <h3 class='title-font white-font'><%= FTH.monthDayYear( prop ) %></h3>
-    </div>
-    <% if (tripViewData[ prop ].elements) {
-        for (var i = 0; i < tripViewData[ prop ].elements.length; i++) { %>
-            <%= tripViewData[ prop ].elements[ i ].outerHTML %>
-    <%  }
-    }
-} %>
+<% for ( var i = 0; i < tripViews.length; ++i ) { %>
+  <%= tripViews[ i ].outerHTML %>
+<% } %>
