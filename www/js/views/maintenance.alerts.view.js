@@ -22,6 +22,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         render: function() {
+            Fuse.log( "Render being called." );
             // Are we rendering alerts for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleAlerts( this.model );
@@ -73,8 +74,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
              * a maintenance reminder to the form.
              */
             var alert = {
-                code: this.popups.$alert.find( "#alert-code" ).text().replace( " ", "", "g" ),
-                message: this.popups.$alert.find( "#alert-message" ).text().replace( " ", "", "g" )
+                code: this.popups.$alert.find( "#alert-code" ).text().replace( /\s+/g, "" ),
+                message: this.popups.$alert.find( "#alert-message" ).text().replace( /\s+/, "" )
             };
 
             this.popups.$alert.popup( "close" );
