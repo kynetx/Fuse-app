@@ -77,10 +77,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             },
                 self = this;
 
-            this.popups.$alert.popup( "close" ).on( "popupafterclose", function( e ) {
+            this.popups.$alert.popup( "close" ).once( "popupafterclose", function( e ) {
                 self.popups.$form.popup( "open" );
             });
-            
+
             this.popups.$form.find( "#reminder-alert-code" ).val( alert.code );
             this.popups.$form.find( "#reminder-alert-message" ).val( alert.message );
         }
