@@ -64,9 +64,19 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             this.tappedAlert = e.target;
             var data = this.tappedAlert.dataset,
                 alert = this.alerts[ data.vehicleIdx ].alerts[ data.alertIdx ];
-            this.popups.$alert.find( "#alert-code" ).html( alert.code );
-            this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
-            this.popups.$alert.popup( "open" );
+            // Part of the temporary handwaving. To be removed.
+            if ( this.tappedAlert.className.indexOf( "ui-icon-check" ) > -1 ) {
+                var rem = this.alertReminders[ 0 ],
+                    dateObj = rems.filter(function( o ) {
+                        o.name === "date";
+                    }).shift();
+                this.popups.$alert.find( "#alert-code" ).html( "Maintenance Scheduled" );
+                this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( "Maintenance alread scheduled on" + " " + dateObj.value );
+            } else {
+                this.popups.$alert.find( "#alert-code" ).html( alert.code );
+                this.popups.$alert.find( "#alert-message > p:eq( 0 )" ).html( alert.message );
+                this.popups.$alert.popup( "open" );
+            }
             e.handled = true;
         },
 
@@ -98,7 +108,13 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             e.stopPropagation();
 
             var $form = $( e.target );
-            var data = $form.serializeArray();
+
+            // This is a little temporary handwaving. To be removed.
+            if ( !this.alertReminders ) {
+                this.alertReminders = [];
+            }
+
+            this.alertReminders[ this.alertReminders.length ] = $form.serializeArray();
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
             $( this.tappedAlert ).buttonMarkup({ icon: "check", iconpos: "right" });
