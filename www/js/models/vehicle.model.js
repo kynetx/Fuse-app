@@ -22,6 +22,12 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
                     "timestamp": "never"
                 },
             ],
+            "reminders": [
+                {
+                    "type": "none",
+                    "date": "0000-00-00"
+                }
+            ],
             "address": "none",
             "timestamp": "never",
             "running": "never",
