@@ -15,7 +15,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             if ( this.model ) {
                 this.header = this.model.get( "nickname" ) + " Alerts";
             }
-            this.popups = [];
+            this.reminders = [];
         },
 
         render: function() {
@@ -34,5 +34,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             this.popups.$alert = $( "#maintenance-alert-info" );
             this.popups.$form = $( "#alert-reminder-form" );
         },
+
+        collectVehicleReminders: function( vehicle ) {
+            // Stub.
+        }
     });
 });
