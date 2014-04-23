@@ -25,7 +25,8 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "reminders": [
                 {
                     "type": "none",
-                    "date": "0000-00-00"
+                    "date": "0000-00-00",
+                    "mileage": 0
                 }
             ],
             "address": "none",
