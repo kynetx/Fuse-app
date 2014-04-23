@@ -9,7 +9,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         
         events: {
             "tap [data-action='alerts']"        : "showAlerts",
-            "tap [data-action='maintenance']"   : "showMaintenanceReminders",
+            "tap [data-action='reminders']"     : "showMaintenanceReminders",
             "tap [data-action='history']"       : "showHistory"
         },
 
