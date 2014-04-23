@@ -3,7 +3,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         id: "maintenance-splash",
         tagName: "div",
         role: "page",
-        header: "Maintenance",
+        header: "Car Care",
         transition: "slide",
         template: _.template( maintenanceSplashTmpl ),
         
