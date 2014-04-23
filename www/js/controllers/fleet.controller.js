@@ -32,6 +32,10 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.views[ "MaintenanceAlerts" ] = new MaintenanceAlertsView({
                 controller: this
             });
+
+            this.views[ "MaintenanceReminders" ] = new MaintenanceRemindersView({
+                controller: this
+            });
         },
         
         showFleet: function() {
@@ -157,6 +161,19 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 model: this.fleet.get( id )
             });
             this.views.VehicleMaintenanceAlerts.render();
+        },
+
+        showMaintenanceReminders: function() {
+            this.views.MaintenanceReminders.render();
+        },
+
+        showMaintenanceRemindersForVehicle: function( id ) {
+            this.views[ "VehicleMaintenanceReminders" ] = new MaintenanceRemindersView({
+                controller: this,
+                model: this.fleet.get( id )
+            });
+
+            this.views.VehicleMaintenanceReminders.render();
         }
     });
 });
