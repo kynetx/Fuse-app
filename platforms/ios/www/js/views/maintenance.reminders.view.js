@@ -28,11 +28,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                     this.collectVehicleReminders( vehicle );
                 }, this);
             }
+            
             this.content = this.template({ data: this.reminders });
             Fuse.View.prototype.render.call( this );
-
-            this.popups.$alert = $( "#maintenance-alert-info" );
-            this.popups.$form = $( "#alert-reminder-form" );
         },
 
         collectVehicleReminders: function( vehicle ) {

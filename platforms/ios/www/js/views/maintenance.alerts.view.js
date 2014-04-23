@@ -32,6 +32,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                     this.collectVehicleAlerts( vehicle );
                 }, this);
             }
+            
             this.content = this.template({ data: this.alerts });
             Fuse.View.prototype.render.call( this );
 
