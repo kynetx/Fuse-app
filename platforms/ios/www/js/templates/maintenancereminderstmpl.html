@@ -4,7 +4,7 @@
     </div>
     <% if ( data[ i ].reminders && data[ i ].reminders.length ) { %>
         <% for ( var j = 0; j < data[ i ].alerts.length; ++j ) { %>
-            <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-alert-idx=<%= j %>><%= data[ i ].reminders[ j ].code %></a>
+            <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].code %></a>
         <% } %>
     <% } else { %>
         <p>No reminders for this vehicle.</p>
