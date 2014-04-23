@@ -23,7 +23,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         render: function() {
-            Fuse.log( "Render being called." );
             // Are we rendering alerts for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleAlerts( this.model );
