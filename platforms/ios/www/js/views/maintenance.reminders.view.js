@@ -28,13 +28,15 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                     this.collectVehicleReminders( vehicle );
                 }, this);
             }
-            
+
             this.content = this.template({ data: this.reminders });
             Fuse.View.prototype.render.call( this );
         },
 
         collectVehicleReminders: function( vehicle ) {
-            // Stub.
+            if ( vehicle.get( "reminders") !== vehicle.defaults.reminders ) {
+                // We have some reminders.
+            }
         }
     });
 });
