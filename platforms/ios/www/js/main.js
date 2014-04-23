@@ -118,6 +118,12 @@
                     "latitude": 40.42970,
                     "longitude": -111.89830
                 },
+                "reminders": [
+                    {
+                        "type": "mileage",
+                        "reason": "Oil Change"
+                    }
+                ],
                 "timestamp": "20140116T151952+0000",
                 "running": false,
                 "fuelRate": 1.2,
