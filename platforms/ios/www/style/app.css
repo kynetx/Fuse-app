@@ -243,7 +243,7 @@ li.vehicle-data {
   * some vertical margin.
   */
  .popup form > * {
-    margin: 5px 0;
+    margin: 17px 0;
  }
 
  #record-fillup > * {
@@ -252,7 +252,6 @@ li.vehicle-data {
  
 .icon-box.light {
     background-color: rgba(0,0,0,.15);
-<<<<<<< HEAD:www/style/app.css
 }
 
 /**
