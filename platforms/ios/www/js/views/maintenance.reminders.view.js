@@ -32,7 +32,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                 // The whole fleet.
                 this.controller.fleet.each(function( vehicle ) {
                     this.collectVehicleReminders( vehicle );
-                }, this);
+                }, this );
             }
 
             this.content = this.template({ data: this.reminders });

@@ -34,7 +34,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                 // The whole fleet.
                 this.controller.fleet.each(function( vehicle ) {
                     this.collectVehicleAlerts( vehicle );
-                }, this);
+                }, this );
             }
             
             this.content = this.template({ data: this.alerts });
