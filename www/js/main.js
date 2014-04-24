@@ -137,6 +137,13 @@
                             "type": "mileage",
                             "value": 105000
                         }
+                    },
+                    {
+                        "reason": "Saftey/Emissions check",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-16" 
+                        }
                     }
                 ],
                 "timestamp": "20140116T151952+0000",
