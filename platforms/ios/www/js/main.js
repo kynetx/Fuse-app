@@ -120,8 +120,12 @@
                 },
                 "reminders": [
                     {
-                        "type": "mileage",
-                        "reason": "Oil Change"
+                        "reason": "Oil Change",
+                        "trigger": {
+                            "type": "mileage",
+                            "value": 105000
+                        }
+                        "recurring": true
                     }
                 ],
                 "timestamp": "20140116T151952+0000",
