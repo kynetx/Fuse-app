@@ -240,11 +240,20 @@
                     "longitude": -111.82633
                 },
                 "alerts": [
-                {
-                    "code": "P0193",
-                    "message": "Fuel Rail Pressure Sensor Circuit High Input",
-                    "timestamp": "never"
-                },
+                    {
+                        "code": "P0193",
+                        "message": "Fuel Rail Pressure Sensor Circuit High Input",
+                        "timestamp": "never"
+                    }
+                ],
+                "reminders": [
+                    {
+                        "reason": "Repair Dent",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-07"
+                        }
+                    }
                 ],
                 "timestamp": "19910831T060849T+07:00",
                 "running": true,
