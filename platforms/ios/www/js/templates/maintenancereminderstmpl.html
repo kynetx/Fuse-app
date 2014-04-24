@@ -27,11 +27,14 @@
     </div>
     <div id="reminder-form-container">
         <form id="reminder">
-            <label for="reminder-trigger-type">Reminder Type:</label>
-            <select id="reminder-trigger-type">
-                <option value="date">Date</option>
-                <option value="mileage">Mileage</option>
+            <label for="reminder-trigger-type">Remimd me:</label>
+            <select id="reminder-trigger-type" name="type">
+                <option value="date">On a date</option>
+                <option value="mileage">At a mileage</option>
             </select>
+            <input id="reminder-trigger-date" name="date" type="date">
+            <input id="reminder-trigger-mileage" name="mileage" type="number">
+            <textarea id="reminder-reason" name="reason">
             <button type="submit" data-theme="b">Save</button>
         </form>
     </div>
