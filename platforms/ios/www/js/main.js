@@ -144,7 +144,7 @@
                             "type": "date",
                             "value": "2014-05-16" 
                         }
-                    }
+                    },
                     {
                         "reason": "Replace Battery",
                         "trigger": {
