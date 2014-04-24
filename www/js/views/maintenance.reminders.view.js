@@ -61,6 +61,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         scheduleMaintenanceReminder: function( e ) {
+            e.preventDefault();
+            e.stopPropagation();
+            
             e.handled = true;
         }
     });
