@@ -35,6 +35,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
 
             this.content = this.template({ data: this.reminders });
             Fuse.View.prototype.render.call( this );
+
+            this.$reminderFormPopup = $( "#reminder-form" );
         },
 
         collectVehicleReminders: function( vehicle ) {
