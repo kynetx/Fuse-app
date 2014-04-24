@@ -21,7 +21,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         render: function() {
             // Handle re-renders correctly.
             this.reminders.length = 0;
-            
+
             // Are we rendering reminders for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleReminders( this.model );
@@ -38,7 +38,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
 
         collectVehicleReminders: function( vehicle ) {
             if ( vehicle.get( "reminders" ) !== vehicle.defaults.reminders ) {
-                // We have some reminders.
+                this.reminders.push({
+                    vehicle: vehicle.get( "nickname" ),
+                    reminders: vehicle.get( "reminders" )
+                });
             }
         }
     });
