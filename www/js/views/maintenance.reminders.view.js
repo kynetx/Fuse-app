@@ -38,6 +38,18 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             Fuse.View.prototype.render.call( this );
 
             this.$reminderFormPopup = $( "#reminder-form" );
+
+            /**
+             * Set some input elements' initial state to hidden.
+             * We have to do it here because jQuery Mobile is stupid.
+             * Ok, that's a horrible explanation. We have to do it here
+             * because jQuery mobile applies its custom styling in such
+             * a way that setting display to none on an element in it's
+             * initial state is pointless. So we have to hide them after
+             * the fact.
+             */
+            $( "#reminder-trigger-date" ).hide();
+            $( "#reminder-trigger-mileage" ).hide();
         },
 
         collectVehicleReminders: function( vehicle ) {
@@ -63,7 +75,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         scheduleMaintenanceReminder: function( e ) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             e.handled = true;
         }
     });
