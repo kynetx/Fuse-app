@@ -116,7 +116,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                 this.alertReminders = [];
             }
 
-            this.alertReminders[ this.alertReminders.length ] = $form.serializeArray();
+            this.alertReminders[ this.alertReminders.length ] = $form.serializeObject();
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
             $( this.tappedAlert ).buttonMarkup({ icon: "check" });

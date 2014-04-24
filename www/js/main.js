@@ -5,6 +5,18 @@
  * For details see https://kynetx.com
  */
  require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
+
+    $.fn.serializeObject = function() {
+        var obj = {},
+            data = this.serializeArray();
+
+        _.each(data, function( chunk ) {
+            obj[ chunk.name ] = obj[ chunk.value ];
+        });
+
+        return obj;
+    };
+
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
@@ -125,7 +137,6 @@
                             "type": "mileage",
                             "value": 105000
                         }
-                        "recurring": true
                     }
                 ],
                 "timestamp": "20140116T151952+0000",

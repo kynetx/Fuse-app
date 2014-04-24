@@ -34,7 +34,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         collectVehicleReminders: function( vehicle ) {
-            if ( vehicle.get( "reminders") !== vehicle.defaults.reminders ) {
+            if ( vehicle.get( "reminders" ) !== vehicle.defaults.reminders ) {
                 // We have some reminders.
             }
         }
