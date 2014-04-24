@@ -13,7 +13,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             if ( this.model ) {
-                this.header = this.model.get( "nickname" ) + " Alerts";
+                this.header = this.model.get( "nickname" ) + " Reminders";
             }
             this.reminders = [];
         },
