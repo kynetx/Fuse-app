@@ -145,6 +145,13 @@
                             "value": "2014-05-16" 
                         }
                     }
+                    {
+                        "reason": "Replace Battery",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-20" 
+                        }
+                    }
                 ],
                 "timestamp": "20140116T151952+0000",
                 "running": false,
