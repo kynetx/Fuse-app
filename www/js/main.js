@@ -11,7 +11,6 @@
             data = this.serializeArray();
 
         _.each(data, function( chunk ) {
-            alert( JSON.stringify( chunk, null, 4 ) );
             obj[ chunk.name ] = chunk.value;
         });
 
