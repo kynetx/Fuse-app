@@ -117,8 +117,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
             }
 
             this.alertReminders[ this.alertReminders.length ] = $form.serializeObject();
+            Fuse.log( this.alertReminders );
+
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
+            
             $( this.tappedAlert ).buttonMarkup({ icon: "check" });
             this.tappedAlert = null;
             e.handled = true;
