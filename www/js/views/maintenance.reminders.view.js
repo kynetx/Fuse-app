@@ -53,7 +53,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         showCreateReminderForm: function( e ) {
-            Fuse.log( e.target, "was tapped." );
             e.handled = true;
         }
     });
