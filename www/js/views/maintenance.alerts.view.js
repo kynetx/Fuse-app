@@ -8,9 +8,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         template: _.template( maintenanceAlertsTmpl ),
         
         events: {
-            "tap .alert": "showAlertInfo",
-            "tap #schedule-repair": "showPrepopulatedReminderForm",
-            "submit #alert-reminder": "scheduleAlertMaintenanceReminder"
+            "tap .alert"                : "showAlertInfo",
+            "tap #schedule-repair"      : "showPrepopulatedReminderForm",
+            "submit #alert-reminder"    : "scheduleAlertMaintenanceReminder"
         },
 
         initialize: function() {
