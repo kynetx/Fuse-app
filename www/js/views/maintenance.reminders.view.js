@@ -37,10 +37,16 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         collectVehicleReminders: function( vehicle ) {
-            if ( vehicle.get( "reminders" ) !== vehicle.defaults.reminders ) {
+            var reminders = vehicle.get( "reminders" );
+
+            if ( reminders !== vehicle.defaults.reminders ) {
                 this.reminders.push({
                     vehicle: vehicle.get( "nickname" ),
                     reminders: vehicle.get( "reminders" )
+                });
+            } else {
+                this.reminders.push({
+                    vehicle: vehicle.get( "nickname" )
                 });
             }
         }
