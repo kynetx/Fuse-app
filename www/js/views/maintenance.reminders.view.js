@@ -8,8 +8,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         template: _.template( maintenanceRemindersTmpl ),
         
         events: {
-            "tap #create-reminder": "showCreateReminderForm",
-            "submit #reminder": "scheduleMaintenanceReminder"
+            "tap #create-reminder"          : "showCreateReminderForm",
+            "change #reminder-trigger-type" : "showRequestedTriggerType",
+            "submit #reminder"              : "scheduleMaintenanceReminder"
         },
 
         initialize: function() {
@@ -76,6 +77,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
 
         showCreateReminderForm: function( e ) {
             this.$reminderFormPopup.popup( "open" );
+            e.handled = true;
+        },
+
+        showRequestedTriggerType: function( e ) {
             e.handled = true;
         },
 
