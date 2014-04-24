@@ -4,7 +4,7 @@
     </div>
     <% if ( data[ i ].reminders && data[ i ].reminders.length ) { %>
         <% for ( var j = 0; j < data[ i ].reminders.length; ++j ) { %>
-            <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= FTH.commaSeperateNumber( reminders[ j ].trigger.value ) %></a>
+            <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].reminders[ j ].trigger.value ) %></a>
         <% } %>
     <% } else { %>
         <p>No reminders for this vehicle.</p>
