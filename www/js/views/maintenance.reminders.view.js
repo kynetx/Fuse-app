@@ -8,6 +8,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         template: _.template( maintenanceRemindersTmpl ),
         
         events: {
+            "tap #create-reminder": "showCreateReminderForm"
         },
 
         initialize: function() {
@@ -49,6 +50,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                     vehicle: vehicle.get( "nickname" )
                 });
             }
+        },
+
+        showCreateReminderForm: function( e ) {
+            Fuse.log( e.target, "was tapped." );
+            e.handled = true;
         }
     });
 });
