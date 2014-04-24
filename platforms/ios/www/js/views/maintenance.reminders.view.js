@@ -40,16 +40,23 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             this.$reminderFormPopup = $( "#reminder-form" );
 
             /**
-             * Set some input elements' initial state to hidden.
+             * Set the initial state of some input elements to hidden.
              * We have to do it here because jQuery Mobile is stupid.
              * Ok, that's a horrible explanation. We have to do it here
              * because jQuery mobile applies its custom styling in such
              * a way that setting display to none on an element in it's
              * initial state is pointless. So we have to hide them after
              * the fact.
+             *
+             * Note: jQuery Mobile actually wraps input elements with a
+             *       custom wrapper div so it can add more custom styling
+             *       and properties to them. So we actually end up having
+             *       the input element's container.
              */
-            $( "#reminder-trigger-date" ).hide();
-            $( "#reminder-trigger-mileage" ).hide();
+            this.$triggerDateInputContainer = $( "#reminder-trigger-date" ).parent();
+            this.$triggetMileageInputContainer = $( "#reminder-trigger-mileage" ).parent();
+            this.$triggerDateInputContainer.hide();
+            this.$triggetMileageInputContainer.hide();
         },
 
         collectVehicleReminders: function( vehicle ) {
