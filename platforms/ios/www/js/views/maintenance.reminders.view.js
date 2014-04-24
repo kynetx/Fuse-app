@@ -19,6 +19,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         render: function() {
+            // Handle re-renders correctly.
+            this.reminders.length = 0;
+            
             // Are we rendering reminders for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleReminders( this.model );

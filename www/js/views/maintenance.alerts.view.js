@@ -23,6 +23,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         render: function() {
+            // Handle re-renders correctly.
+            this.alerts.length = 0;
+            this.popups.length = 0;
+
             // Are we rendering alerts for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleAlerts( this.model );
@@ -121,7 +125,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
 
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
-            
+
             $( this.tappedAlert ).buttonMarkup({ icon: "check" });
             this.tappedAlert = null;
             e.handled = true;
