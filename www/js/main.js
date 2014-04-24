@@ -74,6 +74,36 @@
                     "latitude": 41.238178,
                     "longitude": -111.937246
                 },
+                "reminders": [
+                    {
+                        "reason": "Tire Rotation",
+                        "trigger": {
+                            "type": "mileage",
+                            "value": 56000
+                        }
+                    },
+                    {
+                        "reason": "Air Conditioner Flush",
+                        "trigger": {
+                            "type": "mileage",
+                            "value": 60000 
+                        }
+                    },
+                    {
+                        "reason": "Headlight Replacement",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-09" 
+                        }
+                    },
+                    {
+                        "reason": "Check Engine Light",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-01"
+                        }
+                    }
+                ],
                 "timestamp": "20140116T151952+0000",
                 "running": false,
                 "fuelRate": 1.2,
