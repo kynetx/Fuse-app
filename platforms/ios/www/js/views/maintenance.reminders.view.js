@@ -83,8 +83,20 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showRequestedTriggerType: function( e ) {
             var $typeSelect = $( e.target ),
                 type = $typeSelect.val();
+
+            switch ( type ) {
+                case "mileage":
+                    this.$triggerDateInputContainer.hide();
+                    this.$triggerMileageInputContainer.show();
+                    break;
+                case "date":
+                    this.$triggerMileageInputContainer.hide();
+                    this.$triggerDateInputContainer.show();
+                    break;
+                default:
+                    break;
+            }
             
-            Fuse.log( type );
             e.handled = true;
         },
 
