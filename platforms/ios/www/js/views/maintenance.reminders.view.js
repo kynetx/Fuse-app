@@ -81,7 +81,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         showRequestedTriggerType: function( e ) {
-            alert( "something changed." );
+            alert( JSON.stringify( this, null, 4 ) );
             e.handled = true;
         },
 
