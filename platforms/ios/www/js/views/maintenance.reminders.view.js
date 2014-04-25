@@ -104,9 +104,15 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             e.preventDefault();
             e.stopPropagation();
 
-            var reminder = $( e.target ).serializeObject();
+            var data = $( e.target ).serializeObject(),
+                reminder = {
+                    reason: data.reason,
+                    trigger: {
+                        type: data.type,
+                        value: ( data.mileage ) ? data.mileage : data.date
+                    }
+                };
             Fuse.log( reminder );
-
             this.$reminderFormPopup.popup( "close" );
             alert( "Success! Reminder saved." );
 

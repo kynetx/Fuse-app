@@ -6,11 +6,20 @@
  */
  require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
 
+    /**
+     * Takes the output from $.fn.serializeArray() and turns
+     * it into an object ready to be consumed.
+     */
     $.fn.serializeObject = function() {
         var obj = {},
             data = this.serializeArray();
 
         _.each(data, function( chunk ) {
+            // If there's no value, dont make it part of the final object.
+            if ( chunk.value === "" || chunk.value === null || chunk.value === undefined || typeof chunk.value === "undefined" ) {
+                return true;
+            }
+
             obj[ chunk.name ] = chunk.value;
         });
 
