@@ -96,7 +96,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                 default:
                     break;
             }
-            
+
             e.handled = true;
         },
 
