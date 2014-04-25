@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view", "views/maintenance.reminders.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView, MaintenanceRemindersView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -30,6 +30,10 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
 
             this.views[ "MaintenanceAlerts" ] = new MaintenanceAlertsView({
+                controller: this
+            });
+
+            this.views[ "MaintenanceReminders" ] = new MaintenanceRemindersView({
                 controller: this
             });
         },
@@ -157,6 +161,19 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 model: this.fleet.get( id )
             });
             this.views.VehicleMaintenanceAlerts.render();
+        },
+
+        showMaintenanceReminders: function() {
+            this.views.MaintenanceReminders.render();
+        },
+
+        showMaintenanceRemindersForVehicle: function( id ) {
+            this.views[ "VehicleMaintenanceReminders" ] = new MaintenanceRemindersView({
+                controller: this,
+                model: this.fleet.get( id )
+            });
+
+            this.views.VehicleMaintenanceReminders.render();
         }
     });
 });

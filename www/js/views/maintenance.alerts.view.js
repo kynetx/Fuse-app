@@ -8,9 +8,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         template: _.template( maintenanceAlertsTmpl ),
         
         events: {
-            "tap .alert": "showAlertInfo",
-            "tap #schedule-repair": "showPrepopulatedReminderForm",
-            "submit #alert-reminder-form": "scheduleAlertMaintenanceReminder"
+            "tap .alert"                : "showAlertInfo",
+            "tap #schedule-repair"      : "showPrepopulatedReminderForm",
+            "submit #alert-reminder"    : "scheduleAlertMaintenanceReminder"
         },
 
         initialize: function() {
@@ -23,6 +23,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         render: function() {
+            // Handle re-renders correctly.
+            this.alerts.length = 0;
+            this.popups.length = 0;
+
             // Are we rendering alerts for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleAlerts( this.model );
@@ -30,8 +34,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                 // The whole fleet.
                 this.controller.fleet.each(function( vehicle ) {
                     this.collectVehicleAlerts( vehicle );
-                }, this);
+                }, this );
             }
+            
             this.content = this.template({ data: this.alerts });
             Fuse.View.prototype.render.call( this );
 
@@ -40,17 +45,17 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
         },
 
         collectVehicleAlerts: function( vehicle ) {
-
+            var alerts = vehicle.get( "alerts" );
             /**
              * This check works because of the way object identity in
              * javascript works. If the alerts object on the current vehicle
              * is equal to the default alerts object, then the vehicle actually
              * has NO alerts and we don't push them onto our alerts array.
              */
-            if ( vehicle.get( "alerts" ) !== vehicle.defaults.alerts ) {
+            if ( alerts !== vehicle.defaults.alerts ) {
                 this.alerts.push({
                     vehicle: vehicle.get( "nickname" ),
-                    alerts: vehicle.get( "alerts" )
+                    alerts: alerts
                 });
             } else {
                 this.alerts.push({
@@ -115,9 +120,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
                 this.alertReminders = [];
             }
 
-            this.alertReminders[ this.alertReminders.length ] = $form.serializeArray();
+            this.alertReminders[ this.alertReminders.length ] = $form.serializeObject();
+            Fuse.log( this.alertReminders );
+
             this.popups.$form.popup( "close" );
             alert( "Success! Maintenance reminder saved." );
+
             $( this.tappedAlert ).buttonMarkup({ icon: "check" });
             this.tappedAlert = null;
             e.handled = true;

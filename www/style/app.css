@@ -238,13 +238,20 @@ li.vehicle-data {
     width: 120%;
  }
 
+ /**
+  * Form elements inside of popups should have
+  * some vertical margin.
+  */
+ .popup form > * {
+    margin: 17px 0;
+ }
+ 
  #record-fillup > * {
     margin: 15px 0;
  }
  
 .icon-box.light {
     background-color: rgba(0,0,0,.15);
-<<<<<<< HEAD:www/style/app.css
 }
 
 /**

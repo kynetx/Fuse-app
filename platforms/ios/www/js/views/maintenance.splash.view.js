@@ -3,13 +3,13 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         id: "maintenance-splash",
         tagName: "div",
         role: "page",
-        header: "Maintenance",
+        header: "Car Care",
         transition: "slide",
         template: _.template( maintenanceSplashTmpl ),
         
         events: {
             "tap [data-action='alerts']"        : "showAlerts",
-            "tap [data-action='maintenance']"   : "showMaintenanceReminders",
+            "tap [data-action='reminders']"     : "showMaintenanceReminders",
             "tap [data-action='history']"       : "showHistory"
         },
 
