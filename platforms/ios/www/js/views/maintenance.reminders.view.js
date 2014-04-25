@@ -57,7 +57,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             this.$triggerDateInputContainer = $( "#reminder-trigger-date" ).parent();
             this.$triggerMileageInputContainer = $( "#reminder-trigger-mileage" ).parent();
             this.$triggerDateInputContainer.hide();
-            this.$triggerMileageInputContainer.hide();
         },
 
         collectVehicleReminders: function( vehicle ) {
