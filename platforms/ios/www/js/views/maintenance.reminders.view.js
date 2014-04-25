@@ -106,8 +106,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
 
             var reminder = $( e.target ).serializeObject();
             Fuse.log( reminder );
-            
-            this.$reminderFormPopup.popup( "hide" );
+
+            this.$reminderFormPopup.popup( "close" );
             alert( "Success! Reminder saved." );
 
             e.handled = true;
