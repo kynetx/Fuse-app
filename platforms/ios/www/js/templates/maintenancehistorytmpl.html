@@ -1,0 +1,18 @@
+<% for ( var i = 0; i < data.length; ++i ) { %>
+    <div class="ui-bar ui-bar-a">
+        <h3><%= data[ i ].vehicle %></h3>
+    </div>
+    <% if ( data[ i ].reminders && data[ i ].reminders.length ) { %>
+        <% for ( var j = 0; j < data[ i ].reminders.length; ++j ) { %>
+            <% if ( data[ i ].reminders[ j ].trigger.type === "mileage" ) { %>
+                <!-- mileage-based reminder. -->
+                <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].reminders[ j ].trigger.value ) %> miles</a>
+            <% } else { %>
+                <!-- date-based reminder. -->
+                <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= data[ i ].reminders[ j ].trigger.value %></a>
+            <% } %>
+        <% } %>
+    <% } else { %>
+        <p>No history for this vehicle.</p>
+    <% } %>
+<% } %>

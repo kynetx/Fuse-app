@@ -69,6 +69,14 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
 
         showMaintenanceRemindersForVehicle: function( id ) {
             this.invokeControllerFunction( "showMaintenanceRemindersForVehicle", arguments );
+        },
+
+        showMaintenanceHistory: function() {
+            this.invokeControllerFunction( "showMaintenanceHistory", arguments );
+        },
+
+        showMaintenanceHistoryForVehicle: function( id ) {
+            this.invokeControllerFunction( "showMaintenanceHistoryForVehicle", arguments );
         }
 
     });
