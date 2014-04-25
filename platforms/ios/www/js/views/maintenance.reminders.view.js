@@ -81,7 +81,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         showRequestedTriggerType: function( e ) {
-            Fuse.log( e );
+            var $typeSelect = $( e.target ),
+                type = $typeSelect.val();
+            
+            Fuse.log( type );
             e.handled = true;
         },
 
