@@ -104,6 +104,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             e.preventDefault();
             e.stopPropagation();
 
+            var reminder = $( e.target ).serializeObject();
+            Fuse.log( reminder );
+            
+            this.$reminderFormPopup.popup( "hide" );
+            alert( "Success! Reminder saved." );
+
             e.handled = true;
         }
     });
