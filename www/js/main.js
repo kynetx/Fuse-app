@@ -5,6 +5,27 @@
  * For details see https://kynetx.com
  */
  require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
+
+    /**
+     * Takes the output from $.fn.serializeArray() and turns
+     * it into an object ready to be consumed.
+     */
+    $.fn.serializeObject = function() {
+        var obj = {},
+            data = this.serializeArray();
+
+        _.each(data, function( chunk ) {
+            // If there's no value, dont make it part of the final object.
+            if ( chunk.value === "" || chunk.value === null || chunk.value === undefined || typeof chunk.value === "undefined" ) {
+                return true;
+            }
+
+            obj[ chunk.name ] = chunk.value;
+        });
+
+        return obj;
+    };
+
     Fuse.FIXTURES = {
         "fleet": {
             "aggregates": {
@@ -62,6 +83,36 @@
                     "latitude": 41.238178,
                     "longitude": -111.937246
                 },
+                "reminders": [
+                    {
+                        "reason": "Tire Rotation",
+                        "trigger": {
+                            "type": "mileage",
+                            "value": 56000
+                        }
+                    },
+                    {
+                        "reason": "Air Conditioner Flush",
+                        "trigger": {
+                            "type": "mileage",
+                            "value": 60000 
+                        }
+                    },
+                    {
+                        "reason": "Headlight Replacement",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-09" 
+                        }
+                    },
+                    {
+                        "reason": "Check Engine Light",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-01"
+                        }
+                    }
+                ],
                 "timestamp": "20140116T151952+0000",
                 "running": false,
                 "fuelRate": 1.2,
@@ -118,6 +169,29 @@
                     "latitude": 40.42970,
                     "longitude": -111.89830
                 },
+                "reminders": [
+                    {
+                        "reason": "Oil Change",
+                        "trigger": {
+                            "type": "mileage",
+                            "value": 105000
+                        }
+                    },
+                    {
+                        "reason": "Saftey/Emissions check",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-16" 
+                        }
+                    },
+                    {
+                        "reason": "Replace Battery",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-20" 
+                        }
+                    }
+                ],
                 "timestamp": "20140116T151952+0000",
                 "running": false,
                 "fuelRate": 1.2,
@@ -175,11 +249,20 @@
                     "longitude": -111.82633
                 },
                 "alerts": [
-                {
-                    "code": "P0193",
-                    "message": "Fuel Rail Pressure Sensor Circuit High Input",
-                    "timestamp": "never"
-                },
+                    {
+                        "code": "P0193",
+                        "message": "Fuel Rail Pressure Sensor Circuit High Input",
+                        "timestamp": "never"
+                    }
+                ],
+                "reminders": [
+                    {
+                        "reason": "Repair Dent",
+                        "trigger": {
+                            "type": "date",
+                            "value": "2014-05-07"
+                        }
+                    }
                 ],
                 "timestamp": "19910831T060849T+07:00",
                 "running": true,

@@ -1,0 +1,42 @@
+<% for ( var i = 0; i < data.length; ++i ) { %>
+    <div class="ui-bar ui-bar-a">
+        <h3><%= data[ i ].vehicle %></h3>
+    </div>
+    <% if ( data[ i ].reminders && data[ i ].reminders.length ) { %>
+        <% for ( var j = 0; j < data[ i ].reminders.length; ++j ) { %>
+            <% if ( data[ i ].reminders[ j ].trigger.type === "mileage" ) { %>
+                <!-- mileage-based reminder. -->
+                <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].reminders[ j ].trigger.value ) %> miles</a>
+            <% } else { %>
+                <!-- date-based reminder. -->
+                <a class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= data[ i ].reminders[ j ].trigger.value %></a>
+            <% } %>
+        <% } %>
+    <% } else { %>
+        <p>No reminders for this vehicle.</p>
+    <% } %>
+<% } %>
+<br>
+<br>
+<br>
+<a id="create-reminder" data-role="button" data-theme="b">Create Reminder</a>
+<!-- form for creating a reminder. -->
+<div id="reminder-form" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
+    <div class="ui-bar ui-bar-a">
+        <h3>Set Reminder</h3>
+    </div>
+    <div id="reminder-form-container">
+        <form id="reminder">
+            <label for="reminder-trigger-type">Remimd me:</label>
+            <select id="reminder-trigger-type" name="type">
+                <option value="date">On a date</option>
+                <option value="mileage">At a mileage</option>
+            </select>
+            <input id="reminder-trigger-date" name="date" type="date">
+            <input id="reminder-trigger-mileage" name="mileage" type="number" placeholder="At what mileage?" >
+            <label for="reminder-reason">Reason:</label>
+            <textarea id="reminder-reason" name="reason"></textarea>
+            <button type="submit" data-theme="b">Save</button>
+        </form>
+    </div>
+</div>
