@@ -113,6 +113,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                         value: ( data.mileage ) ? data.mileage : data.date
                     }
                 };
+            
             Fuse.log( reminder );
             this.$reminderFormPopup.popup( "close" );
             alert( "Success! Reminder saved." );
