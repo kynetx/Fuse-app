@@ -912,8 +912,33 @@
     Fuse.logging = true;
 
     // setup loggger 
-    Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
-    
+    var cordovaLogWrapper = Fuse.cordovaLogWrapper = function() {
+        var args = Array.prototype.slice.call( arguments );
+
+        for ( var i = 0; i < args.length; ++i ) {
+            if ( typeof args[ i ] === "object" ) {
+                try {
+                    console.log( JSON.stringify( args[ i ], null, 4 ) );
+                } catch ( e ) {
+                    console.log( "Could not log to console because", e)
+                }
+            } else {
+                console.log( args[ i ] );
+            }
+        }
+    };
+
+    if ( Fuse.logging ) {
+        // If we're in a cordova environment, use our log wrapper.
+        if ( window.cordova && window.location.href.match( /^file/ ) ) {
+            Fuse.log = cordovaLogWrapper;
+        } else {
+            Fuse.log = Function.prototype.bind.apply( console.log, [ console, "Fuse v" + Fuse.VERSION + ":" ] );
+        }
+    } else {
+        Fuse.log = function() {};
+    }
+
     // start the app.
     document.addEventListener( "deviceready", function() {
         Fuse.init();
