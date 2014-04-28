@@ -1,9 +1,12 @@
-<div class="dark-header">
+<div class='dark-header margin-off'>
+    <h3 class='title-font white-font'>Totals</h3>
+</div>
+<div>
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/cost_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'><%= totals.fuel.cost %> total spent</span>
+        <span class='margin-off'>$<%= totals.fuel.cost %> total spent on fuel</span>
     </div>
 
     <div class="vehicle-data">
@@ -14,26 +17,26 @@
     </div>
 </div>
 
-<div class="dark-header">
+<div>
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/fuel_icon_b.png" style="width: 16px;">
         </div>
-        <span class='margin-off'><%= totals.fuel.mpg %> Avg. MPG</span>
+        <span class='margin-off'><%= totals.fuel.mpg %> MPG Avg.</span>
     </div>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/cost_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'><%= totals.fuel.cpg %> Avg. $/Gal</span>
+        <span class='margin-off'><%= totals.fuel.cpg %> Dollar per gallon Avg.</span>
     </div>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/cost_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'>%= totals.fuel.cpm %> Avg. $/Mile</span>
+        <span class='margin-off'><%= totals.fuel.cpm %> Dollar per mile Avg.</span>
     </div>
 </div>
 
