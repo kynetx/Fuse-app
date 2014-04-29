@@ -107,6 +107,8 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.views[ "Trip" ] = new TripDetailView({
                 controller: this
             });
+            this.views.Trip.render();
+            delete this.views.Trip;
         },
 
         showFuelAggregate: function() {
