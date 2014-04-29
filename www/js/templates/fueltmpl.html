@@ -1,13 +1,23 @@
-<div class="fuel-interaction ui-grid-a">
-    <div class="ui-block-a">
-        <h5>Fuel Level</h5>
-        <p><%= vehicle.fuelLevel %>%</p>
+<div class="fuel-interaction">
+    <div class='dark-header'>
+        <h3 class='title-font white-font'>Fuel Status</h3>
     </div>
-    <div class="ui-block-b">
-        <p><a class="trigger-fillup" data-role="button">Fill 'er Up!</a></p>
+    <div>
+        <div class="vehicle-data">
+            <div class="icon-box dark">
+                <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+            </div>
+            <span class='margin-off'><%= vehicle.fuelLevel %>% fuel remaining</span>
+        </div>
+        <a class="trigger-fillup" data-role="button">Fill 'er Up!</a>
     </div>
 </div>
+
 <div class="fuel-data">
+    <div class='dark-header'>
+        <h3 class='title-font white-font'>Fuel Averages</h3>
+    </div>
+
     <div class="fuel-totals ui-grid-a">
         <div class="ui-block-a">
             <p><%= vehicle.aggregates.month.fuel.gallons %></p>
@@ -30,8 +40,9 @@
             <p><%= vehicle.aggregates.month.fuel.cpm %></p>
         </div>
     </div>
-    <div class="fuel-trend-graph">
-        <h1>graph here.</h1>
+
+    <div class="fuel-trend-graph dark-header">
+        <h3 class='title-font white-font'>Graph</h3>
     </div>
 </div>
 <div id="fuel-popup" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
