@@ -1,6 +1,6 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
-        VERSION: "0.0.6.1",
+        VERSION: "0.0.6.2",
 
         history: {
             items: [],
@@ -123,12 +123,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         RouteToView: {
-            "fleet": "Fleet",
-            "findcar": "FindCar",
-            "fuel": "Fuel",
-            "trips": "Trips",
-            "maintenance": "MaintenanceSplash",
-            "maintenance-alerts": "MaintenanceAlerts"
+            "fleet"                 : "Fleet",
+            "findcar"               : "FindCar",
+            "fuel"                  : "Fuel",
+            "trips"                 : "Trips",
+            "maintenance"           : "MaintenanceSplash",
+            "maintenance-alerts"    : "MaintenanceAlerts",
+            "maintenance-reminders" : "MaintenanceReminders",
+            "maintenance-history"   : "MaintenanceHistory"
         },
 
         shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],

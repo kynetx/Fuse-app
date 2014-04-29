@@ -1,5 +1,5 @@
 /**
- * Fuse Mobile Application v0.0.6.1
+ * Fuse Mobile Application v0.0.6.2
  * Copyright Kynetx Inc. 2014. All Rights Reserved.
  * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
  * For details see https://kynetx.com
@@ -912,7 +912,11 @@
     Fuse.logging = true;
 
     // setup loggger 
-    Fuse.log = (Fuse.logging) ? Function.prototype.bind.apply(console.log, [console, "Fuse v" + Fuse.VERSION + ":"]) : function() {};
+    if ( Fuse.logging ) {
+        Fuse.log = Function.prototype.bind.apply( console.log, [ console, "Fuse v" + Fuse.VERSION + ":" ] );
+    } else {
+        Fuse.log = function() {};
+    }
     
     // start the app.
     document.addEventListener( "deviceready", function() {
