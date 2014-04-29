@@ -103,6 +103,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.views.Trips.render();
         },
 
+        showTrip: function( id ) {
+            this.views[ "Trip" ] = new TripView({
+                controller: this
+            });
+        },
+
         showFuelAggregate: function() {
             this.views.FuelAggregate.render();
         },
