@@ -128,6 +128,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             "findcar"               : "FindCar",
             "fuel"                  : "Fuel",
             "trips"                 : "Trips",
+            "trip"                  : "Trip",
             "maintenance"           : "MaintenanceSplash",
             "maintenance-alerts"    : "MaintenanceAlerts",
             "maintenance-reminders" : "MaintenanceReminders",
