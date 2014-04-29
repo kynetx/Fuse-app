@@ -108,7 +108,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 controller: this
             });
             this.views.Trip.render();
-            delete this.views.Trip;
         },
 
         showFuelAggregate: function() {
