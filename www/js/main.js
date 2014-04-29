@@ -913,7 +913,13 @@
 
     // setup loggger 
     if ( Fuse.logging ) {
+
+        if ( "cordova" in window && window.location.href.match( /^http/ ) ) {
+            window.console.useLogger( false );
+        }
+
         Fuse.log = Function.prototype.bind.apply( console.log, [ console, "Fuse v" + Fuse.VERSION + ":" ] );
+
     } else {
         Fuse.log = function() {};
     }
