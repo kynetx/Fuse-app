@@ -230,7 +230,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 Fuse.log( previousView, currentRoute );
 
-                if ( previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) ) {
+                if ( previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
                     Fuse.log( "MATCH!!!" );
                 }
 
