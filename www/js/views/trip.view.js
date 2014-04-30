@@ -11,7 +11,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.ht
         },
 
         events: {
-            "tap li > a": "showTripDetail"
+            "tap li": "showTripDetail"
         },
         
         template: _.template( tripTmpl ),
