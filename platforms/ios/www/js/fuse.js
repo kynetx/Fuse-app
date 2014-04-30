@@ -229,8 +229,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     previousView = Fuse.history.last(),
                     currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
 
-                Fuse.log("is main feature view:", this.isMainFeatureView() );
-
                 if ( !this.isMainFeatureView() && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
                     options[ "icon" ] = "back";
                 }
@@ -787,16 +785,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initActionButtons: function() {
             var showPageFromButton = $.proxy(function(e) {
-                var $target = $(e.target), 
-                    action = $target.closest("a").data("action"),
+                var $target = $( e.target ), 
+                    action = $target.closest( "a" ).data( "action" ),
                     fragment = Backbone.history.fragment,
-                    id = fragment.match(/\/(.*)/);
+                    id = fragment.match( /\/(.*)/ );
 
-                if ( "findcar" === action ) {
+                if ( action === "findcar" ) {
                     // if we are already on the findcar page but they
                     // clicked on the findcar button in the footer,
                     // we toggle back to the fleet view.
-                    if (/findcar/.test(Backbone.history.fragment)) {
+                    if ( /findcar/.test( Backbone.history.fragment ) ) {
                         action = "fleet";
                     }
                 }
@@ -809,8 +807,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
 
                 e.handled = true;
-            }, this);
-            $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
+            }, this );
+
+            var showPageFromBackButton = $.proxy(function( e ) {
+                this.navigate( this.history.get( -1 ).fragment );
+            }, this );
+
+            $( document ).on( "tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton );
+            $( document ).on( "tap", ".fuse-back-btn", showPageFromBackButton );
         },
 
         initMenu: function() {
