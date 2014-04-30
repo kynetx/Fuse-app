@@ -1,7 +1,7 @@
 <h5><%= FTH.getTime(FTH.formatDate( endTime, true )) %></h5>
 <div class="fuse-trip-container">
 
-    <% if ( mileage ) { %>
+    <% if ( typeof mileage !== "undefined" && mileage ) { %>
         <div class="vehicle-data">
             <div class="icon-box dark">
                 <img src="style/images/trip_icon_b.png" style="width: 20px;">
@@ -17,7 +17,7 @@
         <span class='margin-off'><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></span>
     </div>
 
-    <% if ( cost ) { %>
+    <% if ( typeof cost !== "undefined" && cost ) { %>
         <div class="vehicle-data">
             <div class="icon-box dark">
                 <img src="style/images/cost_icon_b.png" style="width: 12px;">
