@@ -2,7 +2,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
     return Fuse.View.extend({
         tagName: "div",
         id: "trip-detail",
-        header: "Trip",
+        header: "Trip Detail",
         role: "page",
         transition: "slide",
         template: _.template( tripDetailTmpl ),
