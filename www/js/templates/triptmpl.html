@@ -14,12 +14,14 @@
         <span class='margin-off'><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></span>
     </div>
 
-    <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+    <% if typeof cost !== "undefined" { %>
+        <div class="vehicle-data">
+            <div class="icon-box dark">
+                <img src="style/images/cost_icon_b.png" style="width: 12px;">
+            </div>
+            <span class='margin-off'>$<%= FTH.commaSeperateNumber( cost ) %></span>
         </div>
-        <span class='margin-off'>$<%= FTH.commaSeperateNumber( cost ) %></span>
-    </div>
+    <% } %>
 
     <div class="fuse-trip-map-trigger center-text">
         <img src="style/images/location_icon.png">
