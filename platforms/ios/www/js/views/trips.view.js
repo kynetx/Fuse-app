@@ -80,7 +80,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
 
         showTripDetail: function( e ) {
             var tripID = $( e.target ).closest( "ul" ).data( "tid" );
-            alert( tripID );
+            Fuse.show( "trip", { id: tripID } );
 
             e.handled = true;
         }
