@@ -9,6 +9,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.ht
                 "data-role": "listview"
             };
         },
+
+        events: {
+            "tap li > a": "showTripDetail"
+        },
         
         template: _.template( tripTmpl ),
 
@@ -19,6 +23,12 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.ht
         render: function() {
             this.$el.html( this.template( this.model.toJSON() ) );
             return this;
+        },
+
+        showTripDetail: function( e ) {
+            alert( this.model.get( "id" ) );
+
+            e.handled = true;
         }
     });
 });
