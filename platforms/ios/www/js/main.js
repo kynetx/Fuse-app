@@ -1946,7 +1946,7 @@
                 "mileage": null
             }
         },
-        
+
         "fillups": []
     };
 
@@ -1976,6 +1976,15 @@
     // remove this for production.
     Fuse.logging = true;
 
+    Fuse.values = [];
+
+    for ( var k in Fuse.FIXTURES.trips ) {
+        Fuse.values.push( Fuse.FIXTURES.trips[ k ] );
+    };
+
+    Fuse.log( JSON.stringify( Fuse.values, null, 4 ) );
+    alert( "death" );
+    throw "death";
     // setup loggger 
     if ( Fuse.logging ) {
         Fuse.log = Function.prototype.bind.apply( console.log, [ console, "Fuse v" + Fuse.VERSION + ":" ] );
