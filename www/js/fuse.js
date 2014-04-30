@@ -14,6 +14,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             last: function() {
                 return this.get(0);
+            },
+
+            pop: function() {
+                return this.items.pop();
             }
         },
 
