@@ -105,7 +105,8 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
         showTrip: function( id ) {
             this.views[ "Trip" ] = new TripDetailView({
-                controller: this
+                controller: this,
+                model: this.trips.get( id )
             });
             this.views.Trip.render();
         },

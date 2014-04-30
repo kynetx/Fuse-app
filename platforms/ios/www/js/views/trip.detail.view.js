@@ -12,7 +12,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         },
         
         render: function() {
-            this.content = this.template();
+            this.content = this.template({ data: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
         }
     });
