@@ -1,8 +1,8 @@
 <% for (var prop in tripViewData) { %>
-    <div class='dark-header collapsible-day'>
+    <div class='dark-header collapsible-day margin-off'>
         <h3 class='title-font white-font'><%= FTH.monthDayYear( prop ) %></h3>
     </div>
-    <div data-role='collapsibleset'>
+    <div data-role='collapsibleset' class='margin-off'>
     	<div data-role='collapsible' data-collapsed='false'>
 	    	<ul data-role='listview'>
 	    	<% if (tripViewData[ prop ].elements) {
