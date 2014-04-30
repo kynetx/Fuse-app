@@ -266,6 +266,10 @@ li.vehicle-data {
     margin: 0px;
 }
 
+.ui-collapsible-content {
+    padding: 0px;
+}
+
  /* Red button theme for JQuery Mobile
  * - Use data-theme="r" for red versions of the default JQuery Mobile Buttons.
  ******************************************************************************************/
