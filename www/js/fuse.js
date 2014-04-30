@@ -152,7 +152,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         args        : args,
                         fragment    : Backbone.history.fragment
                     });
-                    Fuse.log( "added to history:", Fuse.history.items.last() );
+                    Fuse.log( "added to history:", Fuse.history.last() );
                 }
             },
 
