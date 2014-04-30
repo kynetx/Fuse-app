@@ -1945,7 +1945,7 @@
             "startTime": "20140419T155302+0000",
             "mileage": null
         }
-        ] 
+        ],
 
         "fillups": []
     };
@@ -1973,7 +1973,7 @@
     // this is used for prefiltering Fuse.show() requests. Mainly for early-stage development and probably
     // a good idea to remove later.
     Fuse.routes = Object.keys(_.extend(Fuse.routers.AppRouter.routes, Fuse.routers.FleetRouter.routes));
-    
+
     // remove this for production.
     Fuse.logging = true;
     // setup loggger 
