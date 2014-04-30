@@ -1983,7 +1983,7 @@
         Fuse.log = function() {};
     }
 
-    window[ "GlobalFuse" ] = Fuse;
+    window[ "Fuse" ] = Fuse;
     
     // start the app.
     document.addEventListener( "deviceready", function() {
