@@ -5,7 +5,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
         contentClass: "fuse-map-container",
         header: "Trip Map",
         role: "page",
-        transition: "flip",
+        transition: "slide",
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );

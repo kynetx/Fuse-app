@@ -1,6 +1,7 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
-        VERSION: "0.0.6.2",
+        
+        VERSION: "0.0.6.3",
 
         history: {
             items: [],
@@ -127,6 +128,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             "findcar"               : "FindCar",
             "fuel"                  : "Fuel",
             "trips"                 : "Trips",
+            "trip"                  : "Trip",
             "maintenance"           : "MaintenanceSplash",
             "maintenance-alerts"    : "MaintenanceAlerts",
             "maintenance-reminders" : "MaintenanceReminders",
