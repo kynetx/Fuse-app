@@ -228,6 +228,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     previousView = Fuse.history.get( -1 ),
                     currentView = Fuse.history.last();
 
+                if ( previousView && currentView ) {
+                    Fuse.log( "previousView:", previousView, "currentView:", currentView );
+                    Fuse.log( currentView.name.indexOf( previousView.name.substring( 0, 4 ) ) );
+                }
+
                 if ( previousView && currentView && currentView.name.indexOf( previousView.name.substring( 0, 4 ) ) ) {
                     Fuse.log( "MATCH!!!" );
                 }
