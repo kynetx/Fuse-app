@@ -139,18 +139,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         Router: Backbone.Router.extend({
             initialize: function() {
-                this.on("route", this.addRouteToHistory, this);
+                this.on( "route", this.addRouteToHistory, this );
             },
 
             addRouteToHistory: function(name, args) {
                 var previous = Fuse.history.last();
 
-                if (!previous || previous.fragment !== Backbone.history.fragment) {
+                if ( !previous || previous.fragment !== Backbone.history.fragment ) {
                     var splitFrag = Backbone.history.fragment.split("/");
                     Fuse.history.items.push({
-                        name: splitFrag[0],
-                        args: args,
-                        fragment: Backbone.history.fragment
+                        name        : splitFrag[0],
+                        args        : args,
+                        fragment    : Backbone.history.fragment
                     });
                 }
             },
@@ -221,7 +221,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             renderHeader: function() {
                 Fuse.log("Rendering header.");
-                this.$el.append(this.headerTemplate({header: this.header}));
+
+                var options = {
+                    header: this.header
+                },
+                    previousViewName = Fuse.history.get( -1 ).name,
+                    currentViewName = Fuse.history.last().name;
+
+                if ( currentViewName.indexOf( previusViewName.substring( 0, 4 ) ) ) {
+                    Fuse.log( "MATCH!!!" );
+                }
+
+                this.$el.append( this.headerTemplate({ header: options.header, icon: "menu" }) );
             },
 
             renderFooter: function() {
@@ -311,7 +322,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 };
 
                 var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
-                if (previous && Backbone.history.fragment === previous.fragment && "findcar" !== next) {
+                if ( previous && Backbone.history.fragment === previous.fragment && "findcar" !== next ) {
                     var viewName = Fuse.RouteToView[current.name], view;
 
                     if ( previous.args.length ) {
@@ -334,9 +345,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         }
                     }
 
-                    Fuse.log( view );
-
-                    changePageOptions["transition"] = this.controller.views[view].transition;
+                    changePageOptions["transition"] = this.controller.views[ view ].transition;
                     changePageOptions["reverse"] = true;
                 }
 
