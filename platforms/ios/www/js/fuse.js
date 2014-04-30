@@ -229,6 +229,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     previousView = Fuse.history.last(),
                     currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
                 
+                Fuse.log("is main feature view:", this.isMainFeatureView() );
+
                 if ( !this.isMainFeatureView() && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
                     options[ "icon" ] = "back";
                 }
