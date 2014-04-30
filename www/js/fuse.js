@@ -154,6 +154,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         fragment    : Backbone.history.fragment
                     });
                 }
+
+                if ( earlier && earlier.fragment === Backbone.history.fragment ) {
+                    Fuse.history.pop();
+                }
             },
 
             invokeControllerFunction: function() {
