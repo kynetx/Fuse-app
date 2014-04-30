@@ -143,9 +143,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             addRouteToHistory: function(name, args) {
-                var previous = Fuse.history.last();
+                var previous = Fuse.history.last(),
+                    earlier = Fuse.history.get( -1 );
 
-                if ( !previous || previous.fragment !== Backbone.history.fragment ) {
+                if ( !previous || ( previous.fragment !== Backbone.history.fragment && ( !earlier || earlier.fragment !== Backbone.history.fragment ) ) ) {
                     var splitFrag = Backbone.history.fragment.split("/");
                     Fuse.history.items.push({
                         name        : splitFrag[0],
