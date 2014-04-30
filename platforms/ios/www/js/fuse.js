@@ -329,6 +329,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 };
 
                 var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
+                Fuse.log( previous, current, next );
                 if ( previous && Backbone.history.fragment === previous.fragment && "findcar" !== next ) {
                     var viewName = Fuse.RouteToView[current.name], view;
 
