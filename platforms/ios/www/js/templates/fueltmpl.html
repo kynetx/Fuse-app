@@ -1,37 +1,60 @@
-<div class="fuel-interaction ui-grid-a">
-    <div class="ui-block-a">
-        <h5>Fuel Level</h5>
-        <p><%= vehicle.fuelLevel %>%</p>
+<div class="fuel-interaction">
+    <div class='dark-header'>
+        <h3 class='title-font white-font'>Fuel Status</h3>
     </div>
-    <div class="ui-block-b">
-        <p><a class="trigger-fillup" data-role="button">Fill 'er Up!</a></p>
+    <div>
+        <div class="vehicle-data">
+            <div class="icon-box dark">
+                <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+            </div>
+            <span class='margin-off'><%= vehicle.fuelLevel %>% fuel remaining</span>
+        </div>
+        <a class="trigger-fillup" data-role="button">Fill 'er Up!</a>
     </div>
 </div>
+
 <div class="fuel-data">
-    <div class="fuel-totals ui-grid-a">
-        <div class="ui-block-a">
-            <p><%= vehicle.aggregates.month.fuel.gallons %></p>
-        </div>
-        <div class="ui-block-b">
-            <p><%= vehicle.aggregates.month.fuel.cost %></p>
-        </div>
+    <div class='dark-header'>
+        <h3 class='title-font white-font'>Fuel Averages</h3>
     </div>
-    <div class="fuel-avgs ui-grid-b">
-        <div class="ui-block-a">
-            <h5>MPG</h5>
-            <p><%= vehicle.aggregates.month.fuel.mpg %></p>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/fuel_icon_b.png" style="width: 16px;">
         </div>
-        <div class="ui-block-b">
-            <h5>Avg $/Gal</h5>
-            <p><%= vehicle.aggregates.month.fuel.cpg %></p>
-        </div>
-        <div class="ui-block-c">
-            <h5>Avg $/Mile</h5>
-            <p><%= vehicle.aggregates.month.fuel.cpm %></p>
-        </div>
+        <span class='margin-off'><%= vehicle.aggregates.month.fuel.gallons %>g of fuel used this month</span>
     </div>
-    <div class="fuel-trend-graph">
-        <h1>graph here.</h1>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>$<%= vehicle.aggregates.month.fuel.cost %> spend on fuel this month</span>
+    </div>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+        </div>
+        <span class='margin-off'><%= vehicle.aggregates.month.fuel.mpg %> MPG</span>
+    </div>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>$<%= vehicle.aggregates.month.fuel.cpg %> per gallon</span>
+    </div>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>$<%= vehicle.aggregates.month.fuel.cpm %> per mile</span>
+    </div>
+
+    <div class="fuel-trend-graph dark-header">
+        <h3 class='title-font white-font'>Graph</h3>
     </div>
 </div>
 <div id="fuel-popup" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
