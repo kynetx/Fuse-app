@@ -152,7 +152,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         args        : args,
                         fragment    : Backbone.history.fragment
                     });
-                    Fuse.log( "added to history:", Fuse.history.last() );
                 }
             },
 
@@ -226,17 +225,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var options = {
                     header: this.header
                 },
-                    previousView = Fuse.history.get( -1 ),
-                    currentView = Fuse.history.last();
+                    previousView = Fuse.history.last(),
+                    currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
 
-                Fuse.log( previousView, currentView );
-
-                if ( previousView && currentView ) {
-                    Fuse.log( "previousView:", previousView, "currentView:", currentView );
-                    Fuse.log( currentView.name.indexOf( previousView.name.substring( 0, 4 ) ) );
-                }
-
-                if ( previousView && currentView && currentView.name.indexOf( previousView.name.substring( 0, 4 ) ) ) {
+                if ( previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) ) {
                     Fuse.log( "MATCH!!!" );
                 }
 
@@ -330,7 +322,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 };
 
                 var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
-                Fuse.log( previous, current, next );
                 if ( previous && Backbone.history.fragment === previous.fragment && "findcar" !== next ) {
                     var viewName = Fuse.RouteToView[current.name], view;
 
