@@ -1,14 +1,12 @@
 define([ "backbone", "fuse", "jquery", "underscore", "text!templates/triptmpl.html" ], function( Backbone, Fuse, $, _, tripTmpl ) {
     return Fuse.View.extend({
-        tagName: "div",
+        tagName: "ul",
         className: "trip",
         
         attributes: function() {
             return {
-                "data-role": "collapsible",
-                "data-inset": "false",
                 "data-tid": this.model.get( "id" ),
-                "data-iconpos": "right"
+                "data-role": "listview"
             };
         },
         

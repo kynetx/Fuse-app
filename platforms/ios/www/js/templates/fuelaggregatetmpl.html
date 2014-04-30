@@ -1,27 +1,45 @@
-<div class="fuel-aggregate-totals ui-grid-a">
-    <div class="ui-block-a">
-        <h5>Total Cost</h5>
-        <p><%= totals.fuel.cost %></p>
+<div class='dark-header'>
+    <h3 class='title-font white-font'>Totals</h3>
+</div>
+<div>
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>$<%= totals.fuel.cost %> total spent on fuel</span>
     </div>
-    <div class="ui-block-b">
-        <h5>Total Gals Used</h5>
-        <p><%= totals.fuel.gallons %></p>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+        </div>
+        <span class='margin-off'><%= totals.fuel.gallons %> total gallons used</span>
     </div>
 </div>
-<div class="fuel-aggregate-avgs ui-grid-b">
-    <div class="ui-block-a">
-        <h5>Avg. MPG</h5>
-        <p><%= totals.fuel.mpg %></p>
+
+<div>
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+        </div>
+        <span class='margin-off'><%= totals.fuel.mpg %> MPG Avg.</span>
     </div>
-    <div class="ui-block-b">
-        <h5>Avg. $/Gal</h5>
-        <p><%= totals.fuel.cpg %></p>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'><%= totals.fuel.cpg %> dollars per gallon Avg.</span>
     </div>
-    <div class="ui-block-c">
-        <h5>Avg. $/Mile</h5>
-        <p><%= totals.fuel.cpm %></p>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'><%= totals.fuel.cpm %> dollars per mile Avg.</span>
     </div>
 </div>
+
 <% for( var i = 0; i < aggs.length; ++i ) { %>
     <%= aggs[ i ].outerHTML %>
 <% } %>
