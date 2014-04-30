@@ -72,7 +72,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         toggleCollapse: function ( e ) {
-            $( e.target ).next().children().collapsible( 'collapse' );
+            $( this ).next('div').collapsible( 'collapse' );
         }
     });
 });
