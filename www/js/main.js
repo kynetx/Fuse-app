@@ -1982,7 +1982,7 @@
         Fuse.values.push( Fuse.FIXTURES.trips[ k ] );
     };
 
-    Fuse.log( JSON.stringify( Fuse.values, null, 4 ) );
+    console.log( JSON.stringify( Fuse.values, null, 4 ) );
     alert( "death" );
     throw "death";
     // setup loggger 
