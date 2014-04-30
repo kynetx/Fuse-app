@@ -223,18 +223,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 Fuse.log("Rendering header.");
 
                 var options = {
-                    header: this.header
+                    header: this.header,
+                    icon: "menu"
                 },
                     previousView = Fuse.history.last(),
                     currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
+                Fuse.log( Backbone.history.fragment.split( "/" ) );
 
-                Fuse.log( previousView, currentRoute );
-
-                if ( previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
-                    Fuse.log( "MATCH!!!" );
+                if ( !this.isRootView() && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
+                    options[ "icon" ] = "back";
                 }
 
-                this.$el.append( this.headerTemplate({ header: options.header, icon: "menu" }) );
+                this.$el.append( this.headerTemplate( options ) );
             },
 
             renderFooter: function() {
@@ -353,6 +353,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 Fuse.log( "Changing page to:", this.el, "with options:", changePageOptions );
                 $.mobile.changePage( this.$el, changePageOptions );
+            },
+
+            isRootView: function() {
+                return true;
             }
         }),
 
