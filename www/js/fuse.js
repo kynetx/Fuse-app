@@ -228,9 +228,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 },
                     previousView = Fuse.history.last(),
                     currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
-                Fuse.log( Backbone.history.fragment.split( "/" ) );
-
-                if ( !this.isRootView() && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
+                
+                if ( !this.isMainFeatureView() && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
                     options[ "icon" ] = "back";
                 }
 
@@ -355,8 +354,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 $.mobile.changePage( this.$el, changePageOptions );
             },
 
-            isRootView: function() {
-                return true;
+            isMainFeatureView: function() {
+                return Backbone.history.fragment.split( "/" ).length > 1;
             }
         }),
 
