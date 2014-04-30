@@ -225,10 +225,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var options = {
                     header: this.header
                 },
-                    previousViewName = Fuse.history.get( -1 ).name,
-                    currentViewName = Fuse.history.last().name;
+                    previousView = Fuse.history.get( -1 ),
+                    currentView = Fuse.history.last();
 
-                if ( currentViewName.indexOf( previusViewName.substring( 0, 4 ) ) ) {
+                if ( previousView && currentView && currentView.name.indexOf( previousView.name.substring( 0, 4 ) ) ) {
                     Fuse.log( "MATCH!!!" );
                 }
 
