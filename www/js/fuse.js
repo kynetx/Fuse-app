@@ -498,8 +498,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // otherwise default to the height of the body and the witdth (with some padding)
                 // of the containing element.
                 this.height = config.height || $(document.body).height();
-                // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
-                this.width = ( config.width || this.$container.width() ) + 25;
+                this.width =  config.width || this.$container.width();
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.

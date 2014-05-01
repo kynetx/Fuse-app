@@ -218,13 +218,12 @@ li.vehicle-data {
     width: 18px;
  }
 
- #trip-map {
-    height: 50%;
-    width: 50%;
- }
-
 .trip-aggregate-item, .fuel-aggregate-item {
     cursor: pointer;
+}
+
+#trip-map {
+    height: 25%;
 }
 
 /**
