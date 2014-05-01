@@ -23,10 +23,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
                 this.addTrip( trip );
             }, this );
 
-            console.log( this.tripViewData );
-
             this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
+
+            $( '.collapsible:first').collapsible( 'expand' );
         },
 
         renderTrip: function( trip ) {
@@ -72,7 +72,14 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         toggleCollapse: function ( e ) {
-            $( this ).next('div').collapsible( 'collapse' );
+            var target = $( e.target ).parent().next().children();
+            var collapsed = target.collapsible( "option", "collapsed" );
+
+            if ( collapsed ) {
+                target.collapsible( 'expand' );
+            } else {
+                target.collapsible( 'collapse' );
+            }
         }
     });
 });
