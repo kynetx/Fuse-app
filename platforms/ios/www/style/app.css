@@ -270,6 +270,10 @@ li.vehicle-data {
     margin: 0px;
 }
 
+.ui-content {
+    padding: 0px;
+}
+
 .ui-collapsible-content {
     padding: 0px;
 }
