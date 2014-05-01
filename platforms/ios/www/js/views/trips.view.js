@@ -8,7 +8,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
 
         events: {
             "tap .fuse-trip-map-trigger": "showMapForTrip",
-            "tap .collapsible-day": "toggleCollapse"
+            "tap .collapsible-day": "toggleCollapse",
+            "tap .trip a": "showTripDetail"
         },
 
         initialize: function() {
@@ -80,6 +81,15 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             } else {
                 target.collapsible( 'collapse' );
             }
+
+            e.handled = true;
+        },
+
+        showTripDetail: function( e ) {
+            var tripID = $( e.target ).closest( "ul" ).data( "tid" );
+            Fuse.show( "trip", { id: tripID } );
+
+            e.handled = true;
         }
     });
 });

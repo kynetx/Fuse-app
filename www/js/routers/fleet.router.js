@@ -7,6 +7,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             "findcar/:id"               : "showFindCar",
             "trips"                     : "showTripAggregate",
             "trips/:id"                 : "showTrips",
+            "trip/:id"                  : "showTrip",
             "fuel"                      : "showFuelAggregate",
             "fuel/:id"                  : "showFuel",
             "maintenance"               : "showMaintenanceSplash",
@@ -37,6 +38,10 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
         
         showTrips: function( id ) {
             this.invokeControllerFunction( "showTrips", arguments );
+        },
+
+        showTrip: function( id ) {
+            this.invokeControllerFunction( "showTrip", arguments );
         },
 
         showFuelAggregate: function( id ) {
