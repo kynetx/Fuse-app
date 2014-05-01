@@ -708,6 +708,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     travelMode: Maps.TravelMode.DRIVING
                 };
 
+                Fuse.log( routeRequest );
+                Fuse.log( "BLHDFJKSDLFKJSDFLKJSDFL" );
+
                 /**
                  * What follows is a waypoint salience algorithm
                  * that aims to include the most meaningful additional

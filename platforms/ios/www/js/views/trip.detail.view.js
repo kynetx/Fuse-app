@@ -14,10 +14,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
                 container: "#trip-map",
                 overlays: []
             };
-
-            Fuse.log( this.model.toJSON() );
-            throw "death";
-
+            
             this.map.overlays.push({
                 type            : Fuse.map.OverlayTypeId.TRIP,
                 id              : this.model.get( "id" ),
