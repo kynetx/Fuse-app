@@ -21,7 +21,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             size: function() {
-                return this.items.lengthl
+                return this.items.length;
             }
         },
 
