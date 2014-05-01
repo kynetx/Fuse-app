@@ -9,6 +9,19 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
 
         initialize: function( options ) {
             Fuse.View.prototype.initialize.apply( this, arguments );
+
+            this.map = {
+                container: "#trip-map",
+                overlays: []
+            };
+
+            this.map.overlays.push({
+                type            : Fuse.map.OverlayTypeId.TRIP,
+                id              : this.model.get( "id" ),
+                origin          : this.model.get( "startWaypoint" ),
+                destination     : this.model.get( "endWaypoint" ),
+                waypoints       : this.model.get ( "waypoints" )
+            });
         },
         
         render: function() {
