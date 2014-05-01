@@ -235,26 +235,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             renderHeader: function() {
                 Fuse.log("Rendering header.");
 
-                var previousView = Fuse.history.last(),
-                    currentRoute = Backbone.history.fragment.split( "/" )[ 0 ],
-                    shouldShowBackBtn = false;
+                var options = {
+                    header: this.header,
+                    icon: "menu"
+                },
+                    previousView = Fuse.history.last(),
+                    currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
 
                 if ( !this.isMainFeatureView() && Fuse.history.size() >= 1 && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
-                    shouldShowBackBtn = true;
+                    options[ "icon" ] = "back";
                 }
 
-                this.$el.append( this.headerTemplate({ header: this.header }) );
-
-                var $backBtn = $( "#back" ).closest( ".ui-btn" ),
-                    $menuBtn = $( "#open-menu" ).closest( ".ui-btn" );
-
-                if ( shouldShowBackBtn ) {
-                    $menuBtn.hide();
-                    $backBtn.show();
-                } else {
-                    $backBtn.hide();
-                    $menuBtn.show();
-                }
+                this.$el.append( this.headerTemplate( options ) );
             },
 
             renderFooter: function() {
