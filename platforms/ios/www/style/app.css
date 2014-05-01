@@ -8,14 +8,6 @@
     cursor: pointer;
 }
 
-.fuse-navigation-btn {
-    display: none;
-}
-
-.fuse-navigation-btn-shown {
-    display: block;
-}
-
 .center-text {
     text-align: center;
 }

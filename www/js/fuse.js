@@ -245,10 +245,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 this.$el.append( this.headerTemplate({ header: this.header }) );
 
+                var $backBtn = $( "#back" ).closest( ".ui-btn" ),
+                    $menuBtn = $( "#open-menu" ).closest( ".ui-btn" );
+
                 if ( shouldShowBackBtn ) {
-                   $( ".fuse-back-btn" ).addClass( "fuse-navigation-btn-shown" );
+                    $menuBtn.hide();
+                    $backBtn.show();
                 } else {
-                    $( "#open-menu" ).addClass( "fuse-navigation-btn-shown" );
+                    $backBtn.hide();
+                    $menuBtn.show();
                 }
             },
 
