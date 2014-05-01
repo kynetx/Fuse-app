@@ -17,12 +17,36 @@
     </div>
 
     <div class='dark-header'>
-        <h3 class='title-font white-font'>Cost</h3>
+        <h3 class='title-font white-font'>End Time</h3>
     </div>
     <div class="vehicle-data">
         <div class="icon-box dark">
-            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+            <img src="style/images/time_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'>$<%= data.cost %></span>
+        <span class='margin-off'><%= FTH.formatDate( data.endTime ).toLocaleTimeString() %></span>
     </div>
+
+    <% if ( data.mileage ) { %>
+        <div class='dark-header'>
+            <h3 class='title-font white-font'>Mileage</h3>
+        </div>
+        <div class="vehicle-data">
+            <div class="icon-box dark">
+                <img src="style/images/trip_icon_b.png" style="width: 12px;">
+            </div>
+            <span class='margin-off'><%= data.mileage %> miles</span>
+        </div>
+    <% } %>
+
+    <% if ( data.cost ) { %>
+        <div class='dark-header'>
+            <h3 class='title-font white-font'>Cost</h3>
+        </div>
+        <div class="vehicle-data">
+            <div class="icon-box dark">
+                <img src="style/images/cost_icon_b.png" style="width: 12px;">
+            </div>
+            <span class='margin-off'>$<%= data.cost %></span>
+        </div>
+    <% } %>
 </div>
