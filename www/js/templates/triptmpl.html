@@ -1,5 +1,5 @@
 <li>
-    <a><%= FTH.getTime(FTH.formatDate( endTime, true )) %>, <%= mileage %> miles, $<%= cost %> </a>
+    <a><%= FTH.getTime(FTH.formatDate( endTime, true )) %>, <%= mileage %> miles<% if ( cost ) { %>, $<%= cost %><% } %></a>
 </li>
 
 <!--
