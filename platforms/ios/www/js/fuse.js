@@ -498,7 +498,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // otherwise default to the height of the body and the witdth (with some padding)
                 // of the containing element.
                 this.height = config.height || $(document.body).height();
-                this.width =  config.width || this.$container.width();
+                this.width =  config.width || this.$container.width() + 25;
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.
@@ -708,9 +708,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     travelMode: Maps.TravelMode.DRIVING
                 };
 
-                Fuse.log( routeRequest );
-                Fuse.log( "BLHDFJKSDLFKJSDFLKJSDFL" );
-
                 /**
                  * What follows is a waypoint salience algorithm
                  * that aims to include the most meaningful additional
@@ -723,16 +720,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     switch( Object.prototype.toString.call( trip.waypoints ) ) {
                         case "[object Array]":
-                            _.each( trip.waypoints, function(waypoint, idx) {
-                                this.sanatizeWaypoint( waypoint.value );
-                            }, this );
-                            break;
+                        _.each( trip.waypoints, function(waypoint, idx) {
+                            this.sanatizeWaypoint( waypoint.value );
+                        }, this );
+                        break;
                         case "[object Object]":
-                            this.sanatizeWaypoint( trip.waypoints.value );
-                            break;
+                        this.sanatizeWaypoint( trip.waypoints.value );
+                        break;
                         default:
-                            Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
-                            break;
+                        Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
+                        break;
                     }
 
                     /**
@@ -744,7 +741,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                      * 'salientWaypoints' is then the collection of waypoints we send with
                      * our directions service request.
                      */
-                    if ( this.sanatizedWaypoints.length > 0 ) {
+                     if ( this.sanatizedWaypoints.length > 0 ) {
                         if ( this.sanatizedWaypoints.length > this.MAX_ADDITONAL_WAYPOINTS ) {
                             var interestInterval = Math.floor( this.sanatizedWaypoints.length / 4 );
                             Fuse.log( "1/4 of all unique waypoints is approximatley", interestInterval, "elements." );
@@ -773,11 +770,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
                     }
-
-                    // Make the request.
-                    Fuse.loading( "show", "getting trip route..." );
-                    this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
                 }
+                
+                // Make the request.
+                Fuse.loading( "show", "getting trip route..." );
+                this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
             },
 
             sanatizeWaypoint: function( waypoint ) {

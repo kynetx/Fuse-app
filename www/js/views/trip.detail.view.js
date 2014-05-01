@@ -12,9 +12,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
 
             this.map = {
                 container: "#trip-map",
-                overlays: []
+                overlays: [],
+                height: 300
             };
-            
+
             this.map.overlays.push({
                 type            : Fuse.map.OverlayTypeId.TRIP,
                 id              : this.model.get( "id" ),
