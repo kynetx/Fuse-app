@@ -19,8 +19,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
                 type            : Fuse.map.OverlayTypeId.TRIP,
                 id              : this.model.get( "id" ),
                 origin          : this.model.get( "startWaypoint" ),
-                destination     : this.model.get( "endWaypoint" ),
-                waypoints       : this.model.get ( "waypoints" )
+                destination     : this.model.get( "endWaypoint" )
             });
         },
         
