@@ -13,7 +13,7 @@
         <div class="icon-box dark">
             <img src="style/images/time_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'>$<%= FTH.formatDate( data.startTime, true ) %></span>
+        <span class='margin-off'><%= FTH.formatDate( data.startTime ).toLocaleTimeString() %></span>
     </div>
 
     <div class='dark-header'>
