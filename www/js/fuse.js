@@ -1,7 +1,7 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         
-        VERSION: "0.0.6.3",
+        VERSION: "0.0.6.4",
 
         history: {
             items: [],
@@ -14,6 +14,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             last: function() {
                 return this.get(0);
+            },
+
+            pop: function() {
+                return this.items.pop();
+            },
+
+            size: function() {
+                return this.items.length;
             }
         },
 
@@ -139,19 +147,24 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         Router: Backbone.Router.extend({
             initialize: function() {
-                this.on("route", this.addRouteToHistory, this);
+                this.on( "route", this.addRouteToHistory, this );
             },
 
             addRouteToHistory: function(name, args) {
-                var previous = Fuse.history.last();
+                var previous = Fuse.history.last(),
+                    earlier = Fuse.history.get( -1 );
 
-                if (!previous || previous.fragment !== Backbone.history.fragment) {
+                if ( !previous || ( previous.fragment !== Backbone.history.fragment && ( !earlier || earlier.fragment !== Backbone.history.fragment ) ) ) {
                     var splitFrag = Backbone.history.fragment.split("/");
                     Fuse.history.items.push({
-                        name: splitFrag[0],
-                        args: args,
-                        fragment: Backbone.history.fragment
+                        name        : splitFrag[0],
+                        args        : args,
+                        fragment    : Backbone.history.fragment
                     });
+                }
+
+                if ( earlier && earlier.fragment === Backbone.history.fragment ) {
+                    Fuse.history.pop();
                 }
             },
 
@@ -221,7 +234,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             renderHeader: function() {
                 Fuse.log("Rendering header.");
-                this.$el.append(this.headerTemplate({header: this.header}));
+
+                var options = {
+                    header: this.header,
+                    icon: "menu"
+                },
+                    previousView = Fuse.history.last(),
+                    currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
+
+                if ( !this.isMainFeatureView() && Fuse.history.size() >= 1 && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
+                    options[ "icon" ] = "back";
+                }
+
+                this.$el.append( this.headerTemplate( options ) );
             },
 
             renderFooter: function() {
@@ -311,7 +336,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 };
 
                 var previous = Fuse.history.get(-1), current = Fuse.history.last(), next = Backbone.history.fragment.split("/")[0];
-                if (previous && Backbone.history.fragment === previous.fragment && "findcar" !== next) {
+                if ( previous && Backbone.history.fragment === previous.fragment && "findcar" !== next ) {
                     var viewName = Fuse.RouteToView[current.name], view;
 
                     if ( previous.args.length ) {
@@ -334,14 +359,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         }
                     }
 
-                    Fuse.log( view );
-
-                    changePageOptions["transition"] = this.controller.views[view].transition;
+                    changePageOptions["transition"] = this.controller.views[ view ].transition;
                     changePageOptions["reverse"] = true;
                 }
 
                 Fuse.log( "Changing page to:", this.el, "with options:", changePageOptions );
                 $.mobile.changePage( this.$el, changePageOptions );
+            },
+
+            isMainFeatureView: function() {
+                return Backbone.history.fragment.split( "/" ).length === 1;
             }
         }),
 
@@ -471,8 +498,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // otherwise default to the height of the body and the witdth (with some padding)
                 // of the containing element.
                 this.height = config.height || $(document.body).height();
-                // add 25 pixels to the width for good measure (to beat jQM styling...arghh!!).
-                this.width = ( config.width || this.$container.width() ) + 25;
+                this.width =  config.width || this.$container.width() + 25;
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.
@@ -694,16 +720,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     switch( Object.prototype.toString.call( trip.waypoints ) ) {
                         case "[object Array]":
-                            _.each( trip.waypoints, function(waypoint, idx) {
-                                this.sanatizeWaypoint( waypoint.value );
-                            }, this );
-                            break;
+                        _.each( trip.waypoints, function(waypoint, idx) {
+                            this.sanatizeWaypoint( waypoint.value );
+                        }, this );
+                        break;
                         case "[object Object]":
-                            this.sanatizeWaypoint( trip.waypoints.value );
-                            break;
+                        this.sanatizeWaypoint( trip.waypoints.value );
+                        break;
                         default:
-                            Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
-                            break;
+                        Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
+                        break;
                     }
 
                     /**
@@ -715,7 +741,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                      * 'salientWaypoints' is then the collection of waypoints we send with
                      * our directions service request.
                      */
-                    if ( this.sanatizedWaypoints.length > 0 ) {
+                     if ( this.sanatizedWaypoints.length > 0 ) {
                         if ( this.sanatizedWaypoints.length > this.MAX_ADDITONAL_WAYPOINTS ) {
                             var interestInterval = Math.floor( this.sanatizedWaypoints.length / 4 );
                             Fuse.log( "1/4 of all unique waypoints is approximatley", interestInterval, "elements." );
@@ -744,11 +770,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
                     }
-
-                    // Make the request.
-                    Fuse.loading( "show", "getting trip route..." );
-                    this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
                 }
+                
+                // Make the request.
+                Fuse.loading( "show", "getting trip route..." );
+                this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
             },
 
             sanatizeWaypoint: function( waypoint ) {
@@ -771,16 +797,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initActionButtons: function() {
             var showPageFromButton = $.proxy(function(e) {
-                var $target = $(e.target), 
-                    action = $target.closest("a").data("action"),
+                var $target = $( e.target ), 
+                    action = $target.closest( "a" ).data( "action" ),
                     fragment = Backbone.history.fragment,
-                    id = fragment.match(/\/(.*)/);
+                    id = fragment.match( /\/(.*)/ );
 
-                if ( "findcar" === action ) {
+                if ( action === "findcar" ) {
                     // if we are already on the findcar page but they
                     // clicked on the findcar button in the footer,
                     // we toggle back to the fleet view.
-                    if (/findcar/.test(Backbone.history.fragment)) {
+                    if ( /findcar/.test( Backbone.history.fragment ) ) {
                         action = "fleet";
                     }
                 }
@@ -793,8 +819,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
 
                 e.handled = true;
-            }, this);
-            $(document).on("tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton);
+            }, this );
+
+            var showPageFromBackButton = $.proxy(function( e ) {
+                this.navigate( this.history.get( -1 ).fragment );
+            }, this );
+
+            $( document ).on( "tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton );
+            $( document ).on( "tap", "#back", showPageFromBackButton );
         },
 
         initMenu: function() {

@@ -10,4 +10,3 @@ r.js -o www/style/build.js
 echo "CSS Built."
 echo "Building for all platforms..."
 cordova build
-echo "Fuse is almost ready to be deployed. Just make sure the css and include references in index.html are updated and then run deploy.sh. Yay!"

@@ -222,6 +222,10 @@ li.vehicle-data {
     cursor: pointer;
 }
 
+#trip-map {
+    width: 98.65%;
+}
+
 /**
  * The button that opens the fillup popup.
  */

@@ -23,7 +23,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.collection.each(function( trip ) {
                 this.addTrip( trip );
             }, this );
-
+            
             this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
 
