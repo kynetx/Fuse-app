@@ -247,6 +247,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
 
                 Fuse.log( previousView );
+                Fuse.log( Fuse.history.size() );
 
                 this.$el.append( this.headerTemplate( options ) );
             },
