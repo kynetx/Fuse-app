@@ -45,16 +45,16 @@
                 },
                 "year": {
                     "trip": {
-                        "distance": 2456789,
+                        "distance": 100000,
                         "time": 12345678234,
-                        "cost": 800
+                        "cost": 900
                     }
                 },
                 "total": {
                     "trip": {
-                        "distance": 245678910,
-                        "time": 12345678923234,
-                        "cost": 20000
+                        "distance": 150000,
+                        "time": 123345678910123456789,
+                        "cost": 5000
                     },
                     "fuel": {
                         "mpg": 21.3,
@@ -125,9 +125,9 @@
                 "aggregates": {
                     "month": {
                         "trip": {
-                            "distance": 24,
-                            "time": 123456,
-                            "cost": 50
+                            "distance": 400,
+                            "time": 9999999554,
+                            "cost": 150
                         },
                         "fuel": {
                             "mpg": 17.2,
@@ -276,9 +276,9 @@
                 "aggregates": {
                     "month": {
                         "trip": {
-                            "distance": 24,
-                            "time": 123456,
-                            "cost": 50
+                            "distance": 78,
+                            "time": 2520000,
+                            "cost": 82
                         },
                         "fuel": {
                             "mpg": 17.2,
