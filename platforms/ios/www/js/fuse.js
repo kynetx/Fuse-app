@@ -827,7 +827,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }, this );
 
             $( document ).on( "tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton );
-            $( document ).on( "tap", ".fuse-back-btn", showPageFromBackButton );
+            $( document ).on( "tap", "#back", showPageFromBackButton );
         },
 
         initMenu: function() {
