@@ -823,6 +823,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             var showPageFromBackButton = $.proxy(function( e ) {
                 this.navigate( this.history.get( -1 ).fragment );
+
+                e.handled = true;
             }, this );
 
             $( document ).on( "tap", ".fuse-footer-container > a > img, .fuse-header-container > a > img", showPageFromButton );
