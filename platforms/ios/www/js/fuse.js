@@ -242,7 +242,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     previousView = Fuse.history.last(),
                     currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
 
-                if ( !this.isMainFeatureView() && Fuse.history.size() > 1 && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
+                if ( !this.isMainFeatureView() && Fuse.history.size() >= 1 && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
                     options[ "icon" ] = "back";
                 }
 
