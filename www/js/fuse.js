@@ -18,6 +18,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             pop: function() {
                 return this.items.pop();
+            },
+
+            size: function() {
+                return this.items.lengthl
             }
         },
 
@@ -238,9 +242,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     previousView = Fuse.history.last(),
                     currentRoute = Backbone.history.fragment.split( "/" )[ 0 ];
 
-                if ( !this.isMainFeatureView() && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
+                if ( !this.isMainFeatureView() && Fuse.history.size() > 1 && previousView && currentRoute.indexOf( previousView.name.substring( 0, 4 ) ) > -1 ) {
                     options[ "icon" ] = "back";
                 }
+
+                Fuse.log( previousView );
 
                 this.$el.append( this.headerTemplate( options ) );
             },
