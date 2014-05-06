@@ -26,6 +26,20 @@
         <span class='margin-off'><%= FTH.formatDate( data.endTime ).toLocaleTimeString() %></span>
     </div>
 
+    <div class='dark-header'>
+        <h3 class='title-font white-font'>Category</h3>
+    </div>
+    <div class="vehicle-data">
+        <select id="category-select">
+            <option value="none" disabled selected>None</option>
+            <option value="business">Business</option>
+            <option value="medical">Medical</option>
+            <option value="moving">Moving</option>
+            <option value="charitable">Charitable</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
     <% if ( data.mileage ) { %>
         <div class='dark-header'>
             <h3 class='title-font white-font'>Mileage</h3>
