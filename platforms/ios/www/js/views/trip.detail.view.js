@@ -57,8 +57,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         },
 
         changeName: function( e ) {
-            
-            if ( e.handled ) {
+
+            if ( e === this.lastChangeEvent ) {
                 return false;
             }
 
@@ -69,6 +69,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
             this.model.set( "name", name, { silent: true});
             alert( "Success!" );
 
+            this.lastChangeEvent = e;
             e.handled = true;
         }
     });
