@@ -37,8 +37,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
             this.$nameInput = $( "#trip-name" );
 
             if ( this.model.get( "category") !== this.model.defaults.category ) {
-                alert( this.model.get( "category" ) );
                 this.$categorySelect.val( this.model.get( "category" ) );
+                this.$categorySelect.selectmenu( "refresh" );
             }
         },
 
