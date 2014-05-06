@@ -47,6 +47,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         },
 
         changeCategory: function( e ) {
+            e.stopPropagation();
+            e.preventDefault();
+
             var category = this.$categorySelect.val();
             this.model.set( "category", category, { silent: true });
 
@@ -54,6 +57,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         },
 
         changeName: function( e ) {
+            e.stopPropagation();
+            e.preventDefault();
+            
             var name = this.$nameInput.val();
             this.model.set( "name", name, { silent: true});
             alert( "Success!" );
