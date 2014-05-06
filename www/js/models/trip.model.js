@@ -3,6 +3,7 @@ define([ "fuse" ], function( Fuse ) {
         defaults: {
             "id": 247815,
             "mileage": "36.4",
+            "category": "none",
             "startTime": "20140319T161206+0000",
             "endTime": "20140319T170155+0000",
             "startWaypoint": {

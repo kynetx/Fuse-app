@@ -7,6 +7,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         transition: "slide",
         template: _.template( tripDetailTmpl ),
 
+        events: {
+            "change #category-select": "changeCategory"
+        },
+
         initialize: function( options ) {
             Fuse.View.prototype.initialize.apply( this, arguments );
 
@@ -27,6 +31,17 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         render: function() {
             this.content = this.template({ data: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
+
+            this.$categorySelect = $( "#category-select" );
+
+            if ( this.model.get( "category" ) !== "none" ) {
+                this.$categorySelect.val( this.model.get( "category" ) );
+            }
+        },
+
+        changeCategory: function( e ) {
+            var category = this.$categorySelect.val();
+            this.model.set( "category", category, { silent: true });
         }
     });
 });
