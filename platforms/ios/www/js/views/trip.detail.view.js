@@ -40,6 +40,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
                 this.$categorySelect.val( this.model.get( "category" ) );
                 this.$categorySelect.selectmenu( "refresh" );
             }
+
+            if ( this.model.get( "name" ) !== this.model.defaults.name ) {
+                this.$nameInput.val( this.model.get( "name" ) );
+            }
         },
 
         changeCategory: function( e ) {
