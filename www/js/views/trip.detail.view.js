@@ -8,7 +8,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         template: _.template( tripDetailTmpl ),
 
         events: {
-            "change #category-select": "changeCategory"
+            "change #category-select"   : "changeCategory",
+            "tap #trip-name-btn"        : "changeName"
         },
 
         initialize: function( options ) {
@@ -33,6 +34,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
             Fuse.View.prototype.render.call( this );
 
             this.$categorySelect = $( "#category-select" );
+            this.$nameInput = $( "#trip-name" );
 
             if ( this.model.get( "category" ) !== "none" ) {
                 this.$categorySelect.val( this.model.get( "category" ) );
