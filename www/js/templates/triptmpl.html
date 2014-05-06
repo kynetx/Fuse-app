@@ -1,5 +1,19 @@
 <li>
-    <a><%= FTH.getTime(FTH.formatDate( endTime, true )) %><% if ( typeof mileage !== "undefined" && mileage ) { %>, <%= mileage %> miles<% } %><% if ( typeof cost !== "undefined" ) { %>, $<%= cost %><% } %><% if ( typeof category !== "undefined" && category !== "none" ) { %>, <%= category %><% } %></a>
+    <a>
+        <% if ( typeof name !== "undefined" && name !== "none" ) { %>
+            <%= name %>,
+        <% } %>
+        <%= FTH.getTime(FTH.formatDate( endTime, true )) %>
+        <% if ( typeof mileage !== "undefined" && mileage ) { %>
+            , <%= mileage %> miles
+        <% } %>
+        <% if ( typeof cost !== "undefined" ) { %>
+            , $<%= cost %>
+        <% } %>
+        <% if ( typeof category !== "undefined" && category !== "none" ) { %>
+            , <%= category %>
+        <% } %>
+    </a>
 </li>
 
 <!--
