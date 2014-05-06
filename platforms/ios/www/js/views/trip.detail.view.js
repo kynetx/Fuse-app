@@ -58,18 +58,13 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
 
         changeName: function( e ) {
 
-            if ( e === this.lastChangeEvent ) {
-                return false;
-            }
-
-            e.stopPropagation();
-            e.preventDefault();
-            
             var name = this.$nameInput.val();
             this.model.set( "name", name, { silent: true});
-            alert( "Success!" );
+            
+            setTimeout(function() {
+                alert( "Success!" );
+            }, 250 );
 
-            this.lastChangeEvent = e;
             e.handled = true;
         }
     });
