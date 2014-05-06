@@ -57,6 +57,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         },
 
         changeName: function( e ) {
+            
+            if ( e.handled ) {
+                return false;
+            }
+
             e.stopPropagation();
             e.preventDefault();
             
