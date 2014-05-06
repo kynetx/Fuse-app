@@ -54,6 +54,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         changeName: function( e ) {
             var name = this.$nameInput.val();
             this.model.set( "name", name, { silent: true});
+            alert( "Success!" );
         }
     });
 });
