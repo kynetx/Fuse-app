@@ -45,6 +45,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         changeCategory: function( e ) {
             var category = this.$categorySelect.val();
             this.model.set( "category", category, { silent: true });
+        },
+
+        changeName: function( e ) {
+            var name = this.$nameInput.val();
+            this.model.set( "name", name, { silent: true});
         }
     });
 });
