@@ -8,6 +8,10 @@
     cursor: pointer;
 }
 
+div > .dark-header:first-child {
+    margin-top: 0px;
+}
+
 .center-text {
     text-align: center;
 }
@@ -21,6 +25,10 @@
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.fuse-content {
+    background-color: rgba(0,0,0,.1);
 }
 
 .fuse-header-container img {
@@ -101,10 +109,31 @@
 .dark-header {
     border-width: 0px !important;
     background-color: rgba(0,0,0,.6) !important;
-    border-top: 1px solid rgba(0,0,0,.3) !important;
+    /*border-top: 1px solid rgba(0,0,0,.3) !important;*/
     border-bottom: 6px solid rgba(0,0,0,.3) !important;
     margin-top: 3px;
     margin-bottom: 4px;
+    text-align: center;
+}
+
+.month-header {
+    padding-top: 4px;
+    margin: 8px;
+}
+
+.info-group {
+    margin: 8px;
+    border: 3px solid rgba(0,0,0,.6);
+    border-radius: 2px;
+    background-color: white;
+}
+
+.info-group.totals {
+    border: 3px solid rgba(0,0,200,.6);
+}
+
+.info-group.totals > .dark-header {
+    background-color: rgba(0,0,200,.6);
 }
 
 a.fleet-item-header:hover {
@@ -166,7 +195,7 @@ li.vehicle-data {
 
 .detail-font {
     font-size: 100% !important;
-    font-family: serif !important;
+    /*font-family: serif !important;*/
 }
 
 .white-font {
@@ -224,6 +253,30 @@ li.vehicle-data {
 
 #trip-map {
     width: 91.5%;
+}
+
+.absolute {
+    position:absolute;
+    margin: 0px;
+    font-size: 120% !important;
+}
+
+.top {
+    top: -.35em;
+}
+
+.bottom {
+    bottom: -.35em;
+}
+
+.some-right {
+    right: 2.5em;
+    text-align: right;
+}
+
+.right {
+    right: 9px;
+    text-align: right;
 }
 
 /**
