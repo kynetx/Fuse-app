@@ -48,6 +48,8 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
             setTimeout(function() {
                 alert( "Trip data export is currently being generated and will be emailed to you when finished.");
             }, 250 );
+
+            e.handled = true;
         }
     });
 });

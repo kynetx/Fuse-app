@@ -21,6 +21,10 @@
     </div>
     <span class='margin-off'>$<%= FTH.commaSeperateNumber( totals.trip.cost ) %> spent on fuel</span>
 </div>
+
+<div class="vehicle-data">
+    <a id="export-trips" data-role="button">Export Trip Data</a>
+</div>
 <% for( var i = 0; i < aggs.length; ++i ) { %>
     <%= aggs[ i ].outerHTML %>
 <% } %>
