@@ -122,9 +122,6 @@ div > .dark-header:first-child {
 }
 
 .info-group {
-    margin: 8px;
-    border: 3px solid rgba(0,0,0,.6);
-    border-radius: 2px;
     background-color: white;
 }
 
