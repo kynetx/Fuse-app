@@ -7,9 +7,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         template: _.template( tripsTmpl ),
 
         events: {
-            "tap .fuse-trip-map-trigger": "showMapForTrip",
-            "tap .collapsible-day": "toggleCollapse",
-            "tap .trip a": "showTripDetail"
+            "tap .fuse-trip-map-trigger"    : "showMapForTrip",
+            "tap .collapsible-day"          : "toggleCollapse",
+            "tap .trip a"                   : "showTripDetail"
         },
 
         initialize: function() {

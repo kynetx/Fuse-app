@@ -8,7 +8,8 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
         template: _.template( tripAggregateTmpl ),
 
         events: {
-            "tap .trip-aggregate-item": "showTripsForVehicle"
+            "tap .trip-aggregate-item"  : "showTripsForVehicle",
+            "tap #export-trips"         : "exportTrips"
         },
 
         initialize: function() {
@@ -38,6 +39,16 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
         showTripsForVehicle: function( e ) {
             var vid = $( e.target ).closest( ".trip-aggregate-item" ).data( "vid" );
             Fuse.show( "trips", { id: vid } );
+            e.handled = true;
+        },
+        
+        exportTrips: function( e ) {
+            // Somewhat of a stub...
+            // Make trip export call to API, passing a date range.
+            setTimeout(function() {
+                alert( "Trip data export is currently being generated and will be emailed to you when finished.");
+            }, 250 );
+
             e.handled = true;
         }
     });
