@@ -1,7 +1,7 @@
 <div class='ui-alt-icon month-header'>
     <a class="absolute right ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-notext"></a>
     <a class="absolute left ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
-    <h3 class='title-font center-text'> January </h3>
+    <h3 class='title-font center-text'> <%=Fuse.longMonths[4]%> </h3>
 </div>
 
 <div class='info-group'>
@@ -12,21 +12,21 @@
         <div class="icon-box dark">
             <img src="style/images/trip_icon_b.png" style="width: 20px;">
         </div>
-        <span class='margin-off'><%= FTH.commaSeperateNumber( totals.trip.distance ) %> miles</span>
+        <span class='margin-off'><%= FTH.commaSeperateNumber( totals.trip.distance ) %> miles.</span>
     </div>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/time_icon_b.png" style="width: 18px;">
         </div>
-        <span class='margin-off'><%= FTH.formatDuration(totals.trip.time, "H:M") %></span>
+        <span class='margin-off'><%= FTH.formatDuration(totals.trip.time, "H:M")%> travel time.</span>
     </div>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/cost_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'>$<%= FTH.commaSeperateNumber( totals.trip.cost ) %> spent on fuel</span>
+        <span class='margin-off'>$<%= FTH.commaSeperateNumber( totals.trip.cost ) %> spent on fuel.</span>
     </div>
 </div>
 
