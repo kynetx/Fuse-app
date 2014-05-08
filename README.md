@@ -1,4 +1,4 @@
-# Fuse Mobile Application v0.0.6.7
+# Fuse Mobile Application v0.0.6.8
 You'll need cordova installed. In order to get cordova, you'll need npm, node package manager.
 I'm going to assume you know how to get node/npm.
 After you have node & npm installed, run:
