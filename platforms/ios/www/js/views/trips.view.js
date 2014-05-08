@@ -9,8 +9,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         events: {
             "tap .fuse-trip-map-trigger"    : "showMapForTrip",
             "tap .collapsible-day"          : "toggleCollapse",
-            "tap .trip a"                   : "showTripDetail",
-            "tap #export-trips"             : "exportTrips"
+            "tap .trip a"                   : "showTripDetail"
         },
 
         initialize: function() {
@@ -91,14 +90,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             Fuse.show( "trip", { id: tripID } );
 
             e.handled = true;
-        },
-
-        exportTrips: function( e ) {
-            // Somewhat of a stub...
-            // Make trip export call to API, passing a date range.
-            setTimeout(function() {
-                alert( "Trip data export is currently being generated and will be emailed to you when finished.");
-            }, 250 );
         }
     });
 });
