@@ -147,6 +147,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         longMonths: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
+        currentMonth: 4,
+
         Router: Backbone.Router.extend({
             initialize: function() {
                 this.on( "route", this.addRouteToHistory, this );
@@ -209,6 +211,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         View: Backbone.View.extend({
+
+            events: {
+                "tap #next-month"           : "nextMonth",
+                "tap #previous-month"       : "previousMonth" 
+            },
 
             initialize: function(options) {
                 if (options.controller) {
@@ -371,6 +378,22 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             isMainFeatureView: function() {
                 return Backbone.history.fragment.split( "/" ).length === 1;
+            },
+
+            nextMonth: function() {
+                if ( Fuse.currentMonth < 11 ) {
+                    Fuse.currentMonth += 1;
+                } else {
+                    Fuse.currentMonth = 0;
+                }
+            },
+
+            previousMonth: function() {
+                if ( Fuse.currentMonth > 0 ) {
+                    Fuse.currentMonth -= 1;
+                } else {
+                    Fuse.currentMonth = 11;
+                }
             }
         }),
 

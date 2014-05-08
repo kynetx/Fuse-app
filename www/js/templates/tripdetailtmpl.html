@@ -7,29 +7,14 @@
     </div>
 
     <div class='dark-header'>
-        <h3 class='title-font white-font'>Start Time</h3>
+        <h3 class='title-font white-font'>Details</h3>
     </div>
     <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/time_icon_b.png" style="width: 12px;">
-        </div>
-        <span class='margin-off'><%= FTH.formatDate( data.startTime ).toLocaleTimeString() %></span>
-    </div>
-
-    <div class='dark-header'>
-        <h3 class='title-font white-font'>End Time</h3>
+        <h4>Name:</h4>
+        <input id="trip-name" type="text" placeholder="Eg. Commute, Grocery Shopping, Golf Trip, etc." style="text-align: center;">
     </div>
     <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/time_icon_b.png" style="width: 12px;">
-        </div>
-        <span class='margin-off'><%= FTH.formatDate( data.endTime ).toLocaleTimeString() %></span>
-    </div>
-
-    <div class='dark-header'>
-        <h3 class='title-font white-font'>Category</h3>
-    </div>
-    <div class="vehicle-data">
+        <h4>Category:</h4>
         <select id="category-select">
             <option value="none" disabled selected>None</option>
             <option value="business">Business</option>
@@ -40,18 +25,20 @@
         </select>
     </div>
 
-    <div class='dark-header'>
-        <h3 class='title-font white-font'>Name</h3>
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/time_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>Start time: <%= FTH.formatDate( data.startTime ).toLocaleTimeString() %></span>
     </div>
     <div class="vehicle-data">
-        <input id="trip-name" type="text" placeholder="Eg. Commute, Grocery Shopping, Golf Trip, etc." style="text-align: center;">
-        <a id="trip-name-btn" data-role="button">Save</a>
+        <div class="icon-box dark">
+            <img src="style/images/time_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>End time: <%= FTH.formatDate( data.endTime ).toLocaleTimeString() %></span>
     </div>
 
     <% if ( data.mileage ) { %>
-        <div class='dark-header'>
-            <h3 class='title-font white-font'>Mileage</h3>
-        </div>
         <div class="vehicle-data">
             <div class="icon-box dark">
                 <img src="style/images/trip_icon_b.png" style="width: 12px;">
@@ -61,9 +48,6 @@
     <% } %>
 
     <% if ( data.cost ) { %>
-        <div class='dark-header'>
-            <h3 class='title-font white-font'>Cost</h3>
-        </div>
         <div class="vehicle-data">
             <div class="icon-box dark">
                 <img src="style/images/cost_icon_b.png" style="width: 12px;">
@@ -71,4 +55,8 @@
             <span class='margin-off'>$<%= data.cost %></span>
         </div>
     <% } %>
+
+    <div class="vehicle-data">
+        <a id="trip-name-btn" data-role="button">Save</a>
+    </div>
 </div>

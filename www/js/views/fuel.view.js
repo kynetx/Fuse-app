@@ -7,8 +7,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         template: _.template( fuelTmpl ),
 
         events: {
-            "tap .trigger-fillup": "showFillupForm",
-            "submit #record-fillup": "recordFillup"
+            "tap .trigger-fillup"       : "showFillupForm",
+            "submit #record-fillup"     : "recordFillup"
         },
 
         initialize: function() {
@@ -42,6 +42,22 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             this.controller.addFillup( numGallons, priceGallon, odometer, gasStation );
             this.$popup.popup( "close" );
             alert( "Success!" );
+        },
+
+        nextMonth: function() {
+            if ( Fuse.currentMonth < 11 ) {
+                Fuse.currentMonth += 1;
+            } else {
+                Fuse.currentMonth = 0;
+            }
+        },
+
+        previousMonth: function() {
+            if ( Fuse.currentMonth > 0 ) {
+                Fuse.currentMonth -= 1;
+            } else {
+                Fuse.currentMonth = 11;
+            }
         },
 
         getGasStations: function( cb ) {
