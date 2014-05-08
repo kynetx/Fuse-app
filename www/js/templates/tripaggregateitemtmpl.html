@@ -5,19 +5,19 @@
     <div class="icon-box dark">
         <img src="style/images/trip_icon_b.png" style="width: 20px;">
     </div>
-    <span class='margin-off'><%= FTH.commaSeperateNumber( aggregates.month.trip.distance ) %> miles traveled</span>
+    <span class='margin-off'><%= FTH.commaSeperateNumber( aggregates.month.trip.distance ) %> miles.</span>
 </div>
 
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/time_icon_b.png" style="width: 18px;">
     </div>
-    <span class='margin-off'><%= FTH.formatDuration(aggregates.month.trip.time) %> of travel time</span>
+    <span class='margin-off'><%= FTH.formatDuration(aggregates.month.trip.time, "H:M") %> travel time.</span>
 </div>
 
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/cost_icon_b.png" style="width: 12px;">
     </div>
-    <span class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %> spent of fuel</span>
+    <span class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %> spent of fuel.</span>
 </div>

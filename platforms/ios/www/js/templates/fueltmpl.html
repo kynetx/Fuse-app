@@ -1,4 +1,10 @@
-<div class="fuel-interaction">
+<div class='ui-alt-icon month-header'>
+    <a class="absolute right ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-notext"></a>
+    <a class="absolute left ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
+    <h3 class='title-font center-text'> <%=Fuse.longMonths[4]%> </h3>
+</div>
+
+<div class="fuel-interaction info-group">
     <div class='dark-header'>
         <h3 class='title-font white-font'>Fuel Status</h3>
     </div>
@@ -9,11 +15,11 @@
             </div>
             <span class='margin-off'><%= vehicle.fuelLevel %>% fuel remaining</span>
         </div>
-        <a class="trigger-fillup" data-role="button">Fill 'er Up!</a>
+        <a class="trigger-fillup ui-btn ui-btn-b ui-corner-all" data-role="button" style='margin:4px;'>Fill 'er Up!</a>
     </div>
 </div>
 
-<div class="fuel-data">
+<div class="fuel-data info-group">
     <div class='dark-header'>
         <h3 class='title-font white-font'>Fuel Averages</h3>
     </div>
@@ -22,14 +28,14 @@
         <div class="icon-box dark">
             <img src="style/images/fuel_icon_b.png" style="width: 16px;">
         </div>
-        <span class='margin-off'><%= vehicle.aggregates.month.fuel.gallons %>g of fuel used this month</span>
+        <span class='margin-off'><%= vehicle.aggregates.month.fuel.gallons %>g of fuel</span>
     </div>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/cost_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'>$<%= vehicle.aggregates.month.fuel.cost %> spend on fuel this month</span>
+        <span class='margin-off'>$<%= vehicle.aggregates.month.fuel.cost %> spend on fuel</span>
     </div>
 
     <div class="vehicle-data">
@@ -52,11 +58,16 @@
         </div>
         <span class='margin-off'>$<%= vehicle.aggregates.month.fuel.cpm %> per mile</span>
     </div>
+</div>
 
+<!-- UNCOMMENT THIS WHEN THE GRAPH IS ADDED.
+<div class='info-group'>
     <div class="fuel-trend-graph dark-header">
         <h3 class='title-font white-font'>Graph</h3>
     </div>
 </div>
+-->
+
 <div id="fuel-popup" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
     <h5>Record Fillup</h5>
     <div id="fuel-popup-guts">

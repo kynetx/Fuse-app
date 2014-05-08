@@ -145,6 +145,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 
+        longMonths: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+
         Router: Backbone.Router.extend({
             initialize: function() {
                 this.on( "route", this.addRouteToHistory, this );
@@ -959,7 +961,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 getTime: function( datestr ) {
                     var parts = datestr.split(" ");
-                    var time = parts[ 1 ] + ' ' + parts[ 2 ];
+                    var nums = parts[ 1 ].split(":");
+                    var time = nums[ 0 ] + ':' + nums[ 1 ] + ' ' + parts[ 2 ];
 
                     return time;
                 },
