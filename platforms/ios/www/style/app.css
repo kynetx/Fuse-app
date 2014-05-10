@@ -102,18 +102,65 @@ div > .dark-header:first-child {
     height: 58px !important;
     border-width: 0px !important;
     background-color: rgba(0,0,0,.6) !important;
-    border-top: 1px solid rgba(0,0,0,.3) !important;
-    border-bottom: 6px solid rgba(0,0,0,.3) !important;
+    border-top: 4px solid rgba(0,0,0,0) !important;
+    border-bottom: 4px solid rgba(0,0,0,0) !important;
+}
+
+/*
+I here are some test to come up with a better way of showing some of this data
+*/
+div.data-split {
+    background-color: rgba(0, 0, 0, .8);
+    border-top: 1px solid rgba(255, 255, 255, .2);
+    width: 100%;
+    height: 88px;
+}
+
+div.data-split > div {
+    display: inline-block;
+    height: 76px;
+    text-align: center;
+    padding-top: 12px;
+}
+
+div.data-split > div > * {
+    margin:0px;
+    padding:0px;
+}
+
+div.data-split > div > p {
+    opacity: .5;
+}
+
+div.data-split > div > h3 {
+    opacity: .85;
+}
+
+div.data-split > div.data-left {
+    border-right: 1px solid rgba(0, 0, 0, .3);
+    width: 30%;
+    float: left;
+}
+
+div.data-split > div.data-center {
+    width: 38.5%;
+}
+
+div.data-split > div.data-right {
+    border-left: 1px solid rgba(0, 0, 0, .3);
+    width: 30%;
+    float: right;
 }
 
 .dark-header {
-    border-width: 0px !important;
-    background-color: rgba(0,0,0,.6) !important;
-    /*border-top: 1px solid rgba(0,0,0,.3) !important;*/
-    border-bottom: 6px solid rgba(0,0,0,.3) !important;
-    margin-top: 3px;
-    margin-bottom: 4px;
+    background-color: rgba(0,0,0,.6);
+    border-top: 4px solid rgba(0,0,0,0) !important;
+    border-bottom: 4px solid rgba(0,0,0,0) !important;
     text-align: center;
+}
+
+.dark-header:nth-of-type(even) {
+    background-color: rgba(0,0,0,.75) !important;
 }
 
 .month-header {
@@ -215,7 +262,6 @@ li.vehicle-data {
     width: 22px;
     text-align: center;
     height: 22px;
-    border-bottom: 4px solid rgba(0,0,0,.3);
 }
 
 .icon-box > img.light {
@@ -383,4 +429,15 @@ li.vehicle-data {
 .ui-btn-down-r {
     font-family: Helvetica, Arial, sans-serif;
     text-decoration: none;
+}
+
+.ui-btn-b {
+    text-shadow: 0px 0px 0px black !important;
+    border-color: rgba(0, 0, 0, .5) !important;
+    background-color: #DB8F3C !important; /*This is the quick cheap way to alter the b theme*/
+}
+
+.ui-btn-b:hover {
+    background-color: rgba(0, 0, 0, .7) !important;
+    color: white !important;
 }
