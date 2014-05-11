@@ -8,6 +8,10 @@
     cursor: pointer;
 }
 
+.ui-page, .fuse-content {
+    background-color: rgba(0, 0, 0, .8) !important;
+}
+
 div > .dark-header:first-child {
     margin-top: 0px;
 }
@@ -27,8 +31,8 @@ div > .dark-header:first-child {
     right: 10px;
 }
 
-.fuse-content {
-    background-color: rgba(0,0,0,.1);
+.month-header {
+    background-color: rgb(200, 200, 200);
 }
 
 .fuse-header-container img {
@@ -109,6 +113,12 @@ div > .dark-header:first-child {
 /*
 I here are some test to come up with a better way of showing some of this data
 */
+div.data-divide {
+    background-color: rgba(0, 0, 0, .8);
+    width: 100%;
+    height: 52px;
+}
+
 div.data-split {
     background-color: rgba(0, 0, 0, .8);
     border-top: 1px solid rgba(255, 255, 255, .2);
@@ -123,16 +133,20 @@ div.data-split > div {
     padding-top: 12px;
 }
 
+div.data-divide > div {
+    display: inline-block;
+}
+
 div.data-split > div > * {
-    margin:0px;
-    padding:0px;
+    margin: 0px;
+    padding: 0px;
 }
 
-div.data-split > div > p {
-    opacity: .5;
+div.data-split > div > p, div.data-divide > div > p {
+    opacity: .6;
 }
 
-div.data-split > div > h3 {
+div.data-split > div > h3, div.data-divide > div > h3 {
     opacity: .85;
 }
 
@@ -152,6 +166,18 @@ div.data-split > div.data-right {
     float: right;
 }
 
+div.data-divide > div.data-left {
+    width: 30%;
+    float: left;
+    text-align: right;
+}
+
+div.data-divide > div.data-right {
+    width: 62%;
+    float: right;
+    padding-right: 8px;
+}
+
 .dark-header {
     background-color: rgba(0,0,0,.6);
     border-top: 4px solid rgba(0,0,0,0) !important;
@@ -164,8 +190,9 @@ div.data-split > div.data-right {
 }
 
 .month-header {
-    padding-top: 4px;
-    margin: 8px;
+    padding: 4px;
+    padding-top: 8px;
+    background-color: rgb(200, 200, 200);
 }
 
 .info-group {
