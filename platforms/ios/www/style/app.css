@@ -8,7 +8,11 @@
     cursor: pointer;
 }
 
-.ui-page, .fuse-content {
+#trip-name-btn {
+    margin-top: 17px !important;
+}
+
+.ui-page {
     background-color: rgba(0, 0, 0, .8) !important;
 }
 
@@ -114,13 +118,11 @@ div > .dark-header:first-child {
 I here are some test to come up with a better way of showing some of this data
 */
 div.data-divide {
-    background-color: rgba(0, 0, 0, .8);
     width: 100%;
     height: 52px;
 }
 
 div.data-split {
-    background-color: rgba(0, 0, 0, .8);
     border-top: 1px solid rgba(255, 255, 255, .2);
     width: 100%;
     height: 88px;
@@ -179,7 +181,7 @@ div.data-divide > div.data-right {
 }
 
 .dark-header {
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,.7);
     border-top: 4px solid rgba(0,0,0,0) !important;
     border-bottom: 4px solid rgba(0,0,0,0) !important;
     text-align: center;
@@ -193,10 +195,6 @@ div.data-divide > div.data-right {
     padding: 4px;
     padding-top: 8px;
     background-color: rgb(200, 200, 200);
-}
-
-.info-group {
-    background-color: white;
 }
 
 .info-group.totals {
@@ -254,6 +252,7 @@ li.vehicle-data {
  }
 
 .trip-aggregate-item {
+    background-color: rgb(240, 240, 240);
     cursor: pointer;
 }
 
@@ -323,6 +322,7 @@ li.vehicle-data {
 
 #trip-map {
     width: 91.5%;
+    margin-bottom: 8px;
 }
 
 .absolute {
@@ -465,6 +465,6 @@ li.vehicle-data {
 }
 
 .ui-btn-b:hover {
-    background-color: rgba(0, 0, 0, .7) !important;
+    background-color: rgba(255, 255, 255, .2) !important;
     color: white !important;
 }
