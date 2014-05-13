@@ -1005,11 +1005,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 /**
                  * Format a date for human consumption.
-                 * Takes an optional paramater that determines whether
-                 * it should return a precomposed human readable date or
-                 * the raw Date object.
+                 * Can be passed an options hash to determine
+                 * what kind of output to produce.
                  */
-                formatDate: function( datetime, prettyPrint ) {
+                formatDate: function( datetime, options ) {
                     // Get the date into a managable format.
                     datetime = datetime.replace(/\+/, "")
                                        .replace(/T/g, "")
@@ -1030,7 +1029,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                      dateSecond + '.000Z',
                         out = new Date( dateBuild );
 
-                    return ( prettyPrint ) ? out.toLocaleDateString() + " " + out.toLocaleTimeString() : out;
+                    if ( options ) {
+                        if ( options.only ) {
+                            if ( options.only.time ) {
+                                var outTimeParts = out.toLocaleTimeString().split(" "),
+                                    timeParts = outTimeParts[ 0 ].split(":"),
+                                    period = outTimeParts[ 1 ];
+
+                                return timeParts[ 0 ] + ":" + timeParts[ 1 ] + " " + period;
+                            }
+                        } else if ( options.prettyPrint ) {
+                            return out.toLocaleTimeString() + " " + out.toLocaleDateString();
+                        }
+                    }
+
+                    return out;
                 },
 
                 /**
