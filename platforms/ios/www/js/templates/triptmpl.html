@@ -1,7 +1,7 @@
 <li>
     <a>
         <div style="height: 32px">
-            <p class='absolute top'><strong><% if ( typeof name !== "undefined" && name !== "none" ) { %><%= name %>, <% } %><%= endTime %></strong></p>
+            <p class='absolute top'><strong><% if ( typeof name !== "undefined" && name !== "none" ) { %><%= name %>, <% } %><%= FTH.formatDate( endTime, { only: { time: true } } ) %></strong></p>
             <p class='absolute top some-right'><% if ( typeof cost !== "undefined" ) { %> $<%= cost %><% } %></p>
             <p class='absolute bottom'><% if ( typeof mileage !== "undefined" && mileage ) { %> <%= mileage %> miles<% } %></p>
             <p class='absolute bottom some-right'><% if ( typeof category !== "undefined" && category !== "none" ) { %> <%= category %><% } %></p> 
