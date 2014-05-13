@@ -8,12 +8,8 @@
     cursor: pointer;
 }
 
-#trip-name-btn {
-    margin-top: 17px !important;
-}
-
 .ui-page {
-    background-color: rgba(0, 0, 0, .7) !important;
+    background-color: rgb(75, 75, 75) !important;
 }
 
 div > .dark-header:first-child {
