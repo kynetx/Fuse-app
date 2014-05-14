@@ -7,9 +7,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         template: _.template( fuelTmpl ),
 
         events: {
-            "tap .trigger-fillup"               : "showFillupForm",
-            "submit #record-fillup"             : "recordFillup",
-            "change #num-gallons, #price-gallon": "updateCost"
+            "tap .trigger-fillup"   : "showFillupForm",
+            "submit #record-fillup" : "recordFillup",
+            "change #num-gallons"   : "updateCost",
+            "change #price-gallon"  : "updateCost"
         },
 
         initialize: function() {
