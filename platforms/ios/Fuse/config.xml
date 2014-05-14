@@ -34,4 +34,10 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <feature name="Vibration">
+        <param name="ios-package" value="CDVVibration" />
+    </feature>
+    <feature name="Notification">
+        <param name="ios-package" value="CDVNotification" />
+    </feature>
 </widget>
