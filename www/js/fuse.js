@@ -1200,15 +1200,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         getCurrentPosition: function( cb ) {
             if ( "geolocation" in navigator ) {
-                alert( "here!!" );
                 navigator.geolocation.getCurrentPosition(function( pos ) {
+                    Fuse.log( "inside geo callback" );
                     if ( typeof cb === "function" ) {
                         cb({
                             latitude: pos.coords.latitude,
                             longitude: pos.coords.longitude
                         });
                     }
-                }, function( error ) { Fuse.log( "Geolocation died:", error ) }, { timeout: 100000 });
+                }, function( error ) { Fuse.log( "Geolocation died:", error ) }, { timeout: 100000, enableHighAccuracy: false, maximumAge: 5000 });
             }
         },
 

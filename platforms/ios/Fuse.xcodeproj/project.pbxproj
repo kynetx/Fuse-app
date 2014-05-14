@@ -40,7 +40,6 @@
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		8F336E4D5D504025878E9BCC /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E8AD2F5E78459E9842A521 /* CDVLogger.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
-		DE7F8D310AE8492DBE9E046E /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE290A817E447119051CC58 /* CDVLocation.m */; };
 		1B572951DBDD412982C93E70 /* CDVVibration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CADA8C45324454992ABDF0E /* CDVVibration.m */; };
 		6B051B0CFD684BF48804420C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348BCD2F812446D3970765F1 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		08C954C53E9E4BDCB2684CE9 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 283D402AAC4F429185885138 /* CDVNotification.m */; };
@@ -448,7 +447,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				DE7F8D310AE8492DBE9E046E /* CDVLocation.m in Sources */,
 				8F336E4D5D504025878E9BCC /* CDVLogger.m in Sources */,
 				1B572951DBDD412982C93E70 /* CDVVibration.m in Sources */,
 				08C954C53E9E4BDCB2684CE9 /* CDVNotification.m in Sources */,
