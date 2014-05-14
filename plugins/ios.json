@@ -19,6 +19,10 @@
                         {
                             "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -43,6 +47,9 @@
             "PACKAGE_NAME": "com.kynetx.fuse"
         },
         "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "com.kynetx.fuse"
+        },
+        "org.apache.cordova.geolocation": {
             "PACKAGE_NAME": "com.kynetx.fuse"
         }
     },
