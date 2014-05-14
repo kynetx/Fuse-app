@@ -1102,6 +1102,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  }
             });
 
+            // override the default alert() function if navigator.notification exists.
+            if ( navigator.notification ) {
+                window.alert = function( msg ) {
+                    navigator.notification.alert( msg, null, "Fuse", "OK" );
+                };
+            }
+
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
