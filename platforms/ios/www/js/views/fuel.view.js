@@ -7,8 +7,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         template: _.template( fuelTmpl ),
 
         events: {
-            "tap .trigger-fillup"       : "showFillupForm",
-            "submit #record-fillup"     : "recordFillup"
+            "tap .trigger-fillup"               : "showFillupForm",
+            "submit #record-fillup"             : "recordFillup",
+            "change #num-gallons, #price-gallon": "updateCost"
         },
 
         initialize: function() {
@@ -45,14 +46,24 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         recordFillup: function(e) {
             e.preventDefault();
             // Grab the values we want.
-            var numGallons = $( "#num-gallons" ).val(),
+            var numGallons  = $( "#num-gallons" ).val(),
                 priceGallon = $( "#price-gallon" ).val(),
-                odometer = $( "#odometer" ).val(),
-                gasStation = $( "#gas-station" ).val();
+                cost        = $( "#cost" ).val(),
+                odometer    = $( "#odometer" ).val(),
+                gasStation  = $( "#gas-station" ).val();
 
-            this.controller.addFillup( numGallons, priceGallon, odometer, gasStation );
+            this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
             this.$popup.popup( "close" );
             alert( "Success!" );
+        },
+
+        updateCost: function( e ) {
+            e.preventDefault();
+
+            var cost = $( ( "#num-gallons" ).val() * $( "#price-gallon" ).val() ).toFixed( 2 );
+            $( "#cost" ).val( cost );
+
+            e.handled = true;
         },
 
         nextMonth: function() {
