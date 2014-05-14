@@ -1200,6 +1200,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         getCurrentPosition: function( cb ) {
             if ( "geolocation" in navigator ) {
+                alert( "here!!" );
                 navigator.geolocation.getCurrentPosition(function( pos ) {
                     if ( typeof cb === "function" ) {
                         cb({
