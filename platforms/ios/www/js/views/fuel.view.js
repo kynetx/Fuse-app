@@ -24,7 +24,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         showFillupForm: function() {
             this.$popup = $( "#fuel-popup" );
             if ( this.$popup.length ) {
-                Fuse.loading( "show", "Getting nearby gas stations." );
                 this.getGasStations();
             } else {
                 Fuse.log( "Popup could not be found." );
@@ -60,9 +59,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             }
         },
 
-        getGasStations: function( cb ) {
-            Fuse.loading( "show", "getting nearby gas stations" );
+        getGasStations: function() {
             // We make sure to bind the execution context of the callback to the view itself.
+            Fuse.loading( "show", "Getting nearby gas stations." );
             Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
         },
 
