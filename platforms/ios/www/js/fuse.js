@@ -697,6 +697,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             getNearbyPlaces: function( classification, cb ) {
                 var self = this;
                 Fuse.getCurrentPosition(function( location ) {
+                    alert( "in callback!!!" );
                     var pos = new Maps.LatLng( location.latitude, location.longitude ),
                         psr = {
                             location:   pos,
