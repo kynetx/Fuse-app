@@ -122,7 +122,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * so that 'addFillups' can access the fillups for the current vehicle.
              * Note: We may want to sanity check our data modeling here.
              */
-            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( [] );
+            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( Fuse.FIXTURES.fillups );
             this.currentFillups = this.fillups[ id ];
             this.views[ "Fuel" ] = new FuelView({
                 controller: this,

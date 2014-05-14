@@ -19,6 +19,18 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         render: function() {
             this.content = this.template({ vehicle: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
+
+            this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
+
+            this.chartData = {
+                labels: [ "Month To Date" ],
+                datasets: [
+                {
+                    data: this.controller.currentFillups
+                }
+                ]
+            };
+            this.chart = new Chart( this.chartCanvas ).Line( this.chartData );
         },
 
         showFillupForm: function() {
