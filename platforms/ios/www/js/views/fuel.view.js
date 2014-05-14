@@ -61,7 +61,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         updateCost: function( e ) {
             e.preventDefault();
 
-            var cost = $( ( "#num-gallons" ).val() * $( "#price-gallon" ).val() ).toFixed( 2 );
+            var cost = ( $( "#num-gallons" ).val() * $( "#price-gallon" ).val() ).toFixed( 2 );
             $( "#cost" ).val( cost );
 
             e.handled = true;
