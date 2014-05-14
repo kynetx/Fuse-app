@@ -1200,7 +1200,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             longitude: pos.coords.longitude
                         });
                     }
-                }, function() {}, { timeout: 10000 });
+                }, function( error ) { Fuse.log( "Geolocation died:", error ) }, { timeout: 100000 });
             }
         },
 
