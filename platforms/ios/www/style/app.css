@@ -319,6 +319,7 @@ li.vehicle-data {
 #trip-map {
     width: 94%;
     margin-bottom: 8px;
+    z-index: -1;
 }
 
 .absolute {
