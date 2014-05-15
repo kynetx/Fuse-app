@@ -33,6 +33,12 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             this.costs.push( 25 );
             this.costs.push( 67 );
             this.costs.push( 12 );
+            this.costs.push( 80 );
+            this.costs.push( 90 );
+            this.costs.push( 100 );
+            this.costs.push( 40 ):
+            this.costs.push( 32 );
+            this.costs.push( 16 );
 
             this.chartData = {
                 labels: [ "Month Start", "Month End" ],
