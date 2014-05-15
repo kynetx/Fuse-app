@@ -30,6 +30,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 this.costs.push( fillup.cost );
             }, this );
 
+            this.costs.push( 25 );
+            this.costs.push( 67 );
+            this.costs.push( 12 );
+
             this.chartData = {
                 labels: [ "Month Start", "Month End" ],
                 datasets: [
