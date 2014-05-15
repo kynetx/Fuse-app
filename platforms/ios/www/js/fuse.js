@@ -495,6 +495,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     $panel.hide();
                 }
 
+                this.obj.setOptions({
+                    disableDoubleClickZoom: false,
+                    draggable: true
+                });
+
                 Fuse.log("Reset Fuse map:", this);
             },
 
@@ -533,6 +538,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     while ( config.overlays.length ) {
                         this.addOverlay( config.overlays.pop() );
                     }
+                }
+
+                // lock the map if we are asked to.
+                if ( config.locked ) {
+                    this.obj.setOptions({
+                        disableDoubleClickZoom: true,
+                        draggable: false
+                    });
                 }
 
                 // set the context for the fitter function to Fuse.map (this).

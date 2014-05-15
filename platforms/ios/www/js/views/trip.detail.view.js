@@ -18,7 +18,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
             this.map = {
                 container: "#trip-map",
                 overlays: [],
-                height: 300
+                height: 300,
+                locked: true
             };
 
             this.map.overlays.push({
