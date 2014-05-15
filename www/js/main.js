@@ -720,7 +720,15 @@
         }
         ],
 
-        "fillups": []
+        "fillups": [
+        {
+           "numGallons" : 16,
+           "priceGallon": 3.12,
+           "cost"       : 49.12,
+           "odometer"   : 72345,
+           "gasStation" : "Crest"
+        }
+        ]
     };
 
     Fuse.menu = [{

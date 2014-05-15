@@ -122,7 +122,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * so that 'addFillups' can access the fillups for the current vehicle.
              * Note: We may want to sanity check our data modeling here.
              */
-            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( [] );
+            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( Fuse.FIXTURES.fillups );
             this.currentFillups = this.fillups[ id ];
             this.views[ "Fuel" ] = new FuelView({
                 controller: this,
@@ -135,15 +135,17 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
          * Construct a FillupModel and add it to our FillupCollection.
          * @param numGallons  -  number of gallons filled.
          * @param priceGallon -  price per gallon.
+         * @param cost        -  total cost of fillup.
          * @param odometer    -  vehicle odometer reading at time of fillup.
          * @param gasStation  -  gas station where fillup occurred.
          */
-        addFillup: function( numGallons, priceGallon, odometer, gasStation ) {
+        addFillup: function( numGallons, priceGallon, cost, odometer, gasStation ) {
             var fillup = new FillupModel({
-                numGallons:  numGallons,
-                priceGallon: priceGallon,
-                odometer:    odometer,
-                gasStation:  gasStation
+                numGallons  : numGallons,
+                priceGallon : priceGallon,
+                cost        : cost,
+                odometer    : odometer,
+                gasStation  : gasStation
             });
 
             this.currentFillups.add( fillup );

@@ -1102,6 +1102,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  }
             });
 
+            // override the default alert() function if navigator.notification exists.
+            if ( navigator.notification ) {
+                window.alert = function( msg ) {
+                    navigator.notification.alert( msg, null, "Fuse", "OK" );
+                };
+            }
+
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
@@ -1194,13 +1201,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         getCurrentPosition: function( cb ) {
             if ( "geolocation" in navigator ) {
                 navigator.geolocation.getCurrentPosition(function( pos ) {
+                    Fuse.log( "inside geo callback" );
                     if ( typeof cb === "function" ) {
                         cb({
                             latitude: pos.coords.latitude,
                             longitude: pos.coords.longitude
                         });
                     }
-                });
+                }, function( error ) { Fuse.log( "Geolocation died:", error ) });
             }
         },
 
