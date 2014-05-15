@@ -524,11 +524,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // set up the maps container, height, width, and then adjust the map
                 // element given the new configuration.
                 this.$container = $(config.container);
+
                 // use the explicitly passed width and height if given,
                 // otherwise default to the height of the body and the witdth (with some padding)
                 // of the containing element.
-                this.height = config.height || $(document.body).height();
-                this.width =  config.width || this.$container.width() + 35;
+                if ( config.height ) {
+                    if ( typeof config.height === "object" && config.height.percentage ) {
+                        this.height = this.$container.height() * parseFloat( "." + config.height.percentage );
+                    } else {
+                        this.height = config.height;
+                    }
+                } else {
+                    this.height = $( document.body ).height();
+                }
+                
+                this.width =  config.width || this.$container.width() + 20;
                 // adjust the map to the new configuration.
                 this.adjust();
                 // setup bounds.
