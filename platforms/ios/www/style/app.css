@@ -317,7 +317,8 @@ li.vehicle-data {
 }
 
 #trip-map {
-    width: 91.5%;
+    height: 300px;
+    width: 95%;
     margin-bottom: 8px;
 }
 
