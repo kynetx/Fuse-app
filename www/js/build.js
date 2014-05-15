@@ -1,7 +1,7 @@
 ({
     baseUrl: ".",
     name: "vendor/require",
-    out: "../dist/fuse-0.0.6.9.js",
+    out: "../dist/fuse-0.0.7.js",
     include: ["main"],
     optimize: "uglify2",
     wrap: true,
