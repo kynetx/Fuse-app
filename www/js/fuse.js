@@ -147,7 +147,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         longMonths: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
-        currentMonth: 4,
+        currentMonth: 3,
 
         Router: Backbone.Router.extend({
             initialize: function() {
