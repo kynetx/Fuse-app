@@ -26,10 +26,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
             // Build chart cost data
             this.costs = [];
-            this.controller.currentFillups.each(function( fillup ) {
-                this.costs.push( fillup.cost );
-            }, this );
-
             this.costs.push( 25 );
             this.costs.push( 67 );
             this.costs.push( 12 );
@@ -38,9 +34,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 labels: [ "1st", "5th", "10th" ],
                 datasets: [
                 {
-                    fillColor           : "rgba(220,220,220,0.5)",
-                    strokeColor         : "rgba(220,220,220,1)",
-                    pointColor          : "rgba(220,220,220,1)",
+                    fillColor           : "rgba(219,143,60,0.5)",
+                    strokeColor         : "rgba(219,143,60,1)",
+                    pointColor          : "rgba(219,143,60,1)",
                     pointStrokeColor    : "#fff",
                     data                : this.costs
                 }
