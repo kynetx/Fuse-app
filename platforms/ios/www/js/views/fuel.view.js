@@ -38,7 +38,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 labels: [ "1st", "5th", "10th" ],
                 datasets: [
                 {
-                    data: this.costs
+                    fillColor           : "rgba(220,220,220,0.5)",
+                    strokeColor         : "rgba(220,220,220,1)",
+                    pointColor          : "rgba(220,220,220,1)",
+                    pointStrokeColor    : "#fff",
+                    data                : this.costs
                 }
                 ]
             };
