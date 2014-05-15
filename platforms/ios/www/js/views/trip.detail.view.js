@@ -18,10 +18,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
             this.map = {
                 container: "#trip-map",
                 overlays: [],
-                locked: true,
-                height: {
-                    percentage: 98
-                }
+                locked: true
             };
 
             this.map.overlays.push({
