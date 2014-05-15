@@ -24,11 +24,17 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
 
+            // Build chart cost data
+            this.costs = [];
+            this.controller.currentFillups.each(function( fillup ) {
+                this.costs.push( fillup.cost );
+            }, this );
+
             this.chartData = {
-                labels: [ "Month To Date" ],
+                labels: [ "Month Start", "Month End" ],
                 datasets: [
                 {
-                    data: this.controller.currentFillups
+                    data: this.costs
                 }
                 ]
             };
