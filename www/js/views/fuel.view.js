@@ -119,9 +119,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             Fuse.log( "Populated:", stationSelect, "with data:", stations );
 
             // Reset the form.
-            $( "#num-gallons, #price-gallon, #cost, #gas-station" ).val( "" );
+            $( "#num-gallons, #price-gallon, #cost" ).val( "" );
+            $( "#gas-station" ).val( "default" );
             $( "#gas-station" ).selectmenu( "refresh" );
-            
+
             // If our model has a valid odometer value, pre-populate the odometer input.
             var odometer = this.model.get( "odometer" );
             if ( odometer ) {
