@@ -6,7 +6,7 @@
 <div class='info-group'>
 	<% for (var prop in tripViewData) { %>
 	    <div class='dark-header collapsible-day margin-off'>
-	        <h3 class='title-font white-font'><%= FTH.formatDate( prop, { format: { with: "MMM DD YYYY" } } ) %></h3>
+	        <h3 class='title-font white-font'><%= FTH.formatDate( tripViewData[prop].timestamp, { format: { with: "MMM DD YYYY" } } ) %></h3>
 	    </div>
 	    <div data-role='collapsibleset' class='margin-off'>
 	    	<div data-role='collapsible' data-collapsed='true' class='collapsible'>

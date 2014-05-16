@@ -46,11 +46,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
                 model: trip
             });
              
-            if ( !this.tripViewData[ date.getTime() ] ) {
-                this.tripViewData[ date.getTime() ] = { elements: [], aggregates: {} };
+            if ( !this.tripViewData[ date.getDate() ] ) {
+                this.tripViewData[ date.getDate() ] = { elements: [], aggregates: {}, timestamp: date.getTime() };
             }
 
-            this.tripViewData[ date.getTime() ][ "elements" ].push( view.render().el );
+            this.tripViewData[ date.getDate() ][ "elements" ].push( view.render().el );
 
         },
 

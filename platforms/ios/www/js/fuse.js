@@ -1014,6 +1014,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     var out;
 
+                    // If it looks like an iso8601 timestamp without seperators...
                     if ( typeof datetime === "string" ) {
                         // Get the date into a managable format.
                         datetime = datetime.replace(/\+/, "")
@@ -1037,6 +1038,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         out = new Date( dateBuild );
                     } else if ( typeof datetime === "number" ) {
                         out = new Date( datetime );
+                    } else {
+                        throw "formatDate: date format invalid."
                     }
 
                     if ( options ) {
@@ -1045,6 +1048,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 var formatted;
                                 switch ( options.format.with ) {
                                     case "MMM DD YYYY":
+                                        Fuse.log( out );
                                         formatted = Fuse.shortMonths[ out.getMonth() ] + " " + out.getDate() + " " + out.getFullYear();
                                         break;
                                     default:
