@@ -17,6 +17,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.header = this.model.get( "nickname" ) + " " + "Trips";
             this.tripViewData = {};
             this.lastDate = '';
+
+            // sort our trips collection using our pre-defined comparator.
+            this.collection.sort();
         },
 
         render: function() {
