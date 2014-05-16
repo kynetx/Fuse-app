@@ -1,6 +1,6 @@
 ({
     baseUrl: ".",
     cssIn: "app.css",
-    out: "../dist/fuse-0.0.7.css",
+    out: "../dist/fuse-0.0.7.1.css",
     optimizeCss: "standard"
 })
