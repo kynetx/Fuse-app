@@ -61,10 +61,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
 
             var name = this.$nameInput.val();
             this.model.set( "name", name, { silent: true});
-            
-            setTimeout(function() {
-                alert( "Success!" );
-            }, 250 );
+
+            alert( "Success!" );
 
             e.handled = true;
         }
