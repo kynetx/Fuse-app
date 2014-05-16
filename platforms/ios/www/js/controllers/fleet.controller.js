@@ -4,7 +4,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         init: function() {
             this.fleet = new FleetCollection( Fuse.FIXTURES.fleet.index );
             this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
+
             this.trips = new TripCollection( Fuse.FIXTURES.trips );
+            this.trips.comparator = function( a, b ) {
+                return FTH.formatDate( a.get( "endTime" ) ) - FTH.formatDate( b.get ( "endTime" ) );
+            };
+            
             this.fillups = {};
             this.views = {};
 
