@@ -7,40 +7,4 @@
             <p class='absolute bottom some-right'><% if ( typeof category !== "undefined" && category !== "none" ) { %> <%= category %><% } %></p> 
         </div>
     </a>
-    <!--<h3 class="ui-li-aside"><strong> <% if ( typeof cost !== "undefined" ) { %> $<%= cost %><% } %> </strong></h3> -->
-    <!--<p class="ui-li-aside"><% if ( typeof mileage !== "undefined" && mileage ) { %>, <%= mileage %> miles<% } %> </p> -->
 </li>
-
-<!--
-<div class="fuse-trip-container">
-
-    <% if ( typeof mileage !== "undefined" && mileage ) { %>
-        <div class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/trip_icon_b.png" style="width: 20px;">
-            </div>
-            <span class='margin-off'><%= FTH.commaSeperateNumber( mileage ) %> miles traveled</span>
-        </div>
-    <% } %>
-
-    <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/time_icon_b.png" style="width: 18px;">
-        </div>
-        <span class='margin-off'><%= FTH.formatDuration( FTH.formatDate( endTime ).getTime() - FTH.formatDate( startTime ).getTime(), true ) %></span>
-    </div>
-
-    <% if ( typeof cost !== "undefined" && cost ) { %>
-        <div class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/cost_icon_b.png" style="width: 12px;">
-            </div>
-            <span class='margin-off'>$<%= FTH.commaSeperateNumber( cost ) %></span>
-        </div>
-    <% } %>
-
-    <div class="fuse-trip-map-trigger center-text">
-        <img src="style/images/location_icon.png">
-    </div>
-</div>
--->

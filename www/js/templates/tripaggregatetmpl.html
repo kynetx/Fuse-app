@@ -1,34 +1,30 @@
-<div class='ui-alt-icon month-header'>
+<div class='ui-alt-icon month-bar'>
     <a id='next-month' class="absolute right ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-notext"></a>
     <a id='previous-month' class="absolute left ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
     <h3 id='month' class='title-font center-text'> <%=Fuse.longMonths[Fuse.currentMonth]%> </h3>
 </div>
 
-<div class='info-group'>
-    <div class='dark-header'>
-        <h3 class='title-font white-font'>Fleet Totals</h3>
-    </div>
+<div class='title-bar totals'>
+    <h3 class='title-font white-font'>Fleet Totals</h3>
+</div>
 
-    <div class='data-split'>
-        <div class='data-left'>
-            <h3 class='title-font white-font'><%= FTH.shortenNum( FTH.commaSeperateNumber( totals.trip.distance ) ) %></h3>
-            <p class='white-font'> Miles </p>
-        </div>
-        <div class='data-center'>
-            <h3 class='title-font white-font'><%= FTH.formatDuration(totals.trip.time, "H:M")%></h3>
-            <p class='white-font'> Traveling </p>
-        </div>
-        <div class='data-right'>
-            <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.trip.cost ) ) %></h3>
-            <p class='white-font'> Fuel Cost </p>
-        </div>
+<div class='data-divide totals'>
+    <div class='data-left'>
+        <h3 class='title-font white-font'><%= FTH.shortenNum( FTH.commaSeperateNumber( totals.trip.distance ) ) %></h3>
+        <p class='white-font'> Miles </p>
+    </div>
+    <div class='data-center'>
+        <h3 class='title-font white-font'><%= FTH.formatDuration(totals.trip.time, "H:M")%></h3>
+        <p  class='white-font'> Traveling </p>
+    </div>
+    <div class='data-right'>
+        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.trip.cost ) ) %></h3>
+        <p  class='white-font'> Fuel Cost </p>
     </div>
 </div>
+
+<% for( var i = 0; i < aggs.length; ++i ) { %>
+    <%= aggs[ i ].outerHTML %>
+<% } %>
 
 <button id='export-trips' class="ui-btn ui-shadow-icon ui-btn-b margin-off">Export Trip Data</button>
-
-<div class='info-group'>
-    <% for( var i = 0; i < aggs.length; ++i ) { %>
-        <%= aggs[ i ].outerHTML %>
-    <% } %>
-</div>

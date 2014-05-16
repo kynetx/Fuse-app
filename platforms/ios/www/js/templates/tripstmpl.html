@@ -1,23 +1,22 @@
-<div class='ui-alt-icon month-header'>
+<div class='ui-alt-icon month-bar'>
     <a class="absolute right ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-notext"></a>
     <a class="absolute left ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
     <h3 class='title-font center-text'> <%=Fuse.longMonths[4]%> </h3>
 </div>
-<div class='info-group'>
-	<% for (var prop in tripViewData) { %>
-	    <div class='dark-header collapsible-day margin-off'>
-	        <h3 class='title-font white-font'><%= FTH.monthDayYear( prop ) %></h3>
+
+<% for (var prop in tripViewData) { %>
+    <div class='title-bar collapsible-day margin-off'>
+        <h3 class='title-font white-font'><%= FTH.monthDayYear( prop ) %></h3>
+    </div>
+    <div data-role='collapsibleset' class='margin-off'>
+    	<div data-role='collapsible' data-collapsed='true' class='collapsible'>
+	    	<ul data-role='listview'>
+	    	<% if (tripViewData[ prop ].elements) {
+	        	for (var i = 0; i<tripViewData[ prop ].elements.length; i++) { %>
+	            	<%= tripViewData[ prop ].elements[ i ].outerHTML %>
+	    	<%  }
+	    	} %>
 	    </div>
-	    <div data-role='collapsibleset' class='margin-off'>
-	    	<div data-role='collapsible' data-collapsed='true' class='collapsible'>
-		    	<ul data-role='listview'>
-		    	<% if (tripViewData[ prop ].elements) {
-		        	for (var i = 0; i<tripViewData[ prop ].elements.length; i++) { %>
-		            	<%= tripViewData[ prop ].elements[ i ].outerHTML %>
-		    	<%  }
-		    	} %>
-		    </div>
-	    </div>
-	<%} %>
-</div>
+    </div>
+<%} %>
 

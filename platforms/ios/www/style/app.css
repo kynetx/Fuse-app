@@ -8,16 +8,30 @@
     cursor: pointer;
 }
 
+/**
+ * This controls the color of the entire app
+ */
 .ui-page {
     background-color: rgb(75, 75, 75) !important;
 }
 
+/**
+ * Make sure we don't have extra margin on our headers
+
 div > .dark-header:first-child {
     margin-top: 0px;
-}
+} */
 
 .center-text {
     text-align: center;
+}
+
+/**
+ * FUSE-HEADER
+ * This is for the fuse header bar at the top of the screen
+ */
+.fuse-header {
+    height: 40px !important;
 }
 
 /**
@@ -31,20 +45,13 @@ div > .dark-header:first-child {
     right: 10px;
 }
 
-.month-header {
-    background-color: rgb(200, 200, 200);
-}
-
 .fuse-header-container img {
     min-height: 40px;
     cursor: pointer;
 }
 
-#trips > .fuse-content {
-    padding: 0px;
-}
-
 /**
+ * FUSE-FOOTER
  * see note below about why one must sometimes
  * use !important with style definitions in jQuery Mobile
  */
@@ -59,10 +66,19 @@ div > .dark-header:first-child {
     cursor: pointer;
 }
 
+.footer-icon {
+    padding: 0px;
+    margin: 0px;
+}
+
 .vehicle-status-icon {
     height: 10px;
     width: 10px;
     cursor: pointer;
+}
+
+#trips > .fuse-content {
+    padding: 0px;
 }
 
 /**
@@ -92,33 +108,30 @@ div > .dark-header:first-child {
     right: 5%;
 }
 
-/* This fixes a small css glitch that shows up in the vehicle detail screen */
-.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
-    min-height: 0;
-}
-
 .car-thumbnail {
     border-bottom-right-radius: 48px;
     border-top-right-radius: 48px;
 }
 
-.fleet-item-header {
-    height: 58px !important;
-    border-width: 0px !important;
-    background-color: rgba(0, 0, 0, .3) !important;
-    border-top: 4px solid rgba(0,0,0,0) !important;
-    border-bottom: 4px solid rgba(0,0,0,0) !important;
-}
 
 /*
-I here are some test to come up with a better way of showing some of this data
+ * DATA-SPLIT
+ * Creates a way to divide data into two colums
 */
-div.data-divide {
+div.data-split {
     width: 100%;
     height: 52px;
 }
 
-div.data-split {
+div.data-split > div {
+    display: inline-block;
+}
+
+/*
+ * DATA-DIVIDE
+ * Creates a way to split data into three colums
+*/
+div.data-divide {
     background-color: rgba(0, 0, 0, .35);
     border-top: 1px solid rgba(0, 0, 0, .3);
     border-bottom: 1px solid rgba(0, 0, 0, .3);
@@ -126,18 +139,18 @@ div.data-split {
     height: 88px;
 }
 
-div.data-split > div {
+div.data-divide.totals {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+div.data-divide > div {
     display: inline-block;
     height: 76px;
     text-align: center;
     padding-top: 12px;
 }
 
-div.data-divide > div {
-    display: inline-block;
-}
-
-div.data-split > div > * {
+div.data-divide > div > * {
     margin: 0px;
     padding: 0px;
 }
@@ -150,52 +163,72 @@ div.data-split > div > h3, div.data-divide > div > h3 {
     opacity: .85;
 }
 
-div.data-split > div.data-left {
+/*
+ * DATA-LEFT, RIGHT, AND CENTER
+ * These are the divs that go inside the data-split and
+ * data-divide divs and contain the data
+*/
+div.data-divide > div.data-left {
     border-right: 1px solid rgba(0, 0, 0, .3);
     width: 30%;
     float: left;
 }
 
-div.data-split > div.data-center {
+div.data-divide > div.data-center {
     width: 38.5%;
 }
 
-div.data-split > div.data-right {
+div.data-divide > div.data-right {
     border-left: 1px solid rgba(0, 0, 0, .3);
     width: 30%;
     float: right;
 }
 
-div.data-divide > div.data-left {
+div.data-split > div.data-left {
     width: 30%;
     float: left;
     text-align: right;
 }
 
-div.data-divide > div.data-right {
+div.data-split > div.data-right {
     width: 62%;
     float: right;
     padding-right: 8px;
 }
 
-.dark-header {
+/* These are in app element headers */
+.fleet-item-bar {
+    height: 58px !important;
+    border-width: 0px !important;
+    background-color: rgba(0, 0, 0, .3) !important;
+    border-top: 4px solid rgba(0,0,0,0) !important;
+    border-bottom: 4px solid rgba(0,0,0,0) !important;
+}
+
+.title-bar {
     background-color: rgba(0,0,0,.3);
     border-top: 4px solid rgba(0,0,0,0) !important;
     border-bottom: 4px solid rgba(0,0,0,0) !important;
     text-align: center;
 }
 
-.dark-header:nth-of-type(even) {
-    background-color: rgba(0,0,0,.75) !important;
+.title-bar.totals {
+    background-color: rgba(255, 255, 255, .1);
 }
 
-.month-header {
-    padding: 4px;
-    padding-top: 8px;
+/* Month bar at the top of the screen */
+.month-bar {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
     background-color: rgb(200, 200, 200);
 }
 
-a.fleet-item-header:hover {
+.month-bar > .title-font {
+    padding-top: 0px !important;
+}
+
+a.fleet-item-bar:hover {
     background-color: rgba(0,0,0,.4) !important;
 }
 
@@ -255,6 +288,11 @@ li.vehicle-data {
     margin: 0px;
 }
 
+div.fuse-header > .title-font {
+    font-size: 120% !important;
+    padding-top: 8px !important;
+}
+
 .detail-font {
     font-size: 100% !important;
     /*font-family: serif !important;*/
@@ -263,11 +301,6 @@ li.vehicle-data {
 .white-font {
     color: white;
     text-shadow: none;
-}
-
-.footer-icon {
-    padding: 0px;
-    margin: 0px;
 }
 
 .icon-box {
@@ -339,6 +372,11 @@ li.vehicle-data {
 .right {
     right: 9px;
     text-align: right;
+}
+
+/* This fixes a small css glitch that shows up in the vehicle detail screen */
+.ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
+    min-height: 0;
 }
 
 /**

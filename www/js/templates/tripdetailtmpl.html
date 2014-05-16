@@ -1,44 +1,41 @@
-<div class="trip-detail-container info-group">
-
-    <div class='data-split'>
-        <div class='data-left'>
-            <h3 class='title-font white-font'>$<%= data.cost %></h3>
-            <p class='white-font'> Cost </p>
-        </div>
-        <div class='data-center'>
-        </div>
-        <div class='data-right'>
-            <h3 class='title-font white-font'><%= data.mileage %></h3>
-            <p class='white-font'> Miles </p>
-        </div>
+<div class='data-divide'>
+    <div class='data-left'>
+        <h3 class='title-font white-font'>$<%= data.cost %></h3>
+        <p class='white-font'> Cost </p>
     </div>
-
-    <div id="trip-map">
+    <div class='data-center'>
     </div>
-
-    <div class="data-divide">
-        <div class='data-left'>
-            <p class='white-font'>Name:</p>
-        </div>
-        <div class='data-right'>
-            <input id="trip-name" type="text" placeholder="Eg. Commute, Grocery Shopping, Golf Trip, etc." style="text-align: center;">
-        </div>
+    <div class='data-right'>
+        <h3 class='title-font white-font'><%= data.mileage %></h3>
+        <p class='white-font'> Miles </p>
     </div>
-
-    <div class="data-divide">
-        <div class='data-left'>
-            <p class='white-font'>Category:</p>
-        </div>
-        <div class='data-right'>
-            <select id="category-select" data-theme='b'>
-            <option value="none" disabled selected>None</option>
-            <option value="business">Business</option>
-            <option value="medical">Medical</option>
-            <option value="moving">Moving</option>
-            <option value="charitable">Charitable</option>
-            <option value="other">Other</option>
-        </select>
-        </div>
-    </div>
-    <button id="trip-name-btn" class="ui-btn ui-shadow-icon ui-btn-b margin-off">Save</button>
 </div>
+
+<div id="trip-map">
+</div>
+
+<div class="data-split">
+    <div class='data-left'>
+        <p class='white-font'>Name:</p>
+    </div>
+    <div class='data-right'>
+        <input id="trip-name" type="text" placeholder="Eg. Commute, Grocery Shopping, Golf Trip, etc." style="text-align: center;">
+    </div>
+</div>
+
+<div class="data-split">
+    <div class='data-left'>
+        <p class='white-font'>Category:</p>
+    </div>
+    <div class='data-right'>
+        <select id="category-select" data-theme='b'>
+        <option value="none" disabled selected>None</option>
+        <option value="business">Business</option>
+        <option value="medical">Medical</option>
+        <option value="moving">Moving</option>
+        <option value="charitable">Charitable</option>
+        <option value="other">Other</option>
+    </select>
+    </div>
+</div>
+<button id="trip-name-btn" class="ui-btn ui-shadow-icon ui-btn-b margin-off">Save</button>
