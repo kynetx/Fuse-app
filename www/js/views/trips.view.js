@@ -16,7 +16,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.header = this.model.get( "nickname" ) + " " + "Trips";
             this.tripViewData = {};
-            this.lastDate = '';
+
+            // sort our trips collection using our pre-defined comparator.
+            this.collection.sort();
         },
 
         render: function() {
@@ -39,19 +41,17 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         addTrip: function( trip ) {
-            var date = trip.get( "endTime" ).substring( 0, 9 );
+            var date = FTH.formatDate( trip.get( "endTime" ) );
             var view = new TripView({
                 model: trip
             });
              
-            if (date !== this.lastDate) {
-                this.tripViewData[ date ] = this.tripViewData[ date ] || {};
-                this.lastDate = date;
+            if ( !this.tripViewData[ date.getDate() ] ) {
+                this.tripViewData[ date.getDate() ] = { elements: [], aggregates: {}, timestamp: date.getTime() };
             }
-            this.tripViewData[ date ][ "elements" ] = this.tripViewData[ date ][ "elements" ] || [];
-            this.tripViewData[ date ][ "aggregates" ] = this.tripViewData[ date ][ "aggregates" ] || {};
-            this.tripViewData[ date ][ "elements" ].push( view.render().el );
-  
+
+            this.tripViewData[ date.getDate() ][ "elements" ].push( view.render().el );
+
         },
 
         /**

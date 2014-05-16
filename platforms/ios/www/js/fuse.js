@@ -147,7 +147,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         longMonths: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
-        currentMonth: 4,
+        currentMonth: 3,
 
         Router: Backbone.Router.extend({
             initialize: function() {
@@ -495,6 +495,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     $panel.hide();
                 }
 
+                this.obj.setOptions({
+                    disableDoubleClickZoom: false,
+                    draggable: true
+                });
+
                 Fuse.log("Reset Fuse map:", this);
             },
 
@@ -533,6 +538,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     while ( config.overlays.length ) {
                         this.addOverlay( config.overlays.pop() );
                     }
+                }
+
+                // lock the map if we are asked to.
+                if ( config.locked ) {
+                    this.obj.setOptions({
+                        disableDoubleClickZoom: true,
+                        draggable: false
+                    });
                 }
 
                 // set the context for the fitter function to Fuse.map (this).
@@ -971,17 +984,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return parts.join(".");
                 },
 
-                monthDayYear: function( datestr ) {
-                    var newStr = datestr.replace(/\s+/g,'');
-
-                    var month = newStr.substring( 4, 6 ),
-                        day = newStr.substring( 6, 8 ),
-                        year = newStr.substring( 0, 4 );
-
-                    var buildStr = Fuse.shortMonths[ month-1 ] + ' ' + day + ', ' + year;
-                    return buildStr;
-                },
-
                 getTime: function( datestr ) {
                     var parts = datestr.split(" ");
                     var nums = parts[ 1 ].split(":");
@@ -1009,28 +1011,54 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  * what kind of output to produce.
                  */
                 formatDate: function( datetime, options ) {
-                    // Get the date into a managable format.
-                    datetime = datetime.replace(/\+/, "")
-                                       .replace(/T/g, "")
-                                       .replace(/:/, "")
-                                       .replace(/\s/g, "");
 
-                    var dateYear = datetime.slice(0,4),
-                        dateMonth = datetime.slice(4,6),
-                        dateDay = datetime.slice(6,8),
-                        dateHour = datetime.slice(8,10),
-                        dateMinute = datetime.slice(10,12),
-                        dateSecond = datetime.slice(12,14),
-                        dateBuild  = dateYear + '-' +
-                                     dateMonth + '-' +
-                                     dateDay + 'T' +
-                                     dateHour + ':' +
-                                     dateMinute + ':' +
-                                     dateSecond + '.000Z',
+                    var out;
+
+                    // If it looks like an iso8601 timestamp without seperators...
+                    if ( typeof datetime === "string" ) {
+                        // Get the date into a managable format.
+                        datetime = datetime.replace(/\+/, "")
+                                           .replace(/T/g, "")
+                                           .replace(/:/, "")
+                                           .replace(/\s/g, "");
+
+                        var dateYear = datetime.slice(0,4),
+                            dateMonth = datetime.slice(4,6),
+                            dateDay = datetime.slice(6,8),
+                            dateHour = datetime.slice(8,10),
+                            dateMinute = datetime.slice(10,12),
+                            dateSecond = datetime.slice(12,14),
+                            dateBuild  = dateYear + '-' +
+                                         dateMonth + '-' +
+                                         dateDay + 'T' +
+                                         dateHour + ':' +
+                                         dateMinute + ':' +
+                                         dateSecond + '.000Z';
+                        
                         out = new Date( dateBuild );
+                    } else if ( typeof datetime === "number" ) {
+                        out = new Date( datetime );
+                    } else {
+                        throw "formatDate: date format invalid."
+                    }
 
                     if ( options ) {
-                        if ( options.only ) {
+                        if ( options.format ) {
+                            if ( typeof options.format.with === "string" ) {
+                                var formatted;
+                                switch ( options.format.with ) {
+                                    case "MMM DD YYYY":
+                                        Fuse.log( out );
+                                        formatted = Fuse.shortMonths[ out.getMonth() ] + " " + out.getDate() + " " + out.getFullYear();
+                                        break;
+                                    default:
+                                        formatted = out;
+                                        break;
+                                }
+
+                                return formatted;
+                            }
+                        } else if ( options.only ) {
                             if ( options.only.time ) {
                                 var outTimeParts = out.toLocaleTimeString().split(" "),
                                     timeParts = outTimeParts[ 0 ].split(":"),
