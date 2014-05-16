@@ -1,55 +1,64 @@
-<div class='ui-alt-icon month-header'>
+<div class='ui-alt-icon month-bar'>
     <a class="absolute right ui-btn ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-notext"></a>
     <a class="absolute left ui-btn ui-shadow ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
     <h3 class='title-font center-text'> <%=Fuse.longMonths[ Fuse.currentMonth ]%> </h3>
 </div>
 
-<div class='info-group'>
-    <div class='dark-header'>
-        <h3 class='title-font white-font'>Totals</h3>
+<div class='title-bar totals'>
+    <h3 class='title-font white-font'>Totals</h3>
+</div>
+
+<div class='data-divide totals'>
+    <div class='data-left'>
+        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.fuel.gallons ) ) %></h3>
+        <p class='white-font'> Gallons </p>
     </div>
-    <div>
-        <div class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/cost_icon_b.png" style="width: 12px;">
-            </div>
-            <span class='margin-off'>$<%= totals.fuel.cost %> total spent on fuel</span>
-        </div>
-
-        <div class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/fuel_icon_b.png" style="width: 16px;">
-            </div>
-            <span class='margin-off'><%= totals.fuel.gallons %> total gallons used</span>
-        </div>
+    <div class='data-center'>
+        <h3 class='title-font white-font'><%= totals.fuel.mpg %></h3>
+        <p  class='white-font'> MPG </p>
     </div>
-
-    <div>
-        <div class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/fuel_icon_b.png" style="width: 16px;">
-            </div>
-            <span class='margin-off'><%= totals.fuel.mpg %> MPG Avg.</span>
-        </div>
-
-        <div class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/cost_icon_b.png" style="width: 12px;">
-            </div>
-            <span class='margin-off'><%= totals.fuel.cpg %> dollars per gallon Avg.</span>
-        </div>
-
-        <div class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/cost_icon_b.png" style="width: 12px;">
-            </div>
-            <span class='margin-off'><%= totals.fuel.cpm %> dollars per mile Avg.</span>
-        </div>
+    <div class='data-right'>
+        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.fuel.cost ) ) %></h3>
+        <p  class='white-font'> Fuel Cost </p>
     </div>
 </div>
 
-<div class='info-group'>
-    <% for( var i = 0; i < aggs.length; ++i ) { %>
-        <%= aggs[ i ].outerHTML %>
-    <% } %>
+<!--
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/cost_icon_b.png" style="width: 12px;">
+    </div>
+    <span class='margin-off'>$<%= totals.fuel.cost %> total spent on fuel</span>
 </div>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'><%= totals.fuel.gallons %> total gallons used</span>
+</div>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'><%= totals.fuel.mpg %> MPG Avg.</span>
+</div>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/cost_icon_b.png" style="width: 12px;">
+    </div>
+    <span class='margin-off'><%= totals.fuel.cpg %> dollars per gallon Avg.</span>
+</div>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/cost_icon_b.png" style="width: 12px;">
+    </div>
+    <span class='margin-off'><%= totals.fuel.cpm %> dollars per mile Avg.</span>
+</div> -->
+
+<% for( var i = 0; i < aggs.length; ++i ) { %>
+    <%= aggs[ i ].outerHTML %>
+<% } %>

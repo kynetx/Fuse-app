@@ -1,31 +1,29 @@
-<div class='info-group'>
-    <ul data-role="listview" data-inset="false">
-        <li class="fleet-item-header">
-            <img src="<%= icon %>" class="car-thumbnail">
-            <h1 class='margin-off title-font white-font'> <%= nickname %></h1>
-            <p class="margin-off detail-font white-font"> <%= make %>, <%= model %></p>
-        </li>
-        <li class="vehicle-data">
-        <% if (fuelLevel >= 20) { %>
-            <div class="icon-box dark">
-                <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
-        <% } else { %>
-            <div class="icon-box red">
-                <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
-        <% } %>
-            </div>
-            <span class='margin-off'><%= fuelLevel %>% fuel remaining</span>
-        </li>
-        <li class="vehicle-data">
-            <div class="icon-box dark">
-                <img src="style/images/location_icon_b.png" title="View Fuel Statistics"  style="width: 11px;">
-            </div>
+<ul data-role="listview" data-inset="false">
+    <li class="fleet-item-bar">
+        <img src="<%= icon %>" class="car-thumbnail">
+        <h1 class='margin-off title-font white-font'> <%= nickname %></h1>
+        <p class="margin-off detail-font white-font"> <%= make %>, <%= model %></p>
+    </li>
+    <li class="vehicle-data">
+    <% if (fuelLevel >= 20) { %>
+        <div class="icon-box dark">
+            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+    <% } else { %>
+        <div class="icon-box red">
+            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+    <% } %>
+        </div>
+        <span class='margin-off'><%= fuelLevel %>% fuel remaining</span>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/location_icon_b.png" title="View Fuel Statistics"  style="width: 11px;">
+        </div>
 
-            <% if (speed > 0) { %>
-                <span class='margin-off'><%= speed %> MPH on <%= address %></span>
-            <% } else { %>
-                <span class='margin-off'>Parked at <%= address %></span>
-            <% } %>
-        </li>
-    </ul>
-</div>
+        <% if (speed > 0) { %>
+            <span class='margin-off'><%= speed %> MPH on <%= address %></span>
+        <% } else { %>
+            <span class='margin-off'>Parked at <%= address %></span>
+        <% } %>
+    </li>
+</ul>
