@@ -41,18 +41,17 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         addTrip: function( trip ) {
-            Fuse.log( "blah!" );
             var date = FTH.formatDate( trip.get( "endTime" ) );
             var view = new TripView({
                 model: trip
             });
              
             if ( !this.tripViewData[ date.getTime() ] ) {
-                this.tripViewData[ date.getTime() ] = { elements: {}, aggregates: {} };
+                this.tripViewData[ date.getTime() ] = { elements: [], aggregates: {} };
             }
 
             this.tripViewData[ date.getTime() ][ "elements" ].push( view.render().el );
-  
+
         },
 
         /**
