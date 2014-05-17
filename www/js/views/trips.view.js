@@ -47,11 +47,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             var view = new TripView({
                 model: trip
             });
-
-            Fuse.log( date.getDate() );
-             
+            
             if ( !this.tripViewData[ date.getDate() ] ) {
-                Fuse.log( "adding", date.getDate() );
                 this.tripViewData[ date.getDate() ] = { elements: [], aggregates: {}, timestamp: date.getTime() };
             }
 
