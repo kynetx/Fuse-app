@@ -25,6 +25,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.collection.each(function( trip ) {
                 this.addTrip( trip );
             }, this );
+
+            Fuse.log( this.tripViewData );
             
             this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
@@ -45,8 +47,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             var view = new TripView({
                 model: trip
             });
+
+            Fuse.log( date.getDate() );
              
             if ( !this.tripViewData[ date.getDate() ] ) {
+                Fuse.log( "adding", date.getDate() );
                 this.tripViewData[ date.getDate() ] = { elements: [], aggregates: {}, timestamp: date.getTime() };
             }
 
