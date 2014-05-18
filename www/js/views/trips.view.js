@@ -15,7 +15,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.header = this.model.get( "nickname" ) + " " + "Trips";
-            this.tripViewData = {};
+            this.tripViewData = [];
 
             // sort our trips collection using our pre-defined comparator.
             this.collection.sort();
@@ -31,7 +31,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
 
-            $( '.collapsible:first').collapsible( 'expand' );
+            $( '.collapsible:first' ).collapsible( 'expand' );
         },
 
         renderTrip: function( trip ) {
