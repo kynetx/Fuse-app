@@ -31,7 +31,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
 
-            $( '.collapsible:first' ).collapsible( 'expand' );
+            $( ".collapsible:first" ).collapsible( "expand" );
         },
 
         renderTrip: function( trip ) {
@@ -43,17 +43,20 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         addTrip: function( trip ) {
-            var date = FTH.formatDate( trip.get( "endTime" ) );
-            var view = new TripView({
-                model: trip
-            });
+            var date = FTH.formatDate( trip.get( "endTime" ) ),
+                time = date.getTime(),
+                day  = date.getDate(),
+                view = new TripView({
+                    model: trip
+                }),
+                tripIdx = this.tripViewData.map(function( d ) { return d.day; }).indexOf( day );
             
-            if ( !this.tripViewData[ date.getDate() ] ) {
-                this.tripViewData[ date.getDate() ] = { elements: [], aggregates: {}, timestamp: date.getTime() };
+            if ( tripIdx < 0 ) {
+                this.tripViewData.push({ elements: [], aggregates: {}, day: day, timestamp: time });
+                this.tripViewData[ this.tripViewData.length - 1 ][ "elements" ].push( view.render().el )
+            } else {
+                this.tripViewData[ tripIdx ][ "elements" ].push( view.render().el );
             }
-
-            this.tripViewData[ date.getDate() ][ "elements" ].push( view.render().el );
-
         },
 
         /**
