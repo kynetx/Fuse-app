@@ -53,9 +53,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             
             if ( tripIdx < 0 ) {
                 this.tripViewData.push({ elements: [], aggregates: {}, day: day, timestamp: time });
-                this.tripViewData[ this.tripViewData.length - 1 ][ "elements" ].push( view.render().el )
+                this.tripViewData[ this.tripViewData.length - 1 ][ "elements" ].unshift( view.render().el )
             } else {
-                this.tripViewData[ tripIdx ][ "elements" ].push( view.render().el );
+                this.tripViewData[ tripIdx ][ "elements" ].unshift( view.render().el );
             }
         },
 
