@@ -15,7 +15,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.header = this.model.get( "nickname" ) + " " + "Trips";
-            this.tripViewData = {};
+            this.tripViewData = [];
 
             // sort our trips collection using our pre-defined comparator.
             this.collection.sort();
@@ -25,11 +25,13 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             this.collection.each(function( trip ) {
                 this.addTrip( trip );
             }, this );
+
+            Fuse.log( this.tripViewData );
             
             this.content = this.template({ vehicle: this.model.toJSON(), tripViewData: this.tripViewData });
             Fuse.View.prototype.render.call( this );
 
-            $( '.collapsible:first').collapsible( 'expand' );
+            $( ".collapsible:first" ).collapsible( "expand" );
         },
 
         renderTrip: function( trip ) {
@@ -41,17 +43,20 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         addTrip: function( trip ) {
-            var date = FTH.formatDate( trip.get( "endTime" ) );
-            var view = new TripView({
-                model: trip
-            });
-             
-            if ( !this.tripViewData[ date.getDate() ] ) {
-                this.tripViewData[ date.getDate() ] = { elements: [], aggregates: {}, timestamp: date.getTime() };
+            var date = FTH.formatDate( trip.get( "endTime" ) ),
+                time = date.getTime(),
+                day  = date.getDate(),
+                view = new TripView({
+                    model: trip
+                }),
+                tripIdx = this.tripViewData.map(function( d ) { return d.day; }).indexOf( day );
+            
+            if ( tripIdx < 0 ) {
+                this.tripViewData.push({ elements: [], aggregates: {}, day: day, timestamp: time });
+                this.tripViewData[ this.tripViewData.length - 1 ][ "elements" ].unshift( view.render().el )
+            } else {
+                this.tripViewData[ tripIdx ][ "elements" ].unshift( view.render().el );
             }
-
-            this.tripViewData[ date.getDate() ][ "elements" ].push( view.render().el );
-
         },
 
         /**

@@ -1059,11 +1059,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             }
                         } else if ( options.only ) {
                             if ( options.only.time ) {
-                                var outTimeParts = out.toLocaleTimeString().split(" "),
-                                    timeParts = outTimeParts[ 0 ].split(":"),
-                                    period = outTimeParts[ 1 ];
+                                var hour = out.getHours(), period, readableHour;
 
-                                return timeParts[ 0 ] + ":" + timeParts[ 1 ] + " " + period;
+                                if ( hour >= 12 ) {
+                                    period = "PM";
+                                } else {
+                                    period = "AM";
+                                }
+
+                                if ( hour % 12 === 0 ) {
+                                    readableHour = 12;
+                                } else {
+                                    readableHour = hour % 12;
+                                }
+
+                                return readableHour + ":" + ( out.getMinutes() < 10 ? "0" + out.getMinutes() : out.getMinutes() ) + " " + period;
                             }
                         } else if ( options.prettyPrint ) {
                             return out.toLocaleTimeString() + " " + out.toLocaleDateString();
@@ -1075,19 +1085,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 /**
                  * Take a duration in milliseconds and convert it to a human consumable format.
-                 * Also takes a boolean, succint. Causes the function to return 'minutes seconds'
+                 * Also takes a boolean, succinct. Causes the function to return 'minutes seconds'
                  * format instead of 'hours minutes seconds.'
                  */
-                formatDuration: function( duration, succint ) {
+                formatDuration: function( duration, succinct ) {
                     var totalSeconds = parseInt( duration / 1000 ),
                         hours = parseInt( totalSeconds / 24 ) % 24,
                         minutes = parseInt( totalSeconds / 60 ) % 60,
                         seconds = parseInt( totalSeconds % 60, 10 ),
-                        form = ( succint ) ? "succint" : "plural";
-                        iterator = ( succint ) ? [ minutes, seconds ] : [ hours, minutes, seconds ],
+                        form = ( succinct ) ? "succinct" : "plural";
+                        iterator = ( succinct ) ? [ minutes, seconds ] : [ hours, minutes, seconds ],
                         redableDuration = iterator.map(function( val, i ) {
                             if ( val > 0 ) {
-                                return val + ( ( succint ) ? "" : " " )  
+                                return val + ( ( succinct ) ? "" : " " )  
                                            + ( ( val > 1 ) ? this.time.get( i, form ) : 
                                                 this.time.get( i, form ) );
                             } else {
@@ -1109,17 +1119,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         {
                             singular: "hour",
                             plural: "hours",
-                            succint: "h"
+                            succinct: "h"
                         },
                         {
                             singular: "minute",
                             plural: "minutes",
-                            succint: "m"
+                            succinct: "m"
                         },
                         {
                             singular: "second",
                             plural: "seconds",
-                            succint: "s"
+                            succinct: "s"
                         }
                     ],
 
@@ -1228,7 +1238,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         getCurrentPosition: function( cb ) {
             if ( "geolocation" in navigator ) {
                 navigator.geolocation.getCurrentPosition(function( pos ) {
-                    Fuse.log( "inside geo callback" );
                     if ( typeof cb === "function" ) {
                         cb({
                             latitude: pos.coords.latitude,

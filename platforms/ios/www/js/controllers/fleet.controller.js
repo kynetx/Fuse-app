@@ -6,8 +6,8 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
 
             this.trips = new TripCollection( Fuse.FIXTURES.trips );
-            this.trips.comparator = function( a, b ) {
-                return FTH.formatDate( a.get( "endTime" ) ) - FTH.formatDate( b.get ( "endTime" ) );
+            this.trips.comparator = function( a ) {
+                return FTH.formatDate( a.get( "endTime" ) ) * -1;
             };
             
             this.fillups = {};
