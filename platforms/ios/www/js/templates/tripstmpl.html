@@ -4,16 +4,16 @@
     <h3 class='title-font center-text'> <%=Fuse.longMonths[3]%> </h3>
 </div>
 
-<% for (var prop in tripViewData) { %>
+<% for ( var i = 0; i < tripViewData.length; ++i ) { %>
     <div class='title-bar collapsible-day margin-off'>
-        <h3 class='title-font white-font'><%= FTH.formatDate( tripViewData[prop].timestamp, { format: { with: "MMM DD YYYY" } } ) %></h3>
+        <h3 class='title-font white-font'><%= FTH.formatDate( tripViewData[ i ].timestamp, { format: { with: "MMM DD YYYY" } } ) %></h3>
     </div>
     <div data-role='collapsibleset' class='margin-off'>
     	<div data-role='collapsible' data-collapsed='true' class='collapsible'>
 	    	<ul data-role='listview'>
-	    	<% if (tripViewData[ prop ].elements) {
-	        	for (var i = 0; i<tripViewData[ prop ].elements.length; i++) { %>
-	            	<%= tripViewData[ prop ].elements[ i ].outerHTML %>
+	    	<% if ( tripViewData[ i ].elements ) {
+	        	for ( var j = 0; j < tripViewData[ j ].elements.length; ++i ) { %>
+	            	<%= tripViewData[ i ].elements[ j ].outerHTML %>
 	    	<%  }
 	    	} %>
 	    </div>
