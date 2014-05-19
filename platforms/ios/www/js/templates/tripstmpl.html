@@ -5,8 +5,8 @@
 </div>
 
 <% for ( var i = 0; i < tripViewData.length; ++i ) { %>
-    <div class='title-bar collapsible-day margin-off'>
-        <h3 class='title-font white-font'><%= FTH.formatDate( tripViewData[ i ].timestamp, { format: { with: "MMM DD YYYY" } } ) %></h3>
+    <div class='title-bar collapsible-day margin-off left'>
+        <h3 class='title-font title-font-smaller white-font'><%= FTH.formatDate( tripViewData[ i ].timestamp, { format: { with: "MMM DD YYYY" } } ) %></h3>
     </div>
     <div data-role='collapsibleset' class='margin-off'>
     	<div data-role='collapsible' data-collapsed='true' class='collapsible'>
