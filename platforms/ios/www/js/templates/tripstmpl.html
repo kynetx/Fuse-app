@@ -12,11 +12,11 @@
     	<div data-role='collapsible' data-collapsed='true' class='collapsible'>
 	    	<ul data-role='listview'>
 	    	<% if ( tripViewData[ i ].elements ) {
-	        	for ( var j = 0; j < tripViewData[ j ].elements.length; ++i ) { %>
+	        	for ( var j = 0; j < tripViewData[ i ].elements.length; ++j ) { %>
 	            	<%= tripViewData[ i ].elements[ j ].outerHTML %>
 	    	<%  }
 	    	} %>
 	    </div>
     </div>
-<%} %>
+<% } %>
 

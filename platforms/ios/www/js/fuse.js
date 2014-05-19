@@ -1059,11 +1059,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             }
                         } else if ( options.only ) {
                             if ( options.only.time ) {
-                                var outTimeParts = out.toLocaleTimeString().split(" "),
-                                    timeParts = outTimeParts[ 0 ].split(":"),
-                                    period = outTimeParts[ 1 ];
+                                var hour = out.getHours(), period, readableHour;
 
-                                return timeParts[ 0 ] + ":" + timeParts[ 1 ] + " " + period;
+                                if ( hour >= 12 ) {
+                                    period = "PM";
+                                } else {
+                                    period = "AM";
+                                }
+
+                                if ( hour % 12 === 0 ) {
+                                    readableHour = 12;
+                                } else {
+                                    readableHour = hour % 12;
+                                }
+
+                                return readableHour + ":" + ( out.getMinutes() < 10 ? "0" + out.getMinutes() : out.getMinutes() ) + " " + period;
                             }
                         } else if ( options.prettyPrint ) {
                             return out.toLocaleTimeString() + " " + out.toLocaleDateString();
