@@ -1094,7 +1094,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         minutes = parseInt( totalSeconds / 60 ) % 60,
                         seconds = parseInt( totalSeconds % 60, 10 ),
                         form = ( succinct ) ? "succinct" : "plural";
-                        iterator = ( succinct ) ? [ minutes, seconds ] : [ hours, minutes, seconds ],
+                        iterator = [ hours, minutes, seconds ],
                         redableDuration = iterator.map(function( val, i ) {
                             if ( val > 0 ) {
                                 return val + ( ( succinct ) ? "" : " " )  
@@ -1104,7 +1104,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 return "";
                             }
                         }, this ).join(" ");
-
+                        
                     return redableDuration;
                 },
 
