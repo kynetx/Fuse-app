@@ -66,9 +66,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             }
 
             this.tripViewData[ tripIdx ][ "elements" ].unshift( view.render().el );
-            this.tripViewData[ tripIdx ][ "aggregates" ][ "duration" ] += duration;
-            this.tripViewData[ tripIdx ][ "aggregates" ][ "distance" ] += trip.get( "mileage" );
-            this.tripViewData[ tripIdx ][ "aggregates" ][ "cost" ] += trip.get( "cost" );
+            
+            this.tripViewData[ tripIdx ][ "aggregates" ][ "duration" ]  += duration;
+            this.tripViewData[ tripIdx ][ "aggregates" ][ "distance" ]  += trip.get( "mileage" );
+            this.tripViewData[ tripIdx ][ "aggregates" ][ "cost" ]      += trip.get( "cost" );
         },
 
         /**
