@@ -41,20 +41,34 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         addTrip: function( trip ) {
-            var date = FTH.formatDate( trip.get( "endTime" ) ),
-                time = date.getTime(),
-                day  = date.getDate(),
-                view = new TripView({
+            var date        = FTH.formatDate( trip.get( "endTime" ) ),
+                time        = date.getTime(),
+                day         = date.getDate(),
+                duration    = FTH.formatDate( trip.get( "endTime" ) ) - FTH.formatDate( trip.get( "startTime" ) ); 
+                view        = new TripView({
                     model: trip
                 }),
-                tripIdx = this.tripViewData.map(function( t ) { return t.day; }).indexOf( day );
+                tripIdx     = this.tripViewData.map(function( t ) { return t.day; }).indexOf( day );
             
             if ( tripIdx < 0 ) {
-                this.tripViewData.push({ elements: [], aggregates: {}, day: day, timestamp: time });
-                this.tripViewData[ this.tripViewData.length - 1 ][ "elements" ].unshift( view.render().el )
-            } else {
-                this.tripViewData[ tripIdx ][ "elements" ].unshift( view.render().el );
+                var newLength = this.tripViewData.push({
+                    elements    : [], 
+                    aggregates  : {
+                        duration    : 0,
+                        distance    : 0,
+                        cost        : 0
+                    }, 
+                    day         : day, 
+                    timestamp   : time,
+                });
+
+                tripIdx = newLength - 1;
             }
+
+            this.tripViewData[ tripIdx ][ "elements" ].unshift( view.render().el );
+            this.tripViewData[ tripIdx ][ "aggregates" ][ "duration" ] += duration;
+            this.tripViewData[ tripIdx ][ "aggregates" ][ "distance" ] += trip.get( "mileage" );
+            this.tripViewData[ tripIdx ][ "aggregates" ][ "cost" ] += trip.get( "cost" );
         },
 
         /**
