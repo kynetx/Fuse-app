@@ -294,6 +294,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
 
                 this.enhance();
+                this.resetIcons();
             },
 
             cleanup: function() {
@@ -308,10 +309,23 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             resetIcons: function() {
                 // Logic for highlighting icons in footer
-                $( '#trip-icon' ).children().attr( 'src', 'style/images/trip_icon_gray.png' ).trigger( 'create' );
-                $( '#fuel-icon' ).children().attr( 'src', 'style/images/fuel_icon_gray.png' ).trigger( 'create' );
-                $( '#findcar-icon' ).children().attr( 'src', 'style/images/find_car_icon_gray.png' ).trigger( 'create' );
-                $( '#maintenance-icon' ).children().attr( 'src', 'style/images/maintenance_icon_gray.png' ).trigger( 'create' );
+                $( '#trip-icon > img' ).attr( 'src', 'style/images/trip_icon_b.png' );
+                $( '#fuel-icon > img' ).attr( 'src', 'style/images/fuel_icon_b.png' );
+                $( '#findcar-icon > img' ).attr( 'src', 'style/images/find_car_icon_b.png' );
+                $( '#maintenance-icon > img' ).attr( 'src', 'style/images/maintenance_icon_b.png' );
+
+                if ( Backbone.history.fragment.indexOf( 'trip' ) > -1 ) {
+                    $( '#trip-icon > img' ).attr( 'src', 'style/images/trip_icon_gray.png' );
+
+                } else if ( Backbone.history.fragment.indexOf( 'fuel' ) > -1 ) {
+                    $( '#fuel-icon > img' ).attr( 'src', 'style/images/fuel_icon_gray.png' );
+
+                } else if ( Backbone.history.fragment.indexOf( 'maintenance' ) > -1 ) {
+                    $( '#maintenance-icon > img' ).attr( 'src', 'style/images/maintenance_icon_gray.png' );
+
+                } else if ( Backbone.history.fragment.indexOf( 'findcar' ) > -1 ) {
+                    $( '#findcar-icon > img' ).attr( 'src', 'style/images/find_car_icon_gray.png' );
+                }
             },
 
             addToDOM: function() {
@@ -857,7 +871,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         action = "fleet";
                     }
                 }
-
 
                 if ( id && id[ 1 ] ) {
                     this.show( action, { id: id[ 1 ] });
