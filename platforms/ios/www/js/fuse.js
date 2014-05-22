@@ -292,7 +292,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (this.map) {
                     this.showMapWhenReady();
                 }
+
                 this.enhance();
+                this.resetIcons();
             },
 
             cleanup: function() {
@@ -302,6 +304,31 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (dups.length) {
                     dups.empty();
                     dups.remove();
+                }
+            },
+
+            resetIcons: function() {
+                // Logic for highlighting icons in footer
+                $( '#trip-icon > img' ).attr( 'src', 'style/images/trip_icon_b.png' );
+                $( '#fuel-icon > img' ).attr( 'src', 'style/images/fuel_icon_b.png' );
+                $( '#findcar-icon > img' ).attr( 'src', 'style/images/find_car_icon_b.png' );
+                $( '#maintenance-icon > img' ).attr( 'src', 'style/images/maintenance_icon_b.png' );
+
+                if ( Backbone.history.fragment.indexOf( 'trip' ) > -1 ) {
+                    $( '#trip-icon > img' ).attr( 'src', 'style/images/trip_icon_gray.png' );
+                    Fuse.log('trip');
+
+                } else if ( Backbone.history.fragment.indexOf( 'fuel' ) > -1 ) {
+                    $( '#fuel-icon > img' ).attr( 'src', 'style/images/fuel_icon_gray.png' );
+                    Fuse.log('fuel');
+
+                } else if ( Backbone.history.fragment.indexOf( 'maintenance' ) > -1 ) {
+                    $( '#maintenance-icon > img' ).attr( 'src', 'style/images/maintenance_icon_gray.png' );
+                    Fuse.log('maintenance');
+
+                } else if ( Backbone.history.fragment.indexOf( 'findcar' ) > -1 ) {
+                    $( '#findcar-icon > img' ).attr( 'src', 'style/images/find_car_icon_gray.png' );
+                    Fuse.log('findcar');
                 }
             },
 
@@ -1186,7 +1213,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             if (Backbone.history.fragment === page) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
             } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
-                // ...or there are no matching routes...
+                // ...or there ˆre no matching routes...
                 // don't examine the routes array for matching routes 
                 // if we were passed an options object. Routes like foo/1234
                 // are valid but won't be found because foo/:id is what will be 
