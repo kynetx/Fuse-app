@@ -292,6 +292,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if (this.map) {
                     this.showMapWhenReady();
                 }
+
                 this.enhance();
             },
 
@@ -303,6 +304,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     dups.empty();
                     dups.remove();
                 }
+            },
+
+            resetIcons: function() {
+                // Logic for highlighting icons in footer
+                $( '#trip-icon' ).children().attr( 'src', 'style/images/trip_icon_gray.png' ).trigger( 'create' );
+                $( '#fuel-icon' ).children().attr( 'src', 'style/images/fuel_icon_gray.png' ).trigger( 'create' );
+                $( '#findcar-icon' ).children().attr( 'src', 'style/images/find_car_icon_gray.png' ).trigger( 'create' );
+                $( '#maintenance-icon' ).children().attr( 'src', 'style/images/maintenance_icon_gray.png' ).trigger( 'create' );
             },
 
             addToDOM: function() {
@@ -849,6 +858,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     }
                 }
 
+
                 if ( id && id[ 1 ] ) {
                     this.show( action, { id: id[ 1 ] });
                 } else {
@@ -1176,7 +1186,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             if (Backbone.history.fragment === page) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
             } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
-                // ...or there are no matching routes...
+                // ...or there ˆre no matching routes...
                 // don't examine the routes array for matching routes 
                 // if we were passed an options object. Routes like foo/1234
                 // are valid but won't be found because foo/:id is what will be 
