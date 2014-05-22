@@ -383,7 +383,7 @@ div.fuse-header > .title-font {
     text-align: right;
 }
 
-.absolute.right.ui-btn {
+.absolute.right.ui-btn, .absolute.left.ui-btn {
     background: rgba(0, 0, 0, 0);
     border: none;
     margin-top: 2px;
