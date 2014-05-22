@@ -316,19 +316,15 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 if ( Backbone.history.fragment.indexOf( 'trip' ) > -1 ) {
                     $( '#trip-icon > img' ).attr( 'src', 'style/images/trip_icon_gray.png' );
-                    Fuse.log('trip');
 
                 } else if ( Backbone.history.fragment.indexOf( 'fuel' ) > -1 ) {
                     $( '#fuel-icon > img' ).attr( 'src', 'style/images/fuel_icon_gray.png' );
-                    Fuse.log('fuel');
 
                 } else if ( Backbone.history.fragment.indexOf( 'maintenance' ) > -1 ) {
                     $( '#maintenance-icon > img' ).attr( 'src', 'style/images/maintenance_icon_gray.png' );
-                    Fuse.log('maintenance');
 
                 } else if ( Backbone.history.fragment.indexOf( 'findcar' ) > -1 ) {
                     $( '#findcar-icon > img' ).attr( 'src', 'style/images/find_car_icon_gray.png' );
-                    Fuse.log('findcar');
                 }
             },
 
