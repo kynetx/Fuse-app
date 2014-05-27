@@ -726,6 +726,7 @@
            "priceGallon": 3.12,
            "cost"       : 49.12,
            "odometer"   : 72345,
+           "timestamp"  : + new Date(),
            "gasStation" : "Crest"
         }
         ]
