@@ -27,7 +27,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         renderChart: function() {
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
             // Build chart cost data
-            this.costs = [];
+            this.costs = this.controller.currentFillups.map(function( f ) { return f.cost; });
             this.costs.push( 25 );
             this.costs.push( 67 );
             this.costs.push( 12 );
