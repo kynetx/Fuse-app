@@ -21,9 +21,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         render: function() {
             this.content = this.template({ vehicle: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
+            this.renderChart();
+        },
 
+        renderChart: function() {
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
-
             // Build chart cost data
             this.costs = [];
             this.costs.push( 25 );
