@@ -1,5 +1,6 @@
 
 <div class='title-bar'>
+    <a class="absolute right ui-btn ui-icon-carat-r ui-btn-icon-notext"></a>
     <h3 class='title-font white-font'><%= nickname %></h3>
 </div>
 
@@ -8,21 +9,5 @@
             <img src="style/images/fuel_icon_b.png" style="width: 16px;">
         </div>
         <span class='margin-off'><%= fuelLevel %>% of fuel remaining</span>
-    </div>
-</div>
-
-<div class="vehicle-data">
-    <div class="icon-box dark">
-            <img src="style/images/cost_icon_b.png" style="width: 12px;">
-        </div>
-        <span class='margin-off'><%= FTH.formatDuration(aggregates.month.trip.time) %> of travel time</span>
-    </div>
-</div>
-
-<div class="vehicle-data">
-    <div class="icon-box dark">
-            <img src="style/images/cost_icon_b.png" style="width: 12px;">
-        </div>
-        <span class='margin-off'>$<%= FTH.commaSeperateNumber( aggregates.month.trip.cost ) %> spent for trip</span>
     </div>
 </div>
