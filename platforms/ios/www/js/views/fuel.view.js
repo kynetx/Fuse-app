@@ -28,8 +28,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
             // Build chart cost data
             this.costs = this.controller.currentFillups.map(function( f ) { return f.get( "cost" ); });
-            this.dates = this.controller.currentFillups.map(function( f ) { return f.get( "timestamp" ).toString(); });
-
+            this.dates = this.controller.currentFillups.map(function( f ) { return f.get( "timestamp" ).getDay(); });
+            
             this.chartData = {
                 labels: this.dates,
                 datasets: [
