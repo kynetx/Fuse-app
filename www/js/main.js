@@ -726,7 +726,7 @@
            "priceGallon": 3.15,
            "cost"       : 63.00,
            "odometer"   : 72345,
-           "timestamp"  : new Date(),
+           "timestamp"  : new Date( 2014, 4, 3 ),
            "gasStation" : "Chevron"
         },
         {
@@ -734,7 +734,7 @@
            "priceGallon": 3.05,
            "cost"       : 30.50,
            "odometer"   : 72500,
-           "timestamp"  : new Date(),
+           "timestamp"  : new Date( 2014, 4, 7 ),
            "gasStation" : "Crest"
         },
         {
@@ -742,7 +742,7 @@
            "priceGallon": 3.12,
            "cost"       : 49.92,
            "odometer"   : 72716,
-           "timestamp"  : new Date(),
+           "timestamp"  : new Date( 2014, 4, 12 ),
            "gasStation" : "Conoco"
         },
         {
@@ -750,7 +750,7 @@
            "priceGallon": 3.21,
            "cost"       : 44.94,
            "odometer"   : 72859,
-           "timestamp"  : new Date(),
+           "timestamp"  : new Date( 2014, 4, 17 ),
            "gasStation" : "Chevron"
         },
         {
@@ -758,7 +758,7 @@
            "priceGallon": 3.28,
            "cost"       : 62.32,
            "odometer"   : 73051,
-           "timestamp"  : new Date(),
+           "timestamp"  : new Date( 2014, 4, 23 ),
            "gasStation" : "Shell"
         },
         {
@@ -766,7 +766,7 @@
            "priceGallon": 3.31,
            "cost"       : 59.58,
            "odometer"   : 73243,
-           "timestamp"  : new Date(),
+           "timestamp"  : new Date( 2014, 4, 26 ),
            "gasStation" : "Crest"
         }
         ]
