@@ -6,7 +6,7 @@ define([ "fuse" ], function( Fuse ) {
             "cost"          : 0,
             "odometer"      : 000000,
             "timestamp"     : new Date(),
-            "gasStation"    : "Chevron Salem (390 N SR 198, Salem)"
+            "gasStation"    : "Other"
         }
     });
 });
