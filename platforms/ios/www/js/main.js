@@ -782,7 +782,8 @@
     },
     {
         action: "logout",
-        text: "Logout"
+        text: "Logout",
+        disabled: true
     }];
 
     // intialize the routers.
