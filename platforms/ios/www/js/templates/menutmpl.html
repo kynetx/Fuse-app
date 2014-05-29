@@ -5,7 +5,7 @@
         </div>
         <ul data-role="listview">
             <% for (var i = 0; i < items.length; ++i) { %>
-                <% if (items[i].action.toUpperCase() === "FLEET") { %>
+                <% if ( items[ i ].action.toUpperCase() === "FLEET" || items[ i ].action.toUpperCase() === "SETTINGS" ) { %>
                     <li id="menu-item-<%= items[i].action %>"><a data-action="<%= items[i].action %>"><%= items[i].text %></a>
                         <ul class="fleet-menu" data-role="listview">
                             <!-- no easy way in jQM to automagically indent nested lists... -->
