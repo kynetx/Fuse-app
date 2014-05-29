@@ -71,6 +71,16 @@ div > .dark-header:first-child {
     margin: 0px;
 }
 
+.fuse-logo-container {
+    width:100px;
+    margin-right:auto;
+    margin-left:auto
+}
+
+#fuse-logo {
+    width: 96px;
+}
+
 .vehicle-status-icon {
     height: 10px;
     width: 10px;
@@ -311,6 +321,11 @@ div.fuse-header > .title-font {
     text-shadow: none;
 }
 
+.gray-font {
+    color: rgb(170, 170, 170);
+    text-shadow: none;
+}
+
 .icon-box {
     border-radius: .125em;
     display: inline-block;
@@ -450,6 +465,14 @@ div.fuse-header > .title-font {
 
 .ui-collapsible-content {
     padding: 0px;
+}
+
+.collapsible-day {
+    height: 52px;
+}
+
+.collapsible-day:nth-of-type(4n) {
+    background-color: rgba(0, 0, 0, .2)
 }
 
  /* Red button theme for JQuery Mobile

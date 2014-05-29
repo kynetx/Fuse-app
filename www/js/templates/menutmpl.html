@@ -1,5 +1,8 @@
 <div id="sidr">
     <div id="menu" data-theme="b">
+        <div class='fuse-logo-container'>
+            <img id='fuse-logo' src='style/images/fuse_logo.png' title='Fuse Logo'>
+        </div>
         <ul data-role="listview">
             <% for (var i = 0; i < items.length; ++i) { %>
                 <% if (items[i].action.toUpperCase() === "FLEET") { %>
@@ -12,7 +15,7 @@
                         </ul>
                     </li>
                 <% } else { %>
-                    <li id="menu-item-<%= items[i].action %>" style="text-decoration: line-through;"><a style="color: grey;" data-action="<%= items[i].action %>"><%= items[i].text %></a>
+                    <li id="menu-item-<%= items[i].action %>" style="text-decoration: line-through;"><a style="color: grey;" data-action="<%= items[i].action %>"><%= items[i].text %></a></li>
                 <% } %>
             <% } %>
         </ul>
