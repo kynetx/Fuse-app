@@ -71,6 +71,16 @@ div > .dark-header:first-child {
     margin: 0px;
 }
 
+.fuse-logo-container {
+    width:100px;
+    margin-right:auto;
+    margin-left:auto
+}
+
+#fuse-logo {
+    width: 96px;
+}
+
 .vehicle-status-icon {
     height: 10px;
     width: 10px;
