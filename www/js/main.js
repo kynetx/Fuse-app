@@ -722,10 +722,51 @@
 
         "fillups": [
         {
+           "numGallons" : 20,
+           "priceGallon": 3.15,
+           "cost"       : 63.00,
+           "odometer"   : 72345,
+           "timestamp"  : new Date( 2014, 4, 3 ),
+           "gasStation" : "Chevron"
+        },
+        {
+           "numGallons" : 10,
+           "priceGallon": 3.05,
+           "cost"       : 30.50,
+           "odometer"   : 72500,
+           "timestamp"  : new Date( 2014, 4, 7 ),
+           "gasStation" : "Crest"
+        },
+        {
            "numGallons" : 16,
            "priceGallon": 3.12,
-           "cost"       : 49.12,
-           "odometer"   : 72345,
+           "cost"       : 49.92,
+           "odometer"   : 72716,
+           "timestamp"  : new Date( 2014, 4, 12 ),
+           "gasStation" : "Conoco"
+        },
+        {
+           "numGallons" : 14,
+           "priceGallon": 3.21,
+           "cost"       : 44.94,
+           "odometer"   : 72859,
+           "timestamp"  : new Date( 2014, 4, 17 ),
+           "gasStation" : "Chevron"
+        },
+        {
+           "numGallons" : 19,
+           "priceGallon": 3.28,
+           "cost"       : 62.32,
+           "odometer"   : 73051,
+           "timestamp"  : new Date( 2014, 4, 23 ),
+           "gasStation" : "Shell"
+        },
+        {
+           "numGallons" : 18,
+           "priceGallon": 3.31,
+           "cost"       : 59.58,
+           "odometer"   : 73243,
+           "timestamp"  : new Date( 2014, 4, 26 ),
            "gasStation" : "Crest"
         }
         ]

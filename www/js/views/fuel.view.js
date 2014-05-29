@@ -21,17 +21,17 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         render: function() {
             this.content = this.template({ vehicle: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
+            this.renderChart();
+        },
 
+        renderChart: function() {
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
-
             // Build chart cost data
-            this.costs = [];
-            this.costs.push( 25 );
-            this.costs.push( 67 );
-            this.costs.push( 12 );
+            this.costs = this.controller.currentFillups.map(function( f ) { return f.get( "cost" ); });
+            this.dates = this.controller.currentFillups.map(function( f ) { return f.get( "timestamp" ).getDate(); });
 
             this.chartData = {
-                labels: [ "1st", "5th", "10th" ],
+                labels: this.dates,
                 datasets: [
                 {
                     fillColor           : "rgba(219,143,60,0.5)",

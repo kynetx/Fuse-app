@@ -134,6 +134,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 model: this.fleet.get( id )
             });
             this.views.Fuel.render();
+            this.currentFillups.on( "change reset add remove", this.views.Fuel.renderChart, this.views.Fuel );
         },
 
         /**
