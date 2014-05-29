@@ -10,7 +10,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         events: {
             "tap #create-reminder"          : "showCreateReminderForm",
             "change #reminder-trigger-type" : "showRequestedTriggerType",
-            "submit #reminder"              : "scheduleMaintenanceReminder"
+            "submit #reminder"              : "scheduleMaintenanceReminder",
+            "tap .reminder"                 : "showCompleteReminderForm" 
         },
 
         initialize: function() {
@@ -39,6 +40,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             Fuse.View.prototype.render.call( this );
 
             this.$reminderFormPopup = $( "#reminder-form" );
+            this.$reminderCompletePopup = $( "#reminder-complete-form" );
 
             /**
              * Set the initial state of some input elements to hidden.
@@ -78,6 +80,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showCreateReminderForm: function( e ) {
             this.$reminderFormPopup.popup( "open" );
             this.$triggerDateInputContainer.show();
+            e.handled = true;
+        },
+
+        showCompleteReminderForm: function ( e ) {
+            this.$reminderCompletePopup.popup( "open" );
             e.handled = true;
         },
 
