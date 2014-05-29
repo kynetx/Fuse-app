@@ -8,6 +8,7 @@
     <div class='title-bar collapsible-day margin-off left'>
         <span class='gray-font absolute right'>$<%= tripViewData[ i ].aggregates.cost %></span>
         <h3 class='title-font title-font-smaller white-font'><%= FTH.formatDate( tripViewData[ i ].timestamp, { format: { with: "MMM DD YYYY" } } ) %></h3>
+        <span class='gray-font absolute right' style='margin-top:-4px;'><%= FTH.formatDuration(tripViewData[ i ].aggregates.duration) %> travel time</span>
         <span class='gray-font'><%= tripViewData[ i ].aggregates.distance %> miles</span>
     </div>
     <div data-role='collapsibleset' class='margin-off'>
