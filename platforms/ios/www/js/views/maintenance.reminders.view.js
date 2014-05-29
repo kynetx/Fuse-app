@@ -11,7 +11,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             "tap #create-reminder"          : "showCreateReminderForm",
             "change #reminder-trigger-type" : "showRequestedTriggerType",
             "submit #reminder"              : "scheduleMaintenanceReminder",
-            "tap .reminder"                 : "showCompleteReminderForm" 
+            "tap .reminder"                 : "showCompleteReminderForm",
+            "submit #complete"              : "completeReminder"
         },
 
         initialize: function() {
@@ -124,6 +125,16 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             Fuse.log( reminder );
             this.$reminderFormPopup.popup( "close" );
             alert( "Success! Reminder saved." );
+
+            e.handled = true;
+        },
+
+        completeReminder: function ( e ) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            this.$reminderCompletePopup.popup( "close" );
+            alert( "The reminder has been completed and moved to your history." );
 
             e.handled = true;
         }
