@@ -2,7 +2,9 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
     return Fuse.Controller.extend({
 
         init: function() {
-            this.views = {};
+            this.views = {
+                Settings: new SettingsView()
+            };
         },
 
         showVehicleListFromHome: function() {
@@ -10,8 +12,6 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
         },
 
         showSettingsPane: function() {
-            this.views[ "Settings" ] = new SettingsView();
-
             this.views.Settings.render();
         }
     });
