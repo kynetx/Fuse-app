@@ -12,8 +12,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         },
 
         render: function() {
-            Fuse.View.prototype.render.call( this );
             this.content = this.template();
+            Fuse.View.prototype.render.call( this );
         }
     });
 });
