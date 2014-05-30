@@ -218,7 +218,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             initialize: function(options) {
-                if (options.controller) {
+                if ( typeof options === "undefined" || !options || Object.keys( options ).length === 0 ) {
+                    throw "Fatal: Tried to initialize a view with no options."
+                }
+
+                if ( options.controller ) {
                     this.controller = options.controller;
                 }
 
