@@ -3,7 +3,9 @@ define([ "fuse", "jquery", "underscore", "views/settings.view" ], function( Fuse
 
         init: function() {
             this.views = {
-                Settings: new SettingsView()
+                Settings: new SettingsView({
+                    controller: this
+                })
             };
         },
 
