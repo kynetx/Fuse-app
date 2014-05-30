@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
+define([ "fuse", "jquery", "underscore", "views/settings.view" ], function( Fuse, $, _, SettingsView ) {
     return Fuse.Controller.extend({
 
         init: function() {
