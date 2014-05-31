@@ -107,6 +107,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
 
         showReminderFormDelayed: function() {
             this.popups.$form.popup( "open" );
+            $('#reminder-name').text('hi');
+            alert('hi');
         },
 
         scheduleAlertMaintenanceReminder: function( e ) {
