@@ -85,6 +85,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         },
 
         showCompleteReminderForm: function ( e ) {
+            var name = $( e.currentTarget ).text();
+            $('#reminder-name').text(name);
             this.$reminderCompletePopup.popup( "open" );
             e.handled = true;
         },
