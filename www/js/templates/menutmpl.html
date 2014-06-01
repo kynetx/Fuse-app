@@ -14,8 +14,10 @@
                             <% } %>
                         </ul>
                     </li>
-                <% } else { %>
+                <% } else if ( items[ i ].disabled ) { %>
                     <li id="menu-item-<%= items[i].action %>" style="text-decoration: line-through;"><a style="color: grey;" data-action="<%= items[i].action %>"><%= items[i].text %></a></li>
+                <% } else { %>
+                    <li id="menu-item-<%= items[i].action %>"><a data-action="<%= items[i].action %>"><%= items[i].text %></a>
                 <% } %>
             <% } %>
         </ul>
