@@ -31,6 +31,15 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
                     }
                 }
             ],
+            "history": [
+                {
+                    "reason": "none",
+                    "trigger": {
+                        "type": "none",
+                        "value": "none"
+                    }
+                }
+            ],
             "address": "none",
             "timestamp": "never",
             "running": "never",

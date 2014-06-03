@@ -105,6 +105,8 @@
                             "value": "2014-05-09" 
                         }
                     },
+                ],
+                "history" : [
                     {
                         "reason": "Check Engine Light",
                         "trigger": {
