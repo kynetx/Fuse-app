@@ -3,7 +3,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingsprofiletmpl.htm
         id: "settings",
         tagName: "div",
         role: "page",
-        header: "Settings",
+        header: "Profile",
         transition: "slide",
         template: _.template( settingsProfileTmpl ),
         
