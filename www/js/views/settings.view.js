@@ -26,31 +26,36 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
 
         showProfilePane: function( e ) {
             alert( "Profile pane is under construction....coming shortly." );
+            Fuse.show( "settings-profile" );
 
             e.handled = true;
         },
 
         showPreferencePane: function( e ) {
             alert( "Preference pane is under construction...coming shortly." );
+            Fuse.show( "settings-preferences" );
 
             e.handled = true;
         },
 
         showCarSettings: function( e ) {
             alert( "Car linking feature is under construction...coming shortly." );
+            Fuse.show( "settings-cars" );
 
             e.handled = true;
         },
 
         showRecurringMaintenanceReminderSettings: function( e ) {
             alert( "Recurring Maintenance Reminder setup/editing is under construction...coming shortly." );
+            Fuse.show( "settings-reminders" );
 
             e.handled = true;
         },
 
         showTripCategorySettings: function( e ) {
             alert( "Custom trip categories coming shortly..." );
-
+            Fuse.show( "settings-categories" );
+            
             e.handled = true;
         }
     });
