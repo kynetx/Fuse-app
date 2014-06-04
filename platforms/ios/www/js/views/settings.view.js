@@ -22,6 +22,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         render: function() {
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
+
+            alert( "Feature not complete." );
         },
 
         showProfilePane: function( e ) {
@@ -55,7 +57,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         showTripCategorySettings: function( e ) {
             alert( "Custom trip categories coming shortly..." );
             Fuse.show( "settings-categories" );
-            
+
             e.handled = true;
         }
     });
