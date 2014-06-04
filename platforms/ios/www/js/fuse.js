@@ -140,7 +140,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             "maintenance"           : "MaintenanceSplash",
             "maintenance-alerts"    : "MaintenanceAlerts",
             "maintenance-reminders" : "MaintenanceReminders",
-            "maintenance-history"   : "MaintenanceHistory"
+            "maintenance-history"   : "MaintenanceHistory",
+            "settings"              : "Settings",
+            "settings-profile"      : "ProfileSettings",
+            "settings-preferences"  : "PreferenceSettings",
+            "settings-reminders"    : "RecurringMaintenanceReminderSettings",
+            "settings-cars"         : "CarSettings",
+            "settings-categories"   : "TripCategorySettings"
         },
 
         shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],

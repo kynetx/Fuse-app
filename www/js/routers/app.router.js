@@ -6,8 +6,8 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "settings"              : "showSettingsPane",
             "settings-profile"      : "showProfilePane",
             "settings-preferences"  : "showPreferencesPane",
-            "settings-cars"         : "showCarSettings",
             "settings-reminders"    : "showRecurringMaintenanceReminderSettings",
+            "settings-cars"         : "showCarSettings",
             "settings-categories"   : "showTripCategorySettings"
         },
 
