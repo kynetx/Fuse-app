@@ -7,6 +7,14 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         transition: "slide",
         template: _.template( settingsTmpl ),
 
+        events: {
+            "tap [data-action='settings-profile']"      : "showProfilePane",
+            "tap [data-action='settings-preferences']"  : "showPreferencePane",
+            "tap [data-action='settings-cars']"         : "showCarSettings",
+            "tap [data-action='settings-reminders']"    : "showRecurringMaintenanceReminderSettings",
+            "tap [data-action='settings-categories']"   : "showTripCategorySettings"
+        },
+
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
         },
