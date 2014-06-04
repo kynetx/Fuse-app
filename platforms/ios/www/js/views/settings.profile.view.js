@@ -14,8 +14,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingsprofiletmpl.htm
         render: function() {
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
-
-            alert( "Feature not complete." );
         }
     });
 });
