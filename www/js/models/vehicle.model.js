@@ -24,6 +24,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             ],
             "reminders": [
                 {
+                    "id": "none",
                     "reason": "none",
                     "trigger": {
                         "type": "none",
@@ -33,6 +34,7 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             ],
             "history": [
                 {
+                    "id": "none",
                     "reason": "none",
                     "trigger": {
                         "type": "none",

@@ -26,6 +26,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         render: function() {
             // Handle re-renders correctly.
             this.reminders.length = 0;
+            this.reminder = '';
 
             // Are we rendering reminders for the whole fleet or just one vehicle?
             if ( this.model ) {
@@ -87,6 +88,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showCompleteReminderForm: function ( e ) {
             var name = $( e.currentTarget ).text();
             $('#reminder-name').text(name);
+            Fuse.log( $( e.currentTarget ).attr('data-rid') );
+            // I'm right here and I have this working.
+            // I should be able to use Array.unshift() to push to the front of the history.
             this.$reminderCompletePopup.popup( "open" );
             e.handled = true;
         },

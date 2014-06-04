@@ -8,10 +8,10 @@
         <% for ( var j = 0; j < data[ i ].reminders.length; ++j ) { %>
             <% if ( data[ i ].reminders[ j ].trigger.type === "mileage" ) { %>
                 <!-- mileage-based reminder. -->
-                <li class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].reminders[ j ].trigger.value ) %> miles</li>
+                <li class="reminder" data-role="button" data-theme="r" data-rid=<%= data[i].reminders[j].id %> data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].reminders[ j ].trigger.value ) %> miles</li>
             <% } else { %>
                 <!-- date-based reminder. -->
-                <li class="reminder" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= data[ i ].reminders[ j ].trigger.value %></li>
+                <li class="reminder" data-role="button" data-theme="r" data-rid=<%= data[i].reminders[j].id %> data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= data[ i ].reminders[ j ].trigger.value %></li>
             <% } %>
         <% } %>
     </ul>
