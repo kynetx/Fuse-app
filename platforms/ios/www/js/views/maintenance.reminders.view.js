@@ -88,7 +88,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showCompleteReminderForm: function ( e ) {
             var name = $( e.currentTarget ).text();
             $('#reminder-name').text(name);
-            Fuse.log( $( e.currentTarget ).attr('data-rid') );
+            Fuse.log( $( e.currentTarget ).attr( 'data-rid' ) );
+            this.reminder = $( e.currentTarget ).attr( 'data-rid' );
+            // I'm right here and I have this working.
+            // I should be able to use Array.unshift() to push to the front of the history.
             this.$reminderCompletePopup.popup( "open" );
             e.handled = true;
         },
@@ -137,6 +140,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             e.preventDefault();
             e.stopPropagation();
 
+            Fuse.log(this.reminder);
             this.$reminderCompletePopup.popup( "close" );
             alert( "The reminder has been completed and moved to your history." );
 

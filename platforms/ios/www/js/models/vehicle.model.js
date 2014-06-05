@@ -22,26 +22,31 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
                     "timestamp": "never"
                 },
             ],
-            "reminders": [
-                {
-                    "id": "none",
+            "reminders": {
+                "never": {
+                    "id": "never",
                     "reason": "none",
                     "trigger": {
                         "type": "none",
                         "value": "none"
                     }
                 }
-            ],
-            "history": [
-                {
-                    "id": "none",
+            },
+            "history": {
+                "never": {
+                    "id": "never",
                     "reason": "none",
+                    "status": "none",
+                    "updated": "never",
+                    "cost": 0.0,
+                    "receipt": "none",
+                    "vendor": "none",
                     "trigger": {
                         "type": "none",
                         "value": "none"
                     }
                 }
-            ],
+            },
             "address": "none",
             "timestamp": "never",
             "running": "never",
