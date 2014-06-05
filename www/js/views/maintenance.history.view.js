@@ -18,7 +18,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancehistorytmpl.
         },
 
         render: function() {
-
+            this.history.items.length = 0;
             // Are we rendering history for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleHistory( this.model );

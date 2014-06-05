@@ -27,6 +27,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             // Handle re-renders correctly.
             this.reminders.length = 0;
             this.rid = '';
+            this.reminder = {};
             this.vehicleId = '';
 
             // Are we rendering reminders for the whole fleet or just one vehicle?
@@ -91,6 +92,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             var name = $( e.currentTarget ).text();
             $('#reminder-name').text(name);
             var id = $( e.currentTarget ).attr( 'data-rid' ).split(',');
+            this.reminder = $( e.currentTarget );
             this.rid = id[0];
             this.vehicleId = id[1];
             // I'm right here and I have this working.
@@ -146,9 +148,19 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             if ( this.model ) {
                 Fuse.log( this.model.get( 'reminders' )[ this.rid ] );
             } else {
-                Fuse.log( this.controller.fleet.get( this.vehicleId ).get( 'reminders' )[ this.rid ] );
-                //var reminderObj = this.controller.fleet.get( this.vehicleId ).pop( 'reminders' )[ this.rid ];
-                //Fuse.log( reminderObj );
+                var reminderObj = this.controller.fleet.get( this.vehicleId ).get( 'reminders' )[ this.rid ];
+                var history = this.controller.fleet.get( this.vehicleId ).get( 'history' );
+                var reminders = this.controller.fleet.get( this.vehicleId ).get( 'reminders' );
+                delete reminders[ this.rid ];
+
+                if ( typeof history[ "never" ] !== "undefined" ) {
+                    history = {};
+                }
+                history[ this.rid ] = reminderObj;
+
+                this.controller.fleet.get( this.vehicleId ).set( 'reminders', reminders, { silent: true } );
+                this.controller.fleet.get( this.vehicleId ).set( 'history', history, { silent: true } );
+
             }
             this.$reminderCompletePopup.popup( "close" );
             alert( "The reminder has been completed and moved to your history." );
