@@ -26,14 +26,14 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         render: function() {
             // Handle re-renders correctly.
             this.reminders.length = 0;
-            this.reminder = '';
+            this.rid = '';
 
             // Are we rendering reminders for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleReminders( this.model );
             } else {
                 // The whole fleet.
-                this.controller.fleet.each(function( vehicle ) {
+                this.controller.fleet.each( function( vehicle ) {
                     this.collectVehicleReminders( vehicle );
                 }, this );
             }
@@ -88,8 +88,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showCompleteReminderForm: function ( e ) {
             var name = $( e.currentTarget ).text();
             $('#reminder-name').text(name);
-            Fuse.log( $( e.currentTarget ).attr( 'data-rid' ) );
-            this.reminder = $( e.currentTarget ).attr( 'data-rid' );
+            this.rid = $( e.currentTarget ).attr( 'data-rid' );
             // I'm right here and I have this working.
             // I should be able to use Array.unshift() to push to the front of the history.
             this.$reminderCompletePopup.popup( "open" );
@@ -140,7 +139,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             e.preventDefault();
             e.stopPropagation();
 
-            Fuse.log(this.reminder);
+            Fuse.log( this.model.get( "nickname" ) );
             this.$reminderCompletePopup.popup( "close" );
             alert( "The reminder has been completed and moved to your history." );
 

@@ -4,14 +4,12 @@
         <h3 class='title-font white-font' data-action="history"><%= data[ i ].vehicle %></h3>
     </div>
     <ul data-role='listview'>
-    <% if ( data[ i ].history && data[ i ].history.length ) { %>
-        <% for ( var j = 0; j < data[ i ].history.length; ++j ) { %>
+    <% if ( data[ i ].history ) { %>
+        <% for ( j in data[ i ].history ) { %>
             <% if ( data[ i ].history[ j ].trigger.type === "mileage" ) { %>
-                <!-- mileage-based reminder. -->
-                <li class="reminder dark" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].history[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].history[ j ].trigger.value ) %> miles</li>
+                <li class="reminder" data-role="button" data-theme="r" data-rid=<%= data[i].history[ j ].id %> data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].history[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].history[ j ].trigger.value ) %> miles</li>
             <% } else { %>
-                <!-- date-based reminder. -->
-                <li class="reminder dark" data-role="button" data-theme="r" data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].history[ j ].reason %> - <%= data[ i ].history[ j ].trigger.value %></li>
+                <li class="reminder" data-role="button" data-theme="r" data-rid=<%= data[i].history[j].id %> data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].history[ j ].reason %> - <%= data[ i ].history[ j ].trigger.value %></li>
             <% } %>
         <% } %>
     </ul>
