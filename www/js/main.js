@@ -83,36 +83,51 @@
                     "latitude": 41.238178,
                     "longitude": -111.937246
                 },
-                "reminders": [
-                    {
+                "reminders": {
+                    "2014-06-04T21:06:33.464Z": {
+
+                        "id": "2014-06-04T21:06:33.464Z",
+                        "timestamp": "2014-06-04T21:06:33.464Z",
                         "reason": "Tire Rotation",
                         "trigger": {
                             "type": "mileage",
                             "value": 56000
                         }
                     },
-                    {
+                    "2014-06-05T03:02:21.122Z ": {
+                        "id": "2014-06-05T03:02:21.122Z ",
+                        "timestamp": "2014-06-05T03:02:21.122Z",
                         "reason": "Air Conditioner Flush",
                         "trigger": {
                             "type": "mileage",
                             "value": 60000 
                         }
                     },
-                    {
+                    "2014-06-05T03:03:13.128Z": {
+                        "id": "2014-06-05T03:03:13.128Z",
+                        "timestamp": "2014-06-05T03:03:13.128Z",
                         "reason": "Headlight Replacement",
                         "trigger": {
                             "type": "date",
                             "value": "2014-05-09" 
                         }
                     },
-                    {
+                },
+                "history" : {
+                    "2014-06-05T03:05:20.073Z": {
+                        "id": "2014-06-05T03:05:20.073Z",
                         "reason": "Check Engine Light",
+                        "status": "Completed",
+                        "updated": "2014-06-05T03:07:48.589Z",
+                        "cost": 25.12,
+                        "receipt": "#",
+                        "vendor": "Jiffy Lube",
                         "trigger": {
                             "type": "date",
                             "value": "2014-05-01"
                         }
                     }
-                ],
+                },
                 "timestamp": "20140116T151952+0000",
                 "running": false,
                 "fuelRate": 1.2,
@@ -169,29 +184,35 @@
                     "latitude": 40.42970,
                     "longitude": -111.89830
                 },
-                "reminders": [
-                    {
+                "reminders": {
+                    "2014-06-05T03:10:39.232Z": {
+                        "id": "2014-06-05T03:10:39.232Z",
+                        "timestamp": "2014-06-05T03:10:39.232Z",
                         "reason": "Oil Change",
                         "trigger": {
                             "type": "mileage",
                             "value": 105000
                         }
                     },
-                    {
+                    "2014-06-05T03:11:39.013Z": {
+                        "id": "2014-06-05T03:11:39.013Z",
+                        "timestamp": "2014-06-05T03:11:39.013Z",
                         "reason": "Saftey/Emissions check",
                         "trigger": {
                             "type": "date",
                             "value": "2014-05-16" 
                         }
                     },
-                    {
+                    "2014-06-05T03:12:22.771Z": {
+                        "id": "2014-06-05T03:12:22.771Z",
+                        "timestamp": "2014-06-05T03:12:22.771Z",
                         "reason": "Replace Battery",
                         "trigger": {
                             "type": "date",
                             "value": "2014-05-20" 
                         }
                     }
-                ],
+                },
                 "timestamp": "20140116T151952+0000",
                 "running": false,
                 "fuelRate": 1.2,
@@ -255,15 +276,17 @@
                         "timestamp": "never"
                     }
                 ],
-                "reminders": [
-                    {
+                "reminders": {
+                    "2014-06-05T03:13:10.416Z": {
+                        "id": "2014-06-05T03:13:10.416Z",
+                        "timestamp": "2014-06-05T03:13:10.416Z",
                         "reason": "Repair Dent",
                         "trigger": {
                             "type": "date",
                             "value": "2014-05-07"
                         }
                     }
-                ],
+                },
                 "timestamp": "19910831T060849T+07:00",
                 "running": true,
                 "fuelRate": 2.63,

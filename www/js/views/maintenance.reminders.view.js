@@ -26,13 +26,16 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         render: function() {
             // Handle re-renders correctly.
             this.reminders.length = 0;
+            this.rid = '';
+            this.reminder = {};
+            this.vehicleId = '';
 
             // Are we rendering reminders for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleReminders( this.model );
             } else {
                 // The whole fleet.
-                this.controller.fleet.each(function( vehicle ) {
+                this.controller.fleet.each( function( vehicle ) {
                     this.collectVehicleReminders( vehicle );
                 }, this );
             }
@@ -69,7 +72,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             if ( reminders !== vehicle.defaults.reminders ) {
                 this.reminders.push({
                     vehicle: vehicle.get( "nickname" ),
-                    reminders: vehicle.get( "reminders" )
+                    reminders: vehicle.get( "reminders" ),
+                    id: vehicle.get( "id" )
                 });
             } else {
                 this.reminders.push({
@@ -87,6 +91,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showCompleteReminderForm: function ( e ) {
             var name = $( e.currentTarget ).text();
             $('#reminder-name').text(name);
+            var id = $( e.currentTarget ).attr( 'data-rid' ).split(',');
+            this.reminder = $( e.currentTarget );
+            this.rid = id[0];
+            this.vehicleId = id[1];
+            // I'm right here and I have this working.
+            // I should be able to use Array.unshift() to push to the front of the history.
             this.$reminderCompletePopup.popup( "open" );
             e.handled = true;
         },
@@ -135,6 +145,23 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             e.preventDefault();
             e.stopPropagation();
 
+            if ( this.model ) {
+                Fuse.log( this.model.get( 'reminders' )[ this.rid ] );
+            } else {
+                var reminderObj = this.controller.fleet.get( this.vehicleId ).get( 'reminders' )[ this.rid ];
+                var history = this.controller.fleet.get( this.vehicleId ).get( 'history' );
+                var reminders = this.controller.fleet.get( this.vehicleId ).get( 'reminders' );
+                delete reminders[ this.rid ];
+
+                if ( typeof history[ "never" ] !== "undefined" ) {
+                    history = {};
+                }
+                history[ this.rid ] = reminderObj;
+
+                this.controller.fleet.get( this.vehicleId ).set( 'reminders', reminders, { silent: true } );
+                this.controller.fleet.get( this.vehicleId ).set( 'history', history, { silent: true } );
+
+            }
             this.$reminderCompletePopup.popup( "close" );
             alert( "The reminder has been completed and moved to your history." );
 

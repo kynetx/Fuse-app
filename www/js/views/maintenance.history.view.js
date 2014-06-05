@@ -18,7 +18,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancehistorytmpl.
         },
 
         render: function() {
-
+            this.history.items.length = 0;
             // Are we rendering history for the whole fleet or just one vehicle?
             if ( this.model ) {
                 this.collectVehicleHistory( this.model );
@@ -34,12 +34,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancehistorytmpl.
         },
 
         collectVehicleHistory: function( vehicle ) {
-            var reminders = vehicle.get( "reminders" );
+            var history = vehicle.get( "history" );
 
-            if ( reminders !== vehicle.defaults.reminders ) {
+            if ( history !== vehicle.defaults.history ) {
                 this.history.items.push({
                     vehicle: vehicle.get( "nickname" ),
-                    reminders: vehicle.get( "reminders" )
+                    history: vehicle.get( "history" )
                 });
             } else {
                 this.history.items.push({
