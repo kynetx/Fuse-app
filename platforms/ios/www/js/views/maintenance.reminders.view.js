@@ -27,6 +27,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             // Handle re-renders correctly.
             this.reminders.length = 0;
             this.rid = '';
+            this.vehicleId = '';
 
             // Are we rendering reminders for the whole fleet or just one vehicle?
             if ( this.model ) {
@@ -70,7 +71,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             if ( reminders !== vehicle.defaults.reminders ) {
                 this.reminders.push({
                     vehicle: vehicle.get( "nickname" ),
-                    reminders: vehicle.get( "reminders" )
+                    reminders: vehicle.get( "reminders" ),
+                    id: vehicle.get( "id" )
                 });
             } else {
                 this.reminders.push({
@@ -88,7 +90,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showCompleteReminderForm: function ( e ) {
             var name = $( e.currentTarget ).text();
             $('#reminder-name').text(name);
-            this.rid = $( e.currentTarget ).attr( 'data-rid' );
+            var id = $( e.currentTarget ).attr( 'data-rid' ).split(',');
+            this.rid = id[0];
+            this.vehicleId = id[1];
             // I'm right here and I have this working.
             // I should be able to use Array.unshift() to push to the front of the history.
             this.$reminderCompletePopup.popup( "open" );
@@ -139,7 +143,13 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             e.preventDefault();
             e.stopPropagation();
 
-            Fuse.log( this.model.get( "nickname" ) );
+            if ( this.model ) {
+                Fuse.log( this.model.get( 'reminders' )[ this.rid ] );
+            } else {
+                Fuse.log( this.controller.fleet.get( this.vehicleId ).get( 'reminders' )[ this.rid ] );
+                var reminderObj = this.controller.fleet.get( this.vehicleId ).pop( 'reminders' )[ this.rid ];
+                Fuse.log( reminderObj );
+            }
             this.$reminderCompletePopup.popup( "close" );
             alert( "The reminder has been completed and moved to your history." );
 
