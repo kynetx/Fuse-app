@@ -31,7 +31,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         },
 
         showPreferencePane: function( e ) {
-            alert( "Preference pane is under construction...coming shortly." );
             Fuse.show( "settings-preferences" );
 
             e.handled = true;

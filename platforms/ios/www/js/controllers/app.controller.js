@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView ) {
+define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -9,6 +9,10 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
                 }),
 
                 ProfileSettings: new ProfileSettingsView({
+                    controller: this
+                }),
+
+                PreferencesSettings: new PreferencesSettingsView({
                     controller: this
                 })
             };
@@ -24,6 +28,10 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
 
         showProfilePane: function() {
             this.views.ProfileSettings.render();
+        },
+
+        showPreferencesPane: function() {
+            this.views.PreferencesSettings.render();
         }
     });
 });
