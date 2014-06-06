@@ -39,7 +39,7 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
         },
 
         showTripCategorySettings: function() {
-            this.views.TripCategorySettingsView.render();
+            this.views.TripCategorySettings.render();
         }
     });
 });
