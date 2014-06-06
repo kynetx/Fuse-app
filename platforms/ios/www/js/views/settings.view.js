@@ -31,7 +31,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         },
 
         showPreferencePane: function( e ) {
-            alert( "Preference pane is under construction...coming shortly." );
             Fuse.show( "settings-preferences" );
 
             e.handled = true;
@@ -52,7 +51,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         },
 
         showTripCategorySettings: function( e ) {
-            alert( "Custom trip categories coming shortly..." );
             Fuse.show( "settings-categories" );
 
             e.handled = true;

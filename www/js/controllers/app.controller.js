@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView ) {
+define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view", "views/settings.trip.categories.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView, TripCategorySettingsView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -9,6 +9,14 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
                 }),
 
                 ProfileSettings: new ProfileSettingsView({
+                    controller: this
+                }),
+
+                PreferencesSettings: new PreferencesSettingsView({
+                    controller: this
+                }),
+
+                TripCategorySettings: new TripCategorySettingsView({
                     controller: this
                 })
             };
@@ -24,6 +32,14 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
 
         showProfilePane: function() {
             this.views.ProfileSettings.render();
+        },
+
+        showPreferencesPane: function() {
+            this.views.PreferencesSettings.render();
+        },
+
+        showTripCategorySettings: function() {
+            this.views.TripCategorySettings.render();
         }
     });
 });
