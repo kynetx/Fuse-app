@@ -22,12 +22,9 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         render: function() {
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
-
-            alert( "Feature not complete." );
         },
 
         showProfilePane: function( e ) {
-            alert( "Profile pane is under construction....coming shortly." );
             Fuse.show( "settings-profile" );
 
             e.handled = true;
