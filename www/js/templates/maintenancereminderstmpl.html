@@ -28,6 +28,13 @@
     </div>
     <div id="reminder-form-container">
         <form id="reminder">
+            <div class="ui-field-contain">
+                <label for="flip">Is this reminder recurring?</label>
+                <select name="flip" id="flip" data-role="slider">
+                    <option value="off">No</option>
+                    <option value="on">Yes</option>
+                </select>
+            </div>
             <label for="reminder-trigger-type">Remimd me:</label>
             <select id="reminder-trigger-type" name="type">
                 <option value="date">On a date</option>
