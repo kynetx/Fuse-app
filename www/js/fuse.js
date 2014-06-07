@@ -1,7 +1,7 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         
-        VERSION: "0.0.7.7",
+        VERSION: "0.0.7.8",
 
         history: {
             items: [],
