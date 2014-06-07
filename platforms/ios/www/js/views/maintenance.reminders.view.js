@@ -9,7 +9,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         
         events: {
             "tap #create-reminder"          : "showCreateReminderForm",
-            "change #reminder-trigger-type" : "showRequestedTriggerType",
+            "change .reminder-trigger-type" : "showRequestedTriggerType",
+            "change #flip"                  : "showRequestedReminderType",
             "submit #reminder"              : "scheduleMaintenanceReminder",
             "tap .reminder"                 : "showCompleteReminderForm",
             "submit #complete"              : "completeReminder"
@@ -62,8 +63,16 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
              */
             this.$triggerDateInputContainer = $( "#reminder-trigger-date" ).parent();
             this.$triggerMileageInputContainer = $( "#reminder-trigger-mileage" ).parent();
+            this.$triggerMonthInputContainer = $("#reminder-trigger-month").parent();
+            this.$triggerMilesInputContainer = $("#reminder-trigger-miles").parent();
+            this.$notRecurring = $("#not-recurring");
+            this.$recurring = $("#recurring");
+
             this.$triggerDateInputContainer.hide();
             this.$triggerMileageInputContainer.hide();
+            this.$triggerMonthInputContainer.hide();
+            this.$triggerMilesInputContainer.hide();
+            this.$notRecurring.hide();
         },
 
         collectVehicleReminders: function( vehicle ) {
@@ -85,6 +94,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         showCreateReminderForm: function( e ) {
             this.$reminderFormPopup.popup( "open" );
             this.$triggerDateInputContainer.show();
+            this.$triggerMonthInputContainer.show();
             e.handled = true;
         },
 
@@ -114,11 +124,37 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                     this.$triggerMileageInputContainer.hide();
                     this.$triggerDateInputContainer.show();
                     break;
+                case "month":
+                    this.$triggerMilesInputContainer.hide();
+                    this.$triggerMonthInputContainer.show();
+                    break;
+                case "miles":
+                    this.$triggerMonthInputContainer.hide();
+                    this.$triggerMilesInputContainer.show();
+                    break;
                 default:
                     break;
             }
 
             e.handled = true;
+        },
+
+        showRequestedReminderType: function( e ) {
+            var $typeFlip = $( e.currentTarget ),
+                type = $typeFlip.val();
+
+            switch ( type ) {
+                case "no" :
+                    this.$notRecurring.hide();
+                    this.$recurring.show();
+                    break;
+                case "yes":
+                    this.$notRecurring.show();
+                    this.$recurring.hide();
+                    break;
+                default:
+                    break;
+            }
         },
 
         scheduleMaintenanceReminder: function( e ) {

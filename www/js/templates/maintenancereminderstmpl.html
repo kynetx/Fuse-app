@@ -28,13 +28,36 @@
     </div>
     <div id="reminder-form-container">
         <form id="reminder">
-            <label for="reminder-trigger-type">Remimd me:</label>
-            <select id="reminder-trigger-type" name="type">
-                <option value="date">On a date</option>
-                <option value="mileage">At a mileage</option>
-            </select>
-            <input id="reminder-trigger-date" name="date" type="date">
-            <input id="reminder-trigger-mileage" name="mileage" type="number" placeholder="At what mileage?" >
+            <div class="ui-field-contain">
+                <label for="flip">Is this reminder recurring?</label>
+                <select name="flip" id="flip" data-role="slider">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- This is the markup we need to show if the reminder is NOT recurring -->
+            <div id="not-recurring">
+                <label for="reminder-trigger-type">Remimd me:</label>
+                <select class="reminder-trigger-type" name="type">
+                    <option value="date">Remind on a date</option>
+                    <option value="mileage">Remind at a mileage</option>
+                </select>
+                <input id="reminder-trigger-date" name="date" type="date">
+                <input id="reminder-trigger-mileage" name="mileage" type="number" placeholder="At what mileage?" >
+            </div>
+
+            <!-- This is the markup we need to show if the reminder IS recurring -->
+            <div id="recurring">
+                <label for="reminder-trigger-type">Remimd me:</label>
+                <select class="reminder-trigger-type" name="type">
+                    <option value="month">Remind by month</option>
+                    <option value="miles">Remind by miles</option>
+                </select>
+                <input id="reminder-trigger-month" name="month" type="number" placeholder="Every how many months?">
+                <input id="reminder-trigger-miles" name="miles" type="number" placeholder="Every how many miles?" >
+            </div>
+
             <label for="reminder-reason">Reason:</label>
             <textarea id="reminder-reason" name="reason"></textarea>
             <button type="submit" data-theme="b">Save</button>
