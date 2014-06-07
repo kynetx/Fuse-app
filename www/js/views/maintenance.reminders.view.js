@@ -10,6 +10,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         events: {
             "tap #create-reminder"          : "showCreateReminderForm",
             "change .reminder-trigger-type" : "showRequestedTriggerType",
+            "change #flip"                  : "showRequestedReminderType",
             "submit #reminder"              : "scheduleMaintenanceReminder",
             "tap .reminder"                 : "showCompleteReminderForm",
             "submit #complete"              : "completeReminder"
@@ -136,6 +137,24 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             }
 
             e.handled = true;
+        },
+
+        showRequestedReminderType: function( e ) {
+            var $typeFlip = $( e.currentTarget ),
+                type = $typeFlip.val();
+
+            switch ( type ) {
+                case "no" :
+                    this.$notRecurring.hide();
+                    this.$recurring.show();
+                    break;
+                case "yes":
+                    this.$notRecurring.show();
+                    this.$recurring.hide();
+                    break;
+                default:
+                    break;
+            }
         },
 
         scheduleMaintenanceReminder: function( e ) {
