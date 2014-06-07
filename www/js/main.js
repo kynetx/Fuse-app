@@ -1,5 +1,5 @@
 /**
- * Fuse Mobile Application v0.0.7.8
+ * Fuse Mobile Application v0.0.7.9
  * Copyright Kynetx Inc. 2014. All Rights Reserved.
  * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
  * For details see https://kynetx.com
