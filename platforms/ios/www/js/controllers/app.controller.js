@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view", "views/settings.trip.categories.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView, TripCategorySettingsView ) {
+define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view", "views/settings.trip.categories.view", "views/settings.car.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView, TripCategorySettingsView, CarSettingsView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -17,6 +17,10 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
                 }),
 
                 TripCategorySettings: new TripCategorySettingsView({
+                    controller: this
+                }),
+
+                CarSettings: new CarSettingsView({
                     controller: this
                 })
             };
@@ -40,6 +44,10 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
 
         showTripCategorySettings: function() {
             this.views.TripCategorySettings.render();
+        },
+
+        showCarSettings: function() {
+            this.views.CarSettings.render();
         }
     });
 });

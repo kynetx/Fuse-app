@@ -1,11 +1,11 @@
-define([ "fuse", "jquery", "underscore", "text!templates/settingsprofiletmpl.html" ], function( Fuse, $, _, settingsProfileTmpl ) {
+define([ "fuse", "jquery", "underscore", "text!templates/settingscartmpl.html" ], function( Fuse, $, _, settingsCarTmpl ) {
     return Fuse.View.extend({
-        id: "settings-profile",
+        id: "settings-car",
         tagName: "div",
         role: "page",
-        header: "Profile",
+        header: "Car Linkage",
         transition: "slide",
-        template: _.template( settingsProfileTmpl ),
+        template: _.template( settingsCarTmpl ),
         
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );

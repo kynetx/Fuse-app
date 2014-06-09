@@ -1,6 +1,6 @@
 define([ "fuse", "jquery", "underscore", "text!templates/settingsprofiletmpl.html" ], function( Fuse, $, _, settingsProfileTmpl ) {
     return Fuse.View.extend({
-        id: "settings",
+        id: "settings-profile",
         tagName: "div",
         role: "page",
         header: "Profile",

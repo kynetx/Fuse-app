@@ -1,6 +1,6 @@
 define([ "fuse", "jquery", "underscore", "text!templates/settingspreferencestmpl.html" ], function( Fuse, $, _, settingsPreferencesTmpl ) {
     return Fuse.View.extend({
-        id: "settings",
+        id: "settings-preferences",
         tagName: "div",
         role: "page",
         header: "Preferences",
