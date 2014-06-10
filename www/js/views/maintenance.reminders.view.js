@@ -72,7 +72,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             this.$triggerMileageInputContainer.hide();
             this.$triggerMonthInputContainer.hide();
             this.$triggerMilesInputContainer.hide();
-            this.$notRecurring.hide();
+            this.$recurring.hide();
         },
 
         collectVehicleReminders: function( vehicle ) {
@@ -145,12 +145,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
 
             switch ( type ) {
                 case "no" :
-                    this.$notRecurring.hide();
-                    this.$recurring.show();
-                    break;
-                case "yes":
                     this.$notRecurring.show();
                     this.$recurring.hide();
+                    break;
+                case "yes":
+                    this.$notRecurring.hide();
+                    this.$recurring.show();
                     break;
                 default:
                     break;
