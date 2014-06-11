@@ -6,6 +6,10 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingscartmpl.html" ]
         header: "Car Linkage",
         transition: "slide",
         template: _.template( settingsCarTmpl ),
+
+        events: {
+           "change #settings-eci": "setECI"
+        },
         
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
@@ -14,6 +18,14 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingscartmpl.html" ]
         render: function() {
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
+
+            $( "#settings-eci" ).val( localStorage.getItem( "com.kynetx.fuse.ECI" ) );
+        },
+
+        setECI: function( e ) {
+            localStorage.setItem( "com.kynetx.fuse.ECI", $( "#settings-eci" ).val() );
+
+            e.handled = true;
         }
     });
 });
