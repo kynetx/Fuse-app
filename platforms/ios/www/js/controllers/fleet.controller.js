@@ -12,7 +12,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     return FTH.formatDate( a.get( "endTime" ) ) * -1;
                 }
             });
-            
+
             this.fillups = {};
             this.views = {};
 
@@ -108,7 +108,22 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 collection: this.trips
             });
 
-            this.views.Trips.render();
+            try {
+
+                this.trips.fetch({
+                    success: function() {
+                        this.views.Trips.render();
+                    },
+
+                    error: function() {
+                        alert( "Fatal error while trying to retrieve trips from the API!" );
+                        throw "Fatal Error";
+                    }
+                });
+
+            } catch( e ) {
+                this.views.Fleet.render();
+            }
         },
 
         showTrip: function( id ) {
