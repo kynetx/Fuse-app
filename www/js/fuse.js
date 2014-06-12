@@ -3,6 +3,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         
         VERSION: "0.0.7.9",
 
+        BASE_API_URI: "http://kibdev.kobj.net/sky/cloud/b16x18",
+
         history: {
             items: [],
 

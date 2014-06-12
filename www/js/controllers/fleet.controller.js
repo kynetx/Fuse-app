@@ -5,13 +5,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.fleet = new FleetCollection( Fuse.FIXTURES.fleet.index );
             this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
 
-            this.trips = new TripCollection({
-                url: Fuse.BASE_API_URL + "trips?_eci=" + localStorage.getItem( "com.kynetx.fuse.ECI" ),
-
-                comparator: function( a ) {
-                    return FTH.formatDate( a.get( "endTime" ) ) * -1;
-                }
-            });
+            this.trips = new TripCollection();
 
             this.fillups = {};
             this.views = {};
@@ -110,9 +104,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             try {
 
+                var __self__ = this;
+
                 this.trips.fetch({
                     success: function() {
-                        this.views.Trips.render();
+                        __self__.views.Trips.render();
                     },
 
                     error: function() {

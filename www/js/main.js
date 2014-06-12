@@ -829,8 +829,6 @@
         Fuse.log = function() {};
     }
 
-    Fuse.BASE_API_URI = "http://kibdev.kobj.net/sky/cloud/b16x18";
-
     window[ "Fuse" ] = Fuse;
     
     // start the app.
