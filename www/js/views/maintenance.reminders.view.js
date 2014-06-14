@@ -163,7 +163,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             var date = new Date();
             date.toISOString();
 
-
+            // This isn't working how I would expect
             var data = $( e.target ).serializeObject(),
                 reminder = date: {
                     id: date,

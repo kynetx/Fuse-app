@@ -1141,6 +1141,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return redableDuration;
                 },
 
+                formatTime: function( duration, unit ) {
+                    var totalSeconds = parseInt( duration/1000 ),
+                        hours = parseInt( totalSeconds / 24 ) % 24,
+                        minutes = parseInt( totalSeconds / 60 ) % 60,
+                        seconds = parseInt( totalSeconds % 60, 10 );
+
+                        //if (hours > 1)
+                        // I'm working right here. I"m going to go get some dinner :\
+                },
+
                 /**
                  * A lookup table for units of time
                  * and a helper function to retrieve a specified

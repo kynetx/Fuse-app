@@ -160,9 +160,14 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         scheduleMaintenanceReminder: function( e ) {
             e.preventDefault();
             e.stopPropagation();
+            var date = new Date();
+            date.toISOString();
+
 
             var data = $( e.target ).serializeObject(),
-                reminder = {
+                reminder = date: {
+                    id: date,
+                    timestamp: date,
                     reason: data.reason,
                     trigger: {
                         type: data.type,
