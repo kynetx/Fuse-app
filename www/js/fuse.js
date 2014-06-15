@@ -1147,8 +1147,23 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         minutes = parseInt( totalSeconds / 60 ) % 60,
                         seconds = parseInt( totalSeconds % 60, 10 );
 
-                        //if (hours > 1)
-                        // I'm working right here. I"m going to go get some dinner :\
+                        smallTime = '';
+
+                        if (unit.toLowerCase() === 'hour' || unit.toLowerCase() === 'hours' || unit.toLowerCase() === "h") {
+                            var dec = minutes/60;
+                            smallTime = hours+'.'+dec;
+                        } else if (unit.toLowerCase() === 'minute' || unit.toLowerCase() === 'minutes' || unit.toLowerCase() === "m") {
+                            var dec = seconds/60;
+                            smallTime = hours+'.'+dec;
+                        } else if (unit.toLowerCase() === 'secound' || unit.toLowerCase() === 'seconds' || unit.toLowerCase() === "s") {
+                            var dec = minutes/60;
+                            smallTime = hours+'.'+dec;
+                        } else {
+                            smallTime = "0.0"
+                            Fuse.log("Invalid time unit for formatTime() function.")
+                        }
+
+                        return smallTime;
                 },
 
                 /**
