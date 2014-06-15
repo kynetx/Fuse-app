@@ -163,15 +163,16 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             var date = new Date();
             date.toISOString();
 
-
             var data = $( e.target ).serializeObject(),
-                reminder = date: {
-                    id: date,
-                    timestamp: date,
-                    reason: data.reason,
-                    trigger: {
-                        type: data.type,
-                        value: ( data.mileage ) ? data.mileage : data.date
+                reminder = {
+                    date: {
+                        id: date,
+                        timestamp: date,
+                        reason: data.reason,
+                        trigger: {
+                            type: data.type,
+                            value: ( data.mileage ) ? data.mileage : data.date
+                        }
                     }
                 };
             
