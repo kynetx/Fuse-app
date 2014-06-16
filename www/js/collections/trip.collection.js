@@ -10,6 +10,7 @@ define([ "fuse", "models/trip.model" ], function( Fuse, Trip ) {
             return FTH.formatDate( a.get( "endTime" ) ) * -1;
         },
 
+        // switch on multiple api methods.
         sync: function( method, model, options ) {
             Fuse.log( "attempting to sync trips collection!" );
             Fuse.log( arguments );
