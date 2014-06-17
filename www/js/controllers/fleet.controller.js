@@ -103,7 +103,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
 
             try {
-                
+
                 var __self__ = this;
 
                 this.trips.fetch({
@@ -118,7 +118,9 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 });
 
             } catch( e ) {
+                Fuse.log( e );
                 this.views.Fleet.render();
+                alert( "An error occured while retrieving trips: " + e );
             }
         },
 
