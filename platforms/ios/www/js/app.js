@@ -9,6 +9,7 @@ require.config({
         "sidr": "vendor/jquery.sidr",
         "cloudos": "vendor/CloudOS",
         "cloudosconfig": "vendor/CloudOS.config",
+        "fuseapi": "vendor/fuse.api",
         "underscore": "vendor/underscore-min",
         "backbone": "vendor/backbone-min",
         // require js plugins.
@@ -19,15 +20,19 @@ require.config({
     },
 
     shim: {
+        
         "underscore": {
             exports: "_"
         },
+
         "sidr":  {
             deps: [ "jquery" ]
         },
+
         "tooltipster": {
             deps: [ "jquery" ]
         },
+
         "jquerymobileconfig": ["jquery"],
         "jquerymobile": ["jquery", "jquerymobileconfig"],
         "cloudosconfig": ["jquery"],
@@ -35,6 +40,12 @@ require.config({
             deps: ["jquery", "cloudosconfig"],
             exports: "CloudOS"
         },
+
+        "fuseapi": {
+            deps: ["cloudos"],
+            exports: "API"
+        },
+
         "backbone": {
             deps: ["underscore", "jquery"],
             exports: "Backbone"
