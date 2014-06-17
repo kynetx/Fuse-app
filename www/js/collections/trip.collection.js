@@ -12,9 +12,7 @@ define([ "fuse", "models/trip.model", "vendor/fuse.api" ], function( Fuse, Trip,
 
         // switch on multiple api methods.
         sync: function( method, model, options ) {
-            Fuse.log( "attempting to sync trips collection!" );
-            Fuse.log( arguments );
-            Backbone.sync( method, model, options );
+            Fuse.log( "sync!!!!" );
         }
     });
 });
