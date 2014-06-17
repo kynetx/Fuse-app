@@ -103,9 +103,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
 
             try {
-
-                // need to be using API functions here.
-
+                
                 var __self__ = this;
 
                 this.trips.fetch({
