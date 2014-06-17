@@ -13,6 +13,7 @@ define([ "fuse", "models/trip.model", "vendor/fuse.api" ], function( Fuse, Trip,
         // switch on multiple api methods.
         sync: function( method, model, options ) {
             Fuse.log( "sync!!!!" );
+            options.success();
         }
     });
 });
