@@ -1141,13 +1141,33 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return redableDuration;
                 },
 
-                formatTime: function( duration, unit ) {
+                formatTime: function( duration ) {
                     var totalSeconds = parseInt( duration/1000 ),
                         hours = parseInt( totalSeconds / 24 ) % 24,
                         minutes = parseInt( totalSeconds / 60 ) % 60,
                         seconds = parseInt( totalSeconds % 60, 10 );
-                        
+                    var smallTime = '';
+
+                    if ( hours >= 1 ) {
+                        smallTime = hours + (minutes/60);
+                    } else {
+                        smallTime = minutes + (seconds/60);
+                    }
+
                     return smallTime;
+                },
+
+                getTimeUnit: function( duration ) {
+                    var totalSeconds = parseInt( duration/1000 ),
+                        hours = parseInt( totalSeconds / 24 ) % 24,
+                        minutes = parseInt( totalSeconds / 60 ) % 60,
+                        seconds = parseInt( totalSeconds % 60, 10 );
+
+                    if ( hours >= 1 ) {
+                        return 'Hours';
+                    } else {
+                        return 'Minutes';
+                    }
                 },
 
                 /**

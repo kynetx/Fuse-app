@@ -1141,32 +1141,33 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return redableDuration;
                 },
 
-                formatTime: function( duration, unit ) {
+                formatTime: function( duration ) {
+                    var totalSeconds = parseInt( duration/1000 ),
+                        hours = parseInt( totalSeconds / 24 ) % 24,
+                        minutes = parseInt( totalSeconds / 60 ) % 60,
+                        seconds = parseInt( totalSeconds % 60, 10 );
+                    var smallTime = '';
+
+                    if ( hours >= 1 ) {
+                        smallTime = hours + (minutes/60);
+                    } else {
+                        smallTime = minutes + (seconds/60);
+                    }
+
+                    return smallTime;
+                },
+
+                getTimeUnit: function( duration ) {
                     var totalSeconds = parseInt( duration/1000 ),
                         hours = parseInt( totalSeconds / 24 ) % 24,
                         minutes = parseInt( totalSeconds / 60 ) % 60,
                         seconds = parseInt( totalSeconds % 60, 10 );
 
-                    var smallTime = '';
-
-                    if (!unit) {
-                        (hours >  1) ? unit = 'hour' : unit = 'minute';
-                    }
-
-                    if (unit.toLowerCase() === 'hour' || unit.toLowerCase() === 'hours' || unit.toLowerCase() === "h") {
-                        var dec = minutes/60;
-                        smallTime = hours+'.'+dec;
-                    } else if (unit.toLowerCase() === 'minute' || unit.toLowerCase() === 'minutes' || unit.toLowerCase() === "m") {
-                        var dec = seconds/60;
-                        smallTime = minutes+'.'+dec;
-                    } else if (unit.toLowerCase() === 'secound' || unit.toLowerCase() === 'seconds' || unit.toLowerCase() === "s") {
-                        smallTime = seconds;
+                    if ( hours >= 1 ) {
+                        return 'Hours';
                     } else {
-                        smallTime = "0.0"
-                        Fuse.log("Invalid time unit for formatTime() function.")
+                        return 'Minutes';
                     }
-
-                    return smallTime;
                 },
 
                 /**

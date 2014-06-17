@@ -14,8 +14,8 @@
         <p class='white-font'> Miles </p>
     </div>
     <div class='data-center'>
-        <h3 class='title-font white-font'><%= FTH.formatDuration(totals.trip.time, "H:M")%></h3>
-        <p  class='white-font'> Traveling </p>
+        <h3 class='title-font white-font'><%= FTH.formatTime( totals.trip.time )%></h3>
+        <p  class='white-font'> <%= FTH.getTimeUnit( totals.trip.time )%> Traveling </p>
     </div>
     <div class='data-right'>
         <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.trip.cost ) ) %></h3>
