@@ -1146,26 +1146,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         hours = parseInt( totalSeconds / 24 ) % 24,
                         minutes = parseInt( totalSeconds / 60 ) % 60,
                         seconds = parseInt( totalSeconds % 60, 10 );
-
-                    var smallTime = '';
-
-                    if (!unit) {
-                        (hours >  1) ? unit = 'hour' : unit = 'minute';
-                    }
-
-                    if (unit.toLowerCase() === 'hour' || unit.toLowerCase() === 'hours' || unit.toLowerCase() === "h") {
-                        var dec = minutes/60;
-                        smallTime = hours+'.'+dec;
-                    } else if (unit.toLowerCase() === 'minute' || unit.toLowerCase() === 'minutes' || unit.toLowerCase() === "m") {
-                        var dec = seconds/60;
-                        smallTime = minutes+'.'+dec;
-                    } else if (unit.toLowerCase() === 'secound' || unit.toLowerCase() === 'seconds' || unit.toLowerCase() === "s") {
-                        smallTime = seconds;
-                    } else {
-                        smallTime = "0.0"
-                        Fuse.log("Invalid time unit for formatTime() function.")
-                    }
-
+                        
                     return smallTime;
                 },
 
