@@ -1141,28 +1141,42 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return redableDuration;
                 },
 
-                formatTime: function( duration ) {
-                    var totalSeconds = parseInt( duration/1000 ),
-                        hours = parseInt( totalSeconds / 24 ) % 24,
-                        minutes = parseInt( totalSeconds / 60 ) % 60,
-                        seconds = parseInt( totalSeconds % 60, 10 );
+                formatTime: function( duration) {
+                    // Find hours
+                    var hours = Math.floor(duration/(1000 * 60 * 60));
+                    remainder = duration % (1000 * 60 * 60);
+
+                    // Find minutes
+                    var minutes = Math.floor(remainder/(1000 * 60));
+                    remainder = remainder % (1000 * 60);
+
+                    // Find seconds
+                    var seconds = Math.floor(remainder/1000);
+
                     var smallTime = '';
 
+                    // Check to find out what unit we should return.
                     if ( hours >= 1 ) {
                         smallTime = hours + ( minutes/60 ).toFixed( 2 ).substring(1, 4);
                     } else {
                         smallTime = minutes + ( seconds/60 ).toFixed( 2 ).substring(1, 4);
                     }
-
                     return smallTime;
                 },
 
                 getTimeUnit: function( duration ) {
-                    var totalSeconds = parseInt( duration/1000 ),
-                        hours = parseInt( totalSeconds / 24 ) % 24,
-                        minutes = parseInt( totalSeconds / 60 ) % 60,
-                        seconds = parseInt( totalSeconds % 60, 10 );
+                    // Find hours
+                    var hours = Math.floor(duration/(1000 * 60 * 60));
+                    remainder = duration % (1000 * 60 * 60);
 
+                    // Find minutes
+                    var minutes = Math.floor(remainder/(1000 * 60));
+                    remainder = remainder % (1000 * 60);
+
+                    // Find seconds
+                    var seconds = Math.floor(remainder/1000);
+
+                    // Find out what unit we should return
                     if ( hours >= 1 ) {
                         return 'Hours';
                     } else {
