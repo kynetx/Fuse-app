@@ -4,8 +4,8 @@
         <p class='white-font'> Cost </p>
     </div>
     <div class='data-center'>
-        <h3 class='title-font white-font'> <%= FTH.formatDuration( FTH.formatDate( data.endTime ) - FTH.formatDate( data.startTime ), true ) %> </h3>
-        <p class='white-font'> Travel Time </p>
+        <h3 class='title-font white-font'> <%= FTH.formatTime( FTH.formatDate( data.endTime ) - FTH.formatDate( data.startTime ) ) %> </h3>
+        <p class='white-font'> <%= FTH.getTimeUnit( FTH.formatDate( data.endTime ) - FTH.formatDate( data.startTime ) ) %></p>
     </div>
     <div class='data-right'>
         <h3 class='title-font white-font'><%= data.mileage %></h3>
