@@ -1157,9 +1157,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     // Check to find out what unit we should return.
                     if ( hours >= 1 ) {
-                        smallTime = hours + ( minutes/60 ).toFixed( 2 ).substring(1, 4);
+                        smallTime = hours + ( minutes/60 ).toFixed( 2 ).substring(1, 3);
                     } else {
-                        smallTime = minutes + ( seconds/60 ).toFixed( 2 ).substring(1, 4);
+                        smallTime = minutes + ( seconds/60 ).toFixed( 2 ).substring(1, 3);
                     }
                     return smallTime;
                 },
