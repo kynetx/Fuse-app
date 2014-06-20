@@ -18,10 +18,13 @@ define([ "fuse", "models/trip.model", "vendor/fuse.api" ], function( Fuse, Trip,
 
                     // Compute the timestamps for month to date.
                     var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
-                    Fuse.log( "Now:", now, "monthStart:", monthStart );
+
+                    window.now = now;
+                    window.monthStart = monthStart;
+
                     break;
                 default:
-                    throw "An error occured while trying to fetch trips.";
+                    options.error( "API method not yet implemented." );
             }
         }
     });
