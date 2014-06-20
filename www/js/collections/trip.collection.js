@@ -9,20 +9,16 @@ define([ "fuse", "models/trip.model", "vendor/fuse.api" ], function( Fuse, Trip,
         /**
          * Get the trips for the last month using some date math
          * and wrap each trip in a model, then fill the collection
-         * with the array of models. Since a trips collection will
-         * only ever be read from the client and never set from the client,
-         * we only handle read operations and throw an error otherwise.
+         * with the array of models.
          */
         sync: function( method, model, options ) {
+            if ( method === "read" ) {
+                // Fetch all the trips ( month to date )
 
-            if ( method !== "read" ) {
-                throw "Trips collection should never be set from the client.";
+                // Compute the timestamps for month to date.
+                var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
+                Fuse.log( "Now:", now, "monthStart:", monthStart );
             }
-
-            Fuse.log( "sync!!!!" );
-            Fuse.log( model );
-            alert( "overriden backbone.sync on trip collection!" );
-            options.success();
         }
     });
 });
