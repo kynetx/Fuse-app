@@ -37,7 +37,6 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         },
 
         showCarSettings: function( e ) {
-            alert( "Car linking feature is under construction...coming shortly." );
             Fuse.show( "settings-cars" );
 
             e.handled = true;
