@@ -1,4 +1,4 @@
-define([ "fuse", "models/trip.model", "vendor/fuse.api" ], function( Fuse, Trip, API ) {
+define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
     return Fuse.Collection.extend({
         model: Trip,
 
