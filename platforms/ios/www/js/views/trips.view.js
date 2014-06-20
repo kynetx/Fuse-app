@@ -41,6 +41,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
         },
 
         addTrip: function( trip ) {
+            Fuse.log( trip );
             var date        = FTH.formatDate( trip.get( "endTime" ) ),
                 time        = date.getTime(),
                 day         = date.getDate(),
