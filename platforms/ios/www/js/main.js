@@ -32,7 +32,7 @@
                 "month": {
                     "trip": {
                         "distance": 2456,
-                        "time": 123456234,
+                        "time": 323345678,
                         "cost": 102.34
                     },
                     "fuel": {
@@ -46,14 +46,14 @@
                 "year": {
                     "trip": {
                         "distance": 100000,
-                        "time": 12345678234,
+                        "time": 323345678,
                         "cost": 900
                     }
                 },
                 "total": {
                     "trip": {
                         "distance": 150000,
-                        "time": 123345678910123456789,
+                        "time": 323345678,
                         "cost": 5000
                     },
                     "fuel": {
@@ -141,7 +141,7 @@
                     "month": {
                         "trip": {
                             "distance": 400,
-                            "time": 9999999554,
+                            "time": 95200035,
                             "cost": 150
                         },
                         "fuel": {
@@ -226,7 +226,7 @@
                     "month": {
                         "trip": {
                             "distance": 24,
-                            "time": 123456,
+                            "time": 12345659,
                             "cost": 50
                         },
                         "fuel": {
@@ -300,7 +300,7 @@
                     "month": {
                         "trip": {
                             "distance": 78,
-                            "time": 2520000,
+                            "time": 25200009,
                             "cost": 82
                         },
                         "fuel": {

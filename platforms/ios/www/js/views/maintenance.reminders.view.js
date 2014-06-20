@@ -72,7 +72,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
             this.$triggerMileageInputContainer.hide();
             this.$triggerMonthInputContainer.hide();
             this.$triggerMilesInputContainer.hide();
-            this.$notRecurring.hide();
+            this.$recurring.hide();
         },
 
         collectVehicleReminders: function( vehicle ) {
@@ -145,12 +145,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
 
             switch ( type ) {
                 case "no" :
-                    this.$notRecurring.hide();
-                    this.$recurring.show();
-                    break;
-                case "yes":
                     this.$notRecurring.show();
                     this.$recurring.hide();
+                    break;
+                case "yes":
+                    this.$notRecurring.hide();
+                    this.$recurring.show();
                     break;
                 default:
                     break;
@@ -160,13 +160,19 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
         scheduleMaintenanceReminder: function( e ) {
             e.preventDefault();
             e.stopPropagation();
+            var date = new Date();
+            date.toISOString();
 
             var data = $( e.target ).serializeObject(),
                 reminder = {
-                    reason: data.reason,
-                    trigger: {
-                        type: data.type,
-                        value: ( data.mileage ) ? data.mileage : data.date
+                    date: {
+                        id: date,
+                        timestamp: date,
+                        reason: data.reason,
+                        trigger: {
+                            type: data.type,
+                            value: ( data.mileage ) ? data.mileage : data.date
+                        }
                     }
                 };
             
