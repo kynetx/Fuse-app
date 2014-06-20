@@ -14,8 +14,8 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
         sync: function( method, model, options ) {
             switch( method ) {
                 case "read":
-                    Fuse.log( "syncing at beginning." );
                     // Fetch all the trips ( month to date ).
+                    Fuse.loading( "show", "Fetching trips for the past month..." );
 
                     // Compute the timestamps for month to date.
                     var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
@@ -24,10 +24,9 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
 
                     // Grab the trips.
                     API.trips( localStorage.getItem( "com.kynetx.fuse.ECI" ), monthStart.toISOString(), now.toISOString(), function( response ) {
-                        Fuse.log( "syncing inside callback." );
-                        Fuse.log( response );
+                        Fuse.loading( "hide" );
                         if ( typeof response.error === "undefined" ) {
-                            __self__.set( response );
+                            __self__.set( response, { silent: true });
                             options.success( response );
                         } else {
                             options.error( response );
