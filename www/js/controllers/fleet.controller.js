@@ -107,7 +107,8 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 var __self__ = this;
 
                 this.trips.fetch({
-                    success: function() {
+                    success: function( trips ) {
+                        Fuse.log( trips );
                         __self__.views.Trips.render();
                     },
 
