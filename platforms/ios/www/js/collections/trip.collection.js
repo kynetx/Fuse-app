@@ -12,12 +12,17 @@ define([ "fuse", "models/trip.model", "vendor/fuse.api" ], function( Fuse, Trip,
          * with the array of models.
          */
         sync: function( method, model, options ) {
-            if ( method === "read" ) {
-                // Fetch all the trips ( month to date )
+            switch( method ) {
+                case "read":
+                    // Fetch all the trips ( month to date ).
 
-                // Compute the timestamps for month to date.
-                var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
-                Fuse.log( "Now:", now, "monthStart:", monthStart );
+                    // Compute the timestamps for month to date.
+                    var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
+                    Fuse.log( "Now:", now, "monthStart:", monthStart );
+                    break;
+                default:
+                    throw "An error occured while trying to fetch trips.";
+                    break;
             }
         }
     });
