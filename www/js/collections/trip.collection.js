@@ -19,11 +19,13 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                     // Compute the timestamps for month to date.
                     var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
 
+                    var __self__ = this;
+
                     // Grab the trips.
                     API.trips( localStorage.getItem( "com.kynetx.fuse.ECI" ), monthStart.toISOString(), now.toISOString(), function( response ) {
                         Fuse.log( response );
                         if ( typeof response.error === "undefined" ) {
-                            this.set( response );
+                            __self__.set( response );
                             options.success( response );
                         } else {
                             options.error( response );
