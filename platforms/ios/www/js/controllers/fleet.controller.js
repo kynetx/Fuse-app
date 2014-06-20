@@ -114,7 +114,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     error: function( error ) {
                         alert( "Fatal error while trying to retrieve trips from the API!" );
                         throw "Fatal Error";
-                        Fuse.log( error );
                     }
                 });
 

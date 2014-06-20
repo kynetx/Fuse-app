@@ -21,6 +21,8 @@ define([ "fuse", "models/trip.model", "vendor/fuse.api" ], function( Fuse, Trip,
 
                     // Grab the trips.
                     API.trips( localStorage.getItem( "com.kynetx.fuse.ECI" ), monthStart.toISOString(), now.toISOString(), function( response ) {
+                        Fuse.log( response );
+                        debugger;
                         if ( typeof response.error === "undefined" ) {
                             options.success( response );
                         } else {
