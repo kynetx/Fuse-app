@@ -1123,25 +1123,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  * Also takes a boolean, succinct. Causes the function to return 'minutes seconds'
                  * format instead of 'hours minutes seconds.'
                  */
-                formatDuration: function( duration, succinct ) {
-                    var totalSeconds = parseInt( duration / 1000 ),
-                        hours = parseInt( totalSeconds / 24 ) % 24,
-                        minutes = parseInt( totalSeconds / 60 ) % 60,
-                        seconds = parseInt( totalSeconds % 60, 10 ),
-                        form = ( succinct ) ? "succinct" : "plural";
-                        iterator = [ hours, minutes, seconds ],
-                        redableDuration = iterator.map(function( val, i ) {
-                            if ( val > 0 ) {
-                                return val + ( ( succinct ) ? "" : " " )  
-                                           + ( ( val > 1 ) ? this.time.get( i, form ) : 
-                                                this.time.get( i, form ) );
-                            } else {
-                                return "";
-                            }
-                        }, this ).join(" ");
-                        
-                    return redableDuration;
-                },
 
                 formatTime: function( duration) {
                     // Find hours

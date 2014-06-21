@@ -149,9 +149,13 @@ div.data-divide {
     height: 88px;
 }
 
-div.data-divide.totals {
+/*div.data-divide.totals {
     background-color: rgba(255, 255, 255, .3);
 }
+
+.title-bar.totals {
+    background-color: rgba(255, 255, 255, .1);
+}*/
 
 div.data-divide > div {
     display: inline-block;
@@ -229,10 +233,6 @@ div.data-split > div.data-right {
 
 .left {
     text-align: left;
-}
-
-.title-bar.totals {
-    background-color: rgba(255, 255, 255, .1);
 }
 
 /* Month bar at the top of the screen */
