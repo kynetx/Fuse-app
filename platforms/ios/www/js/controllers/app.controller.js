@@ -1,8 +1,12 @@
-define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view", "views/settings.trip.categories.view", "views/settings.car.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView, TripCategorySettingsView, CarSettingsView ) {
+define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view", "views/settings.trip.categories.view", "views/settings.car.view", "views/login.view" ], function( Fuse, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView, TripCategorySettingsView, CarSettingsView, LoginView ) {
     return Fuse.Controller.extend({
 
         init: function() {
             this.views = {
+
+                Login: new LoginView({
+                    controller: this
+                }),
 
                 Settings: new SettingsView({
                     controller: this
@@ -28,6 +32,10 @@ define([ "fuse", "jquery", "underscore", "views/settings.view", "views/settings.
 
         showVehicleListFromHome: function() {
             Fuse.show("fleet");
+        },
+
+        showLoginPane: function() {
+            this.views.Login.render();
         },
 
         showSettingsPane: function() {
