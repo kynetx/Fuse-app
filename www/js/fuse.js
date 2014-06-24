@@ -138,7 +138,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             "fleet"                 : "Fleet",
             "findcar"               : "FindCar",
             "fuel"                  : "Fuel",
-            "trips"                 : "Trips",
+            "trips"                 : "TripAggregate",
             "trip"                  : "Trip",
             "maintenance"           : "MaintenanceSplash",
             "maintenance-alerts"    : "MaintenanceAlerts",
@@ -403,7 +403,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 break;
                         }
                     }
-
+                    
                     changePageOptions["transition"] = this.controller.views[ view ].transition;
                     changePageOptions["reverse"] = true;
                 }
