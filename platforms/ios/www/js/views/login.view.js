@@ -17,7 +17,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/logintmpl.html" ], func
 
         render: function() {
             this.content = this.template();
-            this.disableFooter = true, this.disableHeader = true;
+            this.disableHeader = true;
+            this.disableFooter = true;
             Fuse.View.prototype.render.call( this );
         }
     });
