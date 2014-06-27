@@ -1,4 +1,4 @@
-define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
+define([ "fuse", "jquery", "underscore", "cloudos" ], function( Fuse, $, _, CloudOS ) {
     return Fuse.Router.extend({
         routes: {
             ""                      : "showVehicleListFromHome",
@@ -13,7 +13,11 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
         },
 
         showVehicleListFromHome: function() {
-            this.invokeControllerFunction( "showVehicleListFromHome", arguments );
+            if ( CloudOS.authenticatedSession() ) {
+                this.invokeControllerFunction( "showVehicleListFromHome", arguments );
+            } else {
+                this.showLoginPane();
+            }
         },
 
         showLoginPane: function() {
