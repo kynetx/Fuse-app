@@ -294,9 +294,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 this.cleanup();
                 this.delegateEvents();
-                this.renderHeader();
+                if ( !this.disableHeader ) {
+                    this.renderHeader();
+                }
                 this.renderContent();
-                this.renderFooter();
+                if ( !this.disableFooter ) {
+                    this.renderFooter();
+                }
                 this.addToDOM();
                 this.showWhenReady();
                 // if there is a map configuration,
