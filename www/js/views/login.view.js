@@ -29,11 +29,11 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
 
             Fuse.loading( "show", "logging you in...." );
             CloudOS.login( username, password, function() {
-                this.controller.views.Fleet.render();
+                Fuse.show( "fleet" );
             }, function() {
                 alert( "something went wrong!" );
             });
-            
+
             e.handled = true;
         }
     });
