@@ -16,7 +16,7 @@ define([ "fuse", "jquery", "underscore", "cloudos" ], function( Fuse, $, _, Clou
             if ( CloudOS.authenticatedSession() ) {
                 this.invokeControllerFunction( "showVehicleListFromHome", arguments );
             } else {
-                this.showLoginPane();
+                Fuse.show( "login" );
             }
         },
 
