@@ -7,12 +7,17 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
 
             switch( method ) {
                 case "read":
+                    var vehicles;
                     Fuse.loading( "show", "fetching fleet details..." );
 
                     API.vehicleSummary(function( response ) {
-                        Fuse.log( "fleetSummary response:", response );
-                        debugger;
-                        __self__.set( response, { silent: true });
+
+                        for ( var v in response ) {
+                            vehicles.push( response[ v ] );
+                        }
+
+                        __self__.set( vehicles, { silent: true });
+
                         options.success( response );
                     });
 
