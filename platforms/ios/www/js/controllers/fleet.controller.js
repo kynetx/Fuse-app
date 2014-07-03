@@ -45,6 +45,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
         
         showFleet: function() {
+            // fetch fleet data...
             this.views.Fleet.render();
         },
 

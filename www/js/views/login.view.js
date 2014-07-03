@@ -35,6 +35,7 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                 if ( !response.OAUTH_ECI ) {
                     alert( response.msg );
                 } else {
+                    localStorage.setItem( "com.kynetx.cloudos.DEFAULT_ECI", response.OAUTH_ECI );
                     Fuse.show( "fleet" );
                 }
 
