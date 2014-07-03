@@ -45,7 +45,21 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
         
         showFleet: function() {
-            // fetch fleet data...
+            var __self__ = this;
+            
+            this.fleet.fetch({
+
+                success: function() {
+                    __self__.views.Fleet.render();
+                },
+
+                error: function() {
+                    alert( "Can't grab fleet details. Try again. If the problem persists please contact us." );
+                }
+
+            });
+
+
             this.views.Fleet.render();
         },
 
