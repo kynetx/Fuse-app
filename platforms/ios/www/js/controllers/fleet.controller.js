@@ -46,7 +46,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         
         showFleet: function() {
             var __self__ = this;
-            
+
             this.fleet.fetch({
 
                 success: function() {
@@ -58,8 +58,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 }
 
             });
-
-
+            
             this.views.Fleet.render();
         },
 
