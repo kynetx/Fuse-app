@@ -2,7 +2,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
     return Fuse.Controller.extend({
 
         init: function() {
-            this.fleet = new FleetCollection( Fuse.FIXTURES.fleet.index );
+            this.fleet = new FleetCollection();
             this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
 
             this.trips = new TripCollection();
@@ -58,8 +58,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 }
 
             });
-            
-            this.views.Fleet.render();
         },
 
         showVehicle: function() {
