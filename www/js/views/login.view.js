@@ -28,8 +28,17 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                 password = $( "#login-password" ).val();
 
             Fuse.loading( "show", "logging you in...." );
-            CloudOS.login( username, password, function() {
-                Fuse.show( "fleet" );
+            CloudOS.login( username, password, function( response ) {
+                Fuse.loading( "hide" );
+                Fuse.log( response );
+
+                if ( !response.OAUTH_ECI ) {
+                    alert( response.msg );
+                } else {
+                    Fuse.loading( "show", "fetching initial information..." );
+                    Fuse.routers.FleetRouter.controller.views.Fleet.render();
+                }
+
             }, function() {
                 alert( "something went wrong!" );
             });
