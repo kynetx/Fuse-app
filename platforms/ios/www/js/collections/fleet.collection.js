@@ -16,14 +16,9 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
                             vehicles.push( response[ v ] );
                         }
 
-                        Fuse.log( vehicles );
-                        debugger;
-
-                        __self__.set( vehicles, { silent: true });
-
-                        options.success( response );
+                        options.success( vehicles );
                     });
-
+                    
                     break;
                 default:
                     options.error( "API method not implemented yet." );
