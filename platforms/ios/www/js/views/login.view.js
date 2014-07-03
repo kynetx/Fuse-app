@@ -35,8 +35,7 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                 if ( !response.OAUTH_ECI ) {
                     alert( response.msg );
                 } else {
-                    Fuse.loading( "show", "fetching initial information..." );
-                    Fuse.routers.FleetRouter.controller.views.Fleet.render();
+                    Fuse.show( "fleet" );
                 }
 
             }, function() {
