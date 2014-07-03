@@ -13,6 +13,7 @@ define([ "fuse", "jquery", "underscore", "cloudos" ], function( Fuse, $, _, Clou
         },
 
         showVehicleListFromHome: function() {
+            CloudOS.retrieveSession();
             if ( CloudOS.authenticatedSession() ) {
                 this.invokeControllerFunction( "showVehicleListFromHome", arguments );
             } else {

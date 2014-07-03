@@ -409,6 +409,7 @@
             });
         }
         CloudOS.defaultECI = "none";
+        localStorage.clear();
         kookie_delete();
     };
 
