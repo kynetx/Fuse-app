@@ -10,7 +10,9 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
                     Fuse.loading( "show", "fetching fleet details..." );
 
                     API.vehicleSummary(function( response ) {
-                        __self__.set( _.values( response ), { silent: true });
+                        Fuse.log( "fleetSummary response:", response );
+                        debugger;
+                        __self__.set( response, { silent: true });
                         options.success( response );
                     });
 
