@@ -7,18 +7,12 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
 
             switch( method ) {
                 case "read":
-                    var vehicles = [];
                     Fuse.loading( "show", "fetching fleet details..." );
-
                     API.vehicleSummary(function( response ) {
-
-                        for ( var v in response ) {
-                            vehicles.push( response[ v ] );
-                        }
-
-                        options.success( vehicles );
+                        __self__.set( response, { silent: true });
+                        options.success( response );
                     });
-                    
+
                     break;
                 default:
                     options.error( "API method not implemented yet." );
