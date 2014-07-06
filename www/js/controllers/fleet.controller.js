@@ -62,7 +62,10 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
         showVehicle: function() {
             // retrieve the model by its id from our fleet collection.
-            this.vehicle = this.fleet.get( arguments[ 0 ] );
+            var id = arguments[ 0 ];
+            this.vehicle = this.fleet.find(function( v ) { return v.get( "picoId" ) === id; });
+            Fuse.log( this.vehicle );
+            
             if ( !this.vehicle ) {
                 Fuse.log( "No such vehicle. Aborting." );
                 return;

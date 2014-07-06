@@ -14,7 +14,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
-            this.header = this.model.get( "nickname" ) + " " + "Trips";
+            this.header = this.model.get( "profileName" ) + " " + "Trips";
             this.tripViewData = [];
 
             // sort our trips collection using our pre-defined comparator.
