@@ -17,8 +17,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
-                model: this.totals,
-                collection: this.fleet
+                model: this.totals
             });
 
             this.views[ "FuelAggregate" ] = new FuelAggregateView({
@@ -86,6 +85,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showTripAggregate: function() {
+            this.views.TripAggregate.collection = this.fleet;
             this.views.TripAggregate.render();
         },
 
@@ -113,7 +113,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              */
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
-                model: this.fleet.get( id ),
+                model: this.fleet.find(function( v ) { return v.get( "picoId" ) === id; }),
                 collection: this.trips
             });
 
@@ -122,6 +122,9 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 var __self__ = this;
 
                 this.trips.fetch({
+
+                    tripsECI: "",
+                    
                     success: function( trips ) {
                         __self__.views.Trips.render();
                     },
