@@ -111,19 +111,20 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * the fleet index so that we can show the trips view immediately and then lazy load
              * the next N trips in the background so that delays are minimal.
              */
+
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
                 model: this.fleet.find(function( v ) { return v.get( "picoId" ) === id; }),
                 collection: this.trips
             });
-
+            
             try {
 
                 var __self__ = this;
 
                 this.trips.fetch({
 
-                    tripsECI: "",
+                    tripsECI: __self__.views.Trips.model.get( "channel" ),
                     
                     success: function( trips ) {
                         __self__.views.Trips.render();
