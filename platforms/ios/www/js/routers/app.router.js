@@ -1,8 +1,9 @@
-define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
+define([ "fuse", "jquery", "underscore", "cloudos" ], function( Fuse, $, _, CloudOS ) {
     return Fuse.Router.extend({
         routes: {
             ""                      : "showVehicleListFromHome",
             "home"                  : "showVehicleListFromHome",
+            "login"                 : "showLoginPane",
             "settings"              : "showSettingsPane",
             "settings-profile"      : "showProfilePane",
             "settings-preferences"  : "showPreferencesPane",
@@ -12,7 +13,16 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
         },
 
         showVehicleListFromHome: function() {
-            this.invokeControllerFunction( "showVehicleListFromHome", arguments );
+            CloudOS.retrieveSession();
+            if ( CloudOS.authenticatedSession() ) {
+                this.invokeControllerFunction( "showVehicleListFromHome", arguments );
+            } else {
+                Fuse.show( "login" );
+            }
+        },
+
+        showLoginPane: function() {
+            this.invokeControllerFunction( "showLoginPane", arguments );
         },
 
         showSettingsPane: function() {

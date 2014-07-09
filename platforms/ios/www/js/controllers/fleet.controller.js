@@ -2,7 +2,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
     return Fuse.Controller.extend({
 
         init: function() {
-            this.fleet = new FleetCollection( Fuse.FIXTURES.fleet.index );
+            this.fleet = new FleetCollection();
             this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
 
             this.trips = new TripCollection();
@@ -17,8 +17,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
-                model: this.totals,
-                collection: this.fleet
+                model: this.totals
             });
 
             this.views[ "FuelAggregate" ] = new FuelAggregateView({
@@ -45,12 +44,27 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
         
         showFleet: function() {
-            this.views.Fleet.render();
+            var __self__ = this;
+
+            this.fleet.fetch({
+
+                success: function() {
+                    __self__.views.Fleet.render();
+                },
+
+                error: function() {
+                    alert( "Can't grab fleet details. Try again. If the problem persists please contact us." );
+                }
+
+            });
         },
 
         showVehicle: function() {
             // retrieve the model by its id from our fleet collection.
-            this.vehicle = this.fleet.get( arguments[ 0 ] );
+            var id = arguments[ 0 ];
+            this.vehicle = this.fleet.find(function( v ) { return v.get( "picoId" ) === id; });
+            Fuse.log( this.vehicle );
+            
             if ( !this.vehicle ) {
                 Fuse.log( "No such vehicle. Aborting." );
                 return;
@@ -71,6 +85,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showTripAggregate: function() {
+            this.views.TripAggregate.collection = this.fleet;
             this.views.TripAggregate.render();
         },
 
@@ -96,17 +111,21 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * the fleet index so that we can show the trips view immediately and then lazy load
              * the next N trips in the background so that delays are minimal.
              */
+
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
-                model: this.fleet.get( id ),
+                model: this.fleet.find(function( v ) { return v.get( "picoId" ) === id; }),
                 collection: this.trips
             });
-
+            
             try {
 
                 var __self__ = this;
 
                 this.trips.fetch({
+
+                    tripsECI: __self__.views.Trips.model.get( "channel" ),
+                    
                     success: function( trips ) {
                         __self__.views.Trips.render();
                     },

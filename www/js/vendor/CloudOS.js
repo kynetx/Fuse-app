@@ -368,10 +368,13 @@
     CloudOS.retrieveSession = function()
     {
         var SessionCookie = kookie_retrieve();
+        var localStorageSessionECI = localStorage.getItem( "com.kynetx.cloudos.DEFAULT_ECI" );
 
         console.log("Retrieving session ", SessionCookie);
         if (SessionCookie != "undefined") {
             CloudOS.defaultECI = SessionCookie;
+        } else if ( localStorageSessionECI ) {
+            CloudOS.defaultECI = localStorageSessionECI;
         } else {
             CloudOS.defaultECI = "none";
         }
@@ -406,6 +409,7 @@
             });
         }
         CloudOS.defaultECI = "none";
+        localStorage.clear();
         kookie_delete();
     };
 

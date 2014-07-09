@@ -23,7 +23,7 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                     var __self__ = this;
 
                     // Grab the trips.
-                    API.trips( localStorage.getItem( "com.kynetx.fuse.ECI" ), monthStart.toISOString(), now.toISOString(), function( response ) {
+                    API.trips( options.tripsECI, monthStart.toISOString(), now.toISOString(), function( response ) {
                         Fuse.loading( "hide" );
                         if ( typeof response.skyCloudError === "undefined" ) {
                             __self__.set( response, { silent: true });

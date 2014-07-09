@@ -6,7 +6,7 @@ define(["fuse", "jquery", "underscore", "text!templates/tripaggregateitemtmpl.ht
 
         attributes: function() {
             return {
-                "data-vid": this.model.get( "id" )
+                "data-vid": this.model.get( "picoId" )
             };
         },
         

@@ -1,7 +1,7 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         
-        VERSION: "0.0.9",
+        VERSION: "0.0.9.5",
 
         BASE_API_URI: "http://kibdev.kobj.net/sky/cloud/b16x18",
 
@@ -134,6 +134,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         RouteToView: {
+            "login"                 : "Login",
             "fleet"                 : "Fleet",
             "findcar"               : "FindCar",
             "fuel"                  : "Fuel",
@@ -293,9 +294,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 this.cleanup();
                 this.delegateEvents();
-                this.renderHeader();
+                if ( !this.disableHeader ) {
+                    this.renderHeader();
+                }
                 this.renderContent();
-                this.renderFooter();
+                if ( !this.disableFooter ) {
+                    this.renderFooter();
+                }
                 this.addToDOM();
                 this.showWhenReady();
                 // if there is a map configuration,
@@ -402,6 +407,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 break;
                         }
                     }
+
+                    Fuse.log( view, viewName );
+
+                    Fuse.log( this.controller.views );
 
                     changePageOptions["transition"] = this.controller.views[ view ].transition;
                     changePageOptions["reverse"] = true;
