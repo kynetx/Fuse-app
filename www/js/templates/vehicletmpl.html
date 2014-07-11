@@ -2,7 +2,7 @@
     <li class="fleet-item-bar">
         <img src="<%= profilePhoto %>" class="car-thumbnail">
         <h1 class='margin-off title-font white-font'> <%= profileName %></h1>
-        <% if ( typeof make !== "undefined" && typeof model !== "undefined") { %>
+        <% if ( make !== "none" && model !== "none" ) { %>
             <p class="margin-off detail-font white-font"> <%= make %>, <%= model %></p>
         <% } %>
     </li>
