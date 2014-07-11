@@ -46,6 +46,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showFleet: function() {
             var __self__ = this;
 
+            if ( this.fleet.length ) {
+                this.views.Fleet.render();
+                return;
+            }
+
             this.fleet.fetch({
 
                 success: function() {
@@ -121,6 +126,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             try {
 
                 var __self__ = this;
+
+                if ( this.trips.length ) {
+                    this.views.Trips.render();
+                    return;
+                }
 
                 this.trips.fetch({
 
