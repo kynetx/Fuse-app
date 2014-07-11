@@ -1,8 +1,10 @@
 <ul data-role="listview" data-inset="false">
     <li class="fleet-item-bar">
-        <img src="<%= icon %>" class="car-thumbnail">
-        <h1 class='margin-off title-font white-font'> <%= nickname %></h1>
-        <p class="margin-off detail-font white-font"> <%= make %>, <%= model %></p>
+        <img src="<%= profilePhoto %>" class="car-thumbnail">
+        <h1 class='margin-off title-font white-font'> <%= profileName %></h1>
+        <% if ( typeof make !== "undefined" && typeof model !== "undefined") { %>
+            <p class="margin-off detail-font white-font"> <%= make %>, <%= model %></p>
+        <% } %>
     </li>
     <li class="vehicle-data">
     <% if (fuellevel >= 20) { %>
