@@ -104,7 +104,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     case Maps.places.PlacesServiceStatus.ERROR:
                         Fuse.log( "ERROR! There was a general error contacting the Google Places Service API." );
                         break;
-                    case Maps.olaces.PlacesServiceStatus.INVALID_REQUEST:
+                    case Maps.places.PlacesServiceStatus.INVALID_REQUEST:
                         Fuse.log( "ERROR! Google Places Service request was invalid." );
                         break;
                     case Maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT:
