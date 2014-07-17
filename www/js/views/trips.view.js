@@ -66,7 +66,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
                 tripIdx = newLength - 1;
             }
 
-            this.tripViewData[ tripIdx ][ "elements" ].unshift( view.render().el );
+            this.tripViewData[ tripIdx ][ "elements" ].push( view.render().el );
             
             this.tripViewData[ tripIdx ][ "aggregates" ][ "duration" ]  += duration;
             this.tripViewData[ tripIdx ][ "aggregates" ][ "distance" ]  += parseFloat( trip.get( "mileage" ) );

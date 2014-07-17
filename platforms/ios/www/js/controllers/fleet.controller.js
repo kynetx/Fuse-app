@@ -46,7 +46,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showFleet: function() {
             var __self__ = this;
 
-            if ( this.fleet.length ) {
+            if ( this.fleet.length && !Fuse.bustCache ) {
                 this.views.Fleet.render();
                 return;
             }
@@ -54,6 +54,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.fleet.fetch({
 
                 success: function() {
+                    Fuse.bustCache = false;
                     __self__.views.Fleet.render();
                 },
 
@@ -127,7 +128,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 var __self__ = this;
 
-                if ( this.trips.length ) {
+                if ( this.trips.length && !Fuse.bustCache ) {
                     this.views.Trips.render();
                     return;
                 }
@@ -137,6 +138,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     tripsECI: __self__.views.Trips.model.get( "channel" ),
                     
                     success: function( trips ) {
+                        Fuse.bustCache = false;
                         __self__.views.Trips.render();
                     },
 

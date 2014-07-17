@@ -835,4 +835,9 @@
     document.addEventListener( "deviceready", function() {
         Fuse.init();
     });
+
+    // bust the cache when the app is resuming.
+    document.addEventListener( "resume", function() {
+        Fuse.bustCache = true;
+    });
 });
