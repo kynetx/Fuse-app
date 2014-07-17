@@ -836,8 +836,8 @@
         Fuse.init();
     });
 
-    // bust the cache when the app is resuming.
-    document.addEventListener( "resume", function() {
-        Fuse.bustCache = true;
+    document.addEventListener( "pause", function() {
+        Fuse.routers.FleetRouter.controller.trips.reset();
+        Fuse.routers.FleetRouter.controller.fleet.reset();
     });
 });

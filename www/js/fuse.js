@@ -1270,7 +1270,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
 
             // if we are already on the requested page...
-            if (Backbone.history.fragment === page) {
+            if (Backbone.history.fragment === page ) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
             } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
                 // ...or there ˆre no matching routes...
