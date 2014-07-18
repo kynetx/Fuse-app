@@ -312,6 +312,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 this.enhance();
                 this.resetIcons();
+                Fuse.loading( "hide" );
             },
 
             cleanup: function() {
@@ -1270,9 +1271,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
 
             // if we are already on the requested page...
-            if (Backbone.history.fragment === page ) {
+           /* if (Backbone.history.fragment === page ) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
-            } else if (!options && this.routes && this.routes.indexOf(page) < 0) {
+            } else */ if (!options && this.routes && this.routes.indexOf(page) < 0) {
                 // ...or there ˆre no matching routes...
                 // don't examine the routes array for matching routes 
                 // if we were passed an options object. Routes like foo/1234
