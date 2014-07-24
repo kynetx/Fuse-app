@@ -8,6 +8,13 @@
     cursor: pointer;
 }
 
+#menu-box {
+    margin-right: 4px;
+    margin-left: 4px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
 /**
  * This controls the color of the entire app
  */
@@ -77,7 +84,7 @@ div > .dark-header:first-child {
     margin-left:auto
 }
 
-#fuse-logo {
+.fuse-logo {
     width: 96px;
 }
 
