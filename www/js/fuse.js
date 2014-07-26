@@ -1,7 +1,7 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         
-        VERSION: "0.0.9.7",
+        VERSION: "0.0.9.8",
 
         BASE_API_URI: "http://kibdev.kobj.net/sky/cloud/b16x18",
 
@@ -1273,16 +1273,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // if we are already on the requested page...
            /* if (Backbone.history.fragment === page ) {
                 this.log("Already on requested page! (", page, ") Not doing anything.");
-            } else */ if (!options && this.routes && this.routes.indexOf(page) < 0) {
+            } else  if (!options && this.routes && this.routes.indexOf(page) < 0) {
                 // ...or there ˆre no matching routes...
                 // don't examine the routes array for matching routes 
                 // if we were passed an options object. Routes like foo/1234
                 // are valid but won't be found because foo/:id is what will be 
                 // in the routes array.
                 this.log ("No routes match requested page. Not doing anything.");
-            } else {
+            } else { */
                 this.navigate(page);
-            }
+            /*}*/
         },
 
         /**
