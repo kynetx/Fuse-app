@@ -31,7 +31,7 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                         } else {
                             options.error( response );
                         }
-                    });
+                    }, true );
 
                     break;
                 default:
