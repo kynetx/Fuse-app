@@ -837,6 +837,10 @@
     });
 
     document.addEventListener( "pause", function() {
+        // Nuke whatever's in the collections...
+        Fuse.routers.FleetRouter.controller.trips.reset();
+        Fuse.routers.FleetRouter.controller.fleet.reset();
+
         Fuse.lastRenderedPage = Backbone.history.fragment;
     });
 
