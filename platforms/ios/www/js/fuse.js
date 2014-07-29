@@ -939,6 +939,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet.index});
                 $(document.body).append(menu);
                 $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
+
+                // When someboy swipes right on the login view, do nothing.
+                $(document).on('swiperight', '#login', function(e) {
+                    e.stopPropagation();
+                });
+
+                // Otherwise...open the menu.
                 $(document).on("swiperight", "[data-role='page']", function(e) {
                     // if we're in the map element, do nothing.
                     if ($.contains(document.getElementById("fuse-map"), e.target)) {
@@ -952,11 +959,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     if ($(document.body).hasClass("sidr-open")) {
                         $.sidr("close");
                     }
-                });
-
-                // When someboy swipes right on the login view, do nothing.
-                $(document).on('swiperight', '#login', function(e) {
-                    e.stopPropagation();
                 });
             }
         },
