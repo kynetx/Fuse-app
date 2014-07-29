@@ -33,14 +33,14 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                 Fuse.log( response );
 
                 if ( !response.OAUTH_ECI ) {
-                    alert( response.msg );
+                    alert( 'Could not log you in. Please double check your username/password and try again.' );
                 } else {
                     localStorage.setItem( "com.kynetx.cloudos.DEFAULT_ECI", response.OAUTH_ECI );
                     Fuse.show( "fleet" );
                 }
 
             }, function() {
-                alert( "something went wrong!" );
+                alert('something went wrong!');
             });
 
             e.handled = true;
