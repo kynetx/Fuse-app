@@ -413,7 +413,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     Fuse.log( this.controller.views );
 
-                    changePageOptions["transition"] = this.controller.views[ view ].transition;
+                    // changePageOptions["transition"] = this.controller.views[ view ].transition;
+                    // TODO: Fix the logic so we don't have to manually specify slide here.
+                    changePageOptions["transition"] = 'slide';
                     changePageOptions["reverse"] = true;
                 }
 
