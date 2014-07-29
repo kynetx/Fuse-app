@@ -945,8 +945,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     var doNothingOnSwipe = $(e.target).parents('#fuse-map').length || $(e.target).parents('#login').length;
 
                     if (doNothingOnSwipe) {
-                        e.stopPropagation();
-                        e.preventDefault();
                         return;
                     }
 

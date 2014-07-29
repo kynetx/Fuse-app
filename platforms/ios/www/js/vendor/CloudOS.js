@@ -280,6 +280,7 @@
 				    var tokens = {"access_token": "none",
 						  "OAUTH_ECI": res.token
 						 };
+                    if (tokens.OAUTH_ECI)
 				    CloudOS.saveSession(tokens); success(tokens);}, 
 				{eci: CloudOS.anonECI,
 				 errorFunc: failure
