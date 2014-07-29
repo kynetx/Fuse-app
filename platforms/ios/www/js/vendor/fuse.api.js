@@ -571,7 +571,7 @@
         },
 
     ask_vehicle: function(vehicle_channel, funcName, args, cache, cb, options) {
-        alert(JSON.stringify(options, null, 4));
+        prompt(JSON.stringify(options, null, 4));
         cb = cb || function(){};
         options = options || {};
         cache = cache || {};
