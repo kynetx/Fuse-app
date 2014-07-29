@@ -942,7 +942,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 $(document).on("swiperight", "[data-role='page']", function(e) {
                     // If we're in the map or login views, do nothing.
-                    var doNothingOnSwipe = $(e.target).parents('#fuse-map').length || $(e.target).parents('#login').length;
+                    var $target = $(e.target),
+                        doNothingOnSwipe =  $target.parents('#fuse-map').length || 
+                                            $target.parents('#login').length ||
+                                            $target.is('#fuse-map') ||
+                                            $target.is('#login');
 
                     if (doNothingOnSwipe) {
                         return;
