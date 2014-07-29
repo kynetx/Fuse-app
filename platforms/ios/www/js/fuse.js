@@ -955,7 +955,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 });
 
                 // When someboy swipes right on the login view, do nothing.
-                $('#login').on('swiperight', function(e) {
+                $(document).on('swiperight', '#login', function(e) {
                     e.stopPropagation();
                 });
             }
