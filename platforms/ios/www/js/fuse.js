@@ -940,17 +940,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 $(document.body).append(menu);
                 $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
 
-                // When someboy swipes right on the login view, do nothing.
-                $(document).on('swiperight', '#login', function(e) {
-                    e.stopPropagation();
-                });
-
-                // Otherwise...open the menu.
                 $(document).on("swiperight", "[data-role='page']", function(e) {
-                    // if we're in the map element, do nothing.
-                    if ($.contains(document.getElementById("fuse-map"), e.target)) {
+                    // If we're in the map or login views, do nothing.
+                    var map   = document.getElementById('fuse-map'),
+                        login = document.getElementById('login'),
+                        doNothingOnSwipe = $.contains(map, e.target) || $.contains(login, e.target);
+
+                    if (doNothingOnSwipe) {
                         return;
                     }
+                    
                     e.preventDefault();
                     $.sidr("open");
                 }).on("tap", "#open-menu", function() {
