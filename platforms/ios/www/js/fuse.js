@@ -933,24 +933,25 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             if (args.length && typeof args[0] === 'object') {
                 // Redraw menu.
                 this.log('Redrawing menu with the following data:', args[0]);
+            } else {
+                var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet.index});
+                $(document.body).append(menu);
+                $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
+                $(document).on("swiperight", "[data-role='page']", function(e) {
+                    // if we're in the map element, do nothing.
+                    if ($.contains(document.getElementById("fuse-map"), e.target)) {
+                        return;
+                    }
+                    e.preventDefault();
+                    $.sidr("open");
+                }).on("tap", "#open-menu", function() {
+                    $.sidr("toggle");
+                }).on("tap", "[data-role='page']", function() {
+                    if ($(document.body).hasClass("sidr-open")) {
+                        $.sidr("close");
+                    }
+                });
             }
-            var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet.index});
-            $(document.body).append(menu);
-            $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
-            $(document).on("swiperight", "[data-role='page']", function(e) {
-                // if we're in the map element, do nothing.
-                if ($.contains(document.getElementById("fuse-map"), e.target)) {
-                    return;
-                }
-                e.preventDefault();
-                $.sidr("open");
-            }).on("tap", "#open-menu", function() {
-                $.sidr("toggle");
-            }).on("tap", "[data-role='page']", function() {
-                if ($(document.body).hasClass("sidr-open")) {
-                    $.sidr("close");
-                }
-            });
         },
 
         initMap: function() {
