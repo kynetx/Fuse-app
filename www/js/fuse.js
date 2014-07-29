@@ -929,8 +929,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }, this);
             var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet.index});
             $(document.body).append(menu);
-            $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
-            $(document).on("swiperight", "[data-role='page']", function(e) {
+            $("#menu").sidr().off('tap').on("tap", "li > a", showPageFromMenu);
+            $(document).off('swiperight').on("swiperight", "[data-role='page']", function(e) {
                 // if we're in the map element, do nothing.
                 if ($.contains(document.getElementById("fuse-map"), e.target)) {
                     return;

@@ -806,7 +806,6 @@
     {
         action: "logout",
         text: "Logout",
-        disabled: true
     }];
 
     // intialize the routers.
@@ -838,8 +837,8 @@
 
     document.addEventListener( "pause", function() {
         // Nuke whatever's in the collections...
-        // Fuse.routers.FleetRouter.controller.trips.reset();
-        // Fuse.routers.FleetRouter.controller.fleet.reset();
+        Fuse.routers.FleetRouter.controller.trips.reset();
+        Fuse.routers.FleetRouter.controller.fleet.reset();
 
         Fuse.lastRenderedPage = Backbone.history.fragment;
     });
