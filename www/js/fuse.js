@@ -953,6 +953,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         $.sidr("close");
                     }
                 });
+
+                // When someboy swipes right on the login view, do nothing.
+                $('#login').on('swiperight', function(e) {
+                    e.stopPropagation();
+                });
             }
         },
 
