@@ -942,14 +942,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 $(document).on("swiperight", "[data-role='page']", function(e) {
                     // If we're in the map or login views, do nothing.
-                    var map   = document.getElementById('fuse-map'),
-                        login = document.getElementById('login'),
-                        doNothingOnSwipe = $.contains(map, e.target) || $.contains(login, e.target);
+                    var doNothingOnSwipe = $(e.target).parents('#fuse-map').length || $(e.target).parents('#login').length;
 
                     if (doNothingOnSwipe) {
                         return;
                     }
-                    
+
                     e.preventDefault();
                     $.sidr("open");
                 }).on("tap", "#open-menu", function() {
