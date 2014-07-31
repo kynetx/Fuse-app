@@ -5,7 +5,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.fleet = new FleetCollection();
             this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
 
-            this.trips = new TripCollection();
+            this.trips = [];
 
             this.fillups = {};
             this.views = {};
@@ -117,22 +117,24 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * the next N trips in the background so that delays are minimal.
              */
 
+            this.trips[id] = new TripCollection();
+
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
                 model: this.fleet.find(function( v ) { return v.get( "picoId" ) === id; }),
-                collection: this.trips
+                collection: this.trips[id]
             });
             
             try {
 
                 var __self__ = this;
 
-                if ( this.trips.length ) {
+                if ( this.trips[id].length ) {
                     this.views.Trips.render();
                     return;
                 }
 
-                this.trips.fetch({
+                this.trips[id].fetch({
 
                     tripsECI: __self__.views.Trips.model.get( "channel" ),
                     
@@ -140,7 +142,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                         __self__.views.Trips.render();
                     },
 
-                    error: function( error ) {
+                error: function( error ) {
                         alert( "Fatal error while trying to retrieve trips from the API!" );
                         throw "Fatal Error";
                     }
