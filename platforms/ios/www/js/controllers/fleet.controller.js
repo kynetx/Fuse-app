@@ -117,7 +117,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * the next N trips in the background so that delays are minimal.
              */
 
-            this.trips[id] = new TripCollection();
+            this.trips[id] = this.trips[id] || new TripCollection();
 
             this.views[ "Trips" ] = new TripsView({
                 controller: this,
