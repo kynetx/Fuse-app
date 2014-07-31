@@ -25,7 +25,7 @@ define(["backbone", "fuse", "jquery", "underscore", "views/fleet.item.view", "vi
             this.content = this.fleetTemplate({ fleet: this.fleetItems });
             // Redraw the menu with fresh fleet data.
             Fuse.initMenu({
-                items: this.collection
+                fleet: this.collection
             });
             Fuse.View.prototype.render.call( this );
         },

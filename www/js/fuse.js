@@ -935,6 +935,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             if (args.length && typeof args[0] === 'object') {
                 // Redraw menu.
                 this.log('Redrawing menu with the following data:', args[0]);
+                $('#sidr').remove();
+                var menu = this.menuTemplate({items: Fuse.menu, fleet: args[0].fleet})
+                $(document.body).append(menu);
             } else {
                 var menu = this.menuTemplate({items: Fuse.menu, fleet: Fuse.FIXTURES.fleet.index});
                 $(document.body).append(menu);
