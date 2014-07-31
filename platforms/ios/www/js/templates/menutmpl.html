@@ -11,7 +11,7 @@
                             <!-- no easy way in jQM to automagically indent nested lists... -->
                             <% if (fleet instanceof Backbone.Collection) { %>
                                 <% fleet.each(function(vehicle) { %>
-                                    <li id="vehicle-<%= vehicle.get('picoId') %>" style="font-weight: bold;"><a data-action="fleet" data-vid="<%= vehicle.get('picoId') %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= vehicle.get('nickname') %></a></li>
+                                    <li id="vehicle-<%= vehicle.get('picoId') %>" style="font-weight: bold;"><a data-action="fleet" data-vid="<%= vehicle.get('channel') %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= vehicle.get('label') %></a></li>
                                 <% }) %>
                             <% } else { %>
                                 <% for (var j = 0; j < fleet.length; ++j) { %>
