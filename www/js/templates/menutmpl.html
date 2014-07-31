@@ -17,6 +17,7 @@
                                 <% for (var j = 0; j < fleet.length; ++j) { %>
                                     <li id="vehicle-<%= fleet[j].id %>" style="font-weight: bold;"><a data-action="fleet" data-vid="<%= fleet[j].id %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= fleet[j].nickname %></a></li>
                                 <% } %>
+                            <% } %>
                         </ul>
                     </li>
                 <% } else if ( items[ i ].disabled ) { %>
