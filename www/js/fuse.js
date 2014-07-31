@@ -935,6 +935,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             if (args.length && typeof args[0] === 'object') {
                 // Redraw menu.
                 this.log('Redrawing menu with the following data:', args[0]);
+                $('#sidr').remove();
                 var menu = this.menuTemplate({items: Fuse.menu, fleet: args[0].fleet})
                 $(document.body).append(menu);
                 $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
