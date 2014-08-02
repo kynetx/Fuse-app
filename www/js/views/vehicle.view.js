@@ -9,7 +9,7 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply(this, arguments);
-            this.header = this.model.get("nickname");
+            this.header = this.model.get("profileName");
             this.content = this.template(this.model.toJSON());
         },
 
