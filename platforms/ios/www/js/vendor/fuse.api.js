@@ -387,6 +387,46 @@
         }, options);
     },
 
+    tripSummaries: function(year, month, cb, options) {
+        cb = cb || function(){};
+        options = options || {};
+        if(isEmpty(API.vehicle_summary)) {
+        options.force = true;
+        }
+        var args = {"month": month,
+            "year": year
+               };
+        return API.ask_fleet("tripSummaries", args, API.trip_summaries, function(json) {
+        if(typeof json.error === "undefined") {
+            API.trip_summaries = json;
+            API.log("Retrieve trip summaries", json);
+            cb(json);
+        } else {
+            console.log("Bad trip summaries fetch ", json);
+        }
+        }, options);
+    },
+
+    fuelSummaries: function(year, month, cb, options) {
+        cb = cb || function(){};
+        options = options || {};
+        if(isEmpty(API.vehicle_summary)) {
+        options.force = true;
+        }
+        var args = {"month": month,
+            "year": year
+               };
+        return API.ask_fleet("fuelSummaries", args, API.fuel_summaries, function(json) {
+        if(typeof json.error === "undefined") {
+            API.fuel_summaries = json;
+            API.log("Retrieve fuel summaries", json);
+            cb(json);
+        } else {
+            console.log("Bad fuel summaries fetch ", json);
+        }
+        }, options); 
+    },
+
     updateVehicleSummary: function(id, profile) {
         API.vehicle_summary = API.vehicle_summary || [];
 
@@ -881,13 +921,111 @@
         });
     },
 
+    // ---------- Reminders ----------
+    reminders: function(vehicle_channel, cb, options) {
+        cb = cb || function(){};
+        options = options || {};
+        options.rid = "maintenance";
+        
+        var args = options; // use them all...
+
+        return API.ask_vehicle(vehicle_channel, "reminders", args, null, function(json) {
+            API.log("Retrieve last reminder", json);
+            cb(json);
+               }, options);
+    },
+
+    activeReminders: function(vehicle_channel, date, mileage, cb, options) {
+        cb = cb || function(){};
+        options = options || {};
+        options.rid = "maintenance";
+        
+        var args = {"current_time": date,
+            "mileage": mileage
+               };
+
+        return API.ask_vehicle(vehicle_channel, "activeReminders", args, null, function(json) {
+            API.log("Retrieve active reminders", json);
+            cb(json);
+               }, options);
+    },
+
+    recordReminder: function(vehicle_channel, reminder_obj, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record reminder for vehicle";
+        };
+     
+
+            return CloudOS.raiseEvent("fuse", "new_reminder", reminder_obj, {}, function(response)
+                      {
+                      if(response.length < 2) {
+                          throw "Reminder record failed for vehicle: "  + vehicle_channel;
+                      }
+                      API.log("Recorded reminder for vehicle: " + vehicle_channel + ": " + response);
+                      cb(response);
+                      },
+                      {"eci": vehicle_channel
+                      } 
+            );
+        },
+
+    updateReminder: function(vehicle_channel, reminder_obj, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record reminder for vehicle";
+        };
+        API.requireParams({id: reminder_obj.id
+                   });
+
+            return CloudOS.raiseEvent("fuse", "updated_reminder", reminder_obj, {}, function(response)
+                      {
+                      if(response.length < 1) {
+                          throw "Reminder update failed for vehicle: "  + vehicle_channel;
+                      }
+                      API.log("Updated reminder for vehicle: " + vehicle_channel + ": " + response);
+                      cb(response);
+                      },
+                      {"eci": vehicle_channel
+                      } 
+            );
+        },
+
+    deleteReminder: function(vehicle_channel, id, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record reminder for vehicle";
+        };
+        API.requireParams({id: id});
+
+        var attrs = {"id": id};
+            return CloudOS.raiseEvent("fuse", "unneeded_reminder", attrs, {}, function(response)
+            {
+        if(response.length < 1) {
+            throw "Reminder delete failed for vehicle: "  + vehicle_channel;
+        } 
+                API.log("Deleted reminder for vehicle: " + vehicle_channel);
+        cb(response);
+            },
+        {"eci": vehicle_channel
+        } 
+            );
+        },
+
+    
     // ---------- Alerts ----------
     alerts: function(vehicle_channel, cb, options) {
         cb = cb || function(){};
         options = options || {};
         options.rid = "maintenance";
         
-        var args = options.id ? {"id": options.id} : {};
+        var args = options; // use them all...
 
         return API.ask_vehicle(vehicle_channel, "alerts", args, null, function(json) {
             API.log("Retrieve last alert", json);
@@ -904,6 +1042,10 @@
             "end": end
                };
 
+        if(typeof options.status !== "undefined") {
+        args.status = options.status;
+        }
+
         return API.ask_vehicle(vehicle_channel, "alertsByDate", args, null, function(json) {
             API.log("Retrieve alerts", json);
             cb(json);
@@ -916,16 +1058,16 @@
         cb = cb || function(){};
         options = options || {};
         if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
-        throw "Vehicle channel is null; can't record fuel alert for vehicle";
+        throw "Vehicle channel is null; can't record alert for vehicle";
         };
      
 
             return CloudOS.raiseEvent("fuse", "new_alert", alert_obj, {}, function(response)
                       {
-                      API.log("Recorded alert for vehicle: " + vehicle_channel + ": " + response);
                       if(response.length < 2) {
-                          throw "Fuel alert record failed for vehicle: "  + vehicle_channel;
+                          throw "Alert record failed for vehicle: "  + vehicle_channel;
                       }
+                      API.log("Recorded alert for vehicle: " + vehicle_channel + ": " + response);
                       cb(response);
                       },
                       {"eci": vehicle_channel
@@ -938,17 +1080,17 @@
         cb = cb || function(){};
         options = options || {};
         if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
-        throw "Vehicle channel is null; can't record fuel alert for vehicle";
+        throw "Vehicle channel is null; can't record alert for vehicle";
         };
         API.requireParams({id: alert_obj.id
                    });
 
             return CloudOS.raiseEvent("fuse", "updated_alert", alert_obj, {}, function(response)
                       {
-                      API.log("Updateded alert for vehicle: " + vehicle_channel + ": " + response);
                       if(response.length < 1) {
-                          throw "Fuel alert update failed for vehicle: "  + vehicle_channel;
+                          throw "Alert update failed for vehicle: "  + vehicle_channel;
                       }
+                      API.log("Updated alert for vehicle: " + vehicle_channel + ": " + response);
                       cb(response);
                       },
                       {"eci": vehicle_channel
@@ -961,23 +1103,172 @@
         cb = cb || function(){};
         options = options || {};
         if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
-        throw "Vehicle channel is null; can't record fuel alert for vehicle";
+        throw "Vehicle channel is null; can't record alert for vehicle";
         };
         API.requireParams({id: id});
 
         var attrs = {"id": id};
-            return CloudOS.raiseEvent("fuse", "unneeded_fuel_purchase", attrs, {}, function(response)
+            return CloudOS.raiseEvent("fuse", "unneeded_alert", attrs, {}, function(response)
             {
-                API.log("Deleted alert for vehicle: " + vehicle_channel);
         if(response.length < 1) {
-            throw "Fuel alert record delete failed for vehicle: "  + vehicle_channel;
-        }
-                cb(response);
+            throw "Alert delete failed for vehicle: "  + vehicle_channel;
+        } 
+                API.log("Deleted alert for vehicle: " + vehicle_channel);
+        cb(response);
             },
         {"eci": vehicle_channel
         } 
             );
         },
+
+    processAlert: function(vehicle_channel, status_obj, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record alert for vehicle";
+        };
+        API.requireParams({id: status_obj.id,
+                status: status_obj.status
+                   });
+
+            return CloudOS.raiseEvent("fuse", "handled_alert", status_obj, {}, function(response)
+                      {
+                      if(response.length < 1) {
+                          throw "Alert processing failed for vehicle: "  + vehicle_channel;
+                      }
+                      API.log("Handled alert for vehicle: " + vehicle_channel + ": " + response);
+                      cb(response);
+                      },
+                      {"eci": vehicle_channel
+                      } 
+            );
+        },
+
+    updateAlertStatus: function(vehicle_channel, id, new_status, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record alert for vehicle";
+        };
+        var attrs = {id: id,
+             status: new_status
+            };
+        API.requireParams(attrs); // require all
+            return CloudOS.raiseEvent("fuse", "new_alert_status", attrs, {}, function(response)
+                      {
+                      if(response.length < 1) {
+                          throw "Alert status update failed for vehicle: "  + vehicle_channel;
+                      }
+                      API.log("Updated alert status for vehicle: " + vehicle_channel + ": " + response);
+                      cb(response);
+
+                      },
+                      {"eci": vehicle_channel
+                      } 
+            );
+        },
+
+    // ---------- maintenance records ----------
+    maintenanceRecords: function(vehicle_channel, cb, options) {
+        cb = cb || function(){};
+        options = options || {};
+        options.rid = "maintenance";
+        var args = options; // use them all...
+
+        return API.ask_vehicle(vehicle_channel, "maintenanceRecords", args, null, function(json) {
+            API.log("Retrieve maintenance records", json);
+            cb(json);
+               }, options);
+    },
+
+    maintenanceRecordsByDate: function(vehicle_channel, start, end, cb, options) {
+        cb = cb || function(){};
+        options = options || {};
+        options.rid = "maintenance";
+        
+        var args = {"start": start,
+            "end": end
+               };
+        if(typeof options.status !== "undefined") {
+        args.status = options.status;
+        }
+        return API.ask_vehicle(vehicle_channel, "maintenanceRecordsByDate", args, null, function(json) {
+            API.log("Retrieve maintenance records", json);
+            cb(json);
+               }, options);
+    },
+
+
+    recordMaintenanceRecord: function(vehicle_channel, maintenance_record_obj, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record maintenance_record for vehicle";
+        };
+     
+
+            return CloudOS.raiseEvent("fuse", "new_maintenance_record", maintenance_record_obj, {}, function(response)
+                      {
+                      if(response.length < 1) {
+                          throw "Maintenance record record failed for vehicle: "  + vehicle_channel;
+                      }
+                      API.log("Recorded maintenance record for vehicle: " + vehicle_channel + ": " + response);
+                      cb(response);
+                      },
+                      {"eci": vehicle_channel
+                      } 
+            );
+        },
+
+    updateMaintenanceRecord: function(vehicle_channel, maintenance_record_obj, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record maintenance_record for vehicle";
+        };
+        API.requireParams({id: maintenance_record_obj.id
+                   });
+
+            return CloudOS.raiseEvent("fuse", "updated_maintenance_record", maintenance_record_obj, {}, function(response)
+                      {
+                      if(response.length < 1) {
+                          throw "Maintenance record update failed for vehicle: "  + vehicle_channel;
+                      }
+                      API.log("Updated maintenance record for vehicle: " + vehicle_channel + ": " + response);
+                      cb(response);
+                      },
+                      {"eci": vehicle_channel
+                      } 
+            );
+        },
+
+    deleteMaintenanceRecord: function(vehicle_channel, id, cb, options)
+        {
+        cb = cb || function(){};
+        options = options || {};
+        if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
+        throw "Vehicle channel is null; can't record maintenance_record for vehicle";
+        };
+        var attrs = {"id": id};
+        API.requireParams(attrs); // require all
+
+            return CloudOS.raiseEvent("fuse", "unneeded_maintenance_record", attrs, {}, function(response)
+            {
+        if(response.length < 1) {
+            throw "Maintenance Record delete failed for vehicle: "  + vehicle_channel;
+        } 
+                API.log("Deleted maintenance record for vehicle: " + vehicle_channel);
+        cb(response);
+            },
+        {"eci": vehicle_channel
+        } 
+            );
+        },
+
 
     };
 
