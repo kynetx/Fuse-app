@@ -15,7 +15,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
-            this.header = this.model.get( "nickname" );
+            this.header = this.model.get( "profileName" ) + " " + "Fuel";
         },
 
         render: function() {
