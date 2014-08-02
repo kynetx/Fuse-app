@@ -176,13 +176,44 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
              * so that 'addFillups' can access the fillups for the current vehicle.
              * Note: We may want to sanity check our data modeling here.
              */
-            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection( Fuse.FIXTURES.fillups );
+            this.fillups[ id ] = this.fillups[ id ] || new FillupCollection();
             this.currentFillups = this.fillups[ id ];
             this.views[ "Fuel" ] = new FuelView({
                 controller: this,
-                model: this.fleet.get( id )
+                model: this.fleet.find(function( v ) { return v.get( "picoId" ) === id; }),
             });
-            this.views.Fuel.render();
+
+            try {
+
+                var __self__ = this;
+
+                if ( this.currentFillups.length ) {
+                    this.views.Fuel.render();
+                    return;
+                }
+
+                Fuse.currentFuelContext = __self__.views.Fuel.model.get('channel');
+
+                this.trips[id].fetch({
+
+                    fuelECI: Fuse.currentFuelContext,
+                    
+                    success: function( trips ) {
+                        __self__.views.Fuel.render();
+                    },
+
+                    error: function( error ) {
+                        alert( "Fatal error while trying to retrieve fillups from the API!" );
+                        throw "Fatal Error";
+                    }
+                });
+
+            } catch( e ) {
+                Fuse.log( e );
+                this.views.Fleet.render();
+                alert( "An error occured while retrieving fillups: " + e );
+            }
+            
             this.currentFillups.on( "change reset add remove", this.views.Fuel.renderChart, this.views.Fuel );
         },
 
