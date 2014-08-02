@@ -103,9 +103,14 @@ define([ "fuse" ], function( Fuse ) {
                     API.updateTrip(Fuse.currentTripContext, model.get('id'), model.get('name'), model.get('category'), function(res) {
                         Fuse.loading('hide');
                         if (typeof res.skyCloudError === 'undefined') {
-                            options.success();
+                            alert('Trip succesfully updated.');
+                            if (typeof options.success === 'function') {
+                                options.success();
+                            }
                         } else {
-                            options.error();
+                            if (typeof options.error === 'function') {
+                                options.error();
+                            }
                         }
                     });
                     break;

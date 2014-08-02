@@ -51,10 +51,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
             e.preventDefault();
 
             var category = this.$categorySelect.val();
-            this.model.save( "category", category, { silent: true });
-
             var name = this.$nameInput.val();
-            this.model.save( "name", name, { silent: true });
+            this.model.save({ "name": name, "category": category }, { silent: true });
 
             e.handled = true;
         }
