@@ -134,9 +134,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     return;
                 }
 
+                this.currentTripContext = __self__.views.Trips.model.get('channel');
+
                 this.trips[id].fetch({
 
-                    tripsECI: __self__.views.Trips.model.get( "channel" ),
+                    tripsECI: __self__.currentTripContext,
                     
                     success: function( trips ) {
                         __self__.views.Trips.render();

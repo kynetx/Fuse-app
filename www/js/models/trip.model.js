@@ -94,6 +94,22 @@ define([ "fuse" ], function( Fuse ) {
                 "translatedValue": "40.038496,-111.712584",
                 "key": "GEN_WAYPOINT"
             }]
+        },
+
+        sync: function(method, model, options) {
+            switch(method) {
+                case 'update':
+                    Fuse.loading('show', 'updating trip...');
+                    API.updateTrip(Fuse.currentTripContext, model.get('id'), model.get('name'), model.get('category'), function(res) {
+                        Fuse.loading('hide');
+                        if (typeof res.skyCloudError === 'undefined') {
+                            options.success();
+                        } else {
+                            options.error();
+                        }
+                    });
+                    break;
+            }
         }
     });
 });
