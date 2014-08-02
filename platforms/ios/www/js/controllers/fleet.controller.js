@@ -194,7 +194,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 Fuse.currentFuelContext = __self__.views.Fuel.model.get('channel');
 
-                this.trips[id].fetch({
+                this.currentFillups.fetch({
 
                     fuelECI: Fuse.currentFuelContext,
                     
