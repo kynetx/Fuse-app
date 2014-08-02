@@ -6,7 +6,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/fuelaggregateitemtmpl.h
 
         attributes: function() {
             return {
-                "data-vid": this.model.get( "id" )
+                "data-vid": this.model.get( "picoId" )
             };
         },
         
