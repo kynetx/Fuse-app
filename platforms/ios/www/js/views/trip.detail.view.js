@@ -8,8 +8,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         template: _.template( tripDetailTmpl ),
 
         events: {
-            "change #category-select"   : "changeCategory",
-            "tap #trip-name-btn"        : "changeName"
+            "tap #trip-update-btn"        : "updateTrip"
         },
 
         initialize: function( options ) {
@@ -46,22 +45,17 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
                 this.$nameInput.val( this.model.get( "name" ) );
             }
         },
-
-        changeCategory: function( e ) {
+        
+        updateTrip: function( e ) {
             e.stopPropagation();
             e.preventDefault();
 
             var category = this.$categorySelect.val();
             this.model.save( "category", category, { silent: true });
 
-            e.handled = true;
-        },
-
-        changeName: function( e ) {
-
             var name = this.$nameInput.val();
             this.model.save( "name", name, { silent: true});
-            
+
             e.handled = true;
         }
     });
