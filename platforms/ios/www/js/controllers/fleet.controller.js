@@ -160,7 +160,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showTrip: function( id ) {
             this.views[ "Trip" ] = new TripDetailView({
                 controller: this,
-                model: this.trips[this.currentTripContext].get( id )
+                model: this.trips[this.views.Trips.model.get('picoId')].get( id )
             });
             this.views.Trip.render();
         },
