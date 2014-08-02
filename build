@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # takes the js and css build configs and outputs a fuse build.
 echo "Building Fuse."
 echo "Removing stale dist/ directory"
