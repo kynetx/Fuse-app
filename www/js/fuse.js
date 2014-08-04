@@ -240,14 +240,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // this means we only need to create collections and models
                 // once and then update the data and the views will automatically
                 // re-render.
-                if (this.collection) {
-                    this.collection.on("change", this.render, this);
-                    this.collection.on("add", this.render, this);
-                    this.collection.on("remove", this.render, this);
-                }
-                if (this.model) {
-                    this.model.on("change", this.render, this);
-                }
+                // if (this.collection) {
+                //     this.collection.on("change", this.render, this);
+                //     this.collection.on("add", this.render, this);
+                //     this.collection.on("remove", this.render, this);
+                // }
+                // if (this.model) {
+                //     this.model.on("change", this.render, this);
+                // }
             },
 
             headerTemplate: _.template(headerTmpl),
