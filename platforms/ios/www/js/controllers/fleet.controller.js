@@ -46,8 +46,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showFleet: function() {
             var __self__ = this;
 
-            debugger;
-
             if ( this.fleet.length ) {
                 this.views.Fleet.render();
                 return;
@@ -57,6 +55,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 success: function() {
                     __self__.views.Fleet.render();
+                    debugger;
                 },
 
                 error: function() {
