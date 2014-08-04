@@ -26,7 +26,6 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                     API.tripsByDate( options.tripsECI, monthStart.toISOString(), now.toISOString(), function( response ) {
                         Fuse.loading( "hide" );
                         if ( typeof response.skyCloudError === "undefined" ) {
-                            __self__.set( response, { silent: true });
                             options.success( response );
                         } else {
                             options.error( response );

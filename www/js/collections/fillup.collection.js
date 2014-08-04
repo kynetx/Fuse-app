@@ -17,7 +17,6 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
                     API.fillupsByDate( options.fuelECI, monthStart.toISOString(), now.toISOString(), function( response ) {
                         Fuse.loading( "hide" );
                         if ( typeof response.skyCloudError === "undefined" ) {
-                            __self__.set( response, { silent: true });
                             options.success( response );
                         } else {
                             options.error( response );

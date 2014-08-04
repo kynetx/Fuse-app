@@ -52,10 +52,9 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             }
 
             this.fleet.fetch({
-
+                
                 success: function() {
                     __self__.views.Fleet.render();
-                    debugger;
                 },
 
                 error: function() {
@@ -145,7 +144,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                         __self__.views.Trips.render();
                     },
 
-                error: function( error ) {
+                    error: function( error ) {
                         alert( "Fatal error while trying to retrieve trips from the API!" );
                         throw "Fatal Error";
                     }
