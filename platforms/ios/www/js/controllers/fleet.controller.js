@@ -226,15 +226,13 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
          * @param gasStation  -  gas station where fillup occurred.
          */
         addFillup: function( numGallons, priceGallon, cost, odometer, gasStation ) {
-            var fillup = new FillupModel({
+            this.currentFillups.create({
                 numGallons  : numGallons,
                 priceGallon : priceGallon,
                 cost        : cost,
                 odometer    : odometer,
                 gasStation  : gasStation
             });
-
-            this.currentFillups.add( fillup );
             Fuse.log("Added fillup:", fillup, "to fillup collection:", this.currentFillups );
         },
 
