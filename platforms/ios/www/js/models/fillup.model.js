@@ -25,7 +25,7 @@ define([ "fuse" ], function( Fuse ) {
                         function(res) {
                             Fuse.loading('hide');
                             if (typeof res.skyCloudError === 'undefined') {
-                                alert('Trip succesfully updated.');
+                                alert('Fillup succesfully added.');
                                 if (typeof options.success === 'function') {
                                     options.success();
                                 }
