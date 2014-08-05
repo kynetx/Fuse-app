@@ -19,7 +19,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         render: function() {
-            throw 'die' + '\n' + this.model.toJSON();
+            throw 'die' + '\n' + JSON.stringify(this.model.toJSON(), null, 4);
             this.content = this.template({ vehicle: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
             this.renderChart();
