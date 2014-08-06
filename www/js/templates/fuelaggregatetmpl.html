@@ -10,15 +10,15 @@
 
 <div class='data-divide totals'>
     <div class='data-left'>
-        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.fuel.gallons ) ) %></h3>
+        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( total.fuel.gallons ) ) %></h3>
         <p class='white-font'> Gallons </p>
     </div>
     <div class='data-center'>
-        <h3 class='title-font white-font'><%= totals.fuel.mpg %></h3>
+        <h3 class='title-font white-font'><%= total.fuel.mpg %></h3>
         <p  class='white-font'> MPG </p>
     </div>
     <div class='data-right'>
-        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.fuel.cost ) ) %></h3>
+        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( total.fuel.cost ) ) %></h3>
         <p  class='white-font'> Fuel Cost </p>
     </div>
 </div>

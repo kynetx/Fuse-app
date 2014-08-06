@@ -23,7 +23,18 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
             }, this );
 
             // Build our content.
-            this.content = this.template({ aggs: this.aggregates });
+
+            // We have to calculate fleet totals on our own.
+            // For now set it static.
+            this.total = {
+                fuel: {
+                    gallons: 'Coming shortly...',
+                    cost: 'Coming shortly...',
+                    mpg: 'Coming shortly...'
+                }
+            };
+            
+            this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );
         },
 
