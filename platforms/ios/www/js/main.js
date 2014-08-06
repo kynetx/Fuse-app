@@ -796,6 +796,10 @@
     };
 
     Fuse.menu = [{
+        action: "about",
+        text: "About"
+    },
+    {
         action: "settings",
         text: "Settings"
     },
