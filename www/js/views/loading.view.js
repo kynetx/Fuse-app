@@ -5,7 +5,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/loadingtmpl.html" ], fu
         role: "page",
         header: "Loading",
         transition: "slide",
-        template: _.template( loginTmpl ),
+        template: _.template( loadingTmpl ),
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
