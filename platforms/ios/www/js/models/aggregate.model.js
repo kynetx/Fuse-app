@@ -9,18 +9,13 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
         sync: function(method, model, options) {
             switch(method) {
                 case 'THIS_DOES_NOT_EXIST':
+                    var now = new Date();
                     Fuse.loading('show', 'fetching' + ' ' + 'summaries');
                     API[options.type + 'Summaries'](
 
-                        Fuse.currentFuelContext,
+                        now.getFullYear(),
 
-                        { 
-                            volume: model.get('numGallons'), 
-                            unitPrice: model.get('priceGallon'), 
-                            odometer: model.get('odometer'),
-                            location: model.get('gasStation'),
-                            when: model.get('timestamp')
-                        }, 
+                        '0' + (now.getMonth() + 1),
 
                         function(res) {
                             Fuse.loading('hide');
@@ -34,8 +29,12 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
                                     options.error();
                                 }
                             }
-                    });
+                        },
 
+                        {
+                            force: true
+                        }
+                    );
                     break;
                 default:
                     options.error('API method not yet implemented');
