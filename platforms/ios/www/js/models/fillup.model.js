@@ -5,7 +5,7 @@ define([ "fuse" ], function( Fuse ) {
             "priceGallon"   : 0.00,
             "cost"          : 0,
             "odometer"      : 000000,
-            "timestamp"     : new Date(),
+            "timestamp"     : new Date().toISOString(),
             "gasStation"    : "Other"
         },
 
