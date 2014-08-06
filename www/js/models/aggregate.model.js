@@ -8,7 +8,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
 
         sync: function(method, model, options) {
             switch(method) {
-                case 'THIS_DOES_NOT_EXIST':
+                case 'read':
                     var now = new Date();
                     Fuse.loading('show', 'fetching' + ' ' + 'summaries');
                     API[options.type + 'Summaries'](
