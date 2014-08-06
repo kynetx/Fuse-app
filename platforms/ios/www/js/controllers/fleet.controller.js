@@ -129,12 +129,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 var __self__ = this;
 
+                Fuse.currentTripContext = __self__.views.Trips.model.get('channel');
+
                 if ( this.trips[id].length ) {
                     this.views.Trips.render();
                     return;
                 }
-
-                Fuse.currentTripContext = __self__.views.Trips.model.get('channel');
 
                 this.trips[id].fetch({
 
@@ -187,13 +187,13 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 var __self__ = this;
 
+                Fuse.currentFuelContext = __self__.views.Fuel.model.get('channel');
+
                 if ( this.currentFillups.length ) {
                     this.views.Fuel.render();
                     return;
                 }
-
-                Fuse.currentFuelContext = __self__.views.Fuel.model.get('channel');
-
+                
                 this.currentFillups.fetch({
 
                     fuelECI: Fuse.currentFuelContext,
