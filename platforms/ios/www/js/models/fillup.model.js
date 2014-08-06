@@ -14,7 +14,9 @@ define([ "fuse" ], function( Fuse ) {
                 case 'create':
                     Fuse.loading('show', 'adding fillup...');
                     API.recordFillup(
+
                         Fuse.currentFuelContext,
+
                         { 
                             volume: model.get('numGallons'), 
                             unitPrice: model.get('priceGallon'), 
@@ -22,6 +24,7 @@ define([ "fuse" ], function( Fuse ) {
                             location: model.get('gasStation'),
                             when: model.get('timestamp')
                         }, 
+
                         function(res) {
                             Fuse.loading('hide');
                             if (typeof res.skyCloudError === 'undefined') {
@@ -35,6 +38,7 @@ define([ "fuse" ], function( Fuse ) {
                                 }
                             }
                     });
+
                     break;
             }
         }

@@ -23,14 +23,27 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                     var __self__ = this;
 
                     // Grab the trips.
-                    API.tripsByDate( options.tripsECI, monthStart.toISOString(), now.toISOString(), function( response ) {
-                        Fuse.loading( "hide" );
-                        if ( typeof response.skyCloudError === "undefined" ) {
-                            options.success( response );
-                        } else {
-                            options.error( response );
+                    API.tripsByDate(
+                        
+                        options.tripsECI, 
+
+                        monthStart.toISOString(), 
+
+                        now.toISOString(), 
+
+                        function( response ) {
+                            Fuse.loading( "hide" );
+                            if ( typeof response.skyCloudError === "undefined" ) {
+                                options.success( response );
+                            } else {
+                                options.error( response );
+                            }
+                        },
+
+                        {
+                            force: true 
                         }
-                    }, { force: true });
+                    );
 
                     break;
                 default:

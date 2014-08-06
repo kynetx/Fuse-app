@@ -14,14 +14,27 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
                     var __self__ = this;
 
                     // Grab the fillups.
-                    API.fillupsByDate( options.fuelECI, monthStart.toISOString(), now.toISOString(), function( response ) {
-                        Fuse.loading( "hide" );
-                        if ( typeof response.skyCloudError === "undefined" ) {
-                            options.success( response );
-                        } else {
-                            options.error( response );
+                    API.fillupsByDate(
+                        
+                        options.fuelECI,
+
+                        monthStart.toISOString(), 
+
+                        now.toISOString(),
+
+                        function( response ) {
+                            Fuse.loading( "hide" );
+                            if ( typeof response.skyCloudError === "undefined" ) {
+                                options.success( response );
+                            } else {
+                                options.error( response );
+                            }
+                        }, 
+
+                        {
+                            force: true 
                         }
-                    }, { force: true });
+                    );
 
                     break;
                 default:
