@@ -33,7 +33,7 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                 Fuse.log( response );
 
                 if ( !response.OAUTH_ECI ) {
-                    alert( 'Could not log you in. Please double check your username/password and try again.' );
+                    alert( 'Could not log you in. Please double check your email/password and try again.' );
                 } else {
                     localStorage.setItem( "com.kynetx.cloudos.DEFAULT_ECI", response.OAUTH_ECI );
                     Fuse.show( "fleet" );
