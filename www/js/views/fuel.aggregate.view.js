@@ -27,6 +27,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
             Fuse.View.prototype.render.call( this );
         },
 
+        // This isnt going to work now.
         renderAggregateItem: function( vehicle ) {
             var aggregate = new FuelAggregateItemView({
                 model: vehicle
