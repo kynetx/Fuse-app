@@ -5,9 +5,9 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.fleet = new FleetCollection();
             this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
 
-            this.trips = [];
-
+            this.trips = {};
             this.fillups = {};
+            
             this.views = {};
 
             this.views[ "Fleet" ] = new FleetView({
@@ -193,7 +193,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     this.views.Fuel.render();
                     return;
                 }
-                
+
                 this.currentFillups.fetch({
 
                     fuelECI: Fuse.currentFuelContext,
