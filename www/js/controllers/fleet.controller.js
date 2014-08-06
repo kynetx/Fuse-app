@@ -5,8 +5,8 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.fleet = new FleetCollection();
 
             this.summaries = {
-                fuel: new AggregateCollection(),
-                trip: new AggregateCollection()
+                fuel: new AggregateCollection([], {type: 'fuel'}),
+                trip: new AggregateCollection([], {type: 'trip'})
             };
 
             this.trips = {};
@@ -177,8 +177,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             }
 
             this.summaries.fuel.fetch({
-
-                type: 'fuel',
 
                 success: function() {
                     __self__.views.FuelAggregate.render();
