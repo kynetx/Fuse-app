@@ -24,7 +24,15 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
             }, this );
 
             // Build our content.
-            this.content = this.template({ totals: this.model.toJSON(), aggs: this.aggregates });
+
+            // Calculate total aggregates...
+            this.total = {
+                time: 'Coming shortly',
+                cost: 'Coming shortly',
+                distance: 'Coming shortly'
+            };
+            
+            this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );
         },
 

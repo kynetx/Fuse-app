@@ -1,24 +1,24 @@
 <div class='ui-alt-icon month-bar'>
     <a id='next-month' class="absolute right ui-btn ui-icon-carat-r ui-btn-icon-notext"></a>
     <a id='previous-month' class="absolute left ui-btn ui-icon-carat-l ui-btn-icon-notext"></a>
-    <h3 id='month' class='title-font center-text'> <%=Fuse.longMonths[Fuse.currentMonth]%> </h3>
+    <h3 id='month' class='title-font center-text'> <%=Fuse.longMonths[new Date().getMonth()]%> </h3>
 </div>
 
-<div class='title-bar totals'>
+<div class='title-bar total'>
     <h3 class='title-font white-font'>Fleet Totals</h3>
 </div>
 
-<div class='data-divide totals'>
+<div class='data-divide total'>
     <div class='data-left'>
-        <h3 class='title-font white-font'><%= FTH.shortenNum( FTH.commaSeperateNumber( totals.trip.distance ) ) %></h3>
+        <h3 class='title-font white-font'><%= FTH.shortenNum( FTH.commaSeperateNumber( total.distance ) ) %></h3>
         <p class='white-font'> Miles </p>
     </div>
     <div class='data-center'>
-        <h3 class='title-font white-font'><%= FTH.formatTime( totals.trip.time )%></h3>
-        <p  class='white-font'> <%= FTH.getTimeUnit( totals.trip.time )%></p>
+        <h3 class='title-font white-font'><%= FTH.formatTime( total.time )%></h3>
+        <p  class='white-font'> <%= FTH.getTimeUnit( total.time )%></p>
     </div>
     <div class='data-right'>
-        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( totals.trip.cost ) ) %></h3>
+        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( total.cost ) ) %></h3>
         <p  class='white-font'> Fuel Cost </p>
     </div>
 </div>
