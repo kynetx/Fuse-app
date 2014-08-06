@@ -26,8 +26,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             this.views[ "FuelAggregate" ] = new FuelAggregateView({
                 controller: this,
-                model: this.summaries.fuel,
-                collection: this.fleet
+                model: this.summaries.fuel
             });
 
             this.views[ "MaintenanceSplash" ] = new MaintenanceSplashView({
