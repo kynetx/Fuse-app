@@ -3,7 +3,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
         init: function() {
             this.fleet = new FleetCollection();
-            this.totals = new AggregateModel( Fuse.FIXTURES.fleet.aggregates.total );
+
+            this.summaries = {
+                fuel: new AggregateModel(),
+                trip: new AggregateModel()
+            };
 
             this.trips = {};
             this.fillups = {};
@@ -166,7 +170,25 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showFuelAggregate: function() {
-            this.views.FuelAggregate.render();
+            var __self__ = this;
+
+            if (this.summaries.fuel.length) {
+                this.views.FuelAggregate.render();
+                return;
+            }
+
+            this.summaries.fuel.fetch({
+
+                type: 'fuel',
+
+                success: function() {
+                    __self__.views.FuelAggregate.render();
+                },
+
+                error: function() {
+
+                }
+            });
         },
 
         showFuel: function( id ) {

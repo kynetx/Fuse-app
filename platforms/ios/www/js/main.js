@@ -839,6 +839,7 @@
         // Nuke whatever's in the collections...
         Fuse.routers.FleetRouter.controller.trips = {};
         Fuse.routers.FleetRouter.controller.fillups = {};
+        Fuse.routers.FleetRouter.controller.summaries = {};
         Fuse.routers.FleetRouter.controller.fleet.reset();
 
         Fuse.lastRenderedPage = Backbone.history.fragment;
