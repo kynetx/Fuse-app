@@ -845,7 +845,11 @@
     });
 
     document.addEventListener( "resume", function() {
-        Fuse.show( Fuse.lastRenderedPage );
-        delete Fuse.lastRenderedPage;
+        Fuse.routers.FleetRouter.controller.fleet.fetch({
+            success: function() {
+                Fuse.show(Fuse.lastRenderedPage);
+                delete Fuse.lastRenderedPage;
+            }
+        });
     });
 });
