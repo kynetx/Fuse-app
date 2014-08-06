@@ -950,8 +950,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     var $target = $(e.target),
                         doNothingOnSwipe =  $target.parents('#fuse-map').length || 
                                             $target.parents('#login').length ||
+                                            $target.parents('#loading').length ||
                                             $target.is('#fuse-map') ||
-                                            $target.is('#login');
+                                            $target.is('#login') ||
+                                            $target.is('#loading');
 
                     if (doNothingOnSwipe) {
                         return;
