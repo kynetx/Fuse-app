@@ -53,12 +53,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showFleet: function() {
             var __self__ = this;
 
-            this.views.Loading.render('fetching fleet details...');
-
             if ( this.fleet.length ) {
                 this.views.Fleet.render();
                 return;
             }
+            
+            this.views.Loading.render('fetching fleet details...');
 
             this.fleet.fetch({
                 
