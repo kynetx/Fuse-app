@@ -1,10 +1,14 @@
-define([ "fuse", "cloudos", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view", "views/settings.trip.categories.view", "views/settings.car.view", "views/login.view" ], function( Fuse, CloudOS, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView, TripCategorySettingsView, CarSettingsView, LoginView ) {
+define([ "fuse", "cloudos", "jquery", "underscore", "views/settings.view", "views/settings.profile.view", "views/settings.preferences.view", "views/settings.trip.categories.view", "views/settings.car.view", "views/login.view", "views/about.view" ], function( Fuse, CloudOS, $, _, SettingsView, ProfileSettingsView, PreferencesSettingsView, TripCategorySettingsView, CarSettingsView, LoginView, AboutView ) {
     return Fuse.Controller.extend({
 
         init: function() {
             this.views = {
 
                 Login: new LoginView({
+                    controller: this
+                }),
+
+                About: new AboutView({
                     controller: this
                 }),
 
@@ -36,6 +40,10 @@ define([ "fuse", "cloudos", "jquery", "underscore", "views/settings.view", "view
 
         showLoginPane: function() {
             this.views.Login.render();
+        },
+
+        showAbout: function() {
+            this.views.About.render();
         },
 
         nukeSession: function() {

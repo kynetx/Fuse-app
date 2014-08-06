@@ -135,6 +135,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         RouteToView: {
             "login"                 : "Login",
+            "about"                 : "About",
             "fleet"                 : "Fleet",
             "findcar"               : "FindCar",
             "fuel"                  : "Fuel",

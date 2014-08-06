@@ -3,6 +3,7 @@ define([ "fuse", "jquery", "underscore", "cloudos" ], function( Fuse, $, _, Clou
         routes: {
             ""                      : "showVehicleListFromHome",
             "home"                  : "showVehicleListFromHome",
+            "about"                 : "showAbout",
             "login"                 : "showLoginPane",
             "logout"                : "nukeSession",
             "settings"              : "showSettingsPane",
@@ -24,6 +25,10 @@ define([ "fuse", "jquery", "underscore", "cloudos" ], function( Fuse, $, _, Clou
 
         showLoginPane: function() {
             this.invokeControllerFunction( "showLoginPane", arguments );
+        },
+
+        showAbout: function() {
+            this.invokeControllerFunction( "showAbout", arguments );
         },
 
         nukeSession: function() {
