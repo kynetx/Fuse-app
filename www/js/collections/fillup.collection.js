@@ -15,7 +15,7 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
 
                     // Grab the fillups.
                     API.fillupsByDate(
-                        
+
                         options.fuelECI,
 
                         monthStart.toISOString(), 
@@ -39,6 +39,7 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
                     break;
                 default:
                     options.error( "API method not yet implemented." );
+                    break;
             }
         }
     });

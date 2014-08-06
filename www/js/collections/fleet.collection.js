@@ -20,7 +20,8 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
                     );
                     break;
                 default:
-                    options.error( "API method not implemented yet." );
+                    options.error( "API method not yet implemented." );
+                    break;
             }
 
         }

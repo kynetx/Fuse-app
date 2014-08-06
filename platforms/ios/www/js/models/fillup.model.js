@@ -40,6 +40,9 @@ define([ "fuse" ], function( Fuse ) {
                     });
 
                     break;
+                default:
+                    options.error('API method not yet implemented');
+                    break;
             }
         }
     });
