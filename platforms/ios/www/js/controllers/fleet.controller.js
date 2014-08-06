@@ -1,12 +1,12 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/trip.detail.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view", "views/maintenance.reminders.view", "views/maintenance.history.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, TripDetailView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView, MaintenanceRemindersView, MaintenanceHistoryView ) {
+define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "collections/aggregate.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/trip.detail.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view", "views/maintenance.reminders.view", "views/maintenance.history.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, AggregateCollection, FillupModel, VehicleModel, AggregateModel, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, TripDetailView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView, MaintenanceRemindersView, MaintenanceHistoryView ) {
     return Fuse.Controller.extend({
 
         init: function() {
             this.fleet = new FleetCollection();
 
             this.summaries = {
-                fuel: new AggregateModel(),
-                trip: new AggregateModel()
+                fuel: new AggregateCollection(),
+                trip: new AggregateCollection()
             };
 
             this.trips = {};
@@ -21,12 +21,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             this.views[ "TripAggregate" ] = new TripAggregateView({
                 controller: this,
-                model: this.summaries.trip
+                collection: this.summaries.trip
             });
 
             this.views[ "FuelAggregate" ] = new FuelAggregateView({
                 controller: this,
-                model: this.summaries.fuel
+                collection: this.summaries.fuel
             });
 
             this.views[ "MaintenanceSplash" ] = new MaintenanceSplashView({
