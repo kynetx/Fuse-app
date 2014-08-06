@@ -9,8 +9,8 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
         sync: function(method, model, options) {
             switch(method) {
                 case 'THIS_DOES_NOT_EXIST':
-                    Fuse.loading('show', 'adding fillup...');
-                    API.oneOfTheSummaryMethods(
+                    Fuse.loading('show', 'fetching' + ' ' + 'summaries');
+                    API[options.type + 'Summaries'](
 
                         Fuse.currentFuelContext,
 
