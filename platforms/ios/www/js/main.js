@@ -856,19 +856,19 @@
         for (var k in summaries) {
             summaries[k].reset();
         }
-        
+
         Fuse.routers.FleetRouter.controller.fleet.reset();
 
         Fuse.lastRenderedPage = Backbone.history.fragment;
     });
 
     document.addEventListener( "resume", function() {
-        Fuse.routers.FleetRouter.controller.fleet.fetch({
+        /* Fuse.routers.FleetRouter.controller.fleet.fetch({
             success: function() {
                 Fuse.loading('hide');
                 Fuse.show(Fuse.lastRenderedPage);
                 delete Fuse.lastRenderedPage;
             }
-        });
+        }); */
     });
 });
