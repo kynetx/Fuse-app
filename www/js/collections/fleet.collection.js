@@ -7,7 +7,11 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
 
             switch( method ) {
                 case "read":
-                    Fuse.loading( "show", "fetching fleet details..." );
+                
+                    if (typeof options.silent === 'undefined') {
+                        Fuse.loading( "show", "fetching fleet details..." );
+                    }
+
                     API.vehicleSummary(
 
                         function( response ) {

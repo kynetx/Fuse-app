@@ -863,9 +863,12 @@
 
     document.addEventListener( "resume", function() {
         Fuse.routers.FleetRouter.controller.fleet.fetch({
+
+            // Dont show a loading message...
+            silent: true,
+
             success: function() {
-                Fuse.loading('hide');
-                alert(Fuse.lastRenderedPage);
+                Fuse.log(JSON.stringify(Fuse.routers.controller.trips));
                 Fuse.show(Fuse.lastRenderedPage);
                 delete Fuse.lastRenderedPage;
             }
