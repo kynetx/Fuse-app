@@ -868,7 +868,6 @@
             silent: true,
 
             success: function() {
-                Fuse.log(JSON.stringify(Fuse.routers.controller.trips));
                 Fuse.show(Fuse.lastRenderedPage);
                 delete Fuse.lastRenderedPage;
             }
