@@ -841,9 +841,22 @@
 
     document.addEventListener( "pause", function() {
         // Nuke whatever's in the collections...
-        Fuse.routers.FleetRouter.controller.trips = {};
-        Fuse.routers.FleetRouter.controller.fillups = {};
-        Fuse.routers.FleetRouter.controller.summaries = {};
+        var trips     = Fuse.routers.controller.trips,
+            fillups   = Fuse.routers.controller.fillups,
+            summaries = Fuse.routers.controller.summaries;
+
+        for (var k in trips) {
+            trips[k].reset();
+        }
+
+        for (var k in fillups) {
+            fillups[k].reset();
+        }
+
+        for (var k in summaries) {
+            summaries[k].reset();
+        }
+        
         Fuse.routers.FleetRouter.controller.fleet.reset();
 
         Fuse.lastRenderedPage = Backbone.history.fragment;
