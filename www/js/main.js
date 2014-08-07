@@ -860,14 +860,13 @@
         Fuse.routers.FleetRouter.controller.fleet.reset();
 
         Fuse.lastRenderedPage = Backbone.history.fragment;
-        Fuse.log(Fuse.lastRenderedPage);
     });
 
     document.addEventListener( "resume", function() {
         Fuse.routers.FleetRouter.controller.fleet.fetch({
             success: function() {
                 Fuse.loading('hide');
-                Fuse.log(Fuse.lastRenderedPage);
+                alert(Fuse.lastRenderedPage);
                 Fuse.show(Fuse.lastRenderedPage);
                 delete Fuse.lastRenderedPage;
             }
