@@ -840,6 +840,7 @@
     });
 
     document.addEventListener( "pause", function() {
+        Fuse.lastRenderedPage = Backbone.history.fragment;
         // Nuke whatever's in the collections...
         var trips     = Fuse.routers.controller.trips,
             fillups   = Fuse.routers.controller.fillups,
@@ -858,8 +859,6 @@
         }
 
         Fuse.routers.FleetRouter.controller.fleet.reset();
-
-        Fuse.lastRenderedPage = Backbone.history.fragment;
     });
 
     document.addEventListener( "resume", function() {
