@@ -185,6 +185,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.summaries.fuel.fetch({
 
                 success: function() {
+                    if (!__self__.summaries.fuel.length) {
+                        // If we didnt get back any summaries then we'll just use
+                        // the fleet summary
+                        __self__.summaries.fuel = __self__.fleet;
+                    }
                     __self__.views.FuelAggregate.render();
                 },
 
