@@ -18,8 +18,8 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
 
         render: function() {
             this.aggregates.length = 0;
-            this.collection.each(function ( vehicle ) {
-                this.renderAggregateItem( vehicle );
+            this.collection.each(function ( summary ) {
+                this.renderAggregateItem( summary );
             }, this );
 
             // Build our content.
@@ -39,12 +39,12 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
         },
 
         // This isnt going to work now.
-        renderAggregateItem: function( vehicle ) {
-            var aggregate = new FuelAggregateItemView({
-                model: vehicle
+        renderAggregateItem: function( summary ) {
+            var summary = new FuelAggregateItemView({
+                model: summary
             });
 
-            this.aggregates.push( aggregate.render().el );
+            this.aggregates.push( summary.render().el );
         },
 
         showFuelForVehicle: function( e ) {
