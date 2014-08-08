@@ -99,8 +99,28 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showTripAggregate: function() {
-            this.views.TripAggregate.collection = this.fleet;
-            this.views.TripAggregate.render();
+            var __self__ = this;
+
+            if (this.summaries.trip.length) {
+                this.views.TripAggregate.render();
+                return;
+            }
+
+            this.summaries.trip.fetch({
+
+                success: function() {
+                    if (!__self__.summaries.fuel.length) {
+                        // If we didnt get back any summaries then we'll just use
+                        // the fleet summary
+                        __self__.summaries.trip.reset(__self__.fleet.models);
+                    }
+                    __self__.views.TripAggregate.render();
+                },
+
+                error: function() {
+
+                }
+            });
         },
 
         showTrips: function( id ) {
