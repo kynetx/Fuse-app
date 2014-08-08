@@ -40,11 +40,11 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
 
         // This isnt going to work now.
         renderAggregateItem: function( summary ) {
-            var summary = new FuelAggregateItemView({
+            var s = new FuelAggregateItemView({
                 model: summary
             });
 
-            this.aggregates.push( summary.render().el );
+            this.aggregates.push( s.render().el );
         },
 
         showFuelForVehicle: function( e ) {
