@@ -21,7 +21,7 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
                             Fuse.loading('hide');
                             if (typeof res.skyCloudError === 'undefined') {
                                 if (typeof options.success === 'function') {
-                                    options.success();
+                                    options.success(res);
                                 }
                             } else {
                                 if (typeof options.error === 'function') {
