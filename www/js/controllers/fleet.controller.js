@@ -264,7 +264,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 alert( "An error occured while retrieving fillups: " + e );
             }
             
-            this.currentFillups.on( "add", this.views.Fuel.renderChart, this.views.Fuel );
+            // this.currentFillups.on( "change reset add remove", this.views.Fuel.renderChart, this.views.Fuel );
         },
 
         /**
