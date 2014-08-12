@@ -1,13 +1,13 @@
 <div class='title-bar'>
     <a class="absolute right ui-btn ui-icon-carat-r ui-btn-icon-notext"></a>
-    <h3 class='title-font white-font'><% if (profileName) profileName; else label; %></h3>
+    <h3 class='title-font white-font'><% if (typeof profileName !== 'undefined') profileName; else label; %></h3>
 </div>
 
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
-    <% if (fuellevel) %>
+    <% if (typeof fuellevel !== 'undefined' && fuellevel) %>
         <span class='margin-off'><%= fuellevel %>% fuel remaning</span>
     <% else %>
         <span class='margin-off'>Unable to read fuel remaning</span>
@@ -16,17 +16,17 @@
     <div class="icon-box dark">
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
-    <span class='margin-off'>$<% if (cost) FTH.commaSeperateNumber(cost); else "unknown"; %> spent on fuel</span>
+    <span class='margin-off'>$<% if (typeof cost !== 'undefined') FTH.commaSeperateNumber(cost); else "unknown"; %> spent on fuel</span>
 </div>
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
-    <span class='margin-off'><% FTH.commaSeperateNumber(distance) %> traveled</span>
+    <span class='margin-off'><% if (typeof distance !== 'undefined') FTH.commaSeperateNumber(distance) %> traveled</span>
 </div>
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
-    <span class='margin-off'><% FTH.commaSeperateNumber(volume) %> gallons filled</span>
+    <span class='margin-off'><% if (typeof volume !== 'undefined') FTH.commaSeperateNumber(volume) %> gallons filled</span>
 </div>
