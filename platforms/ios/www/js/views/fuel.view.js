@@ -41,10 +41,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 }
                 ]
             };
-            
+
             this.chart = new Chart( this.chartCanvas ).Line( this.chartData );
 
-            this.controller.currentFillups.on( "change reset add remove", this.views.Fuel.renderChart, this.views.Fuel );
+            this.controller.currentFillups.on( "change reset add remove", this.renderChart, this );
         },
 
         showFillupForm: function() {
