@@ -39,6 +39,10 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
                     options.error('API method not yet implemented');
                     break;
             }
+        },
+
+        parse: function(summaries) {
+            return summaries;
         }
     });
 });
