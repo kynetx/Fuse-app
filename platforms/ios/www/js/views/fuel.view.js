@@ -30,7 +30,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             Fuse.log(this.controller.currentFillups);
             throw "death";
             this.costs = this.controller.currentFillups.map(function( f ) { return f.get( "cost" ); });
-            this.dates = this.controller.currentFillups.map(function( f ) { return f.get( "timestamp" ).getDate(); });
+            this.dates = this.controller.currentFillups.map(function( f ) { return new Date(f.get( "timestamp" )).getDate(); });
 
             this.chartData = {
                 labels: this.dates,
