@@ -35,10 +35,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
                     volume: memo.volume + current.volume
                 };
             });
-
-            Fuse.log(this.total);
-            debugger;
-
+            
             this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );
         },
