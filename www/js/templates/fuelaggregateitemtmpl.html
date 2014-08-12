@@ -12,20 +12,22 @@
     <div class="icon-box dark">
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
-    <% if (typeof fuellevel !== 'undefined' && fuellevel) %>
+    <% if (typeof fuellevel !== 'undefined' && fuellevel) { %>
         <span class='margin-off'><%= fuellevel %>% fuel remaning</span>
-    <% else %>
+    <% } else { %>
         <span class='margin-off'>Unable to read fuel remaning</span>
+    <% } %>
 </div>
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
     <span class='margin-off'>
-        <% if (typeof cost !== 'undefined') %>
+        <% if (typeof cost !== 'undefined') { %>
             $<%= FTH.commaSeperateNumber(cost) %> spent on fuel 
-        <% else %>
+        <% } else { %>
             unknown amount spent on fuel
+        <% } %>
     </span>
 </div>
 <div class="vehicle-data">
@@ -33,10 +35,11 @@
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
     <span class='margin-off'>
-        <% if (typeof distance !== 'undefined') %>
-            <%= FTH.commaSeperateNumber(distance) %> traveled
-        <% else %>
+        <% if (typeof distance !== 'undefined') { %>
+            <%= FTH.commaSeperateNumber(distance) %> miles traveled
+        <% } else { %>
             unknown distance traveled
+        <% } %>
     </span>
 </div>
 <div class="vehicle-data">
@@ -44,9 +47,10 @@
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
     <span class='margin-off'>
-        <% if (typeof volume !== 'undefined') %>
+        <% if (typeof volume !== 'undefined') { %>
             <%= FTH.commaSeperateNumber(volume) %> gallons filled
-        <% else %>
+        <% } else { %>
             uknown amount of gas filled
+        <% } %>
     </span>
 </div>
