@@ -25,14 +25,14 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
             // Build our content.
 
             // We have to calculate fleet totals on our own.
-            // For now set it static.
-            this.total = {
-                gallons: 'Coming shortly...',
-                cost: 'Coming shortly...',
-                mpg: 'Coming shortly...',
-                cpg: 'Coming shortly...',
-                cpm: 'Coming shortly...'
-            };
+            this.total = this.collection.reduce(function(memo, current) {
+                return {
+                    cost: memo.get('cost') + current.get('cost'),
+                    distance: memo.get('distance') + current.get('distance'),
+                    fillups: memo.get('fillups') + current.get('fillups'),
+                    volume: memo.get('volume') + current.get('volume')
+                };
+            });
 
             this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );
