@@ -42,6 +42,7 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
         },
 
         parse: function(summaries) {
+            Fuse.log('In parse:', summaries);
             return summaries;
         }
     });
