@@ -112,6 +112,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     if (!__self__.summaries.trip.length) {
                         // If we didnt get back any summaries then we'll just use
                         // the fleet summary
+                        Fuse.log('No trip summaries, using fleet collection.');
                         __self__.summaries.trip.reset(__self__.fleet.models);
                     }
                     __self__.views.TripAggregate.render();
@@ -208,6 +209,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     if (!__self__.summaries.fuel.length) {
                         // If we didnt get back any summaries then we'll just use
                         // the fleet summary
+                        Fuse.log('No fuel summaries, using fleet collection.');
                         __self__.summaries.fuel.reset(__self__.fleet.models);
                     }
                     __self__.views.FuelAggregate.render();
