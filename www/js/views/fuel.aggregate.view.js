@@ -26,12 +26,12 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
 
             // We have to calculate fleet totals on our own.
             this.total = this.collection.toJSON().reduce(function(memo, current) {
-                return {
+                return new AggregateModel({
                     cost: memo.get('cost') + current.get('cost'),
                     distance: memo.get('distance') + current.get('distance'),
                     fillups: memo.get('fillups') + current.get('fillups'),
                     volume: memo.get('volume') + current.get('volume')
-                };
+                });
             });
 
             Fuse.log(this.total);
