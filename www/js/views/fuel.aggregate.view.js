@@ -32,7 +32,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
                     fillups: memo.get('fillups') + current.get('fillups'),
                     volume: memo.get('volume') + current.get('volume')
                 };
-            });
+            }).toJSON();
 
             Fuse.log(this.total);
             debugger;
