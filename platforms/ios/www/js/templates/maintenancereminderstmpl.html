@@ -1,0 +1,78 @@
+
+<% for ( var i = 0; i < data.length; ++i ) { %>
+    <div class='title-bar'>
+        <h3 class='title-font white-font'><%= data[ i ].vehicle %></h3>
+    </div>
+    <ul data-role='listview'>
+    <% if ( data[ i ].reminders ) { %>
+        <% for ( j in data[ i ].reminders ) { %>
+            <% if ( data[ i ].reminders[ j ].trigger.type === "mileage" ) { %>
+                <li class="reminder" data-role="button" data-theme="r" data-rid=<%= data[i].reminders[ j ].id + "," + data[i].id%>  data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= FTH.commaSeperateNumber( data[ i ].reminders[ j ].trigger.value ) %> miles</li>
+            <% } else { %>
+                <li class="reminder" data-role="button" data-theme="r" data-rid=<%= data[i].reminders[ j ].id + "," + data[i].id%> data-vehicle-idx=<%= i %> data-reminder-idx=<%= j %>><%= data[ i ].reminders[ j ].reason %> - <%= data[ i ].reminders[ j ].trigger.value %></li>
+            <% } %>
+        <% } %>
+    </ul>
+    <% } else { %>
+        <p class='white-font'>No reminders for this vehicle.</p>
+    <% } %>
+<% } %>
+<br>
+<br>
+<br>
+<a id="create-reminder" data-role="button" data-theme="b">Create Reminder</a>
+<!-- form for creating a reminder. -->
+<div id="reminder-form" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
+    <div class="ui-bar ui-bar-a">
+        <h3>Set Reminder</h3>
+    </div>
+    <div id="reminder-form-container">
+        <form id="reminder">
+            <div class="ui-field-contain">
+                <label for="flip">Is this reminder recurring?</label>
+                <select name="flip" id="flip" data-role="slider">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- This is the markup we need to show if the reminder is NOT recurring -->
+            <div id="not-recurring">
+                <label for="reminder-trigger-type">Remimd me:</label>
+                <select class="reminder-trigger-type" name="type">
+                    <option value="date">Remind on a date</option>
+                    <option value="mileage">Remind at a mileage</option>
+                </select>
+                <input id="reminder-trigger-date" name="date" type="date">
+                <input id="reminder-trigger-mileage" name="mileage" type="number" placeholder="At what mileage?" >
+            </div>
+
+            <!-- This is the markup we need to show if the reminder IS recurring -->
+            <div id="recurring">
+                <label for="reminder-trigger-type">Remimd me:</label>
+                <select class="reminder-trigger-type" name="type">
+                    <option value="month">Remind by month</option>
+                    <option value="miles">Remind by miles</option>
+                </select>
+                <input id="reminder-trigger-month" name="month" type="number" placeholder="Every how many months?">
+                <input id="reminder-trigger-miles" name="miles" type="number" placeholder="Every how many miles?" >
+            </div>
+
+            <label for="reminder-reason">Reason:</label>
+            <textarea id="reminder-reason" name="reason"></textarea>
+            <button type="submit" data-theme="b">Save</button>
+        </form>
+    </div>
+</div>
+
+<div id="reminder-complete-form" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
+    <div class="ui-bar ui-bar-a">
+        <h3 id='reminder-name'></h3>
+    </div>
+    <div id="reminder-form-container">
+        <form id="complete">
+            <label for="reminder-trigger-type">Remimder to complete</label>
+            <button type="submit" data-theme="b">Complete</button>
+        </form>
+    </div>
+</div>
