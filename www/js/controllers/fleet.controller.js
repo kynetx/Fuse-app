@@ -263,8 +263,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 this.views.Fleet.render();
                 alert( "An error occured while retrieving fillups: " + e );
             }
-            
-            // this.currentFillups.on( "change reset add remove", this.views.Fuel.renderChart, this.views.Fuel );
         },
 
         /**
