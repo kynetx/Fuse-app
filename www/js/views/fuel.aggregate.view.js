@@ -27,6 +27,13 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
             // We have to calculate fleet totals on our own.
             this.total = this.collection.map(function(summary) {
                 return summary.pick('cost', 'distance', 'fillups', 'volume');
+            }).reduce(function(memo, current) {
+                return {
+                    cost: memo.cost + current.cost,
+                    distance: memo.distance + current.distance,
+                    fillups: memo.fillups + current.fillups,
+                    volume: memo.volume + current.volume
+                };
             });
 
             Fuse.log(this.total);
