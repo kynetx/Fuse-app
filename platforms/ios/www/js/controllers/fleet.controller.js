@@ -206,6 +206,8 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.summaries.fuel.fetch({
 
                 success: function() {
+                    Fuse.log('Fuel summaries:', __self__.summaries.fuel);
+                    debugger;
                     if (!__self__.summaries.fuel.length) {
                         // If we didnt get back any summaries then we'll just use
                         // the fleet summary
