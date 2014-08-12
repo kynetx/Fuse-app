@@ -26,7 +26,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         renderChart: function() {
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
-            this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "cost" )); });
+            this.costs = this.controller.currentFillups.map(function( f ) { return parseInt(f.get( "cost" )); });
             this.dates = this.controller.currentFillups.map(function( f ) { return new Date(f.get( "timestamp" )).getDate(); });
 
             this.chartData = {
