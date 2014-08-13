@@ -15,11 +15,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
-            var name = this.model.get('profileName') || this.model.get('label');
-            this.header = name + " " + "Fuel";
         },
 
         render: function() {
+            var name = this.model.get('profileName') || this.model.get('label');
+            this.header = name + " " + "Fuel";
             this.content = this.template({ vehicle: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
             this.renderChart();
