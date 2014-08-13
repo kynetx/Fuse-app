@@ -238,7 +238,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 var __self__ = this;
 
-                Fuse.currentFuelContext = __self__.views.Fuel.model.get('channel');
+                Fuse.currentFuelContext = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; }).get('channel');
 
                 if ( this.currentFillups.length ) {
                     this.views.Fuel.render();
@@ -273,7 +273,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                             });
 
                         } else {
-                            Fuse.log('summaries had a length and.........', JSON.stringify(__self__.summaries.fuel, null, 4));
                             __self__.views.Fuel.model = __self__.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
                             __self__.views.Fuel.render();
                         }
