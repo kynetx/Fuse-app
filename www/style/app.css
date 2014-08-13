@@ -36,6 +36,7 @@ div > .dark-header:first-child {
 
 .center-text {
     text-align: center;
+    width: 100%;
 }
 
 /**

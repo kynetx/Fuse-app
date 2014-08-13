@@ -1,10 +1,18 @@
 <li>
     <a>
         <div style="height: 32px">
-            <p class='absolute top'><strong><% if ( typeof name !== "undefined" && name.length > 0 ) { %><%= name %>, <% } %><%= FTH.formatDate( endTime, { only: { time: true } } ) %></strong></p>
-            <p class='absolute top some-right'><% if ( typeof cost !== "undefined" ) { %> $<%= cost %><% } %></p>
+	    <!-- top -->
+  	    <p class='absolute top'>
+              <strong><%= FTH.formatDate( endTime, { only: { time: true } } ) %></strong>
+            </p>
+  	    <p class='absolute top some-right'>
+              <% if ( typeof name !== "undefined" && name.length > 0 ) { %><strong><%= name %></strong> <% } %>
+            </p>
+            
+	    <!-- bottom -->
             <p class='absolute bottom'><% if ( typeof mileage !== "undefined" && mileage ) { %> <%= parseFloat( mileage ).toFixed( 1 ) %> miles<% } %></p>
-            <p class='absolute bottom some-right'><% if ( typeof category !== "undefined" && category !== "none" ) { %> <%= category %><% } %></p> 
+            <p class='absolute bottom center-text'><% if ( typeof category !== "undefined" && category !== "none" ) { %><%= category %><% } %></p> 
+            <p class='absolute bottom some-right'><% if ( typeof cost !== "undefined" ) { %> $<%= parseFloat(cost).toFixed(2) %><% } %></p>
         </div>
     </a>
 </li>
