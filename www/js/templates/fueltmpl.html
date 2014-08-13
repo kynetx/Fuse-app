@@ -13,7 +13,13 @@
             <div class="icon-box dark">
                 <img src="style/images/fuel_icon_b.png" style="width: 16px;">
             </div>
-            <span class='margin-off'><%= vehicle.fuellevel %>% fuel remaining</span>
+            <span class='margin-off'>
+                <% if (typeof vehicle.fuellevel !== 'undefined' && vehicle.fuellevel) { %>
+                    <%= vehicle.fuellevel %>% fuel remaining
+                <% } else { %>
+                    unable to determine fuel remaining
+                <% } %>
+            </span>
         </div>
         <a class="trigger-fillup ui-btn ui-btn-b ui-corner-all" data-role="button" style='margin:4px;'>Fill 'er Up!</a>
     </div>
@@ -28,36 +34,56 @@
         <div class="icon-box dark">
             <img src="style/images/fuel_icon_b.png" style="width: 16px;">
         </div>
-        <span class='margin-off'>gallons of fuel</span>
+        <span class='margin-off'>
+            <% if (typeof vehicle.volume !== 'undefined') { %>
+                <%= vehicle.volume %> gallons of fuel purchased
+            <% } else { %>
+                unable to determine number of gallons purchased
+            <% } %>
+        </span>
     </div>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/cost_icon_b.png" style="width: 12px;">
         </div>
-        <span class='margin-off'>$ spent on fuel</span>
+        <span class='margin-off'>
+            <% if (typeof vehicle.cost !== 'undefined' && vehicle.cost) { %>
+                $<%= FTH.commaSeperateNumber(vehicle.cost) %> spent on fuel
+            <% } else { %>
+                unable to determine money spent on fuel
+            <% } %>
+        </span>
     </div>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/fuel_icon_b.png" style="width: 16px;">
         </div>
-        <span class='margin-off'>MPG</span>
+        <span class='margin-off'>
+            <% if (typeof vehicle.cost !== 'undefined' && vehicle.cost && typeof vehicle.distance !== 'undefined' && vehicle.distance) { %>
+                <%= Math.floor(vehicle.distance / vehicle.volume) %> MPG
+            <% } else { %>
+                unable to determine MPG
+            <% } %>
+        </span>
     </div>
 
-    <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+    <!-- 
+        <div class="vehicle-data">
+            <div class="icon-box dark">
+                <img src="style/images/cost_icon_b.png" style="width: 12px;">
+            </div>
+            <span class='margin-off'>$/gallon</span>
         </div>
-        <span class='margin-off'>$/gallon</span>
-    </div>
 
-    <div class="vehicle-data">
-        <div class="icon-box dark">
-            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        <div class="vehicle-data">
+            <div class="icon-box dark">
+                <img src="style/images/cost_icon_b.png" style="width: 12px;">
+            </div>
+            <span class='margin-off'>$/mile</span>
         </div>
-        <span class='margin-off'>$/mile</span>
-    </div>
+    -->
 </div>
 
 <div class='info-group'>

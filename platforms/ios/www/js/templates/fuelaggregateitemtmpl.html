@@ -1,10 +1,11 @@
 <div class='title-bar'>
     <a class="absolute right ui-btn ui-icon-carat-r ui-btn-icon-notext"></a>
     <h3 class='title-font white-font'>
-        <% if (typeof profileName !== 'undefined') %> 
+        <% if (typeof profileName !== 'undefined' && profileName) { %> 
             <%= profileName %> 
-        <% else %> 
+        <% } else { %> 
             <%= label %>
+        <% } %>
     </h3>
 </div>
 
