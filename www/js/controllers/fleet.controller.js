@@ -231,8 +231,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.fillups[ id ] = this.fillups[ id ] || new FillupCollection();
             this.currentFillups = this.fillups[ id ];
             this.views[ "Fuel" ] = new FuelView({
-                controller: this,
-                model: this.fleet.find(function( v ) { return v.get( "picoId" ) === id; }),
+                controller: this
             });
 
             try {
@@ -251,7 +250,32 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     fuelECI: Fuse.currentFuelContext,
                     
                     success: function( trips ) {
-                        __self__.views.Fuel.render();
+
+                        if (!__self__.summaries.fuel.length) {
+
+                            __self__.summaries.fuel.fetch({
+                                
+                                success: function() {
+                                    if (!__self__.summaries.fuel.length) {
+                                        // If we didnt get back any summaries then we'll just use
+                                        // the fleet summary
+                                        Fuse.log('No fuel summaries, using fleet collection.');
+                                        __self__.summaries.fuel.reset(__self__.fleet.models);
+                                    }
+
+                                    __self__.views.Fuel.model = __self__.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; });
+                                    __self__.views.Fuel.render();
+                                },
+
+                                error: function() {
+
+                                }
+                            });
+
+                        } else {
+                            __self__.views.Fuel.model = __self__.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
+                            __self__.views.Fuel.render();
+                        }
                     },
 
                     error: function( error ) {
