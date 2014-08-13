@@ -9,7 +9,7 @@
     </div>
     <span class='margin-off'>
         <!-- NaN !== NaN in JS so that's how we check if fuellevel is actually a number or not. -->
-        <% if (typeof fuellevel !== 'undefined' && parseInt(fuellevel) === parseInt(fuellevel)) %>
+        <% if (typeof fuellevel !== 'undefined' && parseInt(fuellevel) === parseInt(fuellevel)) { %>
             <%= fuellevel %>% fuel remaining
         <% } else { %>
             unable to determine fuel remaining
