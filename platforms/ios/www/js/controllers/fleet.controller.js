@@ -205,7 +205,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             this.summaries.fuel.fetch({
                 
-                success: function() {
+                success: function( summary ) {
                     if (!__self__.summaries.fuel.length) {
                         // If we didnt get back any summaries then we'll just use
                         // the fleet summary
@@ -249,7 +249,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                     fuelECI: Fuse.currentFuelContext,
                     
-                    success: function( trips ) {
+                    success: function( fillups ) {
 
                         if (!__self__.summaries.fuel.length) {
 
@@ -273,6 +273,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                             });
 
                         } else {
+                            Fuse.log('summaries had a length and.........', JSON.stringify(__self__.summaries.fuel, null, 4));
                             __self__.views.Fuel.model = __self__.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
                             __self__.views.Fuel.render();
                         }
