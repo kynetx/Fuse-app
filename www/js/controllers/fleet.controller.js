@@ -264,6 +264,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                                     }
 
                                     __self__.views.Fuel.model = __self__.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; });
+                                    debugger;
                                     __self__.views.Fuel.render();
                                 },
 
