@@ -236,6 +236,8 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             try {
 
+                debugger;
+
                 var __self__ = this;
 
                 Fuse.currentFuelContext = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; }).get('channel');
