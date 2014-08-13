@@ -800,6 +800,10 @@
         text: "About"
     },
     {
+        action: "shop",
+        text: "Shop"
+    },
+    {
         action: "settings",
         text: "Settings"
     },

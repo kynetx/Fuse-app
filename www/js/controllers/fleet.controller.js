@@ -235,14 +235,13 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             });
 
             try {
-
-                debugger;
-
+                
                 var __self__ = this;
 
                 Fuse.currentFuelContext = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; }).get('channel');
 
-                if ( this.currentFillups.length ) {
+                if ( this.currentFillups.length && this.summaries.fuel.length) {
+                    this.views.Fuel.model = this.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
                     this.views.Fuel.render();
                     return;
                 }
