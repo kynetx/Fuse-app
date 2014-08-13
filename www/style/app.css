@@ -290,6 +290,10 @@ li.vehicle-data {
     margin: 0px !important;
 }
 
+.vehicle-data .margin-off {
+    overflow: auto;
+}
+
 .padding-off {
     padding: 0px !important;
 }
