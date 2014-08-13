@@ -291,7 +291,8 @@ li.vehicle-data {
 }
 
 .vehicle-data .margin-off {
-    overflow: auto;
+    width: 50px;
+    word-wrap: break-word;
 }
 
 .padding-off {
