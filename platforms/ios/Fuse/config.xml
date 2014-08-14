@@ -31,6 +31,9 @@
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
+    </feature>
     <name>Fuse</name>
     <description>
         Connecting your car to the rest of the world.
@@ -40,7 +43,4 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <feature name="InAppBrowser">
-        <param name="ios-package" value="CDVInAppBrowser" />
-    </feature>
 </widget>
