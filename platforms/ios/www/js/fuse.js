@@ -924,7 +924,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     vid = $target.data("vid");
 
                 if (action === 'shop') {
-                    window.open('http://joinfuse.com/shop.html', '_blank');
+                    window.open('http://joinfuse.com/shop.html', '_system');
                 } else {
                     if (vid) {
                         this.show(action, {id: vid});
@@ -932,7 +932,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         this.show(action);
                     }
                 }
-                
+
             }, this);
 
             var args = Array.prototype.slice.call(arguments);
