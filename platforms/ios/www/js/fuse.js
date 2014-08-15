@@ -847,12 +847,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             if ( this.salientWaypoints.length > 1 ) {
                                 this.salientWaypoints.reverse();
                             }
-                        }
-                        
-                        routeRequest[ "waypoints" ] = this.salientWaypoints;
 
-                        var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
-                        Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
+                            var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
+                            routeRequest[ "waypoints" ] = this.salientWaypoints;
+
+                            Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
+                        }
                     } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
                     }
