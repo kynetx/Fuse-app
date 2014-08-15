@@ -208,8 +208,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 trip.fetch({
 
                     success: function(trip) {
-                        debugger;
-                        console.log(trip);
+                        __self__.views.Trip.render();
                     },
 
                     error: function(error) {
