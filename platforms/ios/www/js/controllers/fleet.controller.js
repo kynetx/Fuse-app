@@ -168,8 +168,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 this.trips[id].fetch({
 
-                    tripsECI: Fuse.currentTripContext,
-                    
                     success: function( trips ) {
                         __self__.views.Trips.render();
                     },
@@ -188,11 +186,43 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showTrip: function( id ) {
+            var trip = this.trips[this.views.Trips.model.get('picoId')].get( id )
             this.views[ "Trip" ] = new TripDetailView({
                 controller: this,
-                model: this.trips[this.views.Trips.model.get('picoId')].get( id )
+                model: trip
             });
-            this.views.Trip.render();
+
+            try {
+
+                var __self__ = this;
+
+                // If the trip model has a datum attribute, it means
+                // we've already fetched the trip via the API and don't
+                // need to bother with it again.
+                if (trip.get('datum')) {
+                    this.views.Trip.render();
+                    return;
+                }
+
+                // Otherwise let's fetch this thing!
+                this.trip.fetch({
+
+                    success: function(trip) {
+                        debugger;
+                        console.log(trip);
+                    },
+
+                    error: function(error) {
+                        alert('Fatal error while trying to retrieve trip from the API!');
+                        throw 'Fatal Error';
+                    }
+                });
+
+            } catch(e) {
+                Fuse.log(e);
+                this.views.Fleet.render();
+                alert('An error occured while retrieving the trip: ' + e);
+            }
         },
 
         showFuelAggregate: function() {

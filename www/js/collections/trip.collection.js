@@ -25,8 +25,8 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                     // Grab the trips.
                     API.tripsByDate(
 
-                        options.tripsECI, 
-
+                        Fuse.currentTripContext,
+                        
                         monthStart.toISOString(), 
 
                         now.toISOString(), 
