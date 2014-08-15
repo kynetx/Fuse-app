@@ -839,20 +839,21 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 }
                                 ++needle;
                             }
-
-                            // If no waypoints passed our salience filter, just use the sanatized waypoints as the salient waypoints.
-                            this.salientWaypoints = ( this.salientWaypoints.length ) ? this.salientWaypoints : this.sanatizedWaypoints;
-
-                            // Reverse our salient waypoints so they are in the correct chronological order again.
-                            if ( this.salientWaypoints.length > 1 ) {
-                                this.salientWaypoints.reverse();
-                            }
-
-                            var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
-                            routeRequest[ "waypoints" ] = this.salientWaypoints;
-
-                            Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
                         }
+
+                        // Determine final salient waypoints.
+                        this.salientWaypoints = ( this.salientWaypoints.length ) ? this.salientWaypoints : this.sanatizedWaypoints;
+
+                        // Reverse our salient waypoints so they are in the correct chronological order again.
+                        if ( this.salientWaypoints.length > 1 ) {
+                            this.salientWaypoints.reverse();
+                        }
+
+                        routeRequest[ "waypoints" ] = this.salientWaypoints;
+
+                        var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
+                        Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
+
                     } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
                     }
@@ -864,7 +865,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             sanatizeWaypoint: function( waypoint ) {
-                debugger;
                 var latLngSplit = waypoint.split( "," ),
                     lat = latLngSplit[ 0 ],
                     lng = latLngSplit[ 1 ];
