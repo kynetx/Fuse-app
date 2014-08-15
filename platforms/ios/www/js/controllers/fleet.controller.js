@@ -205,7 +205,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 }
 
                 // Otherwise let's fetch this thing!
-                this.trip.fetch({
+                trip.fetch({
 
                     success: function(trip) {
                         debugger;
