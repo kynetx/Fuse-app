@@ -801,7 +801,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  */
 
                  // Check if we have any additional waypoints at all.
-                 debugger;
                  if ( trip.waypoints ) {
                     Fuse.log( trip.waypoints.length, "additional waypoints available for trip:", trip.id );
 
@@ -848,12 +847,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                             if ( this.salientWaypoints.length > 1 ) {
                                 this.salientWaypoints.reverse();
                             }
-
-                            var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
-                            routeRequest[ "waypoints" ] = this.salientWaypoints;
-
-                            Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
                         }
+                        
+                        routeRequest[ "waypoints" ] = this.salientWaypoints;
+
+                        var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
+                        Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
                     } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
                     }
