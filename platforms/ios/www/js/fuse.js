@@ -806,16 +806,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     switch( Object.prototype.toString.call( trip.waypoints ) ) {
                         case "[object Array]":
-                        _.each( trip.waypoints, function(waypoint, idx) {
-                            this.sanatizeWaypoint( waypoint.value );
-                        }, this );
-                        break;
+                            _.each( trip.waypoints, function(waypoint, idx) {
+                                this.sanatizeWaypoint( waypoint.value );
+                            }, this );
+                            break;
                         case "[object Object]":
-                        this.sanatizeWaypoint( trip.waypoints.value );
-                        break;
+                            this.sanatizeWaypoint( trip.waypoints.value );
+                            break;
                         default:
-                        Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
-                        break;
+                            Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
+                            break;
                     }
 
                     /**
