@@ -30,8 +30,8 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         },
         
         render: function() {
-            
-            var waypoints = this.model.get('data').map(function(chunk) {
+
+            this.map.overlays[0]['waypoints'] = this.model.get('data').map(function(chunk) {
                 var block = chunk.datum;
                 return block[block.length - 1].value;
             });
