@@ -801,6 +801,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                  */
 
                  // Check if we have any additional waypoints at all.
+                 debugger;
                  if ( trip.waypoints ) {
                     Fuse.log( trip.waypoints.length, "additional waypoints available for trip:", trip.id );
 
