@@ -30,15 +30,11 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         },
         
         render: function() {
-
+            
             var waypoints = this.model.get('data').map(function(chunk) {
                 var block = chunk.datum;
                 return block[block.length - 1].value;
             });
-
-            console.log('waypoints:', waypoints);
-
-            throw 'ultimate death';
 
             this.content = this.template({ data: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
