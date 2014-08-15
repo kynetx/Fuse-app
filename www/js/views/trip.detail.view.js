@@ -31,10 +31,14 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
         
         render: function() {
 
-            if (this.model.get('waypoints')) {
-                this.map.overlays[0]['waypoints'] = this.model.get('waypoints');
-            }
-            
+            var waypoints = this.model.get('data').map(function(d) {
+                return d.datum[6].value;
+            });
+
+            console.log('waypoints:', waypoints);
+
+            throw 'ultimate death';
+
             this.content = this.template({ data: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
 

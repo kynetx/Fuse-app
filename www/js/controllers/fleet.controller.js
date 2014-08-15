@@ -199,7 +199,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                 // If the trip model has a datum attribute, it means
                 // we've already fetched the trip via the API and don't
                 // need to bother with it again.
-                if (trip.get('datum')) {
+                if (trip.get('data')) {
                     this.views.Trip.render();
                     return;
                 }
