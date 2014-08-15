@@ -864,6 +864,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             },
 
             sanatizeWaypoint: function( waypoint ) {
+                debugger;
                 var latLngSplit = waypoint.split( "," ),
                     lat = latLngSplit[ 0 ],
                     lng = latLngSplit[ 1 ];
