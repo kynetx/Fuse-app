@@ -1,5 +1,10 @@
 define([ "fuse" ], function( Fuse ) {
     return Fuse.Model.extend({
+
+        defaults: {
+            name: 'none',
+            category: 'none'
+        },
         
         sync: function(method, model, options) {
             switch(method) {
