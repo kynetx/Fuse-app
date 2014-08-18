@@ -1011,6 +1011,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         initMonthArrows: function() {
+            this.currentMonth = new Date().getMonth();
+            
             $(document).on('tap', '.month-bar > .right', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
