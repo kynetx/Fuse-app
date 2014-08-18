@@ -4,7 +4,7 @@
  * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
  * For details see https://kynetx.com
  */
- require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
+ require(["fuse", "fuseapi", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, API, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
 
     /**
      * Takes the output from $.fn.serializeArray() and turns
@@ -840,7 +840,9 @@
     
     // start the app.
     document.addEventListener( "deviceready", function() {
-        Fuse.init();
+        API.init(function() {
+            Fuse.init();
+        })
     });
 
     document.addEventListener( "pause", function() {
