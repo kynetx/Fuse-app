@@ -44,8 +44,10 @@
                      "dev":  "b16x23"
                     }
         };
-
-        return this.defaults.production ? rids[name].prod :  rids[name].dev;
+        
+        var version = API.fuse_version || (API.defaults.production ? "prod" : "dev");
+                
+        return rids[name][version];
     },
 
     // we'll retrieve the fleet and vehicle ECIs later and put them here...
@@ -53,21 +55,53 @@
     vehicles: [],
     vehicle_status: {},
     vehicle_summary: {},
+    fuse_version: null,
+
+    check_version: function(cb, options) {
+        cb = cb || function(){};
+        options = options || {};
+        if (API.fuse_version === null || options.force) {
+                API.log("Checking fuse version");
+        return CloudOS.skyCloud("a169x625", "rulesetListChannel", {picoChannel: CloudOS.defaultECI}, function(json) {
+            if(json.rids !== null)  {
+            var rids = json.rids;
+            API.log("Seeing ruleset list:", rids);
+            var found_dev_init = $.inArray("b16x16.prod", rids) >= 0 
+                                          || $.inArray("b16x16.dev", rids) >= 0;
+            if(found_dev_init) {
+                API.fuse_version = "dev";
+            } else {
+                API.fuse_version = "prod";
+            }
+            cb(API.fuse_version);
+            } else {
+            console.log("Seeing null ruleset list...using defaults");
+            cb(API.defaults.production ? "prod" : "dev");
+            }
+        });
+        } else {
+        API.log("Using cached value for version ", API.fuse_version);
+        cb(API.fuse_version);
+        return API.fuse_version;
+        }
+        
+    },
 
         init: function(cb)
         {
         cb = cb || function(){};
         API.log("Initializing...");
         $.when(
-        API.getProfile(CloudOS.defaultECI),
-        API.fleetChannel()
-        ).done(function(profile, eci){
-        API.log("Stored fleet channel", eci[0]);
-        API.log("Retrieved user profile", profile[0]);
-        cb(profile[0], eci[0]);
+        API.check_version()
+            ).then (
+        function(version) { 
+            return API.fleetChannel(); 
+        }
+        ).done(function(eci){
+        cb();
         API.log("Done initializing...");
         }).fail(function(res){
-        API.log("Initialization failed...", res);
+        console.log("Initialization failed...", res);
         });
         },
 
@@ -149,11 +183,42 @@
             {
         // note that because the channel is create asynchronously, processing callback does
         // NOT mean the channel exists. 
-                API.log("account initialized");
+                console.log("account initialized");
         if(response.length < 1) {
             throw "Account initialization failed";
         }
-        cb(response);
+        // function check(failed){ 
+        //     var fc = API.carvoyantOauthUrl() || "";
+        //     console.log("Got a URL: ", fc);
+        //     if(fc === "" && failed > 0) {
+        //  console.log("Waiting for url ", failed); 
+        //  setTimeout(check, 1000, failed--); // check again in a second
+        //     } 
+        // };
+        // setTimeout(check, 5000, 10); // try 10 times
+
+        function imgTimeout(imgDelay){
+            var fc = API.carvoyantOauthUrl() || "";
+            if (fc !== ""){
+            console.log("Got a good response ", fc);
+            cb(response);           
+            }
+            else{
+            // calls recursively waiting for the img to load
+            // increasing the wait time with each call, up to 10
+            imgDelay += 1000;
+            console.log("Trying with delay ", imgDelay);
+            if (imgDelay <= 10000){ // waits up to 20 seconds
+                setTimeout(imgTimeout, imgDelay, imgDelay);
+            }
+            else{
+                console.log("Never received Carvoyant URL");
+                cb(null);
+            }
+            }
+        }
+        imgTimeout(0);
+
             });
         },
 
@@ -390,15 +455,19 @@
     tripSummaries: function(year, month, cb, options) {
         cb = cb || function(){};
         options = options || {};
+        API.trip_summary = API.trip_summary || {};
+        API.trip_summary[year] = API.trip_summary[year] || {};
         if(isEmpty(API.vehicle_summary)) {
         options.force = true;
         }
+        var ts_cache = (typeof API.trip_summary[year] !== "undefined") ? API.trip_summary[year][month]
+                                                                            : null; 
         var args = {"month": month,
             "year": year
                };
-        return API.ask_fleet("tripSummaries", args, API.trip_summaries, function(json) {
+        return API.ask_fleet("tripSummaries", args, ts_cache, function(json) {
         if(typeof json.error === "undefined") {
-            API.trip_summaries = json;
+            API.trip_summary[year][month] = json;
             API.log("Retrieve trip summaries", json);
             cb(json);
         } else {
@@ -410,15 +479,19 @@
     fuelSummaries: function(year, month, cb, options) {
         cb = cb || function(){};
         options = options || {};
+        API.fuel_summary = API.fuel_summary || {};
+        API.fuel_summary[year] = API.fuel_summary[year] || {};
         if(isEmpty(API.vehicle_summary)) {
         options.force = true;
         }
+        var ts_cache = (typeof API.fuel_summary[year] !== "undefined") ? API.fuel_summary[year][month]
+                                                                            : null; 
         var args = {"month": month,
             "year": year
                };
-        return API.ask_fleet("fuelSummaries", args, API.fuel_summaries, function(json) {
+        return API.ask_fleet("fuelSummaries", args, ts_cache, function(json) {
         if(typeof json.error === "undefined") {
-            API.fuel_summaries = json;
+            API.fuel_summary[year][month] = json;
             API.log("Retrieve fuel summaries", json);
             cb(json);
         } else {
@@ -805,7 +878,7 @@
         cb = cb || function(){};
         options = options || {};
         if(typeof vehicle_channel === "undefined" || vehicle_channel === null ) {
-        throw "Vehicle channel is null; can't record fuel fillup for vehicle";
+        throw "Vehicle channel is null; can't update trip for vehicle";
         };
         if( typeof trip_id === "undefined" 
           ){

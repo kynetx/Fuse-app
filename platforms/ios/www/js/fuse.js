@@ -129,6 +129,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
+        switchDataMonth: function() {
+            console.log('Need to switch data month.');
+        },
+
         invoke: function( cb, context ) {
             this.callbacks[ cb ].apply( context, Array.prototype.slice.call( arguments, 2 ) );
         },
@@ -1006,6 +1010,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             });
         },
 
+        initMonthArrows: function() {
+            $(document).on('tap', '.month-bar > .right', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                Fuse.switchDataMonth();
+
+                e.handled = true;
+            });
+        },
+
         preventGhostTaps: function() {
             $(document).on("tap", function(e) {
                 if (e.handled) {
@@ -1036,8 +1051,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.initMenu();
             // add reusable map container to page.
             this.initMap();
-            // inialize tooltip plugin.
+            // initialize tooltip plugin.
             this.initTooltips();
+            // initialize month selector arrows.
+            this.initMonthArrows();
             // prevent ghost taps.
             this.preventGhostTaps();
             // add custom underscore template helpers.
