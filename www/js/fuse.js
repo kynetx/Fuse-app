@@ -137,7 +137,24 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         return;
                     }
 
+                    if (++Fuse.currentMonth > 11) {
+                        Fuse.currentMonth = 0;
+                        ++Fuse.currentYear;
+                    }
 
+                    this.show(Backbone.history.fragment);
+                    break;
+                case 'backward':
+
+                    if (--Fuse.currentMonth < 0) {
+                        Fuse.currentMonth = 11;
+                        --Fuse.currentYear;
+                    }
+                    
+                    this.show(Backbone.history.fragment);
+                    break;
+                default:
+                    alert('invalid date range selected, if the problem persists please contact us.');
                     break;
             };
         },
