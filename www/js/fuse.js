@@ -130,6 +130,23 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         switchDataMonth: function(direction) {
+            // Nuke whatever's in the collections...
+            var trips     = this.routers.FleetRouter.controller.trips,
+                fillups   = this.routers.FleetRouter.controller.fillups,
+                summaries = this.routers.FleetRouter.controller.summaries;
+
+            for (var k in trips) {
+                trips[k].reset();
+            }
+
+            for (var k in fillups) {
+                fillups[k].reset();
+            }
+
+            for (var k in summaries) {
+                summaries[k].reset();
+            }
+
             switch (direction) {
                 case 'forward':
                     if (this.currentMonth === new Date().getMonth()) {
