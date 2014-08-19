@@ -1011,7 +1011,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         initMonthArrows: function() {
-            this.currentMonth = new Date().getMonth();
+            var __self__ = this;
+
+            __self__.currentMonth = new Date().getMonth();
             
             $(document).on('tap', '.month-bar > .right, .month-bar > .left', function(e) {
                 e.preventDefault();
@@ -1020,11 +1022,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var $arrow = $(e.target);
 
                 if ($arrow.hasClass('left')) {
-                    this.switchDataMonth('backward');
+                    __self__.switchDataMonth('backward');
                 } else if ($arrow.hasClass('right')) {
-                    this.switchDataMonth('forward');
+                    __self__.switchDataMonth('forward');
                 } else {
-                    this.log('something went wrong with the month arrows.');
+                    __self__.log('something went wrong with the month arrows.');
                     return false;
                 }
 
