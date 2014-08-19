@@ -130,23 +130,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         },
 
         switchDataMonth: function(direction) {
-            // Nuke whatever's in the collections...
-            var trips     = this.routers.FleetRouter.controller.trips,
-                fillups   = this.routers.FleetRouter.controller.fillups,
-                summaries = this.routers.FleetRouter.controller.summaries;
-
-            for (var k in trips) {
-                trips[k].reset();
-            }
-
-            for (var k in fillups) {
-                fillups[k].reset();
-            }
-
-            for (var k in summaries) {
-                summaries[k].reset();
-            }
-
             switch (direction) {
                 case 'forward':
                     if (this.currentMonth === new Date().getMonth()) {
@@ -158,8 +141,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         Fuse.currentMonth = 0;
                         ++Fuse.currentYear;
                     }
-
-                    Fuse.currentView.render();
                     break;
                 case 'backward':
 
@@ -167,13 +148,13 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         Fuse.currentMonth = 11;
                         --Fuse.currentYear;
                     }
-
-                    Fuse.currentView.render();
                     break;
                 default:
                     alert('invalid date range selected, if the problem persists please contact us.');
                     break;
-            };
+            }
+
+            this.show(Backbone.history.fragment + '?force');
         },
 
         invoke: function( cb, context ) {
