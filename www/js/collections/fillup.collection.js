@@ -9,7 +9,8 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
                     Fuse.loading( "show", "Fetching fillups for the past month..." );
 
                     // Compute the timestamps for month to date.
-                    var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
+                    var monthStart = new Date(Fuse.currentYear, Fuse.currentMonth, 1),
+                        monthEnd = new Date(Fuse.currentYear, Fuse.currentMonth, 0);
 
                     var __self__ = this;
 
@@ -20,7 +21,7 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
 
                         monthStart.toISOString(), 
 
-                        now.toISOString(),
+                        monthEnd.toISOString(),
 
                         function( response ) {
                             Fuse.loading( "hide" );

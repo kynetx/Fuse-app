@@ -18,7 +18,8 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                     Fuse.loading( "show", "Fetching trips for the past month..." );
 
                     // Compute the timestamps for month to date.
-                    var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
+                    var monthStart = new Date(Fuse.currentYear, Fuse.currentMonth, 1),
+                        monthEnd = new Date(Fuse.currentYear, Fuse.currentMonth, 0);
 
                     var __self__ = this;
 
@@ -29,7 +30,7 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
                         
                         monthStart.toISOString(), 
 
-                        now.toISOString(), 
+                        monthEnd.toISOString(), 
 
                         function( response ) {
                             Fuse.loading( "hide" );

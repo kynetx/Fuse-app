@@ -1305,8 +1305,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             var now = new Date();
 
-            Fuse.currentMonth = now.getDate();
-            Fuse.currentYear = now.getFullYear();
+            this.currentMonth = now.getDate();
+            this.currentYear = now.getFullYear();
 
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
