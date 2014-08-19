@@ -1017,7 +1017,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 e.preventDefault();
                 e.stopPropagation();
 
-                Fuse.switchDataMonth();
+                var $arrow = $(e.target);
+
+                if ($arrow.hasClass('left')) {
+                    this.switchDataMonth('backward');
+                } else if ($arrow.hasClass('right')) {
+                    this.switchDataMonth('forward');
+                } else {
+                    this.log('something went wrong with the month arrows.');
+                    return false;
+                }
 
                 e.handled = true;
             });
