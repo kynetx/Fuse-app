@@ -142,7 +142,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         ++Fuse.currentYear;
                     }
 
-                    this.show(Backbone.history.fragment);
+                    Fuse.currentView.render();
                     break;
                 case 'backward':
 
@@ -151,7 +151,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         --Fuse.currentYear;
                     }
 
-                    this.show(Backbone.history.fragment);
+                    Fuse.currentView.render();
                     break;
                 default:
                     alert('invalid date range selected, if the problem persists please contact us.');
@@ -344,6 +344,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.enhance();
                 this.resetIcons();
                 Fuse.loading( "hide" );
+                Fuse.currentView = this;
             },
 
             cleanup: function() {
@@ -1038,7 +1039,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initMonthArrows: function() {
             var __self__ = this;
-            
+
             $(document).on('tap', '.month-bar > .right, .month-bar > .left', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
