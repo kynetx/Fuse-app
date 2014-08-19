@@ -150,7 +150,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         Fuse.currentMonth = 11;
                         --Fuse.currentYear;
                     }
-                    
+
                     this.show(Backbone.history.fragment);
                     break;
                 default:
@@ -1038,8 +1038,6 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         initMonthArrows: function() {
             var __self__ = this;
-
-            __self__.currentMonth = new Date().getMonth();
             
             $(document).on('tap', '.month-bar > .right, .month-bar > .left', function(e) {
                 e.preventDefault();
@@ -1322,7 +1320,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
             var now = new Date();
 
-            this.currentMonth = now.getDate();
+            this.currentMonth = now.getMonth();
             this.currentYear = now.getFullYear();
 
             // tell Backbone to start listening for hashchanges.
