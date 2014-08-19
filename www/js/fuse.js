@@ -129,8 +129,17 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }
         },
 
-        switchDataMonth: function() {
-            console.log('Need to switch data month.');
+        switchDataMonth: function(direction) {
+            switch (direction) {
+                case 'forward':
+                    if (this.currentMonth === new Date().getMonth()) {
+                        alert('Already at latest month.');
+                        return;
+                    }
+
+
+                    break;
+            };
         },
 
         invoke: function( cb, context ) {
@@ -1293,6 +1302,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     navigator.notification.alert( msg, null, "Fuse", "OK" );
                 };
             }
+
+            var now = new Date();
+
+            Fuse.currentMonth = now.getDate();
+            Fuse.currentYear = now.getFullYear();
 
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
