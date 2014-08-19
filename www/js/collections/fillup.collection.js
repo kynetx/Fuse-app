@@ -10,7 +10,7 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
 
                     // Compute the timestamps for month to date.
                     var monthStart = new Date(Fuse.currentYear, Fuse.currentMonth, 1),
-                        monthEnd = new Date(Fuse.currentYear, Fuse.currentMonth, 0);
+                        monthEnd = new Date(Fuse.currentYear, Fuse.currentMonth + 1, 0);
 
                     var __self__ = this;
 
