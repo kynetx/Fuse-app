@@ -99,7 +99,13 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showTripAggregate: function() {
-            var __self__ = this;
+            var __self__ = this,
+                args     = Array.prototype.slice.call(arguments);
+
+
+            if (args[0] === 'force') {
+                this.summaries.trip.reset();
+            }
 
             if (this.summaries.trip.length) {
                 this.views.TripAggregate.render();
@@ -157,9 +163,14 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             
             try {
 
-                var __self__ = this;
+                var __self__ = this,
+                    args     = Array.prototype.slice.call(arguments);
 
                 Fuse.currentTripContext = __self__.views.Trips.model.get('channel');
+
+                if (args[0] === 'force') {
+                    this.trips[id].reset();
+                }
 
                 if ( this.trips[id].length ) {
                     this.views.Trips.render();
@@ -225,7 +236,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showFuelAggregate: function() {
-            var __self__ = this;
+            var __self__ = this,
+                args     = Array.prototype.slice.call(arguments);
+
+            if (args[0] === 'force') {
+                this.summaries.fuel.reset();
+            }
 
             if (this.summaries.fuel.length) {
                 this.views.FuelAggregate.render();
@@ -265,9 +281,14 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             try {
                 
-                var __self__ = this;
+                var __self__ = this,
+                    args     = Array.prototype.slice.call(arguments);
 
                 Fuse.currentFuelContext = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; }).get('channel');
+
+                if (args[0] === 'force') {
+                    this.currentFillups.reset();
+                }
 
                 if ( this.currentFillups.length && this.summaries.fuel.length) {
                     this.views.Fuel.model = this.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
