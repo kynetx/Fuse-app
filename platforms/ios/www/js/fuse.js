@@ -159,7 +159,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             Fuse.flushTripCache    = true;
             Fuse.flushFuelCache    = true;
 
-            debugger;
+            // This is a workaround for backbone's route handling.
+            Backbone.history.stop();
+            Backbone.history.start();
 
             this.show(Backbone.history.fragment);
         },
