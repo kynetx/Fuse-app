@@ -7,7 +7,7 @@ define([ "fuse", "jquery", "underscore" ], function( Fuse, $, _ ) {
             "findcar/:id"               : "showFindCar",
             "trips(?*queryString)"      : "showTripAggregate",
             "trips/:id(?*queryString)"  : "showTrips",
-            "trip/:id(?*queryString"    : "showTrip",
+            "trip/:id(?*queryString)"   : "showTrip",
             "fuel(?*queryString)"       : "showFuelAggregate",
             "fuel/:id(?*queryString)"   : "showFuel",
             "maintenance"               : "showMaintenanceSplash",
