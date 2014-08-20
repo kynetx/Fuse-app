@@ -99,12 +99,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showTripAggregate: function() {
-            var __self__ = this,
-                args     = Array.prototype.slice.call(arguments);
+            var __self__ = this;
 
-
-            if (args[0] === 'force') {
+            if (Fuse.flushTripAggCache) {
                 this.summaries.trip.reset();
+                Fuse.flushTripAggCache = false;
             }
 
             if (this.summaries.trip.length) {
@@ -163,13 +162,13 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             
             try {
 
-                var __self__ = this,
-                    args     = Array.prototype.slice.call(arguments);
+                var __self__ = this;
 
                 Fuse.currentTripContext = __self__.views.Trips.model.get('channel');
 
-                if (args[0] === 'force') {
+                if (Fuse.flushTripCache) {
                     this.trips[id].reset();
+                    Fuse.flushTripCache = false;
                 }
 
                 if ( this.trips[id].length ) {
@@ -236,11 +235,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showFuelAggregate: function() {
-            var __self__ = this,
-                args     = Array.prototype.slice.call(arguments);
+            var __self__ = this;
 
-            if (args[0] === 'force') {
+            if (Fuse.flushFuelAggCache) {
                 this.summaries.fuel.reset();
+                Fuse.flushFuelAggCache = false;
             }
 
             if (this.summaries.fuel.length) {
@@ -281,13 +280,13 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
             try {
                 
-                var __self__ = this,
-                    args     = Array.prototype.slice.call(arguments);
+                var __self__ = this;
 
                 Fuse.currentFuelContext = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; }).get('channel');
 
-                if (args[0] === 'force') {
+                if (Fuse.flushFuelCache) {
                     this.currentFillups.reset();
+                    Fuse.flushFuelCache = false;
                 }
 
                 if ( this.currentFillups.length && this.summaries.fuel.length) {

@@ -154,7 +154,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     break;
             }
 
-            this.show(Backbone.history.fragment + '?force');
+            Fuse.flushTripAggCache = true;
+            Fuse.flushFuelAggCache = true;
+            Fuse.flushTripCache    = true;
+            Fuse.flushFuelCache    = true;
+
+            this.show(Backbone.history.fragment);
         },
 
         invoke: function( cb, context ) {
