@@ -159,6 +159,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             Fuse.flushTripCache    = true;
             Fuse.flushFuelCache    = true;
 
+            debugger;
+
             this.show(Backbone.history.fragment);
         },
 
