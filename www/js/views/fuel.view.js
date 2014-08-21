@@ -127,7 +127,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             $( "#gas-station" ).selectmenu( "refresh" );
 
             // If our model has a valid odometer value, pre-populate the odometer input.
-            var odometer = this.model.get( "odometer" );
+            var odometer = this.model.get( "odometer" ) || this.model.get( "mileage" );
             if ( odometer ) {
                 $( "#odometer" ).val( odometer );
             }

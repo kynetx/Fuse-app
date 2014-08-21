@@ -27,7 +27,7 @@
 
 <div class="fuel-data">
     <div class='title-bar'>
-        <h3 class='title-font white-font'>Fuel Averages</h3>
+        <h3 class='title-font white-font'>Fuel Totals</h3>
     </div>
 
     <div class="vehicle-data">
@@ -68,6 +68,17 @@
             <% } %>
         </span>
     </div>
+
+ <% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/document_icon_b.png" style="width: 16px;">
+        </div>
+        <span class='margin-off'>
+                <%= vehicle.fillups %> purchases
+        </span>
+    </div>
+  <% } %>
 
     <!-- 
         <div class="vehicle-data">
