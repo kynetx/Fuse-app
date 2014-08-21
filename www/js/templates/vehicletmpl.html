@@ -28,4 +28,61 @@
             <span class='margin-off'>Parked at <%= address %></span>
         <% } %>
     </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/dashboard_icon_b.png" title="Odometer"  style="width: 11px;">
+        </div>
+            <span class='margin-off'><%= mileage %> miles
+	    </span>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/dashboard_icon_b.png" title="voltage"  style="width: 11px;">
+        </div>
+          <% if (voltage != "unknown") { %>
+            <span class='margin-off'>Battery: <%= voltage %>V</span>
+          <% } else { %>
+            <span class='margin-off'>Battery: unknown</span>
+          <% } %>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/dashboard_icon_b.png" title="coolant temperature"  style="width: 11px;">
+        </div>
+          <% if (coolantTemperature != "unknown") { %>
+            <span class='margin-off'>Coolant: <%= coolantTemperature %>&deg;</span>
+          <% } else { %>
+            <span class='margin-off'>Coolant: unknown</span>
+          <% } %>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/time_icon_b.png" title="Last Running"  style="width: 11px;">
+        </div>
+            <span class='margin-off'>Last running on
+	      <%= FTH.formatDate( lastRunningTimestamp, { format: { with: "MMM DD YYYY" } } ) %> at 
+    	      <%= FTH.formatDate( lastRunningTimestamp, { only: { time: true } } ) %>
+	    </span>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/document_icon_b.png" title="License"  style="width: 11px;">
+        </div>
+            <span class='margin-off'>License: <%= license %>
+	    </span>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/document_icon_b.png" title="VIN"  style="width: 11px;">
+        </div>
+            <span class='margin-off'>VIN: <%= vin %>
+	    </span>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/document_icon_b.png" title="Device ID"  style="width: 11px;">
+        </div>
+            <span class='margin-off'>Device ID: <%= deviceId %>
+	    </span>
+    </li>
 </ul>
