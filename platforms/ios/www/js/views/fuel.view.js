@@ -43,7 +43,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 ]
             };
 
-            this.chart = new Chart( this.chartCanvas ).Line( this.chartData );
+            this.chart = new Chart( this.chartCanvas ).Line( this.chartData, {animation: false});
 
             this.controller.currentFillups.on( "change reset add remove", this.renderChart, this );
         },
