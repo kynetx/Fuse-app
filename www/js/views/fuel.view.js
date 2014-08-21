@@ -43,7 +43,9 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 ]
             };
 
-            this.chart = new Chart( this.chartCanvas ).Line( this.chartData, {animation: false});
+            Fuse.fuelChart = Fuse.fuelChart || new Chart( this.chartCanvas );
+
+            Fuse.fuelChart.Line( this.costs );
 
             this.controller.currentFillups.on( "change reset add remove", this.renderChart, this );
         },
