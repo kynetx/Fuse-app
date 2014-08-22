@@ -46,7 +46,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             if (Fuse.fuelChart) {
                 for (var i = 0; i < this.costs.length; ++i) {
                     Fuse.fuelChart.addData(this.costs[i], this.dates[i]);
-                    Fuse.fuelchart.removeData();
+                    Fuse.fuelChart.removeData();
                 }
             } else {
                 Fuse.fuelChart = new Chart( this.chartCanvas ).Line( this.chartData, {animation: false});
