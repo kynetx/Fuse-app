@@ -32,7 +32,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
                 return {
                     cost: memo.cost + current.cost,
                     mileage: memo.mileage + current.mileage,
-                    trips: memo.trip_count + current.trip_count
+                    trip_count: memo.trip_count + current.trip_count
                 };
             });            
             this.content = this.template({ total: this.total, aggs: this.aggregates });
