@@ -106,6 +106,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             var stationSelect = document.getElementById( "gas-station" ),
                 otherOption = document.createElement( "option" );
 
+
             otherOption.setAttribute( "value", "other" );
             otherOption.innerHTML = "Other";
 
@@ -127,7 +128,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             $( "#gas-station" ).selectmenu( "refresh" );
 
             // If our model has a valid odometer value, pre-populate the odometer input.
-            var odometer = this.model.get( "odometer" ) || this.model.get( "mileage" );
+            var odometer = this.model.get( "mileage" ) || this.model.get( "odometer" );
             if ( odometer ) {
                 $( "#odometer" ).val( odometer );
             }
