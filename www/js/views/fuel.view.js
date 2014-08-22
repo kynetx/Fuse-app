@@ -43,13 +43,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 ]
             };
 
-            if (Fuse.fuelChart) {
-                // for (var i = 0; i < this.costs.length; ++i) {
-                //    Fuse.fuelChart.addData([this.costs[i]], this.dates[i]);
-                // }
-            } else {
-                // Fuse.fuelChart = new Chart( this.chartCanvas ).Line( this.chartData );
-            }
+            this.chart = new Chart( this.chartCanvas ).Line( this.chartData );
 
             this.controller.currentFillups.on( "change reset add remove", this.renderChart, this );
         },
