@@ -26,12 +26,15 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
             // Build our content.
 
             // Calculate total aggregates...
-            this.total = {
-                time: 'Coming shortly',
-                cost: 'Coming shortly',
-                distance: 'Coming shortly'
-            };
-            
+            this.total = this.collection.map(function(summary) {
+                return summary.pick('cost', 'mileage', 'trip_count');
+            }).reduce(function(memo, current) {
+                return {
+                    cost: memo.cost + current.cost,
+                    mileage: memo.mileage + current.mileage,
+                    trips: memo.trip_count + current.trip_count
+                };
+            });            
             this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );
         },

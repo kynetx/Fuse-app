@@ -14,10 +14,34 @@
         <img src="style/images/trip_icon_b.png" style="width: 16px;">
     </div>
     <span class='margin-off'>
-        <% if (typeof distance !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(distance) %> miles traveled
+        <% if (typeof mileage !== 'undefined') { %>
+            <%= FTH.commaSeperateNumber(mileage) %> miles traveled
         <% } else { %>
             unknown distance traveled
+        <% } %>
+    </span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/trip_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+        <% if (typeof trip_count !== 'undefined') { %>
+            <%= FTH.commaSeperateNumber(trip_count) %> trips taken
+        <% } else { %>
+            unknown number of trips taken
+        <% } %>
+    </span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/trip_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+        <% if (typeof cost !== 'undefined') { %>
+            <%= FTH.commaSeperateNumber(cost) %> total trip cost
+        <% } else { %>
+            unknown total trip cost
         <% } %>
     </span>
 </div>
