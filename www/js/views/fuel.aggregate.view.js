@@ -29,12 +29,19 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
                 return summary.pick('cost', 'distance', 'fillups', 'volume');
             }).reduce(function(memo, current) {
                 return {
-                    cost: memo.cost + current.cost,
-                    distance: memo.distance + current.distance,
-                    fillups: memo.fillups + current.fillups,
-                    volume: memo.volume + current.volume
+                    cost: memo.cost + Number(current.cost),
+                    distance: memo.distance + Number(current.distance),
+                    fillups: memo.fillups + Number(current.fillups),
+                    volume: memo.volume + Number(current.volume)
                 };
-            });
+            },
+            {
+		cost: 0,
+                distance: 0, 
+                fillups: 0, 
+                volume: 0
+            }
+           );
 
             this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );

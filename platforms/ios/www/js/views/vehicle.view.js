@@ -7,6 +7,14 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
         template: _.template(vehicleTmpl),
         infoWindowTemplate: _.template(infoWindowTmpl),
 
+        events: {
+            "tap .trigger-fillup"   : "showFillupForm",
+            "submit #record-fillup" : "recordFillup",
+            "change #num-gallons"   : "updateCost",
+            "change #price-gallon"  : "updateCost"
+        },
+
+
         initialize: function() {
             Fuse.View.prototype.initialize.apply(this, arguments);
             this.header = this.model.get("profileName");
@@ -16,5 +24,38 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
         render: function() {
             Fuse.View.prototype.render.apply(this, arguments);
         },
+
+        showFillupForm: function() {
+            this.$popup = $( "#fuel-popup" );
+            if ( this.$popup.length ) {
+                this.getGasStations();
+            } else {
+                Fuse.log( "Popup could not be found." );
+            }
+        },
+
+        recordFillup: function(e) {
+            e.preventDefault();
+            // Grab the values we want.
+            var numGallons  = $( "#num-gallons" ).val(),
+                priceGallon = $( "#price-gallon" ).val(),
+                cost        = $( "#cost" ).val(),
+                odometer    = $( "#odometer" ).val(),
+                gasStation  = $( "#gas-station" ).val();
+
+            this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
+            this.$popup.popup( "close" );
+//            alert( "Success!" );
+        },
+
+        updateCost: function( e ) {
+            e.preventDefault();
+
+            var cost = ( $( "#num-gallons" ).val() * $( "#price-gallon" ).val() ).toFixed( 2 );
+            $( "#cost" ).val( cost );
+
+            e.handled = true;
+        }
+
     });
 });

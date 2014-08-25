@@ -25,7 +25,7 @@
     </div>
     <span class='margin-off'>
         <% if (typeof cost !== 'undefined') { %>
-            $<%= FTH.commaSeperateNumber(cost) %> spent on fuel 
+            $<%= FTH.commaSeperateNumber(Number(cost).toFixed(2)) %> spent on fuel 
         <% } else { %>
             unknown amount spent on fuel
         <% } %>
@@ -37,7 +37,7 @@
     </div>
     <span class='margin-off'>
         <% if (typeof distance !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(distance) %> miles traveled
+            <%= FTH.commaSeperateNumber(Number(distance).toFixed(1)) %> miles traveled
         <% } else { %>
             unknown distance traveled
         <% } %>
@@ -49,9 +49,21 @@
     </div>
     <span class='margin-off'>
         <% if (typeof volume !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(volume) %> gallons filled
+            <%= FTH.commaSeperateNumber(Number(volume).toFixed(0)) %> gallons filled
         <% } else { %>
             uknown amount of gas filled
+        <% } %>
+    </span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+        <% if (typeof volume !== 'undefined') { %>
+            <%= FTH.commaSeperateNumber(fillups) %> fillups
+        <% } else { %>
+            unknown number of fillups
         <% } %>
     </span>
 </div>

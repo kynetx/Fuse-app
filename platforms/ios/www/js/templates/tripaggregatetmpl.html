@@ -1,5 +1,12 @@
 <div class='ui-alt-icon month-bar'>
+ <% 
+    if ( Fuse.currentMonth !== new Date().getMonth() 
+       ||
+         Fuse.currentYear !== new Date().getFullYear()
+       ) {
+ %>
     <a id='next-month' class="absolute right ui-btn ui-icon-carat-r ui-btn-icon-notext"></a>
+ <% } %>
     <a id='previous-month' class="absolute left ui-btn ui-icon-carat-l ui-btn-icon-notext"></a>
     <h3 id='month' class='title-font center-text'> <%=Fuse.longMonths[Fuse.currentMonth]%> </h3>
 </div>
@@ -18,7 +25,7 @@
         <p  class='white-font'>Trips</p>
     </div>
     <div class='data-right'>
-        <h3 class='title-font white-font'>$<%= FTH.commaSeperateNumber( total.cost.toFixed(2) )  %></h3>
+        <h3 class='title-font white-font'>$<%= FTH.commaSeperateNumber( total.cost.toFixed(0) )  %></h3>
         <p  class='white-font'> Fuel Cost </p>
     </div>
 </div>
