@@ -10,15 +10,15 @@
 
 <div class='data-divide totals'>
     <div class='data-left'>
-        <h3 class='title-font white-font'><%= FTH.shortenNum( FTH.commaSeperateNumber( total.distance ) ) %></h3>
+        <h3 class='title-font white-font'><%= FTH.commaSeperateNumber( total.mileage.toFixed(0) )  %></h3>
         <p class='white-font'> Miles </p>
     </div>
     <div class='data-center'>
-        <h3 class='title-font white-font'><%= FTH.formatTime( total.time )%></h3>
-        <p  class='white-font'> <%= FTH.getTimeUnit( total.time )%></p>
+        <h3 class='title-font white-font'><%= FTH.commaSeperateNumber( total.trip_count.toFixed(0) )%></h3>
+        <p  class='white-font'>Trips</p>
     </div>
     <div class='data-right'>
-        <h3 class='title-font white-font'>$<%= FTH.shortenNum( FTH.commaSeperateNumber( total.cost ) ) %></h3>
+        <h3 class='title-font white-font'>$<%= FTH.commaSeperateNumber( total.cost.toFixed(2) )  %></h3>
         <p  class='white-font'> Fuel Cost </p>
     </div>
 </div>
