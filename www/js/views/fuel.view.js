@@ -18,10 +18,12 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         render: function() {
+	    Fuse.log("Rendering Fuel Page");
             var name = this.model.get('profileName') || this.model.get('label');
             this.header = name + " " + "Fuel";
             this.content = this.template({ vehicle: this.model.toJSON() });
             Fuse.View.prototype.render.call( this );
+	    Fuse.log("Rendering Fuel Chart");
             this.renderChart();
         },
 

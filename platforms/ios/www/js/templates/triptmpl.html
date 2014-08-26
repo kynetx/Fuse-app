@@ -5,8 +5,8 @@
   	    <p class='absolute top'>
               <strong><%= FTH.formatDate( endTime, { only: { time: true } } ) %></strong>
             </p>
-  	    <p class='absolute top some-right'>
-              <% if ( typeof name !== "undefined" && name !== null && name.length > 0 ) { %><strong><%= name %></strong> <% } %>
+  	    <p class='absolute top some-right' >
+              <% if ( typeof name !== "undefined" && name !== null && name.length > 0 ) { %><%= name %><% } %>
             </p>
             
 	    <!-- bottom -->
