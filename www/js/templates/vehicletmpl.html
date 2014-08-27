@@ -50,7 +50,7 @@
             <img src="style/images/dashboard_icon_b.png" title="coolant temperature"  style="width: 11px;">
         </div>
           <% if (coolantTemperature != "unknown") { %>
-            <span class='margin-off'>Coolant: <%= coolantTemperature %>&deg;</span>
+            <span class='margin-off'>Coolant: <%= coolantTemperature %>&deg; F </span>
           <% } else { %>
             <span class='margin-off'>Coolant: unknown</span>
           <% } %>
@@ -60,7 +60,7 @@
             <img src="style/images/time_icon_b.png" title="Last Running"  style="width: 11px;">
         </div>
             <span class='margin-off'>Last running 
-	      <%= FTH.formatDate( lastRunningTimestamp, { format: { with: "MMM DD YYYY" } } ) %> at 
+	      <%= FTH.formatDate( lastRunningTimestamp, { format: { with: "MMM DD YYYY" } } ) %>,  
     	      <%= FTH.formatDate( lastRunningTimestamp, { only: { time: true } } ) %>
 	    </span>
     </li>

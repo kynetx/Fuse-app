@@ -17,6 +17,10 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply(this, arguments);
+
+            var temp = _.clone(this.model.get('coolantTemperature'));
+	    this.model.set("coolantTemperature", ((temp * 9) / 5) + 32); // this is where we'd use a preference
+
             this.header = this.model.get("profileName");
             this.content = this.template(this.model.toJSON());
         },
