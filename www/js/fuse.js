@@ -1129,18 +1129,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return time;
                 },
 
-                shortenNum: function( numstr ) {
-                    var parts = numstr.split(",");
-                    var num = parts[0];
+                // shortenNum: function( numstr ) {
+                //     var parts = numstr.split(",");
+                //     var num = parts[0];
 
-                    for (var i=1; i<parts.length-1; i++) {
-                        num += ',';
-                        num += parts[i];
-                    }
+                //     for (var i=1; i<parts.length-1; i++) {
+                //         num += ',';
+                //         num += parts[i];
+                //     }
 
-                    num += "k";
-                    return num;
-                },
+                //     num += "k";
+                //     return num;
+                // },
 
                 /**
                  * Format a date for human consumption.

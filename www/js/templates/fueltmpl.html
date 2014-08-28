@@ -43,7 +43,7 @@
         </div>
         <span class='margin-off'>
             <% if (typeof vehicle.volume !== 'undefined') { %>
-                <%= vehicle.volume %> gallons of fuel purchased
+                <%= Number(vehicle.volume).toFixed(1) %> gallons of fuel purchased
             <% } else { %>
                 unable to determine number of gallons purchased
             <% } %>
@@ -56,7 +56,7 @@
         </div>
         <span class='margin-off'>
             <% if (typeof vehicle.cost !== 'undefined' && vehicle.cost) { %>
-                $<%= FTH.commaSeperateNumber(vehicle.cost) %> spent on fuel
+                $<%= FTH.commaSeperateNumber(Number(vehicle.cost).toFixed(2)) %> spent on fuel
             <% } else { %>
                 unable to determine money spent on fuel
             <% } %>
@@ -69,12 +69,41 @@
         </div>
         <span class='margin-off'>
             <% if (typeof vehicle.cost !== 'undefined' && vehicle.cost && typeof vehicle.distance !== 'undefined' && vehicle.distance) { %>
-                <%= Math.floor(vehicle.distance / vehicle.volume) %> MPG
+                <%= Math.floor(vehicle.distance / vehicle.volume).toFixed(1) %> MPG
             <% } else { %>
                 unable to determine MPG
             <% } %>
         </span>
     </div>
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>
+            <% if (typeof vehicle.cpg !== 'undefined' && vehicle.cpg) { %>
+                $<%= FTH.commaSeperateNumber(vehicle.cpg.toFixed(2)) %> per gallon
+            <% } else { %>
+                unable to determine money spent on fuel
+            <% } %>
+        </span>
+    </div>
+
+
+    <div class="vehicle-data">
+        <div class="icon-box dark">
+            <img src="style/images/cost_icon_b.png" style="width: 12px;">
+        </div>
+        <span class='margin-off'>
+            <% if (typeof vehicle.cpm !== 'undefined' && vehicle.cpm) { %>
+                $<%= FTH.commaSeperateNumber(vehicle.cpm.toFixed(2)) %> per mile
+            <% } else { %>
+                unable to determine money spent on fuel
+            <% } %>
+        </span>
+    </div>
+
+
 
  <% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
     <div class="vehicle-data">
