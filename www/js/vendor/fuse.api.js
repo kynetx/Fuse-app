@@ -11,7 +11,7 @@
         VERSION: 0.1,
 
         defaults: {
-            logging: true,  // false to turn off logging
+            logging: false,  // false to turn off logging
         production: false,
         hostsite: "http://windley.github.io/Joinfuse/carvoyant.html" // can't contain ,
         },
@@ -378,7 +378,7 @@
            cb(cache);
            return cache;
            }
-    },
+    }, 
 
     // tells the fleet to broadcast access tokens to the vehicles. 
     // should be done any time the access token is refreshed or a new vehicle is added
@@ -511,13 +511,24 @@
         p.profilePhoto = profile.myProfilePhoto;
         p.picoId = id;
 
+        console.log("Updating profile with ", p);
+
         // save it or push it, if not foundf
         var elementPos = API.vehicle_summary.map(function(x) {return x.picoId; }).indexOf(id);
         if (elementPos < 0) {
         API.vehicle_summary.push(p);
         } else {
+        p.vehicleId = API.vehicle_summary[elementPos].vehicleId;
+        p.lastRunningTimestamp = API.vehicle_summary[elementPos].lastRunningTimestamp;
+        p.lastWaypoint = API.vehicle_summary[elementPos].lastWaypoint; 
+        p.address = API.vehicle_summary[elementPos].address;
+        p.fuellevel = API.vehicle_summary[elementPos].fuellevel;
         API.vehicle_summary[elementPos] = p;
         }
+    },
+
+    invalidateVehicleSummary: function() {
+        API.vehicle_summary = null;
     },
 
     // ---------- manage and use vehicle picos ----------
@@ -531,6 +542,9 @@
             "mileage": mileage,
             "deviceId": deviceId
                };
+        if(typeof options.license === "string") {
+        json.license = options.license;
+        }
         API.fleetChannel(function(fleet_channel) {
         if(fleet_channel === null ) {
             throw "Fleet channel is null; can't add vehicle";
