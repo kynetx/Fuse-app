@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "collections/aggregate.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/loading.view", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/trip.detail.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view", "views/maintenance.reminders.view", "views/maintenance.history.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, AggregateCollection, FillupModel, VehicleModel, AggregateModel, LoadingView, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, TripDetailView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView, MaintenanceRemindersView, MaintenanceHistoryView ) {
+define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "collections/aggregate.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/loading.view", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/trip.detail.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view", "views/maintenance.reminders.view", "views/maintenance.history.view" ], function( Fuse, API, $, _, FleetCollection, TripCollection, FillupCollection, AggregateCollection, FillupModel, VehicleModel, AggregateModel, LoadingView, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, TripDetailView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView, MaintenanceRemindersView, MaintenanceHistoryView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -54,6 +54,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             var __self__ = this;
 
             if (Fuse.flushFleetCache) {
+                API.fleet_eci = null;
                 this.fleet.reset();
                 Fuse.flushFleetCache = false;
             }
