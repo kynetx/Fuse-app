@@ -15,7 +15,7 @@
     </div>
     <span class='margin-off'>
         <% if (typeof mileage !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(mileage) %> miles traveled
+            <%= FTH.commaSeperateNumber(Number(mileage).toFixed(1)) %> miles traveled
         <% } else { %>
             unknown distance traveled
         <% } %>
@@ -27,7 +27,7 @@
     </div>
     <span class='margin-off'>
         <% if (typeof trip_count !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(trip_count) %> trips taken
+            <%= FTH.commaSeperateNumber(Number(trip_count).toFixed(0)) %> trips taken
         <% } else { %>
             unknown number of trips taken
         <% } %>
@@ -39,7 +39,7 @@
     </div>
     <span class='margin-off'>
         <% if (typeof cost !== 'undefined') { %>
-            $<%= FTH.commaSeperateNumber(cost) %> total trip cost
+            $<%= FTH.commaSeperateNumber(Number(cost).toFixed(2)) %> total trip cost
         <% } else { %>
             unknown total trip cost
         <% } %>

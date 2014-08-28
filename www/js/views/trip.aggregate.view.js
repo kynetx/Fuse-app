@@ -30,11 +30,12 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
                 return summary.pick('cost', 'mileage', 'trip_count');
             }).reduce(function(memo, current) {
                 return {
-                    cost: memo.cost + current.cost,
-                    mileage: memo.mileage + current.mileage,
-                    trip_count: memo.trip_count + current.trip_count
+                    cost: memo.cost + Number(current.cost),
+                    mileage: memo.mileage + Number(current.mileage),
+                    trip_count: memo.trip_count + Number(current.trip_count)
                 };
-            });            
+            }, {cost: 0, mileage: 0, trip_count: 0}
+            );            
             this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );
         },

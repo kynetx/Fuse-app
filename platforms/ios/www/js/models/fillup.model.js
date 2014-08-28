@@ -28,7 +28,7 @@ define([ "fuse" ], function( Fuse ) {
                         function(res) {
                             Fuse.loading('hide');
                             if (typeof res.skyCloudError === 'undefined') {
-                                alert('Fillup succesfully added.');
+                                // alert('Fillup succesfully added.');
                                 if (typeof options.success === 'function') {
                                     options.success();
                                 }

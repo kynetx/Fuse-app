@@ -40,7 +40,7 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                 }
 
             }, function() {
-                alert('something went wrong!');
+                alert('Fatal error: network connectivity or other fatal problem.');
             });
 
             e.handled = true;
