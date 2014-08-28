@@ -486,6 +486,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
         mapTemplate: _.template(mapTmpl),
         menuTemplate: _.template(menuTmpl),
 
+	keyboard: {
+	    hide : function() {
+		Fuse.log("Hiding keyboard");
+		document.activeElement.blur();
+		$("input").blur();
+	    },
+	},
+
         map: {
 
             directionsService: new Maps.DirectionsService(),

@@ -87,21 +87,22 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             e.handled = true;
         },
 
-        nextMonth: function() {
-            if ( Fuse.currentMonth < 11 ) {
-                Fuse.currentMonth += 1;
-            } else {
-                Fuse.currentMonth = 0;
-            }
-        },
+	// I don't think these are used...
+        // nextMonth: function() {
+        //     if ( Fuse.currentMonth < 11 ) {
+        //         Fuse.currentMonth += 1;
+        //     } else {
+        //         Fuse.currentMonth = 0;
+        //     }
+        // },
 
-        previousMonth: function() {
-            if ( Fuse.currentMonth > 0 ) {
-                Fuse.currentMonth -= 1;
-            } else {
-                Fuse.currentMonth = 11;
-            }
-        },
+        // previousMonth: function() {
+        //     if ( Fuse.currentMonth > 0 ) {
+        //         Fuse.currentMonth -= 1;
+        //     } else {
+        //         Fuse.currentMonth = 11;
+        //     }
+        // },
 
         getGasStations: function() {
             // We make sure to bind the execution context of the callback to the view itself.

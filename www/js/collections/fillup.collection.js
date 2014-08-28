@@ -1,4 +1,4 @@
-define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
+define([ "fuse", "models/fillup.model", "fuseapi" ], function( Fuse, Fillup, API ) {
     return Fuse.Collection.extend({
         model: Fillup,
 
@@ -6,7 +6,7 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
             switch( method ) {
                 case "read":
                     // Fetch all the fillups ( month to date ).
-                    Fuse.loading( "show", "Fetching fillups for the past month..." );
+                    Fuse.loading( "show", "Fetching fillups for " + Fuse.longMonths[ Fuse.currentMonth ] );
 
                     // Compute the timestamps for month to date.
                     var monthStart = new Date(Fuse.currentYear, Fuse.currentMonth, 1),

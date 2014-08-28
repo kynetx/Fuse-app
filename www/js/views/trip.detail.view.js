@@ -60,6 +60,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/tripdetailtmpl.html" ],
             var name = this.$nameInput.val();
             this.model.save({ "name": name, "category": category }, { silent: true });
 
+	    Fuse.keyboard.hide();
             e.handled = true;
         }
     });
