@@ -75,7 +75,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
             this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
             this.$popup.popup( "close" );
-            alert( "Success!" );
+            // alert( "Success!" );
         },
 
         updateCost: function( e ) {
