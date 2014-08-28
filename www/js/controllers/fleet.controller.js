@@ -53,6 +53,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showFleet: function() {
             var __self__ = this;
 
+            if (Fuse.flushFleetCache) {
+                this.fleet.reset();
+                Fuse.flushFleetCache = false;
+            }
+
             if ( this.fleet.length ) {
                 this.views.Fleet.render();
                 return;

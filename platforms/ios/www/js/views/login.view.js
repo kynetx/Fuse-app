@@ -37,6 +37,11 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "cloudos", "text!templates/l
                 } else {
                     localStorage.setItem( "com.kynetx.cloudos.DEFAULT_ECI", response.OAUTH_ECI );
                     API.init(function() {
+                        Fuse.flushFleetCache = true;
+                        Fuse.flushTripCache = true;
+                        Fuse.flushTripAggCache = true;
+                        Fuse.flushFuelCache = true;
+                        Fuse.flushFuelAggCache = true;
                         Fuse.show( "fleet" );
                     });
                 }
