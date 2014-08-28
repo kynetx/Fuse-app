@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.html" ], function( Fuse, $, _, CloudOS, loginTmpl ) {
+define([ "fuse", "fuseapi", "jquery", "underscore", "cloudos", "text!templates/logintmpl.html" ], function( Fuse, API, $, _, CloudOS, loginTmpl ) {
     return Fuse.View.extend({
         id: "login",
         tagName: "div",
@@ -36,7 +36,9 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                     alert( 'Could not log you in. Please double check your email/password and try again.' );
                 } else {
                     localStorage.setItem( "com.kynetx.cloudos.DEFAULT_ECI", response.OAUTH_ECI );
-                    Fuse.show( "fleet" );
+                    API.init(function() {
+                        Fuse.show( "fleet" );
+                    });
                 }
 
             }, function() {
