@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		08C954C53E9E4BDCB2684CE9 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 283D402AAC4F429185885138 /* CDVNotification.m */; };
 		1467F0A8CD5E42E9BBFD8494 /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EFEF68DE17844364B5DF5217 /* CDVNotification.bundle */; };
@@ -539,7 +540,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Fuse;
-				PROVISIONING_PROFILE = "EF6718E2-6316-4C5A-9F82-38668CAEA833";
+				PROVISIONING_PROFILE = "0fe08da1-047e-4e5b-b83c-a0bfac90aaff";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -574,7 +575,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Fuse;
-				PROVISIONING_PROFILE = "EF6718E2-6316-4C5A-9F82-38668CAEA833";
+				PROVISIONING_PROFILE = "0fe08da1-047e-4e5b-b83c-a0bfac90aaff";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
