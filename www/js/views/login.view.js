@@ -36,6 +36,7 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "cloudos", "text!templates/l
                     alert( 'Could not log you in. Please double check your email/password and try again.' );
                 } else {
                     localStorage.setItem( "com.kynetx.cloudos.DEFAULT_ECI", response.OAUTH_ECI );
+                    API.fuse_version = null;
                     API.init(function() {
                         Fuse.flushFleetCache = true;
                         Fuse.flushTripCache = true;
