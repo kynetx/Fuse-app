@@ -29,10 +29,10 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
                 return summary.pick('cost', 'distance', 'fillups', 'volume');
             }).reduce(function(memo, current) {
                 return {
-                    cost: memo.cost + Number(current.cost),
-                    distance: memo.distance + Number(current.distance),
-                    fillups: memo.fillups + Number(current.fillups),
-                    volume: memo.volume + Number(current.volume)
+                    cost: memo.cost + ((typeof current.cost !== "undefined" && current.cost) ? Number(current.cost) : 0),
+                    distance: memo.distance + ((typeof current.distance !== "undefined" && current.distance) ? Number(current.distance) : 0),
+                    fillups: memo.fillups +  ((typeof current.fillups !== "undefined" && current.fillups) ? Number(current.fillups) : 0),
+                    volume: memo.volume +  ((typeof current.volume !== "undefined" && current.volume) ? Number(current.volume) : 0)
                 };
             },
             {

@@ -7,14 +7,12 @@
         <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
 <% } %>
     </div>
-    <span class='margin-off'>
         <!-- NaN !== NaN in JS so that's how we check if fuellevel is actually a number or not. -->
         <% if (typeof fuellevel !== 'undefined' && parseInt(fuellevel) === parseInt(fuellevel)) { %>
+          <span class='margin-off'>
             <%= fuellevel %>% fuel remaining
-        <% } else { %>
-            unable to determine fuel remaining
-        <% } %>
-    </span>
+          </span>
+       <% } %>
 </div>
 <div class="vehicle-data">
     <div class="icon-box dark">

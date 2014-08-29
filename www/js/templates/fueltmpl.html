@@ -84,7 +84,7 @@
             <% if (typeof vehicle.cpg !== 'undefined' && vehicle.cpg) { %>
                 $<%= FTH.commaSeperateNumber(vehicle.cpg.toFixed(2)) %> per gallon
             <% } else { %>
-                unable to determine money spent on fuel
+                unable to determine cost per gallon
             <% } %>
         </span>
     </div>
@@ -98,23 +98,25 @@
             <% if (typeof vehicle.cpm !== 'undefined' && vehicle.cpm) { %>
                 $<%= FTH.commaSeperateNumber(vehicle.cpm.toFixed(2)) %> per mile
             <% } else { %>
-                unable to determine money spent on fuel
+                unable to determine cost per mile
             <% } %>
         </span>
     </div>
 
 
 
- <% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/document_icon_b.png" style="width: 16px;">
         </div>
         <span class='margin-off'>
+            <% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
                 <%= vehicle.fillups %> purchases
+            <% } else { %>
+                no purchases recorded
+            <% } %>
         </span>
     </div>
-  <% } %>
 
     <!-- 
         <div class="vehicle-data">

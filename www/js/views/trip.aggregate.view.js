@@ -30,9 +30,9 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/trip.a
                 return summary.pick('cost', 'mileage', 'trip_count');
             }).reduce(function(memo, current) {
                 return {
-                    cost: memo.cost + Number(current.cost),
-                    mileage: memo.mileage + Number(current.mileage),
-                    trip_count: memo.trip_count + Number(current.trip_count)
+                    cost: memo.cost + ((typeof current.cost !== "undefined" && current.cost) ? Number(current.cost) : 0),
+                    mileage: memo.mileage + ((typeof current.mileage !== "undefined" && current.mileage) ? Number(current.mileage) : 0),
+                    trip_count: memo.trip_count + ((typeof current.trip_count !== "undefined" && current.trip_count) ? Number(current.trip_count) : 0)
                 };
             }, {cost: 0, mileage: 0, trip_count: 0}
             );            
