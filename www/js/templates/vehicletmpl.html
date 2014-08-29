@@ -71,6 +71,16 @@
     </li>
     <li class="vehicle-data">
         <div class="icon-box dark">
+            <img src="style/images/document_icon_b.png" title="Year/Make/Model"  style="width: 16px;">
+        </div>
+          <% if (typeof year !== "undefined" && year) { %>
+            <span class='margin-off'>Year manufactured: <%= year %>  </span>
+          <% } else { %>
+            <span class='margin-off'>Year manufactured: unknown </span>
+          <% } %>
+    </li>
+    <li class="vehicle-data">
+        <div class="icon-box dark">
             <img src="style/images/document_icon_b.png" title="License"  style="width: 16px;">
         </div>
             <span class='margin-off'>License: <%= license %>
