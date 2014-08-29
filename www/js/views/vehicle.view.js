@@ -18,8 +18,9 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
         initialize: function() {
             Fuse.View.prototype.initialize.apply(this, arguments);
 
-            var temp = _.clone(this.model.get('coolantTemperature'));
-	    this.model.set("coolantTemperature", ((temp * 9) / 5) + 32); // this is where we'd use a preference
+            var temp = Number(_.clone(this.model.get('coolantTemperature')));
+	    temp = (temp !== NaN) ? (((temp * 9) / 5) + 32).toFixed(1) : "unknown";   // this is where we'd use a preference
+	    this.model.set("coolantTemperatureFaren", temp);
 
             this.header = this.model.get("profileName");
             this.content = this.template(this.model.toJSON());
@@ -66,7 +67,7 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
             // We make sure to bind the execution context of the callback to the view itself.
             Fuse.loading( "show", "Getting nearby gas stations..." );
 //            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
-            this.populateGasStations.bind( this );
+            this.populateGasStations( [] );
         },
 
         populateGasStations: function( stations ) {
