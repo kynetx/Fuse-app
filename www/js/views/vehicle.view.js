@@ -31,7 +31,7 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
         },
 
         showFillupForm: function() {
-            this.$popup = $( "#fuel-popup" );
+            this.$popup = $( "#fuel-popup-vehicle" );
             if ( this.$popup.length ) {
                 this.getGasStations();
             } else {
