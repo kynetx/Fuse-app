@@ -1195,6 +1195,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                     case "MMM DD YYYY":
                                         formatted = Fuse.shortMonths[ out.getMonth() ] + " " + out.getDate() + " " + out.getFullYear();
                                         break;
+                                    case "MMM DD":
+                                        formatted = Fuse.shortMonths[ out.getMonth() ] + " " + out.getDate();
+                                        break;
                                     default:
                                         formatted = out;
                                         break;

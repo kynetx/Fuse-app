@@ -37,6 +37,7 @@
         <h3 class='title-font white-font'>Fuel Totals</h3>
     </div>
 
+ <% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
     <div class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/fuel_icon_b.png" style="width: 16px;">
@@ -69,7 +70,7 @@
         </div>
         <span class='margin-off'>
             <% if (typeof vehicle.cost !== 'undefined' && vehicle.cost && typeof vehicle.distance !== 'undefined' && vehicle.distance) { %>
-                <%= Math.floor(vehicle.distance / vehicle.volume).toFixed(1) %> MPG
+                <%= (vehicle.distance / vehicle.volume).toFixed(1) %> MPG
             <% } else { %>
                 unable to determine MPG
             <% } %>
@@ -103,7 +104,7 @@
         </span>
     </div>
 
-
+<% } %>
 
     <div class="vehicle-data">
         <div class="icon-box dark">
@@ -138,24 +139,25 @@
 <br>
 <br>
 
-<div class='info-group'>
+<% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
+ <div class='info-group'>
     <div class='vehicle-data' style="margin-left: 5px;">
-        Fillup Chart: <br>
-        (X-Axis: Date of Fillup, Y-Axis: Cost of Fillup)
+        Fillups (Date vs Cost): 
     </div>
     <canvas id="fillup-chart"></canvas>
 </div>
+<% } %>
 
 <div id="fuel-popup" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
     <h5>Record Fillup</h5>
     <div id="fuel-popup-guts">
         <form id="record-fillup">
-            <input id="num-gallons" type="number" placeholder="Gallons filled">
+            <input id="num-gallons" type="number" step="0.001" placeholder="Gallons filled">
             <span style="position:absolute;left:10%;top:25.39%;">$</span>
-            <input id="price-gallon" type="number" step="0.01" placeholder="Price/Gallon" style="padding-left:24px;">
+            <input id="price-gallon" type="number" step="0.001" placeholder="Price/Gallon" style="padding-left:24px;">
             <span style="position:absolute;left:10%;top:38.39%;">$</span>
-            <input id="cost" type="number" step="0.01" placeholder="Total Cost" style="padding-left:24px;">
-            <input id="odometer" type="number" placeholder="Current odometer reading" title="Odometer">
+            <input id="cost" type="number" step="0.001" placeholder="Total Cost" style="padding-left:24px;">
+            <input id="odometer" type="number" step="0.01" placeholder="Current odometer reading" title="Odometer">
             <select id="gas-station">
                 <option val="default" disabled>Gas Station (Choose one)</option>
             </select>
