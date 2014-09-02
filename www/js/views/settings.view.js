@@ -7,52 +7,76 @@ define([ "fuse", "jquery", "underscore", "text!templates/settingstmpl.html" ], f
         transition: "slide",
         template: _.template( settingsTmpl ),
 
-        events: {
-            "tap [data-action='settings-profile']"      : "showProfilePane",
-            "tap [data-action='settings-preferences']"  : "showPreferencePane",
-            "tap [data-action='settings-cars']"         : "showCarSettings",
-            "tap [data-action='settings-reminders']"    : "showRecurringMaintenanceReminderSettings",
-            "tap [data-action='settings-categories']"   : "showTripCategorySettings"
+	events: {
+	    "change #preference-debug-mode": "updateDebugMode"
         },
 
+        
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
+	    
         },
 
         render: function() {
             this.content = this.template();
+
             Fuse.View.prototype.render.call( this );
         },
 
-        showProfilePane: function( e ) {
-            Fuse.show( "settings-profile" );
+	updateDebugMode: function(e) {
+	   e.preventDefault();
+	   var val = $('#preference-debug-mode').val();
+	   console.log("Debug mode is " + val);
+	   e.handled = true;
+	},
 
-            e.handled = true;
-        },
 
-        showPreferencePane: function( e ) {
-            Fuse.show( "settings-preferences" );
+        // events: {
+        //     "tap [data-action='settings-profile']"      : "showProfilePane",
+        //     "tap [data-action='settings-preferences']"  : "showPreferencePane",
+        //     "tap [data-action='settings-cars']"         : "showCarSettings",
+        //     "tap [data-action='settings-reminders']"    : "showRecurringMaintenanceReminderSettings",
+        //     "tap [data-action='settings-categories']"   : "showTripCategorySettings"
+        // },
 
-            e.handled = true;
-        },
+        // initialize: function() {
+        //     Fuse.View.prototype.initialize.apply( this, arguments );
+        // },
 
-        showCarSettings: function( e ) {
-            Fuse.show( "settings-cars" );
+        // render: function() {
+        //     this.content = this.template();
+        //     Fuse.View.prototype.render.call( this );
+        // },
 
-            e.handled = true;
-        },
+        // showProfilePane: function( e ) {
+        //     Fuse.show( "settings-profile" );
 
-        showRecurringMaintenanceReminderSettings: function( e ) {
-            alert( "Recurring Maintenance Reminder setup/editing is under construction...coming shortly." );
-            Fuse.show( "settings-reminders" );
+        //     e.handled = true;
+        // },
 
-            e.handled = true;
-        },
+        // showPreferencePane: function( e ) {
+        //     Fuse.show( "settings-preferences" );
 
-        showTripCategorySettings: function( e ) {
-            Fuse.show( "settings-categories" );
+        //     e.handled = true;
+        // },
 
-            e.handled = true;
-        }
+        // showCarSettings: function( e ) {
+        //     Fuse.show( "settings-cars" );
+
+        //     e.handled = true;
+        // },
+
+        // showRecurringMaintenanceReminderSettings: function( e ) {
+        //     alert( "Recurring Maintenance Reminder setup/editing is under construction...coming shortly." );
+        //     Fuse.show( "settings-reminders" );
+
+        //     e.handled = true;
+        // },
+
+        // showTripCategorySettings: function( e ) {
+        //     Fuse.show( "settings-categories" );
+
+        //     e.handled = true;
+        // }
     });
 });

@@ -14,9 +14,9 @@
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
     <% if (typeof fuellevel !== 'undefined' && fuellevel) { %>
-        <span class='margin-off'><%= fuellevel %>% fuel remaning</span>
+        <span class='margin-off'><%= fuellevel %>% fuel remaining</span>
     <% } else { %>
-        <span class='margin-off'>Unable to determine fuel remaning</span>
+        <span class='margin-off'>Unable to determine fuel remaining</span>
     <% } %>
 </div>
 <div class="vehicle-data">
@@ -49,9 +49,9 @@
     </div>
     <span class='margin-off'>
         <% if (typeof volume !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(Number(volume).toFixed(0)) %> gallons filled
+            <%= FTH.commaSeperateNumber(Number(volume).toFixed(0)) %> gallons purchased
         <% } else { %>
-            uknown amount of gas filled
+            0 gallons purchased
         <% } %>
     </span>
 </div>
@@ -61,9 +61,9 @@
     </div>
     <span class='margin-off'>
         <% if (typeof volume !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(fillups) %> fillups
+            <%= FTH.commaSeperateNumber(fillups) %> fuel purchases
         <% } else { %>
-            unknown number of fillups
+            No fuel purchases
         <% } %>
     </span>
 </div>

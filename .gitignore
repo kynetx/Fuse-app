@@ -41,8 +41,10 @@ build/*
 xcuserdata
 profile
 *.moved-aside
-platforms/ios/www/
+platforms/ios/www/*
 platforms/ios/cordova/console.log
+www/dist
+www/dist/fuse.js
 IOS/www/
 
 # OSX

@@ -15,13 +15,15 @@ define([ "fuse", "models/trip.model", "fuseapi" ], function( Fuse, Trip, API ) {
             switch( method ) {
                 case "read":
                     // Fetch all the trips ( month to date ).
-                    Fuse.loading( "show", "Fetching trips for the past month..." );
+                    Fuse.loading( "show", "Fetching trips for " + Fuse.longMonths[ Fuse.currentMonth ]);
 
                     // Compute the timestamps for month to date.
                     var monthStart = new Date(Fuse.currentYear, Fuse.currentMonth, 1),
                         monthEnd = new Date(Fuse.currentYear, Fuse.currentMonth + 1, 0);
 
                     var __self__ = this;
+		
+		    Fuse.log("Current trip context ", Fuse.currentTripContext);
 
                     // Grab the trips.
                     API.tripsByDate(

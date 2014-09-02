@@ -35,7 +35,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         renderChart: function() {
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
             this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "cost" )); });
-            this.dates = this.controller.currentFillups.map(function( f ) { return new Date(FTH.formatDate(f.get( "timestamp" ))).getDate(); });
+            this.dates = this.controller.currentFillups
+                          .map(function( f ) { return FTH.formatDate(f.get( "timestamp" ) , { format: { with: "MMM DD" } }); });
 
             this.chartData = {
                 labels: this.dates,
@@ -50,7 +51,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 ]
             };
 
-            this.chart = new Chart( this.chartCanvas ).Line( this.chartData );
+            this.chart = new Chart( this.chartCanvas ).Bar( this.chartData );
 
             this.controller.currentFillups.on( "change reset add remove", this.renderChart, this );
         },
@@ -87,26 +88,28 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             e.handled = true;
         },
 
-        nextMonth: function() {
-            if ( Fuse.currentMonth < 11 ) {
-                Fuse.currentMonth += 1;
-            } else {
-                Fuse.currentMonth = 0;
-            }
-        },
+	// I don't think these are used...
+        // nextMonth: function() {
+        //     if ( Fuse.currentMonth < 11 ) {
+        //         Fuse.currentMonth += 1;
+        //     } else {
+        //         Fuse.currentMonth = 0;
+        //     }
+        // },
 
-        previousMonth: function() {
-            if ( Fuse.currentMonth > 0 ) {
-                Fuse.currentMonth -= 1;
-            } else {
-                Fuse.currentMonth = 11;
-            }
-        },
+        // previousMonth: function() {
+        //     if ( Fuse.currentMonth > 0 ) {
+        //         Fuse.currentMonth -= 1;
+        //     } else {
+        //         Fuse.currentMonth = 11;
+        //     }
+        // },
 
         getGasStations: function() {
             // We make sure to bind the execution context of the callback to the view itself.
             Fuse.loading( "show", "Getting nearby gas stations..." );
             Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
+//            this.populateGasStations( [] );
         },
 
         populateGasStations: function( stations ) {
@@ -136,9 +139,12 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
             // If our model has a valid odometer value, pre-populate the odometer input.
             var odometer = this.model.get( "mileage" ) || this.model.get( "odometer" );
+	    Fuse.log("Odometer: ", odometer);
             if ( odometer ) {
                 $( "#odometer" ).val( odometer );
             }
+
+	    Fuse.log("Opening ", this.$popup);
 
             Fuse.loading( "hide" );
             this.$popup.popup( "open" );
