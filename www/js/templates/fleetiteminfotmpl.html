@@ -1,22 +1,26 @@
+
+
+<!-- NaN !== NaN in JS so that's how we check if fuellevel is actually a number or not. -->
+<% if (typeof fuellevel !== 'undefined' && parseInt(fuellevel) === parseInt(fuellevel)) { %>
 <div class="vehicle-data">
-<% if (fuellevel >= 20) { %>
+  <% if (fuellevel >= 20) { %>
     <div class="icon-box dark">
-        <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
-<% } else { %>
+  <% } else { %>
     <div class="icon-box red">
+  <% } %>
         <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
-<% } %>
     </div>
-        <!-- NaN !== NaN in JS so that's how we check if fuellevel is actually a number or not. -->
-        <% if (typeof fuellevel !== 'undefined' && parseInt(fuellevel) === parseInt(fuellevel)) { %>
           <span class='margin-off'>
             <%= fuellevel %>% fuel remaining
           </span>
-       <% } %>
 </div>
+<% } %>
+
+
+<% if (typeof address !== 'undefined' && address) { %>
 <div class="vehicle-data">
     <div class="icon-box dark">
-        <img src="style/images/location_icon_b.png" title="View Fuel Statistics"  style="width: 11px;">
+        <img src="style/images/location_icon_b.png" title="View Location"  style="width: 11px;">
     </div>
 
     <% if (speed > 0) { %>
@@ -25,6 +29,16 @@
         <span class='margin-off'>Parked at <%= address %></span>
     <% } %>
 </div>
+<% } else { %>
+<div class="vehicle-data">
+    <div class="icon-box red">
+        <img src="style/images/location_icon_b.png" title="View Location"  style="width: 11px;">
+    </div>
+    <span class='margin-off'>Start the vehicle</span>
+</div>
+<% } %>
+
+
 <% if (alerts[0].code !== "0000") { %>
 <div class="vehicle-data">
     <div class="icon-box red">

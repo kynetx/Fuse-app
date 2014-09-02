@@ -6,6 +6,9 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
             this.type = options.type;
         },
 
+	comparator: function(a,b){ return a.get("profileName") > b.get("profileName"); },
+
+
         sync: function(method, model, options) {
             switch(method) {
                 case 'read':

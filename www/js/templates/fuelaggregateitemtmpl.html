@@ -9,6 +9,8 @@
     </h3>
 </div>
 
+<% if (typeof fillups !== 'undefined' && fillups) { %>
+
 <div class="vehicle-data">
     <div class="icon-box dark">
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
@@ -60,10 +62,21 @@
         <img src="style/images/fuel_icon_b.png" style="width: 16px;">
     </div>
     <span class='margin-off'>
-        <% if (typeof volume !== 'undefined') { %>
-            <%= FTH.commaSeperateNumber(fillups) %> fuel purchases
-        <% } else { %>
-            No fuel purchases
-        <% } %>
+           <%= FTH.commaSeperateNumber(fillups) %> fuel purchases
+        
     </span>
 </div>
+
+<% } else { %>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+            No fuel purchases
+    </span>
+    </span>
+</div>
+
+<% } %>
