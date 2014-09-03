@@ -23,6 +23,7 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
             }, this );
 
             // Build our content.
+	    Fuse.log("Rendering content for ", Fuse.currentMonth);
 
             // We have to calculate fleet totals on our own.
             this.total = this.collection.map(function(summary) {
