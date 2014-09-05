@@ -12,3 +12,5 @@ r.js -o www/style/build.js
 echo "CSS Built."
 echo "Building for all platforms..."
 cordova build
+echo "Install resources"
+cp -R Resources/splash/* platforms/ios/Fuse/Resources/splash/

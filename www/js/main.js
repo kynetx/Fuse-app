@@ -840,9 +840,12 @@
     
     // start the app.
     document.addEventListener( "deviceready", function() {
+	navigator.splashscreen.show();
         API.init(function() {
+	    navigator.splashscreen.hide();
             Fuse.init();
-        })
+        });
+	
     });
 
     document.addEventListener( "pause", function() {
