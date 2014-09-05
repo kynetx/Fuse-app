@@ -42,7 +42,7 @@ xcuserdata
 profile
 *.moved-aside
 platforms/ios/www/*
-platforms/ios/Fuse/*
+platforms/ios/Fuse/Plugins
 platforms/ios/cordova/console.log
 www/dist
 www/dist/fuse.js
