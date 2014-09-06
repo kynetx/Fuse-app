@@ -34,7 +34,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         renderChart: function() {
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
-            this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "cost" )); });
+            this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "mpg" )); });
             this.dates = this.controller.currentFillups
                           .map(function( f ) { return FTH.formatDate(f.get( "timestamp" ) , { format: { with: "MMM DD" } }); });
 
@@ -72,7 +72,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 priceGallon = $( "#price-gallon" ).val(),
                 cost        = $( "#cost" ).val(),
                 odometer    = $( "#odometer" ).val(),
-                gasStation  = $( "#gas-station" ).val();
+                gasStation  = $( "#gas-station" ).val() !== "other" ? $( "#gas-station" ).val() : $( "#gs-other" ).val();
+	        
 
             this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
             this.$popup.popup( "close" );
@@ -108,14 +109,14 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         getGasStations: function() {
             // We make sure to bind the execution context of the callback to the view itself.
             Fuse.loading( "show", "Getting nearby gas stations..." );
-            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
-//            this.populateGasStations( [] );
+//            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
+            this.populateGasStations( [] );
         },
 
         populateGasStations: function( stations ) {
+
             var stationSelect = document.getElementById( "gas-station" ),
                 otherOption = document.createElement( "option" );
-
 
             otherOption.setAttribute( "value", "other" );
             otherOption.innerHTML = "Other";
@@ -127,13 +128,15 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 opt.innerHTML = info;
                 stationSelect.appendChild( opt );
             });
-
-            stationSelect.appendChild( otherOption );
+	
+	    if($("#gas-station option[value=other]").length === 0) {
+		stationSelect.appendChild( otherOption );
+	    }
 
             Fuse.log( "Populated:", stationSelect, "with data:", stations );
 
             // Reset the form.
-            $( "#num-gallons, #price-gallon, #cost, #gas-station" ).val( "" );
+            $( "#num-gallons, #price-gallon, #cost, #gas-station, #gs-other" ).val( "" );
             $( "#gas-station > option[ val = 'default']" ).prop( "selected", true );
             $( "#gas-station" ).selectmenu( "refresh" );
 
@@ -143,6 +146,15 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             if ( odometer ) {
                 $( "#odometer" ).val( odometer );
             }
+
+	    $('#gs-other').parent().hide();
+	    $('select[id=gas-station]').change(function () {
+		if ($(this).val() == 'other') {
+		    $('#gs-other').parent().show();
+		} else {
+		    $('#gs-other').parent().hide();
+		}
+	    });
 
 	    Fuse.log("Opening ", this.$popup);
 
