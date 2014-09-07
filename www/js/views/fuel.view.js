@@ -109,8 +109,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         getGasStations: function() {
             // We make sure to bind the execution context of the callback to the view itself.
             Fuse.loading( "show", "Getting nearby gas stations..." );
-//            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
-            this.populateGasStations( [] );
+            Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
+//            this.populateGasStations( [] );
         },
 
         populateGasStations: function( stations ) {
