@@ -841,10 +841,12 @@
     // start the app.
     document.addEventListener( "deviceready", function() {
         CloudOS.retrieveSession();
+	navigator.splashscreen.show();
         API.init(function() {
-            console.log('API init was called');
+	    navigator.splashscreen.hide();
             Fuse.init();
-        })
+        });
+	
     });
 
     document.addEventListener( "pause", function() {
