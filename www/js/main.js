@@ -869,9 +869,11 @@
         }
 
         Fuse.routers.FleetRouter.controller.fleet.reset();
+        Backbone.history.stop();
     });
 
     document.addEventListener( "resume", function() {
+        Backbone.history.start();
         Fuse.routers.FleetRouter.controller.fleet.fetch({
 
             // Dont show a loading message...
