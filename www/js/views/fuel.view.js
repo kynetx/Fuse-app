@@ -60,8 +60,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             };
 
             this.chart = new Chart( this.chartCanvas ).Bar( this.chartData );
-
-            this.controller.currentFillups.on( "change reset add remove", this.refresh, this );
         },
 
         showFillupForm: function() {
@@ -85,6 +83,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
             this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
             this.$popup.popup( "close" );
+            this.refresh();
             // alert( "Success!" );
         },
 
