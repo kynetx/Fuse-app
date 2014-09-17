@@ -18,7 +18,7 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
 
                         now.getFullYear(),
 
-                        '0' + (now.getMonth() + 1),
+                        '0' + (Fuse.currentMonth + 1),
 
                         function(res) {
                             Fuse.loading('hide');
