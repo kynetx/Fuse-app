@@ -307,11 +307,16 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
                     
                     success: function( fillups ) {
 
-                        if (!__self__.summaries.fuel.length) {
+                        if (!__self__.summaries.fuel.length || Fuse.flushFuelAggCache) {
 
                             __self__.summaries.fuel.fetch({
                                 
                                 success: function() {
+
+                                    if (Fuse.flushFuelAggCache) {
+                                        Fuse.flushFuelAggCache = false;
+                                    }
+                                    
                                     if (!__self__.summaries.fuel.length) {
                                         // If we didnt get back any summaries then we'll just use
                                         // the fleet summary
