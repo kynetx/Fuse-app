@@ -16,7 +16,7 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
                     Fuse.loading('show', 'fetching ' + this.type + ' summaries');
                     API[this.type + 'Summaries'](
 
-                        now.getFullYear(),
+                        Fuse.currentYear,
 
                         '0' + (Fuse.currentMonth + 1),
 
