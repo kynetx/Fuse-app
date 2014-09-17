@@ -32,6 +32,14 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             this.renderChart();
         },
 
+        refresh: function() {
+            Fuse.flushFuelCache = true;
+            Fuse.flushFuelAggCache = true;
+            Backbone.history.stop();
+            Backbone.history.start();
+            Fuse.show(Backbone.history.fragment);
+        },
+
         renderChart: function() {
             this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
             this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "mpg" )); });
@@ -53,7 +61,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
             this.chart = new Chart( this.chartCanvas ).Bar( this.chartData );
 
-            this.controller.currentFillups.on( "change reset add remove", this.renderChart, this );
+            this.controller.currentFillups.on( "change reset add remove", this.refresh, this );
         },
 
         showFillupForm: function() {
