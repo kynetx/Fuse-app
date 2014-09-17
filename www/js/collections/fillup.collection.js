@@ -2,7 +2,7 @@ define([ "fuse", "models/fillup.model", "fuseapi" ], function( Fuse, Fillup, API
     return Fuse.Collection.extend({
         model: Fillup,
 
-	comparator: function(a,b){ return a.get("timestamp") < b.get("timestamp"); },
+	comparator: function(a,b){ return a.get("timestamp") > b.get("timestamp"); },
 
         sync: function( method, model, options ) {
             switch( method ) {

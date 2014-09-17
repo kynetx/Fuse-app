@@ -7,17 +7,6 @@
         <% } %>
     </li>
     <li class="vehicle-data">
-    <% if (fuellevel >= 20) { %>
-        <div class="icon-box dark">
-            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
-    <% } else { %>
-        <div class="icon-box red">
-            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
-    <% } %>
-        </div>
-        <span class='margin-off'><%= fuellevel %>% fuel remaining</span>
-    </li>
-    <li class="vehicle-data">
         <div class="icon-box dark">
             <img src="style/images/location_icon_b.png" title="Location"  style="width: 14px;">
         </div>
@@ -35,6 +24,19 @@
             <span class='margin-off'><%= mileage %> miles
 	    </span>
     </li>
+<% if (typeof fuellevel !== 'undefined' && fuellevel) { %>
+    <li class="vehicle-data">
+    <% if (fuellevel >= 20) { %>
+        <div class="icon-box dark">
+            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+    <% } else { %>
+        <div class="icon-box red">
+            <img src="style/images/fuel_icon_b.png" title="View Fuel Statistics" style="width: 16px;">
+    <% } %>
+        </div>
+        <span class='margin-off'><%= fuellevel %>% fuel remaining</span>
+    </li>
+<% } %>
     <li class="vehicle-data">
      <% if (voltage >= 12.1) { %>
         <div class="icon-box dark">

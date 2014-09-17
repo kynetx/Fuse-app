@@ -202,7 +202,7 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
         },
 
         showTrip: function( id ) {
-            var trip = this.trips[this.views.Trips.model.get('picoId')].get( id )
+            var trip = this.trips[this.views.Trips.model.get('picoId')].get( id );
             this.views[ "Trip" ] = new TripDetailView({
                 controller: this,
                 model: trip

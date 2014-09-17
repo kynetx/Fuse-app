@@ -50,7 +50,6 @@ define(["fuse", "jquery", "underscore", "models/vehicle.model", "text!templates/
 
             this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
             this.$popup.popup( "close" );
-//            alert( "Success!" );
         },
 
         updateCost: function( e ) {
