@@ -843,6 +843,7 @@
         CloudOS.retrieveSession();
         API.init(function() {
             Fuse.init();
+            navigator.splashscreen.hide();
         });
 	
     });
