@@ -841,9 +841,7 @@
     // start the app.
     document.addEventListener( "deviceready", function() {
         CloudOS.retrieveSession();
-	navigator.splashscreen.show();
         API.init(function() {
-	    navigator.splashscreen.hide();
             Fuse.init();
         });
 	
