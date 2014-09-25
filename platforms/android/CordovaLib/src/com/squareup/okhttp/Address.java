@@ -27,7 +27,7 @@ import static com.squareup.okhttp.internal.Util.equal;
 /**
  * A specification for a connection to an origin server. For simple connections,
  * this is the server's hostname and port. If an explicit proxy is requested (or
- * {@link Proxy#NO_PROXY no proxy} is explicitly requested), this also includes
+ * {@link Proxy#NO_PROXY no proxy} is explicitly requested), this also includefs
  * that proxy information. For secure connections the address also includes the
  * SSL socket factory and hostname verifier.
  *
@@ -120,13 +120,13 @@ public final class Address {
           && this.uriPort == that.uriPort
           && equal(this.sslSocketFactory, that.sslSocketFactory)
           && equal(this.hostnameVerifier, that.hostnameVerifier)
-          && equal(this.authenticator, that.authenticator)
-          && equal(this.transports, that.transports);
-    }
-    return false;
+      && equal(this.authenticator, that.authenticator)
+              && equal(this.transports, that.transports);
   }
+    return false;
+}
 
-  @Override public int hashCode() {
+    @Override public int hashCode() {
     int result = 17;
     result = 31 * result + uriHost.hashCode();
     result = 31 * result + uriPort;
