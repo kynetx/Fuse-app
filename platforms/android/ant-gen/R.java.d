@@ -1,4 +1,4 @@
-/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-gen/com/kynetx/fuse/R.java \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-gen/com/kynetx/fuseapp/R.java \
  : /Users/ako/Code/Kynetx/Fuse-app/platforms/android/res/drawable/icon.png \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/res/drawable-hdpi/ic_action_next_item.png \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/res/drawable-hdpi/ic_action_previous_item.png \

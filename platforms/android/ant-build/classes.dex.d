@@ -6,6 +6,13 @@
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuse/R$string.class \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuse/R$xml.class \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuse/R.class \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuseapp/BuildConfig.class \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuseapp/Fuse.class \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuseapp/R$attr.class \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuseapp/R$drawable.class \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuseapp/R$string.class \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuseapp/R$xml.class \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/com/kynetx/fuseapp/R.class \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/org/apache/cordova/dialogs/Notification$1$1.class \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/org/apache/cordova/dialogs/Notification$1$2.class \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/ant-build/classes/org/apache/cordova/dialogs/Notification$1.class \
