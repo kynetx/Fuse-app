@@ -33,7 +33,6 @@
 		662CBB45EB3042E99B9DDE78 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA9F77FAC51469390EC9F26 /* CDVInAppBrowser.m */; };
 		6B051B0CFD684BF48804420C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348BCD2F812446D3970765F1 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		790974A418FE1C410028429C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 790974A318FE1C410028429C /* Images.xcassets */; };
-		79721EC419232A3A007D8E99 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE290A817E447119051CC58 /* CDVLocation.m */; };
 		799226E619CB8DF400E73E10 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 799226E519CB8DF400E73E10 /* CDVSplashScreen.m */; };
 		7E7966DE1810823500FA85AD /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D41810823500FA85AD /* icon-40.png */; };
 		7E7966DF1810823500FA85AD /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D51810823500FA85AD /* icon-40@2x.png */; };
@@ -455,7 +454,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79721EC419232A3A007D8E99 /* CDVLocation.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
@@ -544,7 +542,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Fuse;
-				PROVISIONING_PROFILE = "c111f2f7-4983-4973-95b4-71a0ef5d0312";
+				PROVISIONING_PROFILE = "99be5c75-67f6-4433-92cf-89e33ea9062e";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -579,7 +577,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Fuse;
-				PROVISIONING_PROFILE = "c111f2f7-4983-4973-95b4-71a0ef5d0312";
+				PROVISIONING_PROFILE = "99be5c75-67f6-4433-92cf-89e33ea9062e";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 			};
