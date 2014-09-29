@@ -43,7 +43,8 @@ module.exports.metadata =
     "org.apache.cordova.dialogs": "0.2.8-dev",
     "org.apache.cordova.inappbrowser": "0.5.2-dev",
     "org.apache.cordova.splashscreen": "0.3.2",
-    "org.apache.cordova.vibration": "0.3.9-dev"
+    "org.apache.cordova.vibration": "0.3.9-dev",
+    "org.apache.cordova.geolocation": "0.3.10"
 }
 // BOTTOM OF METADATA
 });
