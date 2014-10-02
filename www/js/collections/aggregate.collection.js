@@ -13,13 +13,20 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
             switch(method) {
                 case 'read':
                     var now = new Date();
+                    var formattedCurrentMonth;
+
+                    if (Fuse.currentMonth < 10) {
+                        formattedCurrentMonth = '0' + (Fuse.currentMonth + 1);
+                    } else {
+                        formattedCurrentMonth = Fuse.currentMonth + 1;
+                    }
                     Fuse.loading('show', 'fetching ' + this.type + ' summaries');
                     API[this.type + 'Summaries'](
 
                         Fuse.currentYear,
 
-                        '0' + (Fuse.currentMonth + 1),
-
+                        formattedCurrentMonth,
+                        
                         function(res) {
                             Fuse.loading('hide');
                             if (typeof res.skyCloudError === 'undefined') {
