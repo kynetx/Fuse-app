@@ -15,7 +15,7 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
                     var now = new Date();
                     var formattedCurrentMonth;
 
-                    if (Fuse.currentMonth < 10) {
+                    if ((Fuse.currentMonth + 1) < 10) {
                         formattedCurrentMonth = '0' + (Fuse.currentMonth + 1);
                     } else {
                         formattedCurrentMonth = Fuse.currentMonth + 1;
