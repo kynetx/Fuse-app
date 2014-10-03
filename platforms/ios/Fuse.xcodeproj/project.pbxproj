@@ -544,7 +544,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Fuse;
-				PROVISIONING_PROFILE = "f93a9842-e127-4347-bd47-7f7dbb5ada45";
+				PROVISIONING_PROFILE = "50dc481b-2276-48b1-a152-a43ad09ebe67";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -579,7 +579,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Fuse;
-				PROVISIONING_PROFILE = "f93a9842-e127-4347-bd47-7f7dbb5ada45";
+				PROVISIONING_PROFILE = "50dc481b-2276-48b1-a152-a43ad09ebe67";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s";
 			};
