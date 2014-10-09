@@ -296,7 +296,6 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
                 }
 
                 if (this.currentFillups.length && this.summaries.fuel.length) {
-                    alert('ended up here.');
                     this.views.Fuel.model = this.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
                     this.views.Fuel.render();
                     return;
