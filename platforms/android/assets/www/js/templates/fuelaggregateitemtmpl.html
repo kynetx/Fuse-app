@@ -1,0 +1,82 @@
+<div class='title-bar'>
+    <a class="absolute right ui-btn ui-icon-carat-r ui-btn-icon-notext"></a>
+    <h3 class='title-font white-font'>
+        <% if (typeof profileName !== 'undefined' && profileName) { %> 
+            <%= profileName %> 
+        <% } else { %> 
+            <%= label %>
+        <% } %>
+    </h3>
+</div>
+
+<% if (typeof fillups !== 'undefined' && fillups) { %>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <% if (typeof fuellevel !== 'undefined' && fuellevel) { %>
+        <span class='margin-off'><%= fuellevel %>% fuel remaining</span>
+    <% } else { %>
+        <span class='margin-off'>Unable to determine fuel remaining</span>
+    <% } %>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+        <% if (typeof cost !== 'undefined') { %>
+            $<%= FTH.commaSeperateNumber(Number(cost).toFixed(2)) %> spent on fuel 
+        <% } else { %>
+            unknown amount spent on fuel
+        <% } %>
+    </span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+        <% if (typeof distance !== 'undefined') { %>
+            <%= FTH.commaSeperateNumber(Number(distance).toFixed(1)) %> miles traveled
+        <% } else { %>
+            unknown distance traveled
+        <% } %>
+    </span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+        <% if (typeof volume !== 'undefined') { %>
+            <%= FTH.commaSeperateNumber(Number(volume).toFixed(0)) %> gallons purchased
+        <% } else { %>
+            0 gallons purchased
+        <% } %>
+    </span>
+</div>
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+           <%= FTH.commaSeperateNumber(fillups) %> fuel purchases
+        
+    </span>
+</div>
+
+<% } else { %>
+
+<div class="vehicle-data">
+    <div class="icon-box dark">
+        <img src="style/images/fuel_icon_b.png" style="width: 16px;">
+    </div>
+    <span class='margin-off'>
+            No fuel purchases
+    </span>
+    </span>
+</div>
+
+<% } %>
