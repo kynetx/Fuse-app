@@ -35,6 +35,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         refresh: function() {
             Fuse.flushFuelCache = true;
             Fuse.flushFuelAggCache = true;
+            // Debugging...
             Backbone.history.stop();
             Backbone.history.start();
             Fuse.show(Backbone.history.fragment);
