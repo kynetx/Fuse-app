@@ -88,7 +88,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             var __self__ = this;
             setTimeout(function() {
                 __self__.refresh();
-            }, 1000);
+            }, 3000);
             // alert( "Success!" );
         },
 
