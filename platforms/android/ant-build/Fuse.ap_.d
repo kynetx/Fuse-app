@@ -61,6 +61,7 @@
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/collections/aggregate.collection.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/collections/fillup.collection.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/collections/fleet.collection.js \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/collections/reminder.collection.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/collections/trip.collection.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/controllers/app.controller.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/controllers/fleet.controller.js \
@@ -69,6 +70,7 @@
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/models/driver.model.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/models/fillup.model.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/models/notification.model.js \
+/Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/models/reminder.model.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/models/trip.model.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/models/vehicle.model.js \
 /Users/ako/Code/Kynetx/Fuse-app/platforms/android/assets/www/js/routers/app.router.js \
