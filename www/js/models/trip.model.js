@@ -9,7 +9,7 @@ define([ "fuse" ], function( Fuse ) {
         sync: function(method, model, options) {
             switch(method) {
                 case 'read':
-                    Fuse.loading('show', 'fetching trip...');
+                    Fuse.loading('show', 'Fetching trip...');
                     API.trips(Fuse.currentTripContext, model.get('id'), null, null, function(res) {
                         Fuse.loading('hide');
                         if (typeof res.skyCloudError === 'undefined') {
@@ -24,11 +24,10 @@ define([ "fuse" ], function( Fuse ) {
                     });
                     break;
                 case 'update':
-                    Fuse.loading('show', 'updating trip...');
+                    Fuse.loading('show', 'Updating trip...');
                     API.updateTrip(Fuse.currentTripContext, model.get('id'), model.get('name'), model.get('category'), function(res) {
                         Fuse.loading('hide');
                         if (typeof res.skyCloudError === 'undefined') {
-                            // alert('Trip succesfully updated.');
                             if (typeof options.success === 'function') {
                                 options.success();
                             }

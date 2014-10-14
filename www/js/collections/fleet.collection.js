@@ -11,7 +11,7 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
                 case "read":
                 
                     if (typeof options.silent === 'undefined') {
-                        Fuse.loading( "show", "fetching fleet details..." );
+                        Fuse.loading( "show", "Fetching fleet details..." );
                     }
 
                     API.vehicleSummary(

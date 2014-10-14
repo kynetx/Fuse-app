@@ -20,7 +20,7 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
                     } else {
                         formattedCurrentMonth = Fuse.currentMonth + 1;
                     }
-                    Fuse.loading('show', 'fetching ' + this.type + ' summaries');
+                    Fuse.loading('show', 'Fetching ' + this.type + ' summaries');
                     API[this.type + 'Summaries'](
 
                         Fuse.currentYear,

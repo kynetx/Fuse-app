@@ -27,7 +27,7 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "cloudos", "text!templates/l
             var username = $( "#login-username" ).val(),
                 password = $( "#login-password" ).val();
 
-            Fuse.loading( "show", "logging you in...." );
+            Fuse.loading( "show", "Logging you in...." );
             CloudOS.login( username, password, function( response ) {
                 Fuse.loading( "hide" );
                 Fuse.log( response );

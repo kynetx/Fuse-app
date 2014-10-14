@@ -288,7 +288,13 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
                 
                 var __self__ = this;
 
-                Fuse.currentFuelContext = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; }).get('channel');
+		var vehicle = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; });
+		if(typeof vehicle !== "undefined") {
+                    Fuse.currentFuelContext = vehicle.get('channel');
+		} else {
+                    Fuse.log('No vehicle context');
+		}
+
 
                 if (Fuse.flushFuelCache) {
                     this.currentFillups.reset();
