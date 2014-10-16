@@ -16,7 +16,7 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancesplashtmpl.h
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
         },
-
+        
         render: function() {
             this.content = this.template();
             Fuse.View.prototype.render.call( this );
