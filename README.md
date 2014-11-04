@@ -11,6 +11,9 @@ Afterwards `cordova` should be avaliable at the command line.
 For most development purposes, simply `cd www/` from the project root and then run `cordova serve`. You can then
 develop the applciation and see your changes reflected on `localhost:8000`.
 
+You will also need the [Eclp[ise ADT Bundle](https://developer.android.com/sdk/installing/index.html?pkg=adt) and Ant. 
+
+
 ## Build Process
 Navigate to the project root and run `build` shell script.
 
@@ -34,3 +37,4 @@ You can develop as you would on any other web application.
 # Note
 
 This application is under heavy development at any given time. Should you need stable code please use one of our [releases](https://github.com/kynetx/Fuse-app/releases).
+gap:["PluginManager","startup","PluginManager549012458"]

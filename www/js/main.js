@@ -795,9 +795,14 @@
         ]
     };
 
-    Fuse.menu = [{
+    Fuse.menu = [
+    {
         action: "about",
         text: "About"
+    },
+    {
+        action: "help",
+        text: "Help"
     },
     {
         action: "shop",
@@ -814,7 +819,8 @@
     {
         action: "logout",
         text: "Logout",
-    }];
+    }
+    ];
 
     // intialize the routers.
     Fuse.routers = {};

@@ -756,7 +756,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var self = this;
 
                 Maps.event.addListener(googOverlay, trigger, function(e) {
-                    Fuse.loading("show", "getting route...");
+                    Fuse.loading("show", "Getting trip route...");
                     self.routeToOverlay.call(this, e, self, from);
                 });
             },
@@ -899,6 +899,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                         var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
                         Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
+			Fuse.log("Waypoints: ", this.salientWaypoints);
 
                     } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
@@ -906,7 +907,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
                 
                 // Make the request.
-                Fuse.loading( "show", "getting trip route..." );
+                Fuse.loading( "show", "Getting trip route..." );
                 this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
             },
 
@@ -972,6 +973,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                 if (action === 'shop') {
                     window.open('http://joinfuse.com/shop.html', '_system');
+                } else if (action === 'help') {
+                    window.open('http://forum.joinfuse.com/', '_system');
                 } else {
                     if (vid) {
                         this.show(action, {id: vid});
