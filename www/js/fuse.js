@@ -1,7 +1,7 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         
-        VERSION: "1.0.4",
+        VERSION: "1.0.9",
 
         BASE_API_URI: "http://kibdev.kobj.net/sky/cloud/b16x18",
 
@@ -635,12 +635,12 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 }
 
                 // lock the map if we are asked to.
-                if ( config.locked ) {
-                    this.obj.setOptions({
-                        disableDoubleClickZoom: true,
-                        draggable: false
-                    });
-                }
+                // if ( config.locked ) {
+                //    this.obj.setOptions({
+                //        disableDoubleClickZoom: true,
+                //        draggable: false
+                //    });
+                // }
 
                 // set the context for the fitter function to Fuse.map (this).
                 var fitter = $.proxy(function() {

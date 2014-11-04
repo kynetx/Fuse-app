@@ -36,7 +36,7 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
             this.views[ "MaintenanceSplash" ] = new MaintenanceSplashView({
                 controller: this
             });
-
+            
             this.views[ "MaintenanceAlerts" ] = new MaintenanceAlertsView({
                 controller: this
             });

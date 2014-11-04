@@ -8,6 +8,9 @@ xcuserdata/
 *.apk
 *.ap_
 
+# [AKO] added
+platforms/
+
 # files for the dex VM
 *.dex
 
