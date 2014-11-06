@@ -991,7 +991,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // Redraw menu.
                 this.log('Redrawing menu with the following data:', args[0]);
                 $('#sidr').remove();
-                var menu = this.menuTemplate({items: Fuse.menu, fleet: args[0].fleet})
+                var menu = this.menuTemplate({items: Fuse.menu, fleet: args[0].fleet});
                 $(document.body).append(menu);
                 $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
             } else {
@@ -1369,6 +1369,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // build out the final page url.
             // make sure we're not trying to go to the main fleet page,
             // if so, ignore any passed id.
+	    $.sidr("close");
             if (to !== "fleet-main" && settings.id) {
                 page = to + "/" + settings.id;
                 this.log("Attempting to show page:", to, " with options:", settings);
