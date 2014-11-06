@@ -774,10 +774,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 } else {
                     // otherwise grab the user's current location and use it as the origin
                     // in the drections service request.
-                    Fuse.getCurrentPosition(function(pos) {
-                        dsr["origin"] = new Maps.LatLng(pos.latitude, pos.longitude);
-                        map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
-                    });
+                    Fuse.getCurrentPosition(
+			function(pos) {
+                            dsr["origin"] = new Maps.LatLng(pos.latitude, pos.longitude);
+                            map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
+			},
+			function(error) {
+			    Fuse.loading( "hide" );
+			    Fuse.log("No route");
+			}
+		    );
                 }
             },
 
@@ -803,21 +809,27 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
              */
             getNearbyPlaces: function( classification, cb ) {
                 var self = this;
-                Fuse.getCurrentPosition(function( location ) {
-                    var pos = new Maps.LatLng( location.latitude, location.longitude ),
-                        psr = {
-                            location:   pos,
-                            types:      [ classification ],
-                            rankBy:     Maps.places.RankBy.DISTANCE
-                        };
-                    self.placesService.nearbySearch( psr, function( places, status ) {
-                        if ( Maps.places.PlacesServiceStatus.OK === status ) {
-                            self.invokePlacesSuccess( places, cb );
-                        } else {
-                            self.invokePlacesError( status );
-                        }
-                    });
-                });
+                Fuse.getCurrentPosition(
+		    function( location ) {
+			var pos = new Maps.LatLng( location.latitude, location.longitude ),
+                            psr = {
+				location:   pos,
+				types:      [ classification ],
+				rankBy:     Maps.places.RankBy.DISTANCE
+                            };
+			self.placesService.nearbySearch( psr, function( places, status ) {
+                            if ( Maps.places.PlacesServiceStatus.OK === status ) {
+				self.invokePlacesSuccess( places, cb );
+                            } else {
+				self.invokePlacesError( status );
+                            }
+			});
+                    },
+		    function(error) {
+			Fuse.loading( "hide" );
+			cb([]);
+		    }
+		);
             },
 
             // Renders a trip route on the map.
@@ -1435,16 +1447,25 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }, 1);
         },
 
-        getCurrentPosition: function( cb ) {
+        getCurrentPosition: function( cb, error_cb ) {
             if ( "geolocation" in navigator ) {
-                navigator.geolocation.getCurrentPosition(function( pos ) {
-                    if ( typeof cb === "function" ) {
-                        cb({
-                            latitude: pos.coords.latitude,
-                            longitude: pos.coords.longitude
-                        });
-                    }
-                }, function( error ) { Fuse.log( "Geolocation died:", error ) });
+                navigator.geolocation.getCurrentPosition(
+		    function( pos ) {
+			if ( typeof cb === "function" ) {
+                            cb({
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude
+                            });
+			}
+                    }, 
+		    function( error ) { 
+			Fuse.log( "Geolocation died:", error );
+			error_cb(error);
+		    },
+		    {
+			timeout: 5000
+		    }
+		);
             }
         },
 
