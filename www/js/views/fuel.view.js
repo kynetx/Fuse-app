@@ -42,7 +42,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
         },
 
         renderChart: function() {
-            this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
+	    this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
             this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "mpg" )); });
             this.dates = this.controller.currentFillups
                           .map(function( f ) { return FTH.formatDate(f.get( "timestamp" ) , { format: { with: "MMM DD" } }); });
