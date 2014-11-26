@@ -366,13 +366,18 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
          * @param odometer    -  vehicle odometer reading at time of fillup.
          * @param gasStation  -  gas station where fillup occurred.
          */
-        addFillup: function( numGallons, priceGallon, cost, odometer, gasStation ) {
+        addFillup: function( numGallons, priceGallon, cost, odometer, gasStation, when ) {
+
+	    var now = new Date;
+	    var dt = new Date(when + " " + now.getHours() + ":" + now.getMinutes() + ":00").toISOString();
+	    
             var fillup = this.currentFillups.create({
                 numGallons  : numGallons,
                 priceGallon : priceGallon,
                 cost        : cost,
                 odometer    : odometer,
-                gasStation  : gasStation
+                gasStation  : gasStation,
+		when        : dt
             });
             Fuse.log("Added fillup:", fillup, "to fillup collection:", this.currentFillups );
         },

@@ -139,25 +139,26 @@
 <br>
 <br>
 
-<% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
  <div class='info-group'>
+<% if (typeof vehicle.fillups !== 'undefined' && vehicle.fillups ) { %>
     <div class='vehicle-data' style="margin-left: 5px;">
         Fuel Economy (MPG): 
     </div>
+<% } %>
     <canvas id="fillup-chart"></canvas>
 </div>
-<% } %>
 
 <div id="fuel-popup" class="popup" data-role="popup" data-transition="pop" data-position-to="window">
     <h5>Record Fillup</h5>
     <div id="fuel-popup-guts">
         <form id="record-fillup">
-            <input id="num-gallons" type="number" step="0.001" placeholder="Gallons filled">
+            <input id="num-gallons" placeholder="Gallons filled">
             <span style="position:absolute;left:20px;top:100px;">$</span>
-            <input id="price-gallon" type="number" step="0.001" placeholder="Price/Gallon" style="padding-left:24px;">
+            <input id="price-gallon" placeholder="Price/Gallon" style="padding-left:24px;">
             <span style="position:absolute;left:20px;top:150px;">$</span>
-            <input id="cost" type="number" step="0.001" placeholder="Total Cost" style="padding-left:24px;">
-            <input id="odometer" type="number" step="0.01" placeholder="Current odometer reading" title="Odometer">
+            <input id="cost" placeholder="Total Cost" style="padding-left:24px;">
+            <input id="odometer" placeholder="Current odometer reading" title="Odometer">
+	    <input name="when" id="when" type="date" data-role="datebox" data-options='{"mode": "datebox", "useNewStyle":true}'/>
             <select id="gas-station">
                 <option val="default" disabled>Gas Station (Choose one)</option>
             </select>

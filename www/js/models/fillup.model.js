@@ -22,7 +22,7 @@ define([ "fuse" ], function( Fuse ) {
                             unitPrice: model.get('priceGallon'), 
                             odometer: model.get('odometer'),
                             location: model.get('gasStation'),
-                            when: model.get('timestamp')
+                            when: model.get('when')
                         }, 
 
                         function(res) {
