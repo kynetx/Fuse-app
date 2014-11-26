@@ -21,6 +21,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 	    Fuse.log("Rendering Fuel Page");
             var name = this.model.get('profileName') || this.model.get('label');
 
+	    Fuse.log("Get profile");
 	    this.model.set("cpm", this.model.get("cost") / this.model.get("distance"));
 	    this.model.set("cpg", this.model.get("cost") / this.model.get("volume"));
 
@@ -79,10 +80,11 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 priceGallon = $( "#price-gallon" ).val(),
                 cost        = $( "#cost" ).val(),
                 odometer    = $( "#odometer" ).val(),
-                gasStation  = $( "#gas-station" ).val() !== "other" ? $( "#gas-station" ).val() : $( "#gs-other" ).val();
+                gasStation  = $( "#gas-station" ).val() !== "other" ? $( "#gas-station" ).val() : $( "#gs-other" ).val(),
+   		when        = $( "#when" ).val();
 	        
 
-            this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
+            this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation, when );
             this.$popup.popup( "close" );
             Fuse.loading('show', 'Recording fillup...');
             var __self__ = this;
@@ -158,6 +160,10 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             if ( odometer ) {
                 $( "#odometer" ).val( odometer );
             }
+
+	    var now = new Date;
+            $( "#when" ).val(now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate());
+
 
 	    $('#gs-other').parent().hide();
 	    $('select[id=gas-station]').change(function () {
