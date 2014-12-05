@@ -631,9 +631,8 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if ( config.overlays ) {
                     while ( config.overlays.length ) {
 			var ol = config.overlays.pop();
-			if ( typeof ol.position !== "undefined" && ol.position !== null) {
-                            this.addOverlay( ol );
-			}
+	//		console.log("Overlay pos", ol);
+			this.addOverlay( ol );
                     }
                 }
 
@@ -686,7 +685,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var googOverlay;
                 // Determine the type of overlay.
                 switch( overlay.type ) {
-                    case this.OverlayTypeId.MARKER:
+                case this.OverlayTypeId.MARKER:
+		        if (typeof overlay.position === "undefined" || overlay.position === null) { // sometimes missing 
+			   break;
+			}
                         var animation;
                         if ( !overlay.animation || "DROP" === overlay.animation.toUpperCase() ) {
                             animation = Maps.Animation.DROP;

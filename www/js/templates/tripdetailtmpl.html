@@ -45,14 +45,22 @@
   </span>
 </div>
 
+<%  var od;
+    try {
+      od = data.data[0].datum.filter(function(x){return x.key === "GEN_ODOMETER"})[0];
+    }
+    catch(err) {
+      Fuse.log("No trip detail data");
+    }
+    if (typeof od !== "undefined") {
+%>
 <div class="vehicle-data">
   <div class="icon-box dark">
     <img src="style/images/dashboard_icon_b.png" style="width: 16px;">
   </div>
-  <span class='margin-off'> Odometer: 
-    <%= parseFloat( data.data[0].datum.filter(function(x){return x.key === "GEN_ODOMETER"})[0].value ).toFixed( 1 ) %> miles
-  </span>
+    <span class='margin-off'> Odometer:  <%= parseFloat(od.value).toFixed( 1 ) %> miles </span> 
 </div>
+<% }  %>
 
 <div class="data-split">
     <div class='data-left'>
