@@ -631,7 +631,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 if ( config.overlays ) {
                     while ( config.overlays.length ) {
 			var ol = config.overlays.pop();
-			console.log("Overlay pos", ol);
+	//		console.log("Overlay pos", ol);
 			this.addOverlay( ol );
                     }
                 }
