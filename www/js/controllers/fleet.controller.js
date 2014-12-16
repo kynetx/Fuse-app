@@ -368,9 +368,8 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
          */
         addFillup: function( numGallons, priceGallon, cost, odometer, gasStation, when ) {
 
-	    var now = new Date;
-	    var dt = new Date(when + " " + now.getHours() + ":" + now.getMinutes() + ":00").toISOString();
-	    
+	    var dt = new Date(when.split(/\//)).toISOString();
+
             var fillup = this.currentFillups.create({
                 numGallons  : numGallons,
                 priceGallon : priceGallon,

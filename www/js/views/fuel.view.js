@@ -83,7 +83,6 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 gasStation  = $( "#gas-station" ).val() !== "other" ? $( "#gas-station" ).val() : $( "#gs-other" ).val(),
    		when        = $( "#when" ).val();
 	        
-
             this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation, when );
             this.$popup.popup( "close" );
             Fuse.loading('show', 'Recording fillup...');
