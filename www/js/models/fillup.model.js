@@ -6,13 +6,13 @@ define([ "fuse" ], function( Fuse ) {
             "cost"          : 0,
             "odometer"      : 000000,
             "timestamp"     : new Date().toISOString(),
+	    "when"          : new Date().toISOString(),
             "gasStation"    : "Other"
         },
 
         sync: function(method, model, options) {
             switch(method) {
                 case 'create':
-                    Fuse.loading('show', 'Adding fillup...');
                     API.recordFillup(
 
                         Fuse.currentFuelContext,
