@@ -395,6 +395,7 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
         },
 
         showMaintenanceAlerts: function() {
+            // fetch the alerts...
             this.views.MaintenanceAlerts.render();
         },
 
