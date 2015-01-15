@@ -10,5 +10,13 @@ echo "Javascript built."
 echo "Buidling CSS..."
 r.js -o www/style/build.js
 echo "CSS Built."
+
+echo "Install resources"
+cp -R www/res/screens/* platforms/ios/Fuse/Resources/splash/
+for f in platforms/android/res/drawable*
+do cp www/res/screens/Default-568h\@2x~iphone.png $f/screen.png; 
+   cp  www/res/fuse_icon_144x144.png $f/icon.png; 
+done
+
 echo "Building for all platforms..."
 cordova build

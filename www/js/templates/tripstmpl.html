@@ -1,12 +1,21 @@
 <div class='ui-alt-icon month-bar'>
+ <% 
+    if ( Fuse.currentMonth !== new Date().getMonth() 
+       ||
+         Fuse.currentYear !== new Date().getFullYear()
+       ) {
+ %>
     <a class="absolute right ui-btn ui-icon-carat-r ui-btn-icon-notext"></a>
+ <% } %>
     <a class="absolute left ui-btn ui-icon-carat-l ui-btn-icon-notext"></a>
-    <h3 class='title-font center-text'> <%=Fuse.longMonths[ new Date().getMonth() ]%> </h3>
+    <h3 class='title-font center-text'> <%=Fuse.longMonths[Fuse.currentMonth]%> </h3>
 </div>
 
 <% for ( var i = 0; i < tripViewData.length; ++i ) { %>
     <div class='title-bar collapsible-day margin-off left'>
-        <span class='gray-font absolute right'>$<%= tripViewData[ i ].aggregates.cost %></span>
+       <% if ( tripViewData[ i ].aggregates.cost > 0) { %>
+        <span class='gray-font absolute right'>$<%= parseFloat(tripViewData[ i ].aggregates.cost).toFixed(2) %></span>
+       <% } %>
         <h3 class='title-font title-font-smaller white-font'><%= FTH.formatDate( tripViewData[ i ].timestamp, { format: { with: "MMM DD YYYY" } } ) %></h3>
         <span class='gray-font absolute right' style='margin-top:-4px;'><%= FTH.formatTime(tripViewData[ i ].aggregates.duration) %> <%= FTH.getTimeUnit(tripViewData[ i ].aggregates.duration) %> </span>
         <span class='gray-font'><%= tripViewData[ i ].aggregates.distance.toFixed( 1 ) %> miles</span>

@@ -15,19 +15,38 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
-            this.header = this.model.get( "profileName" ) + " " + "Fuel";
         },
 
         render: function() {
+	    Fuse.log("Rendering Fuel Page");
+            var name = this.model.get('profileName') || this.model.get('label');
+
+	    Fuse.log("Get profile");
+	    this.model.set("cpm", this.model.get("cost") / this.model.get("distance"));
+	    this.model.set("cpg", this.model.get("cost") / this.model.get("volume"));
+
+            this.header = name + " " + "Fuel";
             this.content = this.template({ vehicle: this.model.toJSON() });
+
+	    
             Fuse.View.prototype.render.call( this );
             this.renderChart();
         },
 
+        refresh: function() {
+            Fuse.flushFuelCache = true;
+            Fuse.flushFuelAggCache = true;
+            // Debugging...
+            Backbone.history.stop();
+            Backbone.history.start();
+            Fuse.show(Backbone.history.fragment);
+        },
+
         renderChart: function() {
-            this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
-            this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "cost" )); });
-            this.dates = this.controller.currentFillups.map(function( f ) { return new Date(f.get( "timestamp" )).getDate(); });
+	    this.chartCanvas = document.getElementById( "fillup-chart" ).getContext( "2d" );
+            this.costs = this.controller.currentFillups.map(function( f ) { return parseFloat(f.get( "mpg" )); });
+            this.dates = this.controller.currentFillups
+                          .map(function( f ) { return FTH.formatDate(f.get( "timestamp" ) , { format: { with: "MMM DD" } }); });
 
             this.chartData = {
                 labels: this.dates,
@@ -42,9 +61,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 ]
             };
 
-            this.chart = new Chart( this.chartCanvas ).Line( this.chartData );
-
-            this.controller.currentFillups.on( "change reset add remove", this.renderChart, this );
+            this.chart = new Chart( this.chartCanvas ).Bar( this.chartData );
         },
 
         showFillupForm: function() {
@@ -63,11 +80,17 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 priceGallon = $( "#price-gallon" ).val(),
                 cost        = $( "#cost" ).val(),
                 odometer    = $( "#odometer" ).val(),
-                gasStation  = $( "#gas-station" ).val();
-
-            this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation );
+                gasStation  = $( "#gas-station" ).val() !== "other" ? $( "#gas-station" ).val() : $( "#gs-other" ).val(),
+   		when        = $( "#when" ).val();
+	        
+            this.controller.addFillup( numGallons, priceGallon, cost, odometer, gasStation, when );
             this.$popup.popup( "close" );
-            alert( "Success!" );
+            Fuse.loading('show', 'Recording fillup...');
+            var __self__ = this;
+            setTimeout(function() {
+                __self__.refresh();
+            }, 3000);
+            // alert( "Success!" );
         },
 
         updateCost: function( e ) {
@@ -79,29 +102,32 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             e.handled = true;
         },
 
-        nextMonth: function() {
-            if ( Fuse.currentMonth < 11 ) {
-                Fuse.currentMonth += 1;
-            } else {
-                Fuse.currentMonth = 0;
-            }
-        },
+	// I don't think these are used...
+        // nextMonth: function() {
+        //     if ( Fuse.currentMonth < 11 ) {
+        //         Fuse.currentMonth += 1;
+        //     } else {
+        //         Fuse.currentMonth = 0;
+        //     }
+        // },
 
-        previousMonth: function() {
-            if ( Fuse.currentMonth > 0 ) {
-                Fuse.currentMonth -= 1;
-            } else {
-                Fuse.currentMonth = 11;
-            }
-        },
+        // previousMonth: function() {
+        //     if ( Fuse.currentMonth > 0 ) {
+        //         Fuse.currentMonth -= 1;
+        //     } else {
+        //         Fuse.currentMonth = 11;
+        //     }
+        // },
 
         getGasStations: function() {
             // We make sure to bind the execution context of the callback to the view itself.
             Fuse.loading( "show", "Getting nearby gas stations..." );
             Fuse.map.getNearbyPlaces( "gas_station", this.populateGasStations.bind( this ) );
+//            this.populateGasStations( [] );
         },
 
         populateGasStations: function( stations ) {
+
             var stationSelect = document.getElementById( "gas-station" ),
                 otherOption = document.createElement( "option" );
 
@@ -115,21 +141,39 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
                 opt.innerHTML = info;
                 stationSelect.appendChild( opt );
             });
-
-            stationSelect.appendChild( otherOption );
+	
+	    if($("#gas-station option[value=other]").length === 0) {
+		stationSelect.appendChild( otherOption );
+	    }
 
             Fuse.log( "Populated:", stationSelect, "with data:", stations );
 
             // Reset the form.
-            $( "#num-gallons, #price-gallon, #cost, #gas-station" ).val( "" );
+            $( "#num-gallons, #price-gallon, #cost, #gas-station, #gs-other" ).val( "" );
             $( "#gas-station > option[ val = 'default']" ).prop( "selected", true );
             $( "#gas-station" ).selectmenu( "refresh" );
 
             // If our model has a valid odometer value, pre-populate the odometer input.
-            var odometer = this.model.get( "odometer" );
+            var odometer = this.model.get( "mileage" ) || this.model.get( "odometer" );
+	    Fuse.log("Odometer: ", odometer);
             if ( odometer ) {
                 $( "#odometer" ).val( odometer );
             }
+
+	    var now = new Date;
+            $( "#when" ).val(now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate());
+
+
+	    $('#gs-other').parent().hide();
+	    $('select[id=gas-station]').change(function () {
+		if ($(this).val() == 'other') {
+		    $('#gs-other').parent().show();
+		} else {
+		    $('#gs-other').parent().hide();
+		}
+	    });
+
+	    Fuse.log("Opening ", this.$popup);
 
             Fuse.loading( "hide" );
             this.$popup.popup( "open" );

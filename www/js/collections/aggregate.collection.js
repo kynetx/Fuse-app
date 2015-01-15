@@ -6,22 +6,32 @@ define([ "fuse", "models/aggregate.model" ], function( Fuse, Aggregate ) {
             this.type = options.type;
         },
 
+	comparator: function(a,b){ return a.get("profileName") > b.get("profileName"); },
+
+
         sync: function(method, model, options) {
             switch(method) {
                 case 'read':
                     var now = new Date();
-                    Fuse.loading('show', 'fetching ' + this.type + ' summaries');
+                    var formattedCurrentMonth;
+
+                    if ((Fuse.currentMonth + 1) < 10) {
+                        formattedCurrentMonth = '0' + (Fuse.currentMonth + 1);
+                    } else {
+                        formattedCurrentMonth = Fuse.currentMonth + 1;
+                    }
+                    Fuse.loading('show', 'Fetching ' + this.type + ' summaries');
                     API[this.type + 'Summaries'](
 
-                        now.getFullYear(),
+                        Fuse.currentYear,
 
-                        '0' + (now.getMonth() + 1),
-
+                        formattedCurrentMonth,
+                        
                         function(res) {
                             Fuse.loading('hide');
                             if (typeof res.skyCloudError === 'undefined') {
                                 if (typeof options.success === 'function') {
-                                    options.success();
+                                    options.success(res);
                                 }
                             } else {
                                 if (typeof options.error === 'function') {

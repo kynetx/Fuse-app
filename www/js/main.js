@@ -4,7 +4,7 @@
  * Developed by Phillip J. Windley, Alex K. Olson, and Benjamin K. Anderson.
  * For details see https://kynetx.com
  */
- require(["fuse", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
+ require(["fuse", "fuseapi", "cloudos", "jquery", "routers/app.router", "routers/fleet.router", "controllers/app.controller", "controllers/fleet.controller", "jquerymobile", "tooltipster", "sidr"], function(Fuse, API, CloudOS, $, AppRouter, FleetRouter, AppController, FleetController) {
 
     /**
      * Takes the output from $.fn.serializeArray() and turns
@@ -795,9 +795,18 @@
         ]
     };
 
-    Fuse.menu = [{
+    Fuse.menu = [
+    {
         action: "about",
         text: "About"
+    },
+    {
+        action: "help",
+        text: "Help"
+    },
+    {
+        action: "shop",
+        text: "Shop"
     },
     {
         action: "settings",
@@ -810,7 +819,8 @@
     {
         action: "logout",
         text: "Logout",
-    }];
+    }
+    ];
 
     // intialize the routers.
     Fuse.routers = {};
@@ -836,15 +846,20 @@
     
     // start the app.
     document.addEventListener( "deviceready", function() {
-        Fuse.init();
+        CloudOS.retrieveSession();
+        API.init(function() {
+            Fuse.init();
+            navigator.splashscreen.hide();
+        });
+	
     });
 
     document.addEventListener( "pause", function() {
         Fuse.lastRenderedPage = Backbone.history.fragment;
         // Nuke whatever's in the collections...
-        var trips     = Fuse.routers.controller.trips,
-            fillups   = Fuse.routers.controller.fillups,
-            summaries = Fuse.routers.controller.summaries;
+        var trips     = Fuse.routers.FleetRouter.controller.trips,
+            fillups   = Fuse.routers.FleetRouter.controller.fillups,
+            summaries = Fuse.routers.FleetRouter.controller.summaries;
 
         for (var k in trips) {
             trips[k].reset();
@@ -868,9 +883,13 @@
             silent: true,
 
             success: function() {
+                Backbone.history.stop();
+                Backbone.history.start();
                 Fuse.show(Fuse.lastRenderedPage);
                 delete Fuse.lastRenderedPage;
             }
         });
     });
+
+
 });

@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "collections/aggregate.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/loading.view", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/trip.detail.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view", "views/maintenance.reminders.view", "views/maintenance.history.view" ], function( Fuse, $, _, FleetCollection, TripCollection, FillupCollection, AggregateCollection, FillupModel, VehicleModel, AggregateModel, LoadingView, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, TripDetailView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView, MaintenanceRemindersView, MaintenanceHistoryView ) {
+define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collection", "collections/trip.collection", "collections/fillup.collection", "collections/aggregate.collection", "models/fillup.model", "models/vehicle.model", "models/aggregate.model", "views/loading.view", "views/fleet.view", "views/vehicle.view", "views/findcar.view", "views/trips.view", "views/trip.aggregate.view", "views/trip.detail.view", "views/fuel.view", "views/fuel.aggregate.view", "views/maintenance.splash.view", "views/maintenance.alerts.view", "views/maintenance.reminders.view", "views/maintenance.history.view" ], function( Fuse, API, $, _, FleetCollection, TripCollection, FillupCollection, AggregateCollection, FillupModel, VehicleModel, AggregateModel, LoadingView, FleetView, VehicleView, FindCarView, TripsView, TripAggregateView, TripDetailView, FuelView, FuelAggregateView, MaintenanceSplashView, MaintenanceAlertsView, MaintenanceRemindersView, MaintenanceHistoryView ) {
     return Fuse.Controller.extend({
 
         init: function() {
@@ -36,7 +36,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.views[ "MaintenanceSplash" ] = new MaintenanceSplashView({
                 controller: this
             });
-
+            
             this.views[ "MaintenanceAlerts" ] = new MaintenanceAlertsView({
                 controller: this
             });
@@ -52,6 +52,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         
         showFleet: function() {
             var __self__ = this;
+
+            if (Fuse.flushFleetCache) {
+                API.fleet_eci = null;
+                this.fleet.reset();
+                Fuse.flushFleetCache = false;
+            }
 
             if ( this.fleet.length ) {
                 this.views.Fleet.render();
@@ -101,6 +107,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         showTripAggregate: function() {
             var __self__ = this;
 
+            if (Fuse.flushTripAggCache) {
+                this.summaries.trip.reset();
+                Fuse.flushTripAggCache = false;
+            }
+
             if (this.summaries.trip.length) {
                 this.views.TripAggregate.render();
                 return;
@@ -112,6 +123,7 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
                     if (!__self__.summaries.trip.length) {
                         // If we didnt get back any summaries then we'll just use
                         // the fleet summary
+                        Fuse.log('No trip summaries, using fleet collection.');
                         __self__.summaries.trip.reset(__self__.fleet.models);
                     }
                     __self__.views.TripAggregate.render();
@@ -160,6 +172,11 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 Fuse.currentTripContext = __self__.views.Trips.model.get('channel');
 
+                if (Fuse.flushTripCache) {
+                    this.trips[id].reset();
+                    Fuse.flushTripCache = false;
+                }
+
                 if ( this.trips[id].length ) {
                     this.views.Trips.render();
                     return;
@@ -167,8 +184,6 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                 this.trips[id].fetch({
 
-                    tripsECI: Fuse.currentTripContext,
-                    
                     success: function( trips ) {
                         __self__.views.Trips.render();
                     },
@@ -187,15 +202,51 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
         },
 
         showTrip: function( id ) {
+            var trip = this.trips[this.views.Trips.model.get('picoId')].get( id );
             this.views[ "Trip" ] = new TripDetailView({
                 controller: this,
-                model: this.trips[this.views.Trips.model.get('picoId')].get( id )
+                model: trip
             });
-            this.views.Trip.render();
+
+            try {
+
+                var __self__ = this;
+
+                // If the trip model has a datum attribute, it means
+                // we've already fetched the trip via the API and don't
+                // need to bother with it again.
+                if (trip.get('data')) {
+                    this.views.Trip.render();
+                    return;
+                }
+
+                // Otherwise let's fetch this thing!
+                trip.fetch({
+
+                    success: function(trip) {
+                        __self__.views.Trip.render();
+                    },
+
+                    error: function(error) {
+                        alert('Fatal error while trying to retrieve trip from the API!');
+                        throw 'Fatal Error';
+                    }
+                });
+
+            } catch(e) {
+                Fuse.log(e);
+                this.views.Fleet.render();
+                alert('An error occured while retrieving the trip: ' + e);
+            }
         },
 
         showFuelAggregate: function() {
             var __self__ = this;
+
+            if (Fuse.flushFuelAggCache) {
+                this.summaries.fuel.reset();
+                Fuse.flushFuelAggCache = false;
+            }
 
             if (this.summaries.fuel.length) {
                 this.views.FuelAggregate.render();
@@ -203,11 +254,12 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             }
 
             this.summaries.fuel.fetch({
-
-                success: function() {
+                
+                success: function( summary ) {
                     if (!__self__.summaries.fuel.length) {
                         // If we didnt get back any summaries then we'll just use
                         // the fleet summary
+                        Fuse.log('No fuel summaries, using fleet collection.');
                         __self__.summaries.fuel.reset(__self__.fleet.models);
                     }
                     __self__.views.FuelAggregate.render();
@@ -229,17 +281,28 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
             this.fillups[ id ] = this.fillups[ id ] || new FillupCollection();
             this.currentFillups = this.fillups[ id ];
             this.views[ "Fuel" ] = new FuelView({
-                controller: this,
-                model: this.fleet.find(function( v ) { return v.get( "picoId" ) === id; }),
+                controller: this
             });
 
             try {
-
+                
                 var __self__ = this;
 
-                Fuse.currentFuelContext = __self__.views.Fuel.model.get('channel');
+		var vehicle = __self__.fleet.find(function( v ) { return v.get( "picoId" ) === id; });
+		if(typeof vehicle !== "undefined") {
+                    Fuse.currentFuelContext = vehicle.get('channel');
+		} else {
+                    Fuse.log('No vehicle context');
+		}
 
-                if ( this.currentFillups.length ) {
+
+                if (Fuse.flushFuelCache) {
+                    this.currentFillups.reset();
+                    Fuse.flushFuelCache = false;
+                }
+
+                if (this.currentFillups.length && this.summaries.fuel.length) {
+                    this.views.Fuel.model = this.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
                     this.views.Fuel.render();
                     return;
                 }
@@ -248,8 +311,38 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
 
                     fuelECI: Fuse.currentFuelContext,
                     
-                    success: function( trips ) {
-                        __self__.views.Fuel.render();
+                    success: function( fillups ) {
+
+                        if (!__self__.summaries.fuel.length || Fuse.flushFuelAggCache) {
+
+                            __self__.summaries.fuel.fetch({
+                                
+                                success: function() {
+
+                                    if (Fuse.flushFuelAggCache) {
+                                        Fuse.flushFuelAggCache = false;
+                                    }
+                                    
+                                    if (!__self__.summaries.fuel.length) {
+                                        // If we didnt get back any summaries then we'll just use
+                                        // the fleet summary
+                                        Fuse.log('No fuel summaries, using fleet collection.');
+                                        __self__.summaries.fuel.reset(__self__.fleet.models);
+                                    }
+
+                                    __self__.views.Fuel.model = __self__.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; });
+                                    __self__.views.Fuel.render();
+                                },
+
+                                error: function() {
+
+                                }
+                            });
+
+                        } else {
+                            __self__.views.Fuel.model = __self__.summaries.fuel.find(function( v ) { return v.get( "picoId" ) === id; }),
+                            __self__.views.Fuel.render();
+                        }
                     },
 
                     error: function( error ) {
@@ -273,13 +366,17 @@ define([ "fuse", "jquery", "underscore", "collections/fleet.collection", "collec
          * @param odometer    -  vehicle odometer reading at time of fillup.
          * @param gasStation  -  gas station where fillup occurred.
          */
-        addFillup: function( numGallons, priceGallon, cost, odometer, gasStation ) {
+        addFillup: function( numGallons, priceGallon, cost, odometer, gasStation, when ) {
+
+	    var dt = new Date(when.split(/\//)).toISOString();
+
             var fillup = this.currentFillups.create({
                 numGallons  : numGallons,
                 priceGallon : priceGallon,
                 cost        : cost,
                 odometer    : odometer,
-                gasStation  : gasStation
+                gasStation  : gasStation,
+		when        : dt
             });
             Fuse.log("Added fillup:", fillup, "to fillup collection:", this.currentFillups );
         },

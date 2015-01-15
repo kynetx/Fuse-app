@@ -1,7 +1,7 @@
 define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!templates/headertmpl.html", "text!templates/contenttmpl.html", "text!templates/footertmpl.html", "text!templates/menutmpl.html", "text!templates/maptmpl.html"], function(Backbone, $, _, Maps, headerTmpl, contentTmpl, footerTmpl, menuTmpl, mapTmpl) {
     var Fuse = {
         
-        VERSION: "0.0.25",
+        VERSION: "1.0.13",
 
         BASE_API_URI: "http://kibdev.kobj.net/sky/cloud/b16x18",
 
@@ -127,6 +127,43 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                         break;
                 }
             }
+        },
+
+        switchDataMonth: function(direction) {
+            switch (direction) {
+                case 'forward':
+                    if (this.currentMonth === new Date().getMonth()) {
+                        alert('Already at latest month.');
+                        return;
+                    }
+
+                    if (++Fuse.currentMonth > 11) {
+                        Fuse.currentMonth = 0;
+                        ++Fuse.currentYear;
+                    }
+                    break;
+                case 'backward':
+
+                    if (--Fuse.currentMonth < 0) {
+                        Fuse.currentMonth = 11;
+                        --Fuse.currentYear;
+                    }
+                    break;
+                default:
+                    alert('invalid date range selected, if the problem persists please contact us.');
+                    break;
+            }
+
+            Fuse.flushTripAggCache = true;
+            Fuse.flushFuelAggCache = true;
+            Fuse.flushTripCache    = true;
+            Fuse.flushFuelCache    = true;
+
+            // This is a workaround for backbone's route handling.
+            Backbone.history.stop();
+            Backbone.history.start();
+
+            this.show(Backbone.history.fragment);
         },
 
         invoke: function( cb, context ) {
@@ -314,6 +351,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 this.enhance();
                 this.resetIcons();
                 Fuse.loading( "hide" );
+                Fuse.currentView = this;
             },
 
             cleanup: function() {
@@ -447,6 +485,14 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
         mapTemplate: _.template(mapTmpl),
         menuTemplate: _.template(menuTmpl),
+
+	keyboard: {
+	    hide : function() {
+		Fuse.log("Hiding keyboard");
+		document.activeElement.blur();
+		$("input").blur();
+	    },
+	},
 
         map: {
 
@@ -584,17 +630,19 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // add overlays, if any.
                 if ( config.overlays ) {
                     while ( config.overlays.length ) {
-                        this.addOverlay( config.overlays.pop() );
+			var ol = config.overlays.pop();
+	//		console.log("Overlay pos", ol);
+			this.addOverlay( ol );
                     }
                 }
 
                 // lock the map if we are asked to.
-                if ( config.locked ) {
-                    this.obj.setOptions({
-                        disableDoubleClickZoom: true,
-                        draggable: false
-                    });
-                }
+                // if ( config.locked ) {
+                //    this.obj.setOptions({
+                //        disableDoubleClickZoom: true,
+                //        draggable: false
+                //    });
+                // }
 
                 // set the context for the fitter function to Fuse.map (this).
                 var fitter = $.proxy(function() {
@@ -637,7 +685,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var googOverlay;
                 // Determine the type of overlay.
                 switch( overlay.type ) {
-                    case this.OverlayTypeId.MARKER:
+                case this.OverlayTypeId.MARKER:
+		        if (typeof overlay.position === "undefined" || overlay.position === null) { // sometimes missing 
+			   break;
+			}
                         var animation;
                         if ( !overlay.animation || "DROP" === overlay.animation.toUpperCase() ) {
                             animation = Maps.Animation.DROP;
@@ -710,7 +761,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 var self = this;
 
                 Maps.event.addListener(googOverlay, trigger, function(e) {
-                    Fuse.loading("show", "getting route...");
+                    Fuse.loading("show", "Getting trip route...");
                     self.routeToOverlay.call(this, e, self, from);
                 });
             },
@@ -728,10 +779,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 } else {
                     // otherwise grab the user's current location and use it as the origin
                     // in the drections service request.
-                    Fuse.getCurrentPosition(function(pos) {
-                        dsr["origin"] = new Maps.LatLng(pos.latitude, pos.longitude);
-                        map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
-                    });
+                    Fuse.getCurrentPosition(
+			function(pos) {
+                            dsr["origin"] = new Maps.LatLng(pos.latitude, pos.longitude);
+                            map.makeDirectionsRequest(dsr, map.invokeDirectionsSuccess, map.invokeDirectionsError);
+			},
+			function(error) {
+			    Fuse.loading( "hide" );
+			    Fuse.log("No route");
+			}
+		    );
                 }
             },
 
@@ -757,21 +814,27 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
              */
             getNearbyPlaces: function( classification, cb ) {
                 var self = this;
-                Fuse.getCurrentPosition(function( location ) {
-                    var pos = new Maps.LatLng( location.latitude, location.longitude ),
-                        psr = {
-                            location:   pos,
-                            types:      [ classification ],
-                            rankBy:     Maps.places.RankBy.DISTANCE
-                        };
-                    self.placesService.nearbySearch( psr, function( places, status ) {
-                        if ( Maps.places.PlacesServiceStatus.OK === status ) {
-                            self.invokePlacesSuccess( places, cb );
-                        } else {
-                            self.invokePlacesError( status );
-                        }
-                    });
-                });
+                Fuse.getCurrentPosition(
+		    function( location ) {
+			var pos = new Maps.LatLng( location.latitude, location.longitude ),
+                            psr = {
+				location:   pos,
+				types:      [ classification ],
+				rankBy:     Maps.places.RankBy.DISTANCE
+                            };
+			self.placesService.nearbySearch( psr, function( places, status ) {
+                            if ( Maps.places.PlacesServiceStatus.OK === status ) {
+				self.invokePlacesSuccess( places, cb );
+                            } else {
+				self.invokePlacesError( status );
+                            }
+			});
+                    },
+		    function(error) {
+			Fuse.loading( "hide" );
+			cb([]);
+		    }
+		);
             },
 
             // Renders a trip route on the map.
@@ -806,16 +869,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
 
                     switch( Object.prototype.toString.call( trip.waypoints ) ) {
                         case "[object Array]":
-                        _.each( trip.waypoints, function(waypoint, idx) {
-                            this.sanatizeWaypoint( waypoint.value );
-                        }, this );
-                        break;
+                            _.each( trip.waypoints, function(waypoint, idx) {
+                                this.sanatizeWaypoint( waypoint.value );
+                            }, this );
+                            break;
                         case "[object Object]":
-                        this.sanatizeWaypoint( trip.waypoints.value );
-                        break;
+                            this.sanatizeWaypoint( trip.waypoints.value );
+                            break;
                         default:
-                        Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
-                        break;
+                            Fuse.log( "Trip waypoints data is neither an object or an array. It is:", Object.prototype.toString.call( trip.waypoints ) );
+                            break;
                     }
 
                     /**
@@ -839,27 +902,29 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 }
                                 ++needle;
                             }
-
-                            // If no waypoints passed our salience filter, just use the sanatized waypoints as the salient waypoints.
-                            this.salientWaypoints = ( this.salientWaypoints.length ) ? this.salientWaypoints : this.sanatizedWaypoints;
-
-                            // Reverse our salient waypoints so they are in the correct chronological order again.
-                            if ( this.salientWaypoints.length > 1 ) {
-                                this.salientWaypoints.reverse();
-                            }
-
-                            var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
-                            routeRequest[ "waypoints" ] = this.salientWaypoints;
-
-                            Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
                         }
+
+                        // Determine final salient waypoints.
+                        this.salientWaypoints = ( this.salientWaypoints.length ) ? this.salientWaypoints : this.sanatizedWaypoints;
+
+                        // Reverse our salient waypoints so they are in the correct chronological order again.
+                        if ( this.salientWaypoints.length > 1 ) {
+                            this.salientWaypoints.reverse();
+                        }
+
+                        routeRequest[ "waypoints" ] = this.salientWaypoints;
+
+                        var pluralOrNot = ( this.salientWaypoints.length === 1 ) ? "waypoint" : "waypoints";
+                        Fuse.log( this.salientWaypoints.length, "additional unique", pluralOrNot, "added to trip route", trip.id );
+			Fuse.log("Waypoints: ", this.salientWaypoints);
+
                     } else {
                         Fuse.log( "Additional waypoints were present in the data for trip", trip.id, "but none were unique, so none will be added to the request." );
                     }
                 }
                 
                 // Make the request.
-                Fuse.loading( "show", "getting trip route..." );
+                Fuse.loading( "show", "Getting trip route..." );
                 this.makeDirectionsRequest( routeRequest, this.invokeTripRouteSuccess, this.invokeDirectionsError );
             },
 
@@ -923,10 +988,16 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     action = $target.data("action");
                     vid = $target.data("vid");
 
-                if (vid) {
-                    this.show(action, {id: vid});
+                if (action === 'shop') {
+                    window.open('http://joinfuse.com/shop.html', '_system');
+                } else if (action === 'help') {
+                    window.open('http://forum.joinfuse.com/', '_system');
                 } else {
-                    this.show(action);
+                    if (vid) {
+                        this.show(action, {id: vid});
+                    } else {
+                        this.show(action);
+                    }
                 }
 
             }, this);
@@ -937,7 +1008,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 // Redraw menu.
                 this.log('Redrawing menu with the following data:', args[0]);
                 $('#sidr').remove();
-                var menu = this.menuTemplate({items: Fuse.menu, fleet: args[0].fleet})
+                var menu = this.menuTemplate({items: Fuse.menu, fleet: args[0].fleet});
                 $(document.body).append(menu);
                 $("#menu").sidr().on("tap", "li > a", showPageFromMenu);
             } else {
@@ -1001,6 +1072,28 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             });
         },
 
+        initMonthArrows: function() {
+            var __self__ = this;
+
+            $(document).on('tap', '.month-bar > .right, .month-bar > .left', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                var $arrow = $(e.target);
+
+                if ($arrow.hasClass('left')) {
+                    __self__.switchDataMonth('backward');
+                } else if ($arrow.hasClass('right')) {
+                    __self__.switchDataMonth('forward');
+                } else {
+                    __self__.log('something went wrong with the month arrows.');
+                    return false;
+                }
+
+                e.handled = true;
+            });
+        },
+
         preventGhostTaps: function() {
             $(document).on("tap", function(e) {
                 if (e.handled) {
@@ -1031,8 +1124,10 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             this.initMenu();
             // add reusable map container to page.
             this.initMap();
-            // inialize tooltip plugin.
+            // initialize tooltip plugin.
             this.initTooltips();
+            // initialize month selector arrows.
+            this.initMonthArrows();
             // prevent ghost taps.
             this.preventGhostTaps();
             // add custom underscore template helpers.
@@ -1062,18 +1157,18 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                     return time;
                 },
 
-                shortenNum: function( numstr ) {
-                    var parts = numstr.split(",");
-                    var num = parts[0];
+                // shortenNum: function( numstr ) {
+                //     var parts = numstr.split(",");
+                //     var num = parts[0];
 
-                    for (var i=1; i<parts.length-1; i++) {
-                        num += ',';
-                        num += parts[i];
-                    }
+                //     for (var i=1; i<parts.length-1; i++) {
+                //         num += ',';
+                //         num += parts[i];
+                //     }
 
-                    num += "k";
-                    return num;
-                },
+                //     num += "k";
+                //     return num;
+                // },
 
                 /**
                  * Format a date for human consumption.
@@ -1119,6 +1214,9 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                                 switch ( options.format.with ) {
                                     case "MMM DD YYYY":
                                         formatted = Fuse.shortMonths[ out.getMonth() ] + " " + out.getDate() + " " + out.getFullYear();
+                                        break;
+                                    case "MMM DD":
+                                        formatted = Fuse.shortMonths[ out.getMonth() ] + " " + out.getDate();
                                         break;
                                     default:
                                         formatted = out;
@@ -1259,6 +1357,11 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
                 };
             }
 
+            var now = new Date();
+
+            this.currentMonth = now.getMonth();
+            this.currentYear = now.getFullYear();
+
             // tell Backbone to start listening for hashchanges.
             Backbone.history.start();
         },
@@ -1283,6 +1386,7 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             // build out the final page url.
             // make sure we're not trying to go to the main fleet page,
             // if so, ignore any passed id.
+	    $.sidr("close");
             if (to !== "fleet-main" && settings.id) {
                 page = to + "/" + settings.id;
                 this.log("Attempting to show page:", to, " with options:", settings);
@@ -1348,16 +1452,25 @@ define(["backbone", "jquery", "underscore", "vendor/google.maps", "text!template
             }, 1);
         },
 
-        getCurrentPosition: function( cb ) {
+        getCurrentPosition: function( cb, error_cb ) {
             if ( "geolocation" in navigator ) {
-                navigator.geolocation.getCurrentPosition(function( pos ) {
-                    if ( typeof cb === "function" ) {
-                        cb({
-                            latitude: pos.coords.latitude,
-                            longitude: pos.coords.longitude
-                        });
-                    }
-                }, function( error ) { Fuse.log( "Geolocation died:", error ) });
+                navigator.geolocation.getCurrentPosition(
+		    function( pos ) {
+			if ( typeof cb === "function" ) {
+                            cb({
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude
+                            });
+			}
+                    }, 
+		    function( error ) { 
+			Fuse.log( "Geolocation died:", error );
+			error_cb(error);
+		    },
+		    {
+			timeout: 5000
+		    }
+		);
             }
         },
 

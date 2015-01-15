@@ -1,4 +1,4 @@
-define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.html" ], function( Fuse, $, _, CloudOS, loginTmpl ) {
+define([ "fuse", "fuseapi", "jquery", "underscore", "cloudos", "text!templates/logintmpl.html" ], function( Fuse, API, $, _, CloudOS, loginTmpl ) {
     return Fuse.View.extend({
         id: "login",
         tagName: "div",
@@ -27,7 +27,7 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
             var username = $( "#login-username" ).val(),
                 password = $( "#login-password" ).val();
 
-            Fuse.loading( "show", "logging you in...." );
+            Fuse.loading( "show", "Logging you in...." );
             CloudOS.login( username, password, function( response ) {
                 Fuse.loading( "hide" );
                 Fuse.log( response );
@@ -36,11 +36,19 @@ define([ "fuse", "jquery", "underscore", "cloudos", "text!templates/logintmpl.ht
                     alert( 'Could not log you in. Please double check your email/password and try again.' );
                 } else {
                     localStorage.setItem( "com.kynetx.cloudos.DEFAULT_ECI", response.OAUTH_ECI );
-                    Fuse.show( "fleet" );
+                    API.fuse_version = null;
+                    API.init(function() {
+                        Fuse.flushFleetCache = true;
+                        Fuse.flushTripCache = true;
+                        Fuse.flushTripAggCache = true;
+                        Fuse.flushFuelCache = true;
+                        Fuse.flushFuelAggCache = true;
+                        Fuse.show( "fleet" );
+                    });
                 }
 
             }, function() {
-                alert('something went wrong!');
+                alert('Fatal error: network connectivity or other fatal problem.');
             });
 
             e.handled = true;

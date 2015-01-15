@@ -91,6 +91,8 @@ define([ "backbone", "fuse", "jquery", "underscore", "views/trip.view", "views/f
             e.handled = true;
         },
 
+        // Something with toggle collapse...
+        // Only happens in app...
         toggleCollapse: function ( e ) {
             var target = $( e.target ).parent().next().children();
             var collapsed = target.collapsible( "option", "collapsed" );

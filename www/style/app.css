@@ -36,6 +36,7 @@ div > .dark-header:first-child {
 
 .center-text {
     text-align: center;
+    width: 100%;
 }
 
 /**
@@ -202,7 +203,7 @@ div.data-divide > div.data-center {
 
 div.data-divide > div.data-right {
     border-left: 1px solid rgba(0, 0, 0, .3);
-    width: 30%;
+    width: 28%;
     float: right;
 }
 
@@ -394,7 +395,7 @@ div.fuse-header > .title-font {
 .absolute {
     position:absolute;
     margin: 0px;
-    font-size: 120% !important;
+    font-size: 110% !important;
 }
 
 .top {

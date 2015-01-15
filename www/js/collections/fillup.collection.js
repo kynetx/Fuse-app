@@ -1,15 +1,18 @@
-define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
+define([ "fuse", "models/fillup.model", "fuseapi" ], function( Fuse, Fillup, API ) {
     return Fuse.Collection.extend({
         model: Fillup,
+
+	comparator: function(a,b){ return a.get("timestamp") > b.get("timestamp"); },
 
         sync: function( method, model, options ) {
             switch( method ) {
                 case "read":
                     // Fetch all the fillups ( month to date ).
-                    Fuse.loading( "show", "Fetching fillups for the past month..." );
+                    Fuse.loading( "show", "Fetching fillups for " + Fuse.longMonths[ Fuse.currentMonth ] );
 
                     // Compute the timestamps for month to date.
-                    var now = new Date(), monthStart = new Date( now.getFullYear(), now.getMonth() );
+                    var monthStart = new Date(Fuse.currentYear, Fuse.currentMonth, 1),
+                        monthEnd = new Date(Fuse.currentYear, Fuse.currentMonth + 1, 1);
 
                     var __self__ = this;
 
@@ -20,7 +23,7 @@ define([ "fuse", "models/fillup.model" ], function( Fuse, Fillup ) {
 
                         monthStart.toISOString(), 
 
-                        now.toISOString(),
+                        monthEnd.toISOString(),
 
                         function( response ) {
                             Fuse.loading( "hide" );

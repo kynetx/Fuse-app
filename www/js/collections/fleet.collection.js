@@ -2,6 +2,8 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
     return Fuse.Collection.extend({
         model: Vehicle,
 
+	comparator: function(a,b){ return a.get("profileName") > b.get("profileName"); },
+
         sync: function( method, model, options ) {
             var __self__ = this;
 
@@ -9,7 +11,7 @@ define([ "fuse", "jquery", "underscore", "models/vehicle.model", "fuseapi" ], fu
                 case "read":
                 
                     if (typeof options.silent === 'undefined') {
-                        Fuse.loading( "show", "fetching fleet details..." );
+                        Fuse.loading( "show", "Fetching fleet details..." );
                     }
 
                     API.vehicleSummary(

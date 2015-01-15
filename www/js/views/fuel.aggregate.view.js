@@ -23,16 +23,26 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/fuel.a
             }, this );
 
             // Build our content.
+	    Fuse.log("Rendering content for ", Fuse.currentMonth);
 
             // We have to calculate fleet totals on our own.
-            // For now set it static.
-            this.total = {
-                gallons: 'Coming shortly...',
-                cost: 'Coming shortly...',
-                mpg: 'Coming shortly...',
-                cpg: 'Coming shortly...',
-                cpm: 'Coming shortly...'
-            };
+            this.total = this.collection.map(function(summary) {
+                return summary.pick('cost', 'distance', 'fillups', 'volume');
+            }).reduce(function(memo, current) {
+                return {
+                    cost: memo.cost + ((typeof current.cost !== "undefined" && current.cost) ? Number(current.cost) : 0),
+                    distance: memo.distance + ((typeof current.distance !== "undefined" && current.distance) ? Number(current.distance) : 0),
+                    fillups: memo.fillups +  ((typeof current.fillups !== "undefined" && current.fillups) ? Number(current.fillups) : 0),
+                    volume: memo.volume +  ((typeof current.volume !== "undefined" && current.volume) ? Number(current.volume) : 0)
+                };
+            },
+            {
+		cost: 0,
+                distance: 0, 
+                fillups: 0, 
+                volume: 0
+            }
+           );
 
             this.content = this.template({ total: this.total, aggs: this.aggregates });
             Fuse.View.prototype.render.call( this );

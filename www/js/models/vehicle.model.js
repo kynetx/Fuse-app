@@ -57,6 +57,8 @@ define(["fuse", "jquery", "underscore"], function(Fuse, $, _) {
             "batteryVoltage": 0.0,
             "header": 0,
             "speed": 0,
+	    "voltage": "unknown",
+	    "coolantTemperature": "unknown",
             "aggregates": {
                 "month": {
                     "distance": 0,
