@@ -89,7 +89,7 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             var __self__ = this;
             setTimeout(function() {
                 __self__.refresh();
-            }, 3000);
+            }, 5000);
             // alert( "Success!" );
         },
 
@@ -153,16 +153,28 @@ define([ "backbone", "fuse", "jquery", "underscore", "text!templates/fueltmpl.ht
             $( "#gas-station > option[ val = 'default']" ).prop( "selected", true );
             $( "#gas-station" ).selectmenu( "refresh" );
 
+	    var today = new Date();
+	    var dd = today.getDate();
+	    var mm = today.getMonth()+1; //January is 0!
+	    var yyyy = today.getFullYear();
+
+	    if(dd<10) { 
+		dd='0'+dd
+	    } 
+
+	    if(mm<10) {
+		mm='0'+mm
+	    } 
+	    today = yyyy + "-" + mm + "-" + dd;
+
+	    $( "#when" ).val(today);
+
             // If our model has a valid odometer value, pre-populate the odometer input.
             var odometer = this.model.get( "mileage" ) || this.model.get( "odometer" );
 	    Fuse.log("Odometer: ", odometer);
             if ( odometer ) {
                 $( "#odometer" ).val( odometer );
             }
-
-	    var now = new Date;
-            $( "#when" ).val(now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate());
-
 
 	    $('#gs-other').parent().hide();
 	    $('select[id=gas-station]').change(function () {
