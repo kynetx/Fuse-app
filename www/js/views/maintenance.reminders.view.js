@@ -175,11 +175,13 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancereminderstmp
                         }
                     }
                 };
-            
-            Fuse.log( reminder );
-            this.$reminderFormPopup.popup( "close" );
-            alert( "Success! Reminder saved." );
 
+            Fuse.log( reminder );
+
+            var currentReminders = this.model.get('reminders');
+            currentReminders[reminder.date] = reminder;
+            this.model.set('reminders', currentReminders);
+            this.$reminderFormPopup.popup( "close" );
             e.handled = true;
         },
 
