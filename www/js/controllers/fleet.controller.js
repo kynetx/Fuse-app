@@ -395,6 +395,7 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
         },
 
         showMaintenanceAlerts: function() {
+            this.model
             this.views.MaintenanceAlerts.render();
         },
 
@@ -407,6 +408,16 @@ define([ "fuse", "fuseapi", "jquery", "underscore", "collections/fleet.collectio
         },
 
         showMaintenanceReminders: function() {
+            // Make a .facth() call on the model.
+            this.MaintenanceReminders.fetch({
+                success: function() {
+                    // MaintenanceReminders is now populated...
+                },
+
+                error: function() {
+
+                }
+            })
             this.views.MaintenanceReminders.render();
         },
 

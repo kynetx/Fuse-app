@@ -54,12 +54,12 @@ define([ "fuse", "jquery", "underscore", "text!templates/maintenancealertstmpl.h
              */
             if ( alerts !== vehicle.defaults.alerts ) {
                 this.alerts.push({
-                    vehicle: vehicle.get( "nickname" ),
+                    vehicle: vehicle.get( "profileName" ),
                     alerts: alerts
                 });
             } else {
                 this.alerts.push({
-                    vehicle: vehicle.get( "nickname" )
+                    vehicle: vehicle.get( "profileName" )
                 });
             }
         },

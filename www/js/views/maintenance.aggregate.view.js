@@ -8,11 +8,28 @@ define([ "fuse", "jquery", "underscore", "models/aggregate.model", "views/mainte
         template: _.template( maintenanceAggregateTmpl ),
 
         events: {
+            'click a': 'showAlert'
         },
 
         initialize: function() {
             Fuse.View.prototype.initialize.apply( this, arguments );
             this.aggregates = [];
+
+            this.aggregates.push({
+                some: 'dummy',
+                data: 'is',
+                always: 'good'
+            });
+
+        },
+
+        render: function() {
+            Fuse.View.prototype.render.apply(this, arguments);
+        },
+
+        showAlert: function() {
+            alert('Maintenance in progress....');
+            alert('It\'s alive!!!');
         }
 
     });
